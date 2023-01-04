@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            string="Print Lots"
+            id="action_print_lots"
+            model="lot.barcode.report"
+            report_type="qweb-pdf"
+            menu="False"
+            name="metro_barcode_print_community.pick_print_lots"
+            file="metro_barcode_print_community.pick_print_lots"
+        />
+        <report
+            string="Print Packages"
+            id="action_print_package"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            menu="False"
+            name="metro_barcode_print_community.picking_print_packages"
+            file="metro_barcode_print_community.picking_print_packages"
+        />
+        <report
+            string="Print Package Contents"
+            id="action_print_package_content"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            menu="False"
+            name="metro_barcode_print_community.print_package_contents"
+            file="metro_barcode_print_community.print_package_contents"
+        />
+        <report
+            string="Print Product Labels"
+            id="action_print_product_labels"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            menu="False"
+            name="metro_barcode_print_community.print_product_labels"
+            file="metro_barcode_print_community.print_product_labels"
+        />
+    </data>
+</odoo>

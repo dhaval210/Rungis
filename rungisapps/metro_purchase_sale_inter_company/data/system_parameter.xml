@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="inter_company_partner_parameter" model="ir.config_parameter">
+            <field name="key">inter_company_purchase_partner_id</field>
+            <field name="value">1</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="tour_id" />
+                <field name="softm_trennen" />
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='order_line']/tree/field[@name='name']" position="after">
+                <field name="so_pos_no"  invisible="1"/>
+                <field name="special_wishes"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group[2]" position="inside">
+                <label for="special_wishes"/>
+                <div>
+                    <field name="special_wishes"/>
+                </div>
+                <label for="so_pos_no"/>
+                <div>
+                    <field name="so_pos_no"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

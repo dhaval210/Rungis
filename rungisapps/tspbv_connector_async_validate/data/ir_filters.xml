@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+        <record id="tspbv_connector.tspbv_assignment_create_batch_picking_filter" model="ir.filters">
+            <field name="domain">[('state', '=', 'in_progress'),('use_voice_pick', '=', True),('async_pick', '=', False),]</field>
+        </record>
+</odoo>

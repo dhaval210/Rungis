@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_res_notify_conf" model="ir.ui.view">
+        <field name="name">res.config.settings.configuration.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="2"/>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@data-key='stock']/div[hasclass('o_settings_container')]" position="after">
+                <h2>Piece Fish Operation Types</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box">
+                        <!-- <div class="o_setting_right_pane"> -->
+                            <label for="piece_fish_operation_type_ids"/>
+                            <div class="text-muted">
+                                Piece Fish Operation Type
+                            </div>
+                            <field name="piece_fish_operation_type_ids">
+                                <tree>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        <!-- </div> -->
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

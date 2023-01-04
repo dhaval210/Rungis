@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- transporter.route inherit form view -->
+    <record id="transport_management_route_form_view" model="ir.ui.view">
+        <field name="name">transporter.route.inherit.view.form</field>
+        <field name="model">transporter.route</field>
+        <field name="inherit_id" ref="odoo_transport_management.transport_management_route_form_view"/>
+        <field name="arch" type="xml">
+            <field name="transporter_id" position="after">
+                <field name="tour_name"/>
+                <field name="tour_group"/>
+                <field name="tour_depot"/>
+                <field name="tour_default_departure" widget="float_time"/>
+            </field>
+        </field>
+    </record>
+</odoo>

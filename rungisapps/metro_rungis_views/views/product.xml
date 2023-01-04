@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="product_product_view_default_code" model="ir.ui.view">
+            <field name="name">product.template.search.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="default_code" string="Product Code"
+                           filter_domain="['|',('default_code', '=', self), ('product_variant_ids.default_code', '=', self)]"/>
+                    <field name="name" string="Product"
+                           filter_domain="['|',  ('name', 'ilike', self), ('barcode', 'ilike', self)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_product_view_inherited" model="ir.ui.view">
+            <field name="name">product.product.form.inherited</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="group_check" invisible="1"/>
+                </field>
+                <field name="image_medium" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_brand_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="sale_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="catch_weight_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="landed_cost_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="type" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="categ_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="categ_main_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="softm_location_number" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="categ_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="default_code" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="barcode" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="fao_fishing_technique_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="allow_negative_stock" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="standard_price" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_price_base" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_turnover" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="company_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="max_deviation" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="average_cw_quantity" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="cw_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)], 'invisible': [('catch_weight_ok','=',False)]}</attribute>
+                </field>
+                <field name="uom_po_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="uom_po_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="invoice_policy" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="expense_policy" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="abc_class1" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="abc_class3" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="optional_product_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_sale" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="supplier_taxes_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_method" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_purchase" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="tracking" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="produce_delay" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="sale_delay" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="use_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="life_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="removal_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="alert_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_production" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_inventory" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="net_weight" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="weight" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="weight_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="volume" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="volume_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="base_qty" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="transport_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="dimensional_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_length" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_height" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_width" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="packaging_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_pickingout" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_pickingin" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_picking" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_account_input" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_account_output" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+<!--                <xpath expr="//field[@name='product_turnover']" position="before">-->
+<!--                    <field name="margin" widget="percentage"/>-->
+<!--                </xpath>-->
+            </field>
+        </record>
+
+        <record id="product_template_form_views" model="ir.ui.view">
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="fao_fishing_technique_id" position="replace">
+                    <field name="fao_fishing_technique_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_template_view_inherited" model="ir.ui.view">
+            <field name="name">product.template.form.inherited</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="group_check" invisible="1"/>
+                </field>
+                <field name="image_medium" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_brand_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="scientific_name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="sale_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="catch_weight_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="landed_cost_ok" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="type" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="categ_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="categ_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="x_launch_date" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="default_code" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="barcode" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="fao_fishing_technique_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="allow_negative_stock" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="standard_price" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_price_base" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_turnover" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="company_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="max_deviation" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="average_cw_quantity" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="cw_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)], 'invisible': [('catch_weight_ok','=',False)]}</attribute>
+                </field>
+                <field name="uom_po_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="uom_po_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="invoice_policy" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="expense_policy" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="abc_class1" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="abc_class3" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="optional_product_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_sale" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="supplier_taxes_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="purchase_method" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_purchase" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="tracking" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="produce_delay" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="sale_delay" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="use_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="life_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="removal_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="alert_time" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_production" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_inventory" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="net_weight" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="weight" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="weight_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="volume" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="volume_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="base_qty" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="transport_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="responsible_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="dimensional_uom_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_length" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_height" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="product_width" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="packaging_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_pickingout" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_pickingin" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="description_picking" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_account_input" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_account_output" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <xpath expr="//page[@name='variants']/field[@name='attribute_line_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='categ_ids']" position="after">
+                    <field name="main_categ_id"  options="{'no_create': True}" attrs="{'readonly': [('group_check', '=', True)]}"/>
+                </xpath>
+
+<!--                <xpath expr="//field[@name='product_turnover']" position="before">-->
+<!--                    <field name="margin" widget="percentage"/>-->
+<!--                </xpath>-->
+
+            </field>
+        </record>
+
+        <record id="product_view_default_code" model="ir.ui.view">
+            <field name="name">product.product.search.inherited</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_search_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="replace">
+                    <field name="default_code" string="Product Code" filter_domain="[('default_code', '=', self)]"/>
+                    <field name="name" string="Product"
+                           filter_domain="['|', ('name', 'ilike', self), ('barcode', 'ilike', self)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="purchase_order_line_inherited" model="ir.ui.view">
+            <field name="name">purchase.order.line.inherited</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='company_id']" position="replace">
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"
+                           invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='account_analytic_id']" position="replace">
+                    <field name="account_analytic_id" context="{'default_partner_id':parent.partner_id}"
+                           groups="analytic.group_analytic_accounting" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='analytic_tag_ids']" position="replace">
+                    <field name="analytic_tag_ids" groups="analytic.group_analytic_tags" widget="many2many_tags"
+                           options="{'color_field': 'color'}" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="product_packaging_tree_view_metro" model="ir.ui.view">
+            <field name="name">product.packaging.tree.inherited</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <field name="barcode"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="product_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[3]/div[1]" position="inside">
+                    <span attrs="{'invisible':[('base', '!=', 'last_purchase_price')]}">LPP  -  </span>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

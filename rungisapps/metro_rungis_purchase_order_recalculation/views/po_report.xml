@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchaseorder_document_packaging" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//table" position="replace">
+            <!-- class="table table-sm o_main_table" -->
+            <table  style="width: 100%" class="table-sm o_main_table table-bordered" border="1">
+                <thead>
+                    <tr>
+                        <th><strong>Description</strong></th>
+                        <th><strong>RE Ref</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right" groups="tis_catch_weight.group_catch_weight">Net Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.order_line" t-as="line">
+                        <tr style="width: 100%;">
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                            <td class="text-left">
+                                <span t-field="line.product_id.default_code"/>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="line.product_qty"/>
+                                <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                            </td>
+                            
+                            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                                <span t-field="line.product_cw_uom_qty"/>
+                                <span t-field="line.product_cw_uom"/>
+                            </td>
+                        </tr>
+                        <tr  t-if="line.recalculated_packaging_unit" class="width: 100%;">
+                            <td name="recalculated_packaging_unit" class="text-center" colspan="4">
+                                <span t-field="line.recalculated_packaging_unit"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+
+    <template id="report_purchasequotation_document_packaging" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//table" position="replace">
+            <!-- class="table table-sm o_main_table" -->
+            <table  style="width: 100%" class="table-sm o_main_table table-bordered" border="1">
+                <thead>
+                    <tr>
+                        <th><strong>Description</strong></th>
+                        <th><strong>RE Ref</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right" groups="tis_catch_weight.group_catch_weight">Net Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.order_line" t-as="line">
+                        <tr style="width: 100%;">
+                            <td>
+                                <span t-field="line.name"/>
+                            </td>
+                            <td class="text-left">
+                                <span t-field="line.product_id.default_code"/>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="line.product_qty"/>
+                                <span t-field="line.product_uom.name" groups="uom.group_uom"/>
+                            </td>
+                            
+                            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                                <span t-field="line.product_cw_uom_qty"/>
+                                <span t-field="line.product_cw_uom"/>
+                            </td>
+                        </tr>
+                        <tr  t-if="line.recalculated_packaging_unit" class="width: 100%;">
+                            <td name="recalculated_packaging_unit" class="text-center" colspan="4">
+                                <span t-field="line.recalculated_packaging_unit"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+</odoo>

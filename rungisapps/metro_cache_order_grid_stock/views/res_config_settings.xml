@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.order.grid.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="OrderGrid" string="Order Grid" data-key="metro_cache_order_grid">
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <!-- <div class="o_setting_right_pane"> -->
+                                <label for="res_generic_warehouse_ids"/>
+                                <div class="text-muted">
+                                    Generic Warehouse Matrix
+                                </div>
+                                <field name="res_generic_warehouse_ids">
+                                    <tree>
+                                        <field name="warehouse_id"/>
+                                        <field name="transit_in_ids"/>
+                                        <field name="transit_out_ids"/>
+                                        <field name="receipt_in_id"/>
+                                    </tree>
+                                </field>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Views -->
+        <record id="product_category_form_view_metro_purchasing_team" model="ir.ui.view">
+            <field name="name">product.category.form.inherited.metro.purchasing.team</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="purchasing_team_id" options="{'no_create_edit': True, 'no_create': True, 'no_edit': True}"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_product_template_inherited_metro_purchasing_team" model="ir.ui.view">
+            <field name="name">product.template.form.inherited.metro.purchasing.team</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="purchasing_team_id"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_form_view_metro_purchasing_team">
+            <field name="name">product.product.metro.purchasing.team</field>
+            <field name="model">product.product</field>
+            <field name="active">False</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="categ_id" position="after">
+                    <field name="purchasing_team_id"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record model="ir.actions.act_window" id="action_show_purchasing_teams">
+            <field name="name">Purchasing Teams</field>
+            <field name="res_model">purchasing.team</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="menu_purchasing_teams" name="Purchasing Teams" parent="purchase.menu_purchase_config" sequence="50" action="action_show_purchasing_teams"/>
+
+
+    </data>
+</odoo>

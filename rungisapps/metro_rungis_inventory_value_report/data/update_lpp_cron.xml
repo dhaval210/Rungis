@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_product_lpp_cron" forcecreate='True' model="ir.cron">
+            <field name="name">Update LPP</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field name="model_id" ref="model_product_product"/>
+            <field name="state">code</field>
+            <field name="code">model.update_lpp()</field>
+        </record>
+    </data>
+</odoo>

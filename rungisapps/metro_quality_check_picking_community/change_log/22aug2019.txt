@@ -1,0 +1,2 @@
+22 August 2019:
+- EMO-842 : fixed module performance issue,when upgrading module

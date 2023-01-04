@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--TREE VIEW-->
+    <record id="view_production_lot_tree_extension" model="ir.ui.view">
+        <field name="name">view_production_lot_tree_extension</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+		<field name="purchasing_team_id" />
+	    </xpath>
+        </field>
+    </record>
+
+<!--FORM VIEW-->
+   <record id="view_production_lot_form_extension" model="ir.ui.view">
+        <field name="name">view_production_lot_form_extension</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+		<field name="purchasing_team_id" />
+	    </xpath>
+        </field>
+    </record>
+
+
+<!--SEARCH VIEW-->
+    <record id="view_production_lot_search_extension" model="ir.ui.view">
+        <field name="name">view_production_lot_search_extension</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.search_product_lot_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+		<field name="purchasing_team_id" />
+	    </xpath>
+        </field>
+    </record>
+
+</odoo>

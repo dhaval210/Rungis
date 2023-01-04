@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="cart_lines_cw_qty_avg" inherit_id="tis_cw_web_sale.cart_lines_cw_qty"
+              name="Shopping Cart Lines with CW Qty">
+        <xpath expr="//input[hasclass('cw_quantity')]" position="attributes">
+            <attribute name="t-att-data-cw_qty">line.product_id.average_cw_quantity or 1</attribute>
+            <attribute name="t-att-value">'{0:.4f}'.format(line.product_cw_uom_qty)</attribute>
+            <attribute name="style">width:80px;</attribute>
+        </xpath>
+
+<!--        <xpath expr="//t[@t-if='line.product_id.catch_weight_ok']/td[2]" position="attributes">-->
+        <!--            <attribute name="style">text-align:center</attribute>-->
+        <!--        </xpath>-->
+    </template>
+
+    <template id="product_cw_quantity_avg" inherit_id="tis_cw_web_sale.product_cw_quantity"
+              name="Select CW Quantity">
+        <xpath expr="//input[hasclass('cw_quantity')]" position="attributes">
+            <attribute name="t-att-data-cw_qty">product.average_cw_quantity</attribute>
+            <attribute name="style">width:80px;</attribute>
+            <attribute name="t-att-value">'{0:.4f}'.format(product.average_cw_quantity )</attribute>
+        </xpath>
+    </template>
+
+    <template id="cart_popover_inherit" inherit_id="tis_cw_web_sale.cart_popover" name="Cart Popover CW">
+        <xpath expr="//span[2]" position="replace">
+            <span t-esc="'{0:.4f}'.format(line.product_cw_uom_qty)"/>
+        </xpath>
+    </template>
+    <template id="cart_lines_cw_qty_approx_price" inherit_id="website_sale.cart_lines" name="Shopping Cart Lines with CW Qty">
+        <xpath expr="//table/tbody/t/tr/td[5]" position="inside">
+            <t t-if="line.product_id.catch_weight_ok" groups="tis_catch_weight.group_catch_weight">
+                <span groups="tis_catch_weight.group_catch_weight">/</span>
+                <span t-esc="line.price_reduce_taxexcl*line.product_id.average_cw_quantity" style="white-space: nowrap;"
+                      t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                      groups="account.group_show_line_subtotals_tax_excluded"/>
+                <span t-esc="line.price_reduce_taxinc*line.product_id.average_cw_quantity" style="white-space: nowrap;"
+                      t-options="{'widget': 'monetary', 'display_currency': website_sale_order.currency_id}"
+                      groups="account.group_show_line_subtotals_tax_included"/>
+                <span groups="tis_catch_weight.group_catch_weight">Approx Total</span>
+            </t>
+        </xpath>
+    </template>
+    <template id="product_price_cw" inherit_id="website_sale.product_price">
+        <xpath expr="//div/h4[1]" position="inside">
+            <t t-if="product.catch_weight_ok">
+                <span groups="tis_catch_weight.group_catch_weight">/</span>
+                <span t-esc="product.average_cw_quantity * combination_info['price']"
+                      t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"
+                      groups="tis_catch_weight.group_catch_weight"/>
+                <span groups="tis_catch_weight.group_catch_weight">Approx Total</span>
+            </t>
+        </xpath>
+
+    </template>
+</odoo>

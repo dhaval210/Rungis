@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_employee_form_metro_min_order" model="ir.ui.view">
+            <field name="name">view.employee.form.metro.min.order</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet//notebook//page" position="after">
+                    <page string="Minimum Order">
+                        <group string="Minimum Order Amount">
+                            <field name="min_amount_employee" class="oe_inline"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+         </record>
+    </data>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_picking_type_form_put_pack">
+        <field name="name">Operation Types Put Pack</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <field name="use_existing_lots" position="after">
+                <field name="apply_packrules"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_stock_pack_product_rule_form">
+        <field name="name">Stock Pack Product Rule Form</field>
+        <field name="model">stock.pack.product.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="stock_packrule_id" />
+                    <field name="value_id" context="{'default_rule_id': stock_packrule_id}"/>
+                </group>
+                <group>
+                    <field name="product_id" />
+                    <field name="warehouse_id" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_stock_pack_product_rule_tree">
+        <field name="name">Stock Pack Product Rule Tree</field>
+        <field name="model">stock.pack.product.rule</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="stock_packrule_id" />
+                <field name="value_id" context="{'default_rule_id': stock_packrule_id}"/>
+                <field name="product_id" />
+                <field name="warehouse_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_pack_product_rule" model="ir.actions.act_window">
+        <field name="name">Stock Product Pack Rule</field>
+        <field name="res_model">stock.pack.product.rule</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_stockpackrule" name="Product Pack Rules" parent="stock.menu_warehouse_config" action="action_stock_pack_product_rule" sequence="100"/>
+
+    <record model="ir.ui.view" id="view_stock_pack_rule_value_tree">
+        <field name="name">Stock Pack Rule Value Tree</field>
+        <field name="model">stock.pack.rule.value</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="rule_id" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_pack_rule_value" model="ir.actions.act_window">
+        <field name="name">Stock Pack Rule Value</field>
+        <field name="res_model">stock.pack.rule.value</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="menu_stockpackrule_value" name="Pack Rule Values" parent="stock.menu_warehouse_config" action="action_stock_pack_rule_value" sequence="110"/>
+
+</odoo>

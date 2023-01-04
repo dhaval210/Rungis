@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="edi_portal_invoice_page" name="Invoice Portal Template for EDI" inherit_id="account.portal_invoice_page" primary="True">
+        <xpath expr="//div[hasclass('o_download_pdf')]/div[hasclass('btn-group')][1]" position="after">
+            <div class="btn-group flex-grow-1 mr-1 mb-1" t-if="invoice.partner_id.invoice_format == 'pdf_ubl'">
+                <a class="btn btn-secondary btn-block o_download_btn" t-att-href="invoice.get_portal_url(report_type='pdf_ubl', download=True)" title="Download"><i class="fa fa-download"/> Download embedded PDF</a>
+            </div>
+            <div class="btn-group flex-grow-1 mr-1 mb-1" t-if="invoice.partner_id.invoice_format == 'edi'">
+                <a class="btn btn-secondary btn-block o_download_btn" t-att-href="invoice.get_portal_url(report_type='xml', download=True)" title="Download"><i class="fa fa-download"/> Download XML</a>
+            </div>
+        </xpath>
+    </template>
+</odoo>

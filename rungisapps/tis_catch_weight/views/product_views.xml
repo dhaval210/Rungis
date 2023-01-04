@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_product_form_catchweight">
+            <field name="name">product.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div[2]/div/div[2]" position="after">
+                    <div groups="tis_catch_weight.group_catch_weight">
+                        <field name="catch_weight_ok"/>
+                        <label for="catch_weight_ok"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='list_price']" position="replace">
+                    <label for="list_price"/>
+                    <div class="o_row">
+                        <field name="list_price" widget='monetary'
+                               options="{'currency_field': 'currency_id', 'field_digits': True}" style="width:60%"/>
+                        <span t-if="sale_price_base" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                              style="font-size:11pt" groups="tis_catch_weight.group_catch_weight">/
+                        </span>
+                        <field name="sale_price_base" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               style="width:30%" groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+                </xpath>
+                <xpath expr="//page[@name='general_information']/group[1]/group[2]/div[2]/field[@name='standard_price']" position="replace">
+                    <div name="standard_price_uom" groups="base.group_user" class="o_row"
+                         attrs="{'invisible': [('product_variant_count', '&gt;', 1)]}">
+                        <field name="standard_price" widget='monetary'
+                               options="{'currency_field': 'currency_id', 'field_digits': True}" style="width:60%"/>
+                        <span t-if="purchase_price_base" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                              style="font-size:11pt" groups="tis_catch_weight.group_catch_weight">/
+                        </span>
+                        <field name="purchase_price_base" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               style="width:30%" groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+<!--                    <div name="update_cost_price" class="col-lg-2">-->
+<!--                            <button string="Update Cost" type="action"-->
+<!--                            name="%(stock_account.action_view_change_standard_price)d"-->
+<!--                            attrs="{'invisible':['|', '|', ('valuation','!=', 'real_time'), ('cost_method', 'not in', ['average', 'standard']), ('product_variant_count', '>', 1)]}"-->
+<!--                            class="oe_link oe_read_only"/>-->
+<!--                        </div>-->
+                </xpath>
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field name="cw_uom_id" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'invisible': [('catch_weight_ok','=',False)]}" options="{'no_create': True}"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_template_form_view_button_catch_weight">
+            <field name="name">product.template.catch.weight.inherit.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <button name="toggle_active" position="before">
+                    <button class="oe_stat_button" name="action_view_sales"
+                            attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                            type="object" icon="fa-signal" groups="tis_catch_weight.group_catch_weight"
+                            help="Sold in the last 365 days">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_sales_count" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW Sold</span>
+                        </div>
+                    </button>
+                </button>
+                <button name="toggle_active" position="before">
+                    <button class="oe_stat_button" name="action_view_po" groups="tis_catch_weight.group_catch_weight"
+                            type="object" icon="fa-shopping-cart"
+                            attrs="{'invisible': ['|',('purchase_ok', '=', False),('catch_weight_ok','=',False)]}"
+                            help="Purchased in the last 365 days">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_purchased_product_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW Purchased</span>
+                        </div>
+                    </button>
+                </button>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="before">
+                    <button type="object"
+                            name="action_open_quants"
+                            groups="tis_catch_weight.group_catch_weight"
+                            attrs="{'invisible':['|',('type', '!=', 'product'),('catch_weight_ok','=',False)]}"
+                            class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_qty_available" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW On Hand</span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="before">
+                    <button type="action"
+                            name="%(stock.action_stock_level_forecast_report_template)d"
+                            attrs="{'invisible':['|',('type', '!=', 'product'), ('catch_weight_ok','=',False)]}"
+                            groups="tis_catch_weight.group_catch_weight"
+                            class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                <field name="cw_virtual_available" widget="statinfo" nolabel="1"/>
+                                <span attrs="{'invisible':[('cw_outgoing_qty', '=', 0),('cw_incoming_qty','=',0)]}"
+                                      groups="base.group_no_one">
+                                    (-<field name="cw_outgoing_qty" widget="statinfo" nolabel="1"/>+<field
+                                        name="cw_incoming_qty" widget="statinfo" nolabel="1"/>)
+                                </span>
+                                <field name="cw_uom_name" class="ml4"/>
+                            </span>
+                            <span class="o_stat_text">CW Forecasted</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_form_view_button_catch_weight">
+            <field name="name">product.catch.weight.inherit.form.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <button name="toggle_active" position="before">
+                    <button class="oe_stat_button" name="action_view_sales"
+                            attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                            type="object" icon="fa-signal" groups="tis_catch_weight.group_catch_weight"
+                            help="Sold in the last 365 days">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_sales_count" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW Sold</span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button" name="action_view_po" groups="tis_catch_weight.group_catch_weight"
+                            type="object" icon="fa-shopping-cart"
+                            attrs="{'invisible': ['|',('purchase_ok', '=', False),('catch_weight_ok','=',False)]}"
+                            help="Purchased in the last 365 days">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_purchased_product_qty" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW Purchased</span>
+                        </div>
+                    </button>
+                </button>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="before">
+                    <button type="object"
+                            name="action_open_quants"
+                            groups="tis_catch_weight.group_catch_weight"
+                            attrs="{'invisible':['|',('type', '!=', 'product'),('catch_weight_ok','=',False)]}"
+                            class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_qty_available" widget="statinfo" nolabel="1" class="mr4"/>
+                                <field name="cw_uom_name"/>
+                            </span>
+                            <span class="o_stat_text">CW On Hand</span>
+                        </div>
+                    </button>
+                    <button type="action"
+                            name="%(stock.action_stock_level_forecast_report_template)d"
+                            attrs="{'invisible':['|',('type', '!=', 'product'),('catch_weight_ok','=',False)]}"
+                            groups="tis_catch_weight.group_catch_weight"
+                            class="oe_stat_button" icon="fa-building-o">
+                        <div class="o_field_widget o_stat_info" groups="tis_catch_weight.group_catch_weight">
+                            <span class="o_stat_value">
+                                <field name="cw_virtual_available" widget="statinfo" nolabel="1"/>
+                                <span attrs="{'invisible':[('cw_outgoing_qty', '=', 0),('cw_incoming_qty','=',0)]}"
+                                      groups="base.group_no_one">
+                                    (-<field name="cw_outgoing_qty" widget="statinfo" nolabel="1"/>+<field
+                                        name="cw_incoming_qty" widget="statinfo" nolabel="1"/>)
+                                </span>
+                                <field name="cw_uom_name" class="ml4"/>
+                            </span>
+                            <span class="o_stat_text">CW Forecasted</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_product_tree2_catchweight">
+            <field name="name">product.tree2.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="stock_account.view_stock_product_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field name="cw_qty_at_date" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="cw_uom_id" string="CW UOM" attrs="{'invisible': [('cw_qty_at_date', '=', 0)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_product_product_tree_catch_weight">
+            <field name="name">product.product.inherit_tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field name="cw_virtual_available" string="Forecasted cw Quantity"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="cw_qty_available" string="CW Quantity On Hand"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" string="CW UOM" groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_search_view_cw" model="ir.ui.view">
+            <field name="name">product.template.search.cw</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_search_view"/>
+            <field name="arch" type="xml">
+                <filter name="filter_to_purchase" position="after">
+                    <filter string="Catch Weight Product" name="filter_catch_weight"
+                            groups="tis_catch_weight.group_catch_weight" domain="[('catch_weight_ok', '=', 1)]"/>
+                </filter>
+            </field>
+        </record>
+
+        <record id="view_product_variant_kanban_brand" model="ir.ui.view">
+            <field name="name">product variant kanban view: add cw label</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="lst_price" position="after">
+                    <field name="catch_weight_ok"/>
+                </field>
+                <xpath expr="//t/div/div[1]" position="before">
+                    <t t-if="record.catch_weight_ok.raw_value" groups="tis_catch_weight.group_catch_weight">
+                        <img align="left" class="img" src="/tis_catch_weight/static/src/img/cw_logo.png"
+                             style="top:-1px;left:-1px; position: absolute; z-index:2;" height="30"
+                             width="30" alt="CW"/>
+                    </t>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_template_kanban_cw_onhand">
+            <field name="name">Product Template Kanban CW View</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="catch_weight_ok"/>
+                </field>
+                <xpath expr="//t/div/div[1]" position="before">
+                    <t t-if="record.catch_weight_ok.raw_value" groups="tis_catch_weight.group_catch_weight">
+                        <img align="left" alt="Image" class="img" src="/tis_catch_weight/static/src/img/cw_logo.png"
+                             style="top:-1px;left:-1px; position: absolute; z-index:2;" height="30"
+                             width="30"/>
+                    </t>
+                </xpath>
+                <ul position="inside">
+                    <li t-if="record.type.raw_value == 'product' and record.catch_weight_ok.raw_value"
+                        groups="tis_catch_weight.group_catch_weight">
+                        CW On hand:
+                        <field name="cw_qty_available" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="cw_uom_id" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </li>
+                </ul>
+
+            </field>
+        </record>
+
+        <record id="product_packaging_form_view_catch_weight" model="ir.ui.view">
+            <field name="name">product.packaging.form.view.cw</field>
+            <field name="model">product.packaging</field>
+            <field name="inherit_id" ref="product.product_packaging_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="before">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="cw_qty" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <div class="o_row" groups="tis_catch_weight.group_catch_weight"
+                         attrs="{'invisible': [('catch_weight_ok', '=', False)]}">
+                        <field name="cw_qty"/>
+                        <field name="cw_uom_id"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

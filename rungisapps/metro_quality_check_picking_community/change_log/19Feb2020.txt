@@ -1,0 +1,2 @@
+19 Feb 2020:
+- as of version 1.3, change name 'metro_quality_check_picking' to 'metro_quality_check_picking_community'.

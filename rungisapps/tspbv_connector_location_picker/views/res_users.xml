@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+        <!-- Kanban View Definition -->
+        <record id="res_users_picker_kanban" model="ir.ui.view">
+            <field name="name">picker assignment kanban</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile tspbv_kanban" default_group_by="picker_location_id" group_create="false" quick_create="false" create="0" >
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="picker_location_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_card oe_kanban_global_click ignore_default_click_handler">
+                                <div class="o_kanban_record_top mb8">
+                                    <div class="o_kanban_record_headings">
+                                        <strong class="o_kanban_record_title"><span><field name="name"/></span></strong>
+                                    </div>
+                                </div>
+                                <div>
+                                    <strong><span>Picking Count: <field name="picker_count"/></span></strong>
+                                    <strong><span>Template: <field name="workflow_id"/></span></strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+        <!-- Kanban View Action -->
+        <record id="res_users_picker_action" model="ir.actions.act_window">
+            <field name="name">Picker Assignment</field>
+            <field name="res_model">res.users</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" ref="res_users_picker_kanban"/>
+            <field name="context">{'kanban_view_ref':'res_users_picker_kanban'}</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="res_users_picker_menu_act" name="Assignment" parent="tspbv_picker_menu_categ" action="res_users_picker_action" sequence="10"/>
+</odoo>

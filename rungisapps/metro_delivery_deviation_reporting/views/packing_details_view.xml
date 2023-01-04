@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="packing_details_tree_view" model="ir.ui.view">
+            <field name="name">packing.details.tree.view</field>
+            <field name="model">packing.details</field>
+            <field name="arch" type="xml">
+                <tree string="Packing Info" default_order="time_stamp desc">
+                    <field name="order_id"/>
+                    <field name="pack_operation"/>
+                    <field name="time_stamp"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="packing_details_form_view" model="ir.ui.view">
+            <field name="name">packing.details.form.view</field>
+            <field name="model">packing.details</field>
+            <field name="arch" type="xml">
+                <form string="Packing Info">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="order_id"/>
+                                <field name="message_info" widget="html"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Product Info" name="order_id">
+                                <field name="line_ids">
+                                    <tree string="Packing Info">
+                                        <field name="product_id"/>
+                                        <field name="qty_ordered"/>
+                                        <field name="qty_done"/>
+                                        <field name="uom_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_packing_details_view" model="ir.actions.act_window">
+            <field name="name">Packing Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">packing.details</field>
+            <field name="view_id" ref="packing_details_tree_view"/>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    There is no record.
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Delivery Deviations" id="menu_delivery_deviations"
+                  parent="sale.menu_sale_report" action="action_packing_details_view" sequence="5" groups="sales_team.group_sale_salesman_all_leads"/>
+    </data>
+</odoo>

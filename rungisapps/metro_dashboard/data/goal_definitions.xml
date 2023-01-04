@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Frequency of sales -->
+        <record id="metro_freq_sales" model="gamification.goal.definition">
+            <field name="name">Frequency of Sales</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">sales per day</field>
+            <field name="compute_code">today = datetime.now().date()
+first_day = today.replace(day=1)
+orders = env["sale.order"].search_count([
+    ("create_date", "&lt;=", str(today)),
+    ("create_date", "&gt;=", str(first_day)),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done")
+])
+result = orders / today.day</field>
+        </record>
+
+        <!-- Average Basket -->
+        <record id="metro_avg_sold_item_count" model="gamification.goal.definition">
+            <field name="name">Average Basket</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">items</field>
+            <field name="compute_code">today = datetime.now().date()
+first_day = today.replace(day=1)
+recordset = env["sale.order"].search([
+    ("date_order", "&lt;=", str(today)),
+    ("date_order", "&gt;=", str(first_day)),
+    "|",
+    ("state", "!=", "draft"),
+    ("state", "!=", "cancelled")
+])
+orders_count = 0
+result = 0
+for record in recordset:
+    skus = []
+    for order in record.order_line:
+        if order.product_id.code not in skus:
+                skus.append(order.product_id.code)
+    orders_count += 1
+    result += len(skus)
+if orders_count:
+    result = result / orders_count</field>
+        </record>
+
+        <!-- New Customers -->
+        <record id="metro_new_customers" model="gamification.goal.definition">
+            <field name="name">New Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("new_customer", "=", True)])</field>
+        </record>
+
+        <!-- Buying Customers -->
+        <record id="metro_buying_customers" model="gamification.goal.definition">
+            <field name="name">Buying Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("buy_customer", "=", True)])</field>
+        </record>
+
+        <!-- Lost Customers -->
+        <record id="metro_lost_customers" model="gamification.goal.definition">
+            <field name="name">Lost Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("lost_customer", "=", True)])</field>
+        </record>
+
+        <!-- Target Sales Achievement -->
+        <record id="metro_target_sales_achievement" model="gamification.goal.definition">
+            <field name="name">Target Sales Achievement</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">records = env["res.partner"].search([("buying_potential", "&gt;", 0.0), ("sales_target", "&gt;", 0.0)])
+target = 0
+as_is = 0
+result = 0
+prt = env["metro.dashboard.variable"].search([("name", "=", "pro_rata_temporis")]).val()
+if not prt:
+    prt = 1
+for rec in records:
+    target += rec.sales_target
+    for order in rec.sale_order_ids:
+        as_is += order.amount_untaxed
+if target:
+    result = (as_is / (target * prt)) * 100</field>
+        </record>
+
+        <!-- Number of customers with potential -->
+        <record id="metro_customer_potential_count" model="gamification.goal.definition">
+            <field name="name">Customers with Potential</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("buying_potential", "&gt;", 0.0)])</field>
+        </record>
+
+        <!-- Number of customers with sales target -->
+        <record id="metro_customer_sales_target_count" model="gamification.goal.definition">
+            <field name="name">Customers with Sales Targets</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("sales_target", "&gt;", 0.0)])</field>
+        </record>
+
+        <!-- Customers with Sales target, summed up as pro rata temporis -->
+        <record id="metro_customer_sales_target_prt" model="gamification.goal.definition">
+            <field name="name">Sales Target pro rata temporis</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="compute_code">prt = float(env["metro.dashboard.variable"].search([("name", "=", "pro_rata_temporis")]).value)
+result = 0
+if not prt:
+    prt = 1
+records = env["res.partner"].search([("buying_potential", "&gt;", 0.0), ("sales_target", "&gt;", 0.0)])
+for rec in records:
+    result += rec.sales_target
+result = (result * prt)</field>
+        </record>
+
+        <!-- Customer Sales Achievement As Is -->
+        <record id="metro_customer_sales_target_asis" model="gamification.goal.definition">
+            <field name="name">Customer Sales As Is</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="compute_code">result = 0
+records = env["res.partner"].search([("buying_potential", "&gt;", 0.0), ("sales_target", "&gt;", 0.0)])
+for rec in records:
+    for order in rec.sale_order_ids:
+        result += order.amount_untaxed</field>
+        </record>
+ 
+        <!-- Profit margin, hugely simplified -->
+        <record id="metro_profit_margin" model="gamification.goal.definition">
+            <field name="name">Profit margin (hugely simplified)</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="compute_code">recordset = env["sale.order"].search([
+    ("invoice_status", "=", "invoiced")
+])
+earnings = 0
+for r in recordset:
+    earnings = earnings + r.amount_untaxed
+recordset = env["purchase.order"].search([("invoice_status", "=", "invoiced")])
+costs = 0
+for r in recordset:
+    costs = costs + r.amount_untaxed
+result = earnings - costs</field>
+        </record>
+
+        <!-- 
+            Web Shop
+            -->
+        <!-- Share of Sales in % -->
+        <record id="metro_webshop_share_of_sales" model="gamification.goal.definition">
+            <field name="name">Share of Web Shop Sales</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">records = env["sale.order"].search([
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+total = 0
+webshop = 0
+result = 0
+for rec in records:
+    if rec.webshop_sale == True:
+        webshop += rec.amount_untaxed
+    total += rec.amount_untaxed
+if total:
+    result = webshop / total * 100</field>
+        </record>
+
+        <!-- Average Order Value in Web Shop -->
+        <record id="metro_webshop_avg_order_value" model="gamification.goal.definition">
+            <field name="name">Web Shop Average Order Value</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="compute_code">orders = env["sale.order"].search([
+    ("webshop_sale", "=", True),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+amount = 0
+result = 0
+for order in orders:
+    amount += order.amount_untaxed
+if len(orders):
+    result = amount / len(orders)</field>
+        </record>
+
+        <!-- Share of Sales for Key Accounts in % -->
+        <record id="metro_webshop_share_of_sales" model="gamification.goal.definition">
+            <field name="name">Share of Web Shop Sales (KAC)</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">records = env["sale.order"].search([
+    ("partner_id.kac", "=", True),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+total = 0
+webshop = 0
+result = 0
+for rec in records:
+    if rec.webshop_sale == True:
+        webshop += rec.amount_untaxed
+    total += rec.amount_untaxed
+if total:
+    result = webshop / total * 100</field>
+        </record>
+
+        <!--
+            SCM - Supply Chain Management
+        -->
+
+        <!-- Delivery Deviations -->
+        <record id="metro_scm_delivery_deviations" model="gamification.goal.definition">
+            <field name="name">Delivery Deviations</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">orders</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+deviations = env["packing.details"].search([
+    ("time_stamp", "&gt;=", first_day),
+    ("time_stamp", "&lt;=", last_day),
+])
+order_ids = []
+for d in deviations:
+    if d.order_id not in order_ids:
+        order_ids.append(d.order_id)
+result = len(order_ids)</field>
+        </record>
+        
+        <!-- Perfect Order Share-->
+        <record id="metro_scm_perfect_order_share" model="gamification.goal.definition">
+            <field name="name">Perfect Order Share</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+deviations = env["packing.details"].search([
+    ("time_stamp", "&gt;=", first_day),
+    ("time_stamp", "&lt;=", last_day),
+])
+order_ids = []
+result = 0
+for d in deviations:
+    if d.order_id.id not in order_ids:
+        order_ids.append(d.order_id.id)
+perfect_orders = env["sale.order"].search_count([("id", "not in", list(order_ids))])
+if perfect_orders or len(order_ids):
+    result = perfect_orders / (perfect_orders + len(order_ids)) * 100</field>
+        </record>
+
+        <!-- Lines moved -->
+        <record id="metro_scm_lines_moved" model="gamification.goal.definition">
+            <field name="name">Lines moved</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">movements</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+lines = env["stock.move.line"].search([
+    ("write_date", "&gt;=", first_day),
+    ("write_date", "&lt;=", last_day),
+    ("done_move", "=", True),
+])
+owner_ids = []
+lines_moved = 0
+result = 0
+for line in lines:
+    if not line.owner_id in owner_ids:
+        owner_ids.append(line.owner_id)
+    lines_moved += 1
+if len(owner_ids):
+    result = lines_moved / len(owner_ids)</field>
+        </record>
+
+        <!-- Units moved -->
+        <record id="metro_scm_units_moved" model="gamification.goal.definition">
+            <field name="name">Units moved</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">units moved</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+lines = env["stock.move.line"].search([
+    ("write_date", "&gt;=", first_day),
+    ("write_date", "&lt;=", last_day),
+    ("done_move", "=", True),
+])
+quantities = 0
+for line in lines:
+    quantities += line.qty_done
+result = quantities</field>
+        </record>
+
+        <!--
+            VAS - Value Added Service => Manufacturing
+        -->
+        
+        <!-- Value created -->
+        <record id="metro_vas_value_created" model="gamification.goal.definition">
+            <field name="name">Value created</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+mos = env["mrp.production"].search([
+    ("date_finished", "&gt;=", first_day),
+    ("date_finished", "&lt;=", last_day),
+    ("state", "=", "done"),
+])
+price_before = 0
+price_after = 0
+for mo in mos:
+    if mo.product_id.reversed_bom:
+        for line in mo.move_raw_ids:
+            price_after += line.product_id.list_price * line.product_uom_qty
+        price_before += mo.product_id.list_price * mo.product_qty
+    else:
+        for line in mo.move_raw_ids:
+            price_before += line.product_id.list_price * line.product_uom_qty
+        price_after += mo.product_id.list_price * mo.product_qty
+result = price_after - price_before</field>
+        </record>
+    </data>
+</odoo>

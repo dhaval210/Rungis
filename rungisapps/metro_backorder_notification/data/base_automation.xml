@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="stock_backorder_notification" model='base.automation'>
+            <field name="name">Cancelled Backorder Notification</field>
+            <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model" />
+            <field name="trigger">on_write</field>
+            <field name="state">email</field>
+            <field name="filter_pre_domain">[["purchase_id.id","!=",False]]</field>
+            <field name="filter_domain">[["state","=","cancel"],["backorder_id","!=",False]]</field>
+            <field name="template_id" ref="metro_backorder_notification.stock_backorder_mail"/>
+        </record>
+    </data>
+</odoo>

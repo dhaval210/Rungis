@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='stock']" position="inside">
+                    <h2 id="schedule_info">Cw Product Highlight</h2>
+                    <div class="row mt16 mb16 o_settings_container" modifiers="{}">
+                        <div class="col-12 col-lg-6 o_setting_box" modifiers="{}">
+                            <div class="o_setting_left_pane" modifiers="{}"/>
+                            <div class="o_setting_right_pane" modifiers="{}">
+                                <span class="o_form_label" modifiers="{}">
+                                    Cw Product Highlight
+                                </span>
+                                <div class="text-muted" modifiers="{}">
+                                    <field name="cw_product_highlight" modifiers="{}"/>
+                                </div>
+                                <span class="o_form_label" modifiers="{}">
+                                    Picking/Operation Type
+                                </span>
+                                <div class="text-muted" modifiers="{}">
+                                    <field name="operation_filters" widget="many2many_tags" modifiers="{}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

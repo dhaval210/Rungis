@@ -1,0 +1,4 @@
+.o_barcode_client_action .o_barcode_lines .o_barcode_line .o_edit {
+    opacity: 1;
+    font-size: 3rem;
+}

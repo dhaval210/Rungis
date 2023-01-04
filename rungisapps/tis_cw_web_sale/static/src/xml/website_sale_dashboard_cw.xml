@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-extend="website_sale.products_table">
+        <t t-jquery=".o_top_margin .row .col-12 .table-hover tr th:first-child" t-operation="after">
+            <th>CW Quantity</th>
+        </t>
+        <t t-jquery=".o_top_margin .row .col-12 .table-hover tr td:first-child" t-operation="after">
+            <td><t t-esc="product.cw_qty"/></td>
+        </t>
+    </t>
+</templates>

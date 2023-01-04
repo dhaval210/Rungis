@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- simple voice dialog starts here -->
+    <record id="dialoglist_1" model="tspbv.dialoglist">
+        <field name="name">Simple Voice Dialog</field>
+        <field name="start">startOrder</field>
+        <field name="default_code">simple</field>
+    </record>
+    
+    <record id="output_1" model="tspbv.output">
+        <field name="lydia_output">Order §spell{123456}, 6 positions, 1 pallet</field>
+        <field name="lydia_copilot">order: 123456, positions: 6, pallets: 1</field>
+    </record>
+    
+    <record id="grammar_rule_1" model="tspbv.grammar.rule">
+        <field name="rule_name">start order</field>
+        <field name="content">(starten|abbrechen)</field>
+    </record>
+    
+    <record id="input_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_1')])]" />
+    </record>
+    
+    <record id="dialog_1" model="tspbv.dialog">
+        <field name="id_dialog">startOrder</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_1" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_1" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_1" />
+    </record>
+    
+    <record id="recognition_1" model="tspbv.recognition">
+        <field name="rel">pos1</field>
+        <field name="input_id" ref="tspbv_connector.input_1" />
+        <field name="input_type">recognition</field>
+        <field name="pattern">start order</field>
+    </record>
+    <record id="link_1" model="tspbv.link">
+        <field name="rel">pos1</field>
+        <field name="href">http://.../Demo_Pos1.xml</field>
+        <field name="method">post</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_1" />
+    </record>
+    <!-- simple voice dialog ends here -->
+    
+    <!-- complex voice dialog starts here -->
+    <record id="dialoglist_2" model="tspbv.dialoglist">
+        <field name="name">Complex Voice Dialog (Containing most of all specified tags)</field>
+        <field name="start">aisle</field>
+        <field name="default_code">complex</field>
+    </record>
+    <!-- start block of dialog with id aisle  -->
+    <record id="output_2" model="tspbv.output">
+        <field name="lydia_output">Aisle 1</field>
+    </record>
+    
+    <record id="grammar_rule_2" model="tspbv.grammar.rule">
+        <field name="rule_name">okay</field>
+        <field name="content">Lydia cancel</field>
+    </record>
+    
+    <record id="input_2" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_2')])]" />
+    </record>
+    <record id="dialog_2" model="tspbv.dialog">
+        <field name="id_dialog">aisle</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_2" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_2" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_2" />
+    </record>
+    <record id="recognition_2" model="tspbv.recognition">
+        <field name="rel">aisleok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector.input_2" />
+    </record>
+    <record id="link_2" model="tspbv.link">
+        <field name="rel">aisleok</field>
+        <field name="href">#location</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_2" />
+    </record>
+    <!-- end block of dialog with id aisle  -->
+    
+    <!-- start block of dialog with id location  -->
+    
+    
+    <record id="output_3" model="tspbv.output">
+        <field name="lydia_output">Rack 5 shelf 11</field>
+    </record>
+
+    <record id="constraint_1" model="tspbv.grammar.rule.constraint">
+        <field name="type">digits</field>
+        <field name="min">2</field>
+        <field name="max">2</field>
+    </record>
+    
+    
+    <record id="grammar_rule_3" model="tspbv.grammar.rule">
+        <field name="rule_name">checkdigit</field>
+        <field name="content">(okay|fertig)</field>
+        <field name="constraint_id" ref="tspbv_connector.constraint_1"/>
+    </record>
+    
+    <record id="input_3" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_3')])]" />
+    </record>
+    
+    <record id="dialog_3" model="tspbv.dialog">
+        <field name="id_dialog">location</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_3" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_3" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_2" />
+    </record>
+    <record id="recognition_3" model="tspbv.recognition">
+        <field name="rel">checkdigitok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">(62) okay</field>
+        <field name="input_id" ref="tspbv_connector.input_3" />
+    </record>
+    <record id="scan_4" model="tspbv.scan">
+        <field name="rel">checkdigitok</field>
+        <field name="input_type">scan</field>
+        <field name="on_match">$0==62</field>
+        <field name="pattern">.*</field>
+        <field name="input_id" ref="tspbv_connector.input_3" />
+    </record>
+    <record id="link_3" model="tspbv.link">
+        <field name="rel">checkdigitok</field>
+        <field name="href">#amount</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_3" />
+    </record>
+    <!-- sub dialog inside link -->
+    
+    <record id="output_4" model="tspbv.output">
+        <field name="lydia_output">checkdigit not ok</field>
+    </record>
+    
+    <record id="dialog_4" model="tspbv.dialog">
+        <field name="id_dialog">checkDigitNotOkDialog</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_4" />
+    </record>
+    
+    <record id="link_4" model="tspbv.link">
+        <field name="rel">checkdigitnotok</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_3" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_4" />
+    </record>
+    <record id="link_5" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#location</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_4" />
+    </record>
+    <!-- end block of dialog with id location  -->
+    
+    <!-- start block of dialog with id amount  -->
+    <record id="output_5" model="tspbv.output">
+        <field name="lydia_output">Take 2</field>
+    </record>
+
+    <record id="constraint_2" model="tspbv.grammar.rule.constraint">
+        <field name="type">digits</field>
+        <field name="min">1</field>
+        <field name="max">2</field>
+    </record>
+    
+    <record id="grammar_rule_4" model="tspbv.grammar.rule">
+        <field name="rule_name">pickamount</field>
+        <field name="content">(okay | pieces)</field>
+        <field name="constraint_id" ref="tspbv_connector.constraint_2"/>
+    </record>
+    
+    <record id="input_5" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_4')])]" />
+    </record>
+    
+    <record id="dialog_5" model="tspbv.dialog">
+        <field name="id_dialog">amount</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_5" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_5" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_2" />
+    </record>
+    
+    <record id="scan_5" model="tspbv.scan">
+        <field name="rel">overAmountNotOk</field>
+        <field name="input_type">scan</field>
+        <field name="on_match">2 &gt; $1</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="tspbv_connector.input_5" />
+    </record>
+    <record id="recognition_6" model="tspbv.recognition">
+        <field name="rel">confirmSubAmount</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">checkSubAmount($1, 2)</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="tspbv_connector.input_5" />
+    </record>
+    <record id="recognition_7" model="tspbv.recognition">
+        <field name="rel">amountCorrect</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="tspbv_connector.input_5" />
+    </record>
+    
+    <record id="link_6" model="tspbv.link">
+        <field name="rel">overAmountNotOk</field>
+        <field name="href">#overamountnotallowed</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_5" />
+    </record>
+    <record id="link_7" model="tspbv.link">
+        <field name="rel">confirmSubAmount</field>
+        <field name="href">#confirmsubamount</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_5" />
+    </record>
+    <record id="link_8" model="tspbv.link">
+        <field name="rel">amountCorrect</field>
+        <field name="href">http://.../Demo_FinishOrder.xml</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_5" />
+    </record>
+    <!-- start block of dialog with id amount  -->
+    
+    <!-- start block of dialog with id overamountnotallowed  -->
+    <record id="output_6" model="tspbv.output">
+        <field name="lydia_output">Overamount not allowed</field>
+    </record>
+    
+    <record id="dialog_6" model="tspbv.dialog">
+        <field name="id_dialog">overamountnotallowed</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_6" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_2" />
+    </record>
+    
+    
+    <record id="link_9" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#amount</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_6" />
+    </record>
+    <!-- end block of dialog with id overamountnotallowed  -->
+    
+    <!-- start block of dialog with id confirmsubamount  -->
+    <record id="output_7" model="tspbv.output">
+        <field name="lydia_output">Confirm ${amount}[1]</field>
+    </record>
+    
+    <record id="grammar_rule_5" model="tspbv.grammar.rule">
+        <field name="rule_name">cancel</field>
+        <field name="content"></field>
+    </record>
+    
+    <record id="input_7" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_4'),
+                                                    ref('tspbv_connector.grammar_rule_5')])]" />
+    </record>
+    
+    <record id="dialog_7" model="tspbv.dialog">
+        <field name="id_dialog">confirmsubamount</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_7" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_7" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_2" />
+    </record>
+    
+    <record id="recognition_8" model="tspbv.recognition">
+        <field name="rel">cancel</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">cancel</field>
+        <field name="input_id" ref="tspbv_connector.input_7" />
+    </record>
+    <record id="recognition_9" model="tspbv.recognition">
+        <field name="rel">confirm</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">$1==${amount}[1]</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="tspbv_connector.input_7" />
+    </record>
+    <record id="link_10" model="tspbv.link">
+        <field name="rel">cancel</field>
+        <field name="href">#amount</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_7" />
+    </record>
+    <record id="link_11" model="tspbv.link">
+        <field name="rel">confirm</field>
+        <field name="href">http://.../Demo_FinishOrder.xml</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_7" />
+    </record>
+    <!-- end block of dialog with id confirmsubamount  -->
+    <!-- complex voice dialog ends here -->
+</odoo>

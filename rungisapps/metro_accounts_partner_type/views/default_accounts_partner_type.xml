@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="partner_type_on_partner">
+        <field name="name">partner.type.on.partner</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='supplier']" position="after">
+                <field name="partner_type_id"/>
+            </xpath>
+      </field>
+    </record>
+
+
+    <record id="accounts_per_partner_type" model="ir.ui.view">
+        <field name="name">accounts.per.partner.type</field>
+        <field name="model">partner.type</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="account_payable_id"/>
+                <field name="account_receivable_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="action_partner_type">
+        <field name="name">Partner Types</field>
+        <field name="res_model">partner.type</field>
+    </record>
+
+    <menuitem name="Partner Types" id="menu_partner_type" parent="account.account_account_menu"
+              action="action_partner_type"/>
+
+</odoo>

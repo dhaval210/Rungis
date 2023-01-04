@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id='move-container'>
+            <div class="container-fluid" style="margin-top:2mm;">
+                 <div class="row" style="font-size:3mm;">
+                    <strong>Vendor :</strong>
+                     <t t-set="vendor" t-value="move_id.lot_id.purchase_order_ids.mapped('partner_id.name')"/>
+                     <t t-if="vendor">
+                        <t t-esc="vendor[0]"/>
+                     </t>
+                </div>
+                <div class="row" style="font-size:3mm;">
+                    <strong>Product No :</strong>
+                    <span t-esc="product.default_code"/>
+                </div>
+                <div class="row" style="font-size:3mm;">
+                    <strong>Product Name :</strong>
+                    <span t-esc="product.name"/>
+                </div>
+                <div class="row" style="font-size:3mm;">
+                    <strong>Scientific Name :</strong>
+                    <span t-esc="product.scientific_name"/>
+                </div>
+                <div class="row" style="font-size:3mm;">
+
+                    <strong>FAO Informations :</strong>
+                    <br/>
+                    <span>LOT NO :</span>
+                    <span t-field="move_id.lot_id.name"/>
+                    <br/>
+                    <t t-if="move_id.lot_id.lot_attribute_line_ids">
+                        <t t-foreach="move_id.lot_id.lot_attribute_line_ids" t-as="l">
+                            <span t-field="l.value_ids"/>
+                            <br/>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </template>
+        <template id="fish_label_template">
+            <t t-call="web.basic_layout">
+                <t t-foreach="move" t-as="move_id">
+                    <t t-set="product" t-value="move_id.product_id"/>
+                    <t t-if="separate_page">
+                        <t t-foreach="print_copy[move_id.id]" t-as="count">
+                            <div class="page" style="margin-left: -2mm;margin-right: -2mm;">
+                                <t t-call="metro_rungis_fish_label_report.move-container" t-lang="pick.partner_id.lang" />
+                                <p style="page-break-before:always;"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="same_page">
+                        <div class="page" style="margin-left: -2mm;margin-right: -2mm;">
+                            <t t-foreach="print_copy[move_id.id]" t-as="count">
+                                <t t-call="metro_rungis_fish_label_report.move-container" t-lang="pick.partner_id.lang"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

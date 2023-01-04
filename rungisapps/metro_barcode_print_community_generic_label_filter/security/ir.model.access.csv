@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_generic_label_group_user,generic.label.matrix,model_res_generic_label,base.group_user,1,1,1,1

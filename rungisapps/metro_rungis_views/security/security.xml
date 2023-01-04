@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="group_article" model="res.groups">
+            <field name="name">Article master data only AT</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+        </record>
+
+        <record id="group_contact" model="res.groups">
+            <field name="name">Contact master data only AT</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+        </record>
+
+        <record id="group_master_user_sale_order" model="res.groups">
+            <field name="name">master user sale orders</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+    </data>
+</odoo>

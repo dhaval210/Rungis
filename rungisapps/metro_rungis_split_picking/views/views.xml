@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherit_split_picking" model="ir.ui.view">
+        <field name="name">res.partner.form.metro.split_picking</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="picking_split_allow"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_warehouse_picking_split" model="ir.ui.view">
+        <field name="name">stock.warehouse.inherit.picking.split</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="picking_split_limit"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_form_picking_split" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.picking.split</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='scheduled_date']" position="before">
+                <field name="is_splitpick"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

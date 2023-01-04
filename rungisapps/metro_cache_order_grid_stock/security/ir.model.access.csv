@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cache_product_qty_grid_group_user,cache.product.qty.grid.user,model_cache_product_qty_grid,base.group_user,1,1,1,1
+access_res_generic_warehouse_group_user,res.generic.warehouse.user,model_res_generic_warehouse,base.group_user,1,1,1,1
+access_cache_product_qty_grid_group_admin,cache.product.qty.grid.admin,model_cache_product_qty_grid,metro_cache_order_grid.group_cache_admin,1,1,1,1
+access_res_generic_warehouse_group_admin,res.generic.warehouse.admin,model_res_generic_warehouse,metro_cache_order_grid.group_cache_admin,1,1,1,1

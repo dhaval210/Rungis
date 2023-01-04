@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   
+    <!-- MRP.BOM -->
+    <record id="mrp_bom_form_view_inherit_metro_mrp" model="ir.ui.view">
+        <field name="name">mrp.bom.view.form.inherit.metro.mrp</field>
+        <field name="model">mrp.bom</field>
+        <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bom_line_ids']//tree//field[@name='operation_id']" position="after">
+                <field name="auto_lot_creation"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mrp_production_form_view_inherit_metro_mrp" model="ir.ui.view">
+        <field name="name">mrp.production.view.form.inherit.metro.mrp</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//field[@name='finished_move_line_ids']/.." position="attributes">
+                <attribute name='attrs'>{'invisible': [('state','=','confirmed')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

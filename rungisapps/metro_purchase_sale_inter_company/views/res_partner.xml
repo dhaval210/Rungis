@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="company_ids" string="Companies" groups="base.group_multi_company" options="{'no_create': True}" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="company_id" position="after">
+                    <field name="company_ids" string="Companies" groups="base.group_multi_company" options="{'no_create': True}" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record model="ir.rule" id="base.res_partner_rule">
+            <field name="domain_force">['|','|','|',('company_id.child_ids','child_of',[user.company_id.id]),('company_id','child_of',[user.company_id.id]),('company_id','=',False),('company_ids','in',[user.company_id.id])]</field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'product'), ('name', '=', 'product_comp_rule')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record model="ir.rule" id="product.product_comp_rule">
+            <field name="domain_force">['|', '|',('company_id','=',user.company_id.id),('company_id','=',False),('company_ids','in',[user.company_id.id])]</field>
+        </record>
+    </data>
+</odoo>

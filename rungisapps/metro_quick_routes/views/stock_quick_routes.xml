@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.quick.routes form view -->
+    <record id="stock_quick_routes_view_form" model="ir.ui.view">
+        <field name="name">stock.quick.routes.view.form</field>
+        <field name="model">stock.quick.routes</field>
+        <field name="arch" type="xml">
+            <form string="Generate Routes">
+                <sheet>
+                    <div class="oe_button_box" name="stock_quick_routes_button_box">
+                        <button name="action_toggle_active"
+                                type="object"
+                                confirm="(Un)archiving a project automatically (un)archives its tasks and issues. Do you want to proceed?"
+                                class="oe_stat_button"
+                                icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                        <button name="generate_quality_route" type="object" string="Generate Route"/>
+                    </div>
+                    <group>
+                        <field name="warehouse_id"/>
+                        <field name="name"/>
+                        <field name="quality_name"/>
+                        <field name="puffer_name"/>
+                        <field name="location_parent_create"/>
+                        <field name="input_location_id"/>
+                        <field name="final_location_id"/>
+                        <field name="sequence_in_id"/>
+                        <field name="sequence_int_id"/>
+
+
+                        <field name="applicable_category"/>
+                        <field name="category_ids" widget="many2many_tags"  attrs="{'invisible': [('applicable_category', '!=', True)]}"/>
+                        <field name="applicable_warehouse"/>
+                        <field name="warehouse_ids" widget="many2many_tags" attrs="{'invisible': [('applicable_warehouse', '!=', True)]}"/>
+                        <field name="applicable_product"/>
+                        <field name="applicable_saleorderline"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- stock.quick.routes action window -->
+    <record id="stock_quick_routes_action" model="ir.actions.act_window">
+        <field name="name">stock.quick.routes.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.quick.routes</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="stock_quick_routes_menu_act" name="Quick Routes" parent="stock.menu_warehouse_config" action="stock_quick_routes_action" sequence="99"/>
+
+
+    <record id="stock_location_route_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.location.route.form.inherit</field>
+        <field name="model">stock.location.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='company_id']" position="after">
+                <field name="softm_location_number"/>
+             </xpath>
+        </field>
+    </record>
+
+</odoo>

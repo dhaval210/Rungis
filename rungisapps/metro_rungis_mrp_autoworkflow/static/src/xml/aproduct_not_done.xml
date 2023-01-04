@@ -1,0 +1,24 @@
+<templates id="template" xml:space="preserve">
+
+    <t t-name="metro_rungis_mrp_autoworkflow.notDone">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Location</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="values" t-as="val">
+                        <tr>
+                            <td t-esc="val.product_id"/>
+                            <td t-esc="val.location_id"/>
+                            <td t-esc="val.reason"/>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+    </t>
+
+</templates>

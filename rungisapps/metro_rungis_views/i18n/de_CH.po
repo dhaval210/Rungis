@@ -1,0 +1,205 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_views
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20210108\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-05-05 06:52+0000\n"
+"PO-Revision-Date: 2022-05-05 06:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_views
+#: selection:product.attribute,create_variant:0
+msgid "Always"
+msgstr "Immer"
+
+#. module: metro_rungis_views
+#: model:res.groups,name:metro_rungis_views.group_article
+msgid "Article master data only AT"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,help:metro_rungis_views.field_product_attribute__create_variant
+msgid "Check this if you want to create multiple variants for this attribute."
+msgstr "Aktivieren, wenn Sie mehrere Varianten für dieses Attribute erzeugen möchten."
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: metro_rungis_views
+#: model:res.groups,name:metro_rungis_views.group_contact
+msgid "Contact master data only AT"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_stock_picking_type__count_picking_ready_today
+msgid "Count Picking Ready Today"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_attribute__create_variant
+msgid "Create Variants"
+msgstr "Varianten erstellen"
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_stock_move__currency_id
+msgid "Currency"
+msgstr "Währung"
+
+#. module: metro_rungis_views
+#: model_terms:ir.actions.act_window,help:metro_rungis_views.action_picking_tree_draft
+#: model_terms:ir.actions.act_window,help:metro_rungis_views.action_picking_tree_ready_today
+msgid "Define a new transfer"
+msgstr "Neue Lagerbewegung erstellen"
+
+#. module: metro_rungis_views
+#: model:ir.actions.act_window,name:metro_rungis_views.action_picking_tree_draft
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.stock_picking_type_kanban_view
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_product__fao_fishing_technique_id
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_template__fao_fishing_technique_id
+msgid "FAO Fishing Tech."
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_product__group_check
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_template__group_check
+#: model:ir.model.fields,field_description:metro_rungis_views.field_res_partner__group_check
+#: model:ir.model.fields,field_description:metro_rungis_views.field_res_users__group_check
+msgid "Group Check"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_product__write_date
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_template__write_date
+#: model:ir.model.fields,field_description:metro_rungis_views.field_res_partner__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: metro_rungis_views
+#: model:ir.ui.menu,name:metro_rungis_views.menu_lot_purchase
+msgid "Lots/Serial Numbers"
+msgstr "Chargen-/Seriennummern"
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_product__main_categ_id
+#: model:ir.model.fields,field_description:metro_rungis_views.field_product_template__main_categ_id
+msgid "Main Group"
+msgstr "Hauptgruppe"
+
+#. module: metro_rungis_views
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.view_order_form
+msgid "Master Confirm"
+msgstr ""
+
+#. module: metro_rungis_views
+#: selection:product.attribute,create_variant:0
+msgid "Never"
+msgstr "Niemals"
+
+#. module: metro_rungis_views
+#: selection:product.attribute,create_variant:0
+msgid "Only when the product is added to a sales order"
+msgstr "Nur wenn das Produkt einem Kundenauftrag hinzugefügt wird"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Vorgangstyp"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_product_product
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.product_product_view_default_code
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.product_view_default_code
+msgid "Product"
+msgstr "Produkt"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_product_attribute
+msgid "Product Attribute"
+msgstr "Produktattribut"
+
+#. module: metro_rungis_views
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.product_product_view_default_code
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.product_view_default_code
+msgid "Product Code"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Produktbewegungen (Lagerbewegung)"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_product_template
+msgid "Product Template"
+msgstr "Produktvorlage"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_purchase_order
+msgid "Purchase Order"
+msgstr "Beschaffungsauftrag"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Bestellposition"
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_stock_move__purchase_price
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.purchase_product_incoming_product_view
+msgid "Purchase Price"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_sale_order
+msgid "Sale Order"
+msgstr "Verkaufsauftrag"
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Auftragsposition"
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_stock_move_line__special_wishes
+msgid "Sonderwünsche"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model,name:metro_rungis_views.model_stock_move
+msgid "Stock Move"
+msgstr "Lagerbuchung"
+
+#. module: metro_rungis_views
+#: model:ir.actions.act_window,name:metro_rungis_views.action_picking_tree_ready_today
+msgid "To Do"
+msgstr "Zu erledigen"
+
+#. module: metro_rungis_views
+#: model_terms:ir.ui.view,arch_db:metro_rungis_views.stock_picking_type_kanban_view
+msgid "To Process Today"
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:ir.model.fields,field_description:metro_rungis_views.field_purchase_order__vendor_ref
+msgid "Vendor Int. Ref."
+msgstr ""
+
+#. module: metro_rungis_views
+#: model:res.groups,name:metro_rungis_views.group_master_user_sale_order
+msgid "master user sale orders"
+msgstr ""
+

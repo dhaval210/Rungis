@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_form_view_procurement_button_inherited">
+            <field name="name">product.product.procurement.inherited</field>
+            <field name="model">product.product</field>
+            <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_product)d']"
+                           position="replace">
+                        <button type="action"
+                                name="%(stock.action_stock_level_forecast_report_product)d"
+                                attrs="{'invisible':[('type', '!=', 'product')]}"
+                                class="oe_stat_button" icon="fa-building-o">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+
+                                    <a href="#" data-toggle="tooltip" title="gggg">
+                                        <field name="virtual_available" widget="statinfo" nolabel="1"/>
+                                    </a>
+                                    <span attrs="{'invisible':[('outgoing_qty', '=', 0),('incoming_qty','=',0)]}"
+                                          groups="base.group_no_one">
+                                        <field name="outgoing_qty" invisible="1" widget="statinfo" nolabel="1"/>
+                                        <field name="incoming_qty" invisible="1" widget="statinfo" nolabel="1"/>
+                                        <script>
+                                            $(document).ready(function(){
+                                            var word1 = document.getElementsByName('outgoing_qty')[0].innerText;
+                                            var word2 = document.getElementsByName('incoming_qty')[0].innerText;
+                                            var word3 = document.getElementsByName('uom_name')[0].innerText;
+                                            var word4= "(-" + word1 + "+" + word2 + ") " + word3
+
+                                            $('[data-toggle="tooltip"]').attr('title', word4);
+                                            $('[data-toggle="tooltip"]').tooltip();
+                                            });
+                                        </script>
+                                    </span>
+                                    <field name="uom_name" class="ml4"/>
+                                </span>
+                                <span class="o_stat_text">Forecasted</span>
+                            </div>
+                        </button>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="product_template_form_view_procurement_button_inherited">
+            <field name="name">product.template_procurement.inherited</field>
+            <field name="model">product.template</field>
+            <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//button[@name='%(stock.action_stock_level_forecast_report_template)d']"
+                           position="replace">
+
+                        <button type="action"
+                                name="%(stock.action_stock_level_forecast_report_template)d"
+                                attrs="{'invisible':[('type', '!=', 'product')]}"
+                                class="oe_stat_button" icon="fa-building-o">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+
+                                    <a href="#" data-toggle="tooltip" title="gggg">
+                                        <field name="virtual_available" widget="statinfo" nolabel="1"/>
+                                    </a>
+                                    <span attrs="{'invisible':[('outgoing_qty', '=', 0),('incoming_qty','=',0)]}"
+                                          groups="base.group_no_one">
+                                        <field name="outgoing_qty" invisible="1" widget="statinfo" nolabel="1"/>
+                                        <field name="incoming_qty" invisible="1" widget="statinfo" nolabel="1"/>
+                                        <script>
+                                            $(document).ready(function(){
+                                            var word1 = document.getElementsByName('outgoing_qty')[0].innerText;
+                                            var word2 = document.getElementsByName('incoming_qty')[0].innerText;
+                                            var word3 = document.getElementsByName('uom_name')[0].innerText;
+                                            var word4= "(-" + word1 + "+" + word2 + ") " + word3
+
+                                            $('[data-toggle="tooltip"]').attr('title', word4);
+                                            $('[data-toggle="tooltip"]').tooltip();
+                                            });
+                                        </script>
+                                    </span>
+                                    <field name="uom_name" class="ml4"/>
+                                </span>
+                                <span class="o_stat_text">Forecasted</span>
+                            </div>
+                        </button>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+
+    </data>
+</odoo>

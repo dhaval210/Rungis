@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+
+from odoo import fields, models
+
+class PickingRoute(models.Model):
+    _name = 'picking.route'
+    _rec_name = 'source_location'
+
+    source_location = fields.Many2one(
+        'route.location',
+        string='Source Location',
+        required=True,
+    )
+    destination_location = fields.Many2one(
+        'route.location',
+        string='Destination Location',
+        required=True,
+    )
+    distance = fields.Float(
+        string='Distance(Km)',
+        required=True,
+    )
+    hour = fields.Float(
+        string='Hours',
+        required=True,
+    )
+    status = fields.Selection([
+        ('start', 'Start'),
+        ('onroute', 'On Route'),
+        ('halt', 'Halt'),
+        ('reach', 'Reach')],
+        default='start',
+    )
+    note = fields.Text(
+        string='Notes',
+    )
+    gps_tracking = fields.Char(
+        string='Gps Tracking No',
+    )
+    delivery_id = fields.Many2one(
+        'stock.picking',
+        string='Delivery',
+    )
+    delivery_route_id = fields.Many2one(
+        'picking.transport.info',
+        string='Picking Transport Info',
+    )
+    start_time = fields.Datetime(
+        string="Start Time",
+        #default=fields.Date.today(),
+    )
+    end_time = fields.Datetime(
+        string="End Time",
+        #default=fields.Date.today(),
+    )
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

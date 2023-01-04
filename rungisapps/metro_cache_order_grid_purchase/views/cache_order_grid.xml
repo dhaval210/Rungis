@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cache.order.grid inherit tree view -->
+    <record id="cache_order_grid_view_tree" model="ir.ui.view">
+        <field name="name">cache.order.grid.inherit.view.tree</field>
+        <field name="model">cache.order.grid</field>
+        <field name="inherit_id" ref="metro_cache_order_grid.cache_order_grid_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="in_past" position="after">
+                <field name="incoming_confirmed_qty"/>
+                <field name="incoming_planned_qty"/>
+            </field>
+        </field>
+    </record>
+</odoo>

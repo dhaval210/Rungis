@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="article_statics_tree_view" model="ir.ui.view">
+            <field name="name">article.statics.tree.view</field>
+            <field name="model">article.statistics</field>
+            <field name="arch" type="xml">
+                <tree string="Article Statics" create="false">
+                    <field name="product_id"/>
+                    <field name="article_number"/>
+                    <field name="sub_category"/>
+                    <field name="category_id"/>
+                    <field name="date" invisible="1"/>
+                    <field name="supplier_id"/>
+                    <field name="supplier_number"/>
+                    <field name="sale_price_month" widget="monetary"/>
+                    <field name="sale_price_6_month" widget="monetary"/>
+                    <field name="stock_available"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="article_statics_pivot_view" model="ir.ui.view">
+            <field name="name">article.statics.pivot.view</field>
+            <field name="model">article.statistics</field>
+            <field name="arch" type="xml">
+                <pivot string="Article Statistics">
+                    <field name="product_id" type="row"/>
+                    <field name="sale_price_month" type="measure"/>
+                    <field name="sale_price_6_month" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="article_statics_graph_view" model="ir.ui.view">
+            <field name="name">article.statics.graph.view</field>
+            <field name="model">article.statistics</field>
+            <field name="arch" type="xml">
+                <graph string="Article Statistics">
+                    <field name="product_id"/>
+                    <field name="sale_price_month" type="measure"/>
+                    <field name="sale_price_6_month" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="article_statistics_report_search" model="ir.ui.view">
+            <field name="name">article.statistics.report.search</field>
+            <field name="model">article.statistics</field>
+            <field name="arch" type="xml">
+                <search string="Stock Days">
+                    <field name="product_id" string="Product"/>
+                    <field name="article_number" string="Article Number"/>
+                    <field name="sub_category" string="Sub Category"/>
+                    <field name="category_id" string="Category"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Category" name="category" domain="[]" context="{'group_by':'category_id'}"/>
+                        <filter string="Products" name="product" domain="[]" context="{'group_by':'product_id'}"/>
+                        <filter string="Subcategory" name="sub_category" domain="[]" context="{'group_by':'sub_category'}"/>
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'supplier_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="article_statics_product_action" model="ir.actions.act_window">
+            <field name="name">Article Statistics</field>
+            <field name="res_model">article.statistics</field>
+            <field name="context">{'search_default_product':1}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="view_id" eval="article_statics_tree_view"/>
+            <field name="search_view_id" ref="article_statistics_report_search"/>
+        </record>
+
+    </data>
+</odoo>

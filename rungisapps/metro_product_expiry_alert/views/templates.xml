@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+        <!-- Alert mail template -->
+        <record id="expiry_alert_email_template_product" model="mail.template">
+            <field name="name">Product expiry alert - By Products</field>
+            <field name="email_from">${object.company_id and object.company_id.email or ''}</field>
+            <field name="subject">Product Expiry (Product: ${object.name})</field>
+            <field name="email_to">
+                ${object.purchasing_team_id and object.purchasing_team_id.alert_email or user.email|safe}
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="product.model_product_product"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                <![CDATA[
+            <div>
+              %for res in ctx['data']
+              ${res}
+              %endfor
+            </div>
+            <div style="padding:0px;width:1000px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <table cellspacing="0" cellpadding="0" style="width:600px;background:inherit;color:inherit">
+                    <tbody><tr>
+                        <td valign="center" width="200" style="padding:10px 10px 10px 5px;font-size: 12px">
+                            <img src="/logo.png" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}">
+                        </td>
+                    </tr></tbody>
+                </table>
+            </div>
+            <div style="padding: 0px; width: 1000px; margin: auto; background: center top / 100% repeat rgb(255, 255, 255);">
+	        <p style="color: rgb(119, 119, 119);">
+	        Dear ${user.name | safe} , </p>
+            <!--${object.user_id and object.user_id.name or '' } -->
+	      <p style="color: rgb(119, 119, 119);"> The product <strong>[${object.default_code}]${object.name}</strong> in the following lots are expiring soon: &nbsp;<span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">&nbsp;</span><span style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial; font-weight: initial;">&nbsp;</span><br></p><p style="color: rgb(119, 119, 119);"></p>
+
+
+
+<!--                        <div style="color: rgb(119, 119, 119);">-->
+                        %for values in ctx['lot_data']
+                            <strong> Lot/Serial Number: </strong> ${values['lot_number']}
+                            <br>
+                            <strong> Best Before Date: </strong> ${values['use_date']}
+                            <br>
+                            <strong> End of life date: </strong> ${values['life_date']}
+                            <br>
+                            <strong> Removal date: </strong> ${values['removal_date']}
+                            <br>
+                            <br>
+                        %endfor
+                        </div>
+
+
+
+      <div style="padding:0px;width:1000px;margin:auto; margin-top: 10px; background: #fff repeat top /100%;color:#777777"><br>
+          <p style="font-size: 11px; margin-top: 10px;">
+              <strong>Sent by ${user.company_id.name}</strong>
+
+          ]]>
+
+            </field>
+        </record>
+    </data>
+</odoo>

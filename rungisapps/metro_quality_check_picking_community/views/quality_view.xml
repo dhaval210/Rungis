@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="quality_check_view_form_inherit_quality_check" model="ir.ui.view">
+            <field name="name">quality.check.form.inherit.quality_check</field>
+            <field name="model">quality.inspection</field>
+            <field name="inherit_id" ref="sync_quality_control.quality_inspection_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="quality_check" string="Truck Quality Checks">
+                        <group>
+                            <group>
+                                <field name="custom_truck_type" />
+                                <field name="custom_product_type" invisible="1"/>
+                                <field name="custom_vehicle_condition" attrs="{'invisible':[('custom_product_type','!=','vehicle_condition')]}"/>
+                                <field name="custom_stacking_arragment" attrs="{'invisible':[('custom_product_type','!=','stacking_arrangement')]}"/>
+<!--                                <field name="custom_vehicle_door" attrs="{'invisible':[('custom_product_type','!=','vehicle_door')]}"/-->
+                                <field name="custom_vehicle_temprature" attrs="{'invisible':[('custom_product_type','!=','vehicle_temprature')]}"/>
+                                <field name="custom_chilled_temprature" attrs="{'invisible':[('custom_product_type','!=','vehicle_temprature')]}"/>
+                            </group>
+                            <group>
+                                <field name="custom_internal_notes" />
+                                <field name="quality_check_user_id" />
+                                <field name="quality_check_date" />
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="quality_check_view_tree_inherit_stock_picking" model="ir.ui.view">
+            <field name="name">quality.check.form.inherit.quality_check</field>
+            <field name="model">quality.inspection</field>
+            <field name="inherit_id" ref="sync_quality_control.quality_inspection_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                    <field name="picking_id" />
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="quality_check_view_filter_inherit_stock_picking" model="ir.ui.view">
+            <field name="name">quality.check.filter.inherit.picking</field>
+            <field name="model">quality.inspection</field>
+            <field name="inherit_id" ref="sync_quality_control.view_report_quality_inspection_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <filter name="stock_picking_id" string="Stock Picking" context="{'group_by': 'picking_id'}"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

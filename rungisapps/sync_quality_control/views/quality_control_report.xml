@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- QWeb Reports -->
+    <report
+        id="sync_quality_control_report_qweb"
+        model="quality.control.alert"
+        string="Quality Control Alert"
+        report_type="qweb-pdf"
+        name="sync_quality_control.quality_control_report_qweb"
+        file="sync_quality_control.quality_control_report_qweb"
+        attachment_use="True"
+    />
+</odoo>

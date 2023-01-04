@@ -1,0 +1,440 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_invoice_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20210108\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-11 05:09+0000\n"
+"PO-Revision-Date: 2022-02-11 05:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<br/>\n"
+"                            BIC:"
+msgstr "<br/>\n"
+"                            BIC:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<br/>\n"
+"                            HS-Code:"
+msgstr "<br/>\n"
+"                            IS-Code: "
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<br/>\n"
+"                            IBAN:"
+msgstr "<br/>\n"
+"                            IBAN:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<br/>\n"
+"                            Lot name:"
+msgstr "<br/>\n"
+"                            Lot:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<br/>\n"
+"                            BBD:"
+msgstr "<br/>\n"
+"                            MHD:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "<br/>\n"
+"                Customer discounts:"
+msgstr "<br/>\n"
+"                Kundenrabatt:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "<br/>\n"
+"                Order reference number:"
+msgstr "<br/>\n"
+"                Bestellreferenz des Kunden:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Amount</strong>\n"
+"                    <br/>"
+msgstr "<strong>Betrag</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Discount</strong>\n"
+"                    <br/>"
+msgstr "<strong>Rabatt</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Gross Amount</strong>\n"
+"                    <br/>"
+msgstr "<strong>Bruttobetrag</strong>\n"
+"                    <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Net Amount</strong>\n"
+"                    <br/>"
+msgstr "<strong>Nettobetrag</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Sum:</strong>\n"
+"                    <br/>"
+msgstr "<strong>Summe:</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>Total Untaxed Amount</strong>\n"
+"                <br/>\n"
+"                <strong>Global discounts</strong>\n"
+"                <br/>\n"
+"                <strong>Net Amount</strong>\n"
+"                <br/>\n"
+"                <strong>VAT</strong>\n"
+"                <br/>\n"
+"                <strong>Invoice Total</strong>\n"
+"                <br/>"
+msgstr "<strong>Gesamtwert ohne Steuern</strong>\n"
+"                <br/>\n"
+"                <strong>Kundenrabatt/e</strong>\n"
+"                <br/>\n"
+"                <strong>Nettobetrag</strong>\n"
+"                <br/>\n"
+"                <strong>MwSt</strong>\n"
+"                <br/>\n"
+"                <strong>Gesamtbetrag</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>VAT rate</strong>\n"
+"                    <br/>"
+msgstr "<strong>MwSt Satz</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "<strong>VAT</strong>\n"
+"                    <br/>"
+msgstr "<strong>MwSt</strong>\n"
+"                <br/>"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_account_invoice_send
+msgid "Account Invoice Send"
+msgstr "Konto-Rechnung senden"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Bank:"
+msgstr "Bank:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Credit Note."
+msgstr "Gutschrift"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_info_invoice
+msgid "Customer Number:"
+msgstr "Kundennummer:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "DN No."
+msgstr "Lieferscheinnr."
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "DN No.
+                            <br/>
+                            DN Date"
+msgstr "Lieferscheinnr.
+                            <br/>
+                             Lieferdatum"
+
+
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.header
+msgid "DUPLICATE"
+msgstr "DUPLIKAT"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_info_invoice
+msgid "Date:"
+msgstr "Datum:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Delivery address:"
+msgstr "<br/>\n"
+"            Anlieferadresse:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_report_metro_rungis_invoice_report_print_invoice__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice__duplicate_watermark
+msgid "Duplicate watermark"
+msgstr "Doppeltes Wasserzeichen"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_account_fiscal_position
+msgid "Fiscal Position"
+msgstr "Steuerzuordnung"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__footer_p1
+msgid "Footer Seite 1"
+msgstr "Fußzeile Seite 1"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__footer_p2
+msgid "Footer Seite 2"
+msgstr "Fußzeile Seite 2"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice_global_discount__gross_amt
+msgid "Gross amount"
+msgstr "Bruttobetrag"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "HS-Code:"
+msgstr "Intrastat-Code:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__header_p1
+msgid "Header Seite 1"
+msgstr "Kopfzeile Seite 1"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__header_p2
+msgid "Header Seite 2"
+msgstr "Kopfzeile Seite 2"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_report_metro_rungis_invoice_report_print_invoice__id
+msgid "ID"
+msgstr "ID"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_account_invoice_global_discount
+msgid "Invoice Global Discount"
+msgstr "Globaler Rabatt auf Rechnung"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_fiscal_position__invoice_information
+msgid "Invoice Information"
+msgstr "Rechnungsinformatione"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Rechungsposition"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Invoice No."
+msgstr "Rechnungsnr.:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.header
+msgid "Invoice No.:"
+msgstr "Rechnungsnummer:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Invoice No:"
+msgstr "Rechnungsnr.:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__invoice_final_text_box
+msgid "Invoice:Final Text Box"
+msgstr "Rechnung: Letztes Textfeld"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__invoice_credit_payment
+msgid "Invoice:credit payment"
+msgstr "Rechnung: Kreditzahlung"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_res_company__metro_bio_certificate
+msgid "BIo Certificate"
+msgstr "Bio-Zertifikat"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_report_metro_rungis_invoice_report_print_invoice____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice_line__delivery_no
+msgid "Lieferschein Nr."
+msgstr ""
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_db2_sale_order_line__lot_name
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_sale_order_line__lot_name
+msgid "Lot"
+msgstr "Fertigungslos"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Lot name:"
+msgstr "Lot: "
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Order reference number:"
+msgstr ""
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Please"
+msgstr "Bitte Translation"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Product"
+msgstr "Produkt"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Product Description"
+msgstr "Artikelbezeichnung"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Qty"
+msgstr "Menge"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.header
+msgid "RECHNUNG Nr."
+msgstr "RECHNUNG Nr."
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "Sale order number:"
+msgstr "Auftragsnummer:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Auftragsposition"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Sales Price"
+msgstr "Verkaufspreis"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.footer
+msgid "Seite:\n"
+"                    <span class=\"page\"/>\n"
+"                    /\n"
+"                    <span class=\"topage\"/>"
+msgstr "Seite:\n"
+"                    <span class=\"page\"/>\n"
+"                    /\n"
+"                    <span class=\"topage\"/>"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Total Untaxed Amount"
+msgstr "Gesamtbetrag vor Steuern"
+
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "Total Untaxed
+                            <br/>
+                            Amount
+                        "
+msgstr "Gesamtbetrag vor
+                            <br/>
+                            Steuern
+                          "
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_stock_picking
+msgid "Transfer"
+msgstr "Lieferung vornehmen"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.invoice_lines
+msgid "VAT"
+msgstr "USt."
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_info_invoice
+msgid "VAT ID:"
+msgstr "Ust-ID:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "We created the following credit:"
+msgstr "Wir schreiben Ihnen gut:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_invoice
+msgid "We thank you for the order placed with us and\n"
+"            charge as follows:"
+msgstr "Wir danken für den uns erteilten Auftrag und berechnen wie folgt:"
+
+#. module: metro_rungis_invoice_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_report.page_info_invoice
+msgid "Your contact person:"
+msgstr "Ihr Kontakt:"
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice_send__data_to_transfert
+msgid "data_to_transfert"
+msgstr ""
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model,name:metro_rungis_invoice_report.model_report_metro_rungis_invoice_report_print_invoice
+msgid "report.metro_rungis_invoice_report.print_invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice_line__so_pos_no
+msgid "so position no"
+msgstr ""
+
+#. module: metro_rungis_invoice_report
+#: model:ir.model.fields,field_description:metro_rungis_invoice_report.field_account_invoice_send__to_transfert
+msgid "to_transfert"
+msgstr ""
+

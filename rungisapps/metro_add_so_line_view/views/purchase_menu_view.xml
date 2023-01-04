@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="metro_po_line_tree" model="ir.ui.view">
+        <field name="name">metro.po.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_order"/>
+                <field name="partner_id"/>
+                <field name="date_planned"/>
+                <field name="product_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_po_line_search" model="ir.ui.view">
+        <field name="name">metro.po.line.search</field>
+        <field name="model">purchase.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Purchase Order Lines">
+                <filter string="RFQ" name="rfq" domain="[('state', '=', 'draft')]"/>
+                <filter string="RFQ Sent" name="rfq_sent" domain="[('state', '=', 'sent')]"/>
+                <filter string="To Approve" name="to_approve" domain="[('state', '=', 'to approve')]"/>
+                <filter string="Purchase Order" name="purchase_order" domain="[('state', '=', 'purchase')]"/>
+                <filter string="Locked" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state', '=', 'cancel')]"/>
+                <separator/>
+                <filter string="Purchased Last 365 Days" name="last_year_purchase"
+                        domain="[('date_order', '&gt;', (context_today() - relativedelta(days=365)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Today" name="purchase_order_today"
+                        domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+                <filter string="Yesterday" name="purchase_order_yesterday"
+                        domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <group expand="0" string="Extended Filters">
+                    <field name="company_id" groups="base.group_multi_company"/>
+                    <field name="date_order"/>
+                </group>
+                <group expand="0" string="Group By">
+                    <filter name="vendor" string="Vendor" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter name="product_id" string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter name="order_reference" string="Order Reference" domain="[]" context="{'group_by':'order_id'}"/>
+                    <filter name="status" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <separator/>
+                    <filter name="partner_buyer" string="Buyer" domain="[]" context="{'group_by':'buyer_id'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_metro_po_lines" model="ir.actions.act_window">
+        <field name="name">Purchase Order Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="search_view_id" ref="metro_po_line_search"/>
+    </record>
+
+    <record id="action_po_lines_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="metro_po_line_tree"/>
+        <field name="act_window_id" ref="action_metro_po_lines"/>
+    </record>
+
+    <menuitem name="Purchase Order Lines"
+              id="menu_metro_po_lines"
+              parent="purchase.menu_procurement_management"
+              action="action_metro_po_lines"/>
+</odoo>

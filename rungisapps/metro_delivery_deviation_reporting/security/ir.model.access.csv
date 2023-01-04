@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_packing_details,access.packing.details,model_packing_details,sales_team.group_sale_salesman_all_leads,1,1,1,1
+access_packing_details_line,access.packing.details.line,model_packing_details_line,sales_team.group_sale_salesman_all_leads,1,1,1,1

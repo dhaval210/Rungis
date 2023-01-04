@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.picking.batch inherit form view -->
+    <record id="stock_picking_batch_form" model="ir.ui.view">
+        <field name="name">stock.picking.batch.inherit.view.form</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="print_transport_label" string="Transportlabel" type="object" class="oe_highlight"/>
+                <button name="print_single_pickings" string="Print Pickings" type="object" class="oe_highlight"/>
+                <button name="print_warehouse4" string="Pick Batch" type="object" class="oe_highlight"/>
+                <button name="print_transport_label_two" string="Transport label2" type="object" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="res_picking_graph_view">
+        <field name="name">stock.picking.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="picking_type_id"/>
+            </graph>
+        </field>
+    </record>
+    <record id="stock.action_picking_tree_all" model="ir.actions.act_window">
+        <field name="view_mode">tree,kanban,form,calendar,graph</field>
+    </record>
+</odoo>

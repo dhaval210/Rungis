@@ -1,0 +1,1352 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* tis_cw_stock_report_xls
+#	* tis_cw_average_qty
+#	* tis_cw_procurement
+#	* tis_cw_web_sale
+#	* tis_cw_demo_data
+#	* tis_cw_mrp
+#	* tis_cw_web_sale_avg
+#	* tis_catch_weight
+#	* all_channels_sales_cw_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-25 04:00+0000\n"
+"PO-Revision-Date: 2019-06-25 04:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:258
+#, python-format
+msgid "\n"
+"There are %s %s available across all warehouses."
+msgstr "\n"
+"Existem% s% s disponíveis em todos os armazéns."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_demo_data
+msgid " CW Products demo data"
+msgstr "CW Products demo data"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid " CW Quantity Finished Product"
+msgstr " CW Quantidade Produto Acabado"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_stock_quantity_history__report_type
+msgid " Report Type"
+msgstr " Tipo de relatório"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW Forecasted</span>"
+msgstr "<span class=\"o_stat_text\">Previsão de CW</span>"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW On Hand</span>"
+msgstr "<span class=\"o_stat_text\">CW na mão</span>"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_popover
+msgid "<span>CW Qty:</span>"
+msgstr "<span>Qtd:</span>"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "<span>CW Quantity</span>\n"
+"                            <span>(</span>"
+msgstr "<span>Quantidade CW</span>\n"
+"                            <span>(</span>"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:310
+#: code:addons/tis_catch_weight/models/product_template.py:317
+#, python-format
+msgid "A CatchWeight product cannot be a service product."
+msgstr "Um produto CatchWeight não pode ser um produto de serviço."
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:6
+#, python-format
+msgid "Access to all Enterprise Apps"
+msgstr "Acesso a todos os aplicativos corporativos"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activate catch weight system"
+msgstr "Ativar o sistema de captura de peso"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in Ecommerce"
+msgstr "Ativando recursos de captura de peso no comércio eletrônico"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in manufacturing"
+msgstr "Ativando recursos de peso de captura na fabricação"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Add one"
+msgstr "Adicione um"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:11
+#, python-format
+msgid "And more"
+msgstr "E mais"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Apply"
+msgstr "Aplique"
+
+#. module: tis_cw_average_qty
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_product__average_cw_quantity
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_template__average_cw_quantity
+msgid "Average CW Quantity"
+msgstr "Quantidade média de CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_average_qty
+msgid "Average quantity on CW Products"
+msgstr "Quantidade média em produtos CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale_avg
+msgid "Average quantity on CW Products in ecommerce"
+msgstr "Quantidade média em produtos CW no comércio eletrônico"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Below are applicable to catch weight product(s)."
+msgstr "Abaixo, aplicam-se os produtos de captura de peso."
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Lista de materiais"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Linha de lista de materiais"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_invoiced
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Billed CW Qty"
+msgstr "Faturado CW Qty"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+msgid "Box of Avocado"
+msgstr "Caixa de abacate"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+msgid "Box of Cherry"
+msgstr "Caixa de cereja"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_strawberry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_strawberry_product_template
+msgid "Box of Strawberry"
+msgstr "Pudełko z truskawkami"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:10
+#, python-format
+msgid "Bug fixes guarantee"
+msgstr "Garantia de correções de bugs"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_banana_product_template
+msgid "Bunch of Banana"
+msgstr "Bando de Banana"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+msgid "Bundle of beetroot"
+msgstr "Pacote de beterraba"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+msgid "Bundle of Bitter Gourd"
+msgstr "Pacote de cabaço amargo"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_cotton
+#: model:product.template,name:tis_cw_demo_data.product_product_cotton_product_template
+msgid "Bundle of Cotton"
+msgstr "Pacote de algodão"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_spinach
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_spinach_product_template
+msgid "Bundle of Spinach"
+msgstr "Pacote de espinafre"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_butter
+#: model:product.template,name:tis_cw_demo_data.product_product_butter_product_template
+msgid "Butter"
+msgstr "manteiga"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.template,name:tis_cw_demo_data.product_product_butter_me_up_product_template
+msgid "Butter Me Up"
+msgstr "Manteiga Me Up"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Consumed"
+msgstr "CW Consumido"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_delivered
+msgid "CW Delivered"
+msgstr "CW entregue"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Delivered Quantity"
+msgstr "Quantidade entregue CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom_qty
+msgid "CW Demand"
+msgstr "CW Demand"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_qty_done
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+msgid "CW Done"
+msgstr "CW feito"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_virtual_available
+msgid "CW Forecast Quantity"
+msgstr "Quantidade de previsão de CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_virtual_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Forecasted Quantity"
+msgstr "Quantidade prevista em CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_incoming_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_incoming_qty
+msgid "CW Incoming"
+msgstr "CW Incoming"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_invoiced
+msgid "CW Invoiced"
+msgstr "CW Invoiced"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Invoiced Quantity"
+msgstr "Quantidade Faturada CW"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+msgid "CW On Hand"
+msgstr "CW na mão"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_kanban_cw_onhand
+msgid "CW On hand:"
+msgstr "CW na mão"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_outgoing_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_outgoing_qty
+msgid "CW Outgoing"
+msgstr "Saída CW"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_invoice_catchweight
+msgid "CW QTY"
+msgstr "CW QTY"
+
+#. modules: tis_catch_weight, tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_delivery_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_qoutation_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_sale_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stockpicking_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_summary_cw_qty
+msgid "CW Qty"
+msgstr "CW Qty"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_delivered
+msgid "CW Qty Delivered"
+msgstr "CW Qty Delivered"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_invoiced
+msgid "CW Qty Invoiced"
+msgstr "CW Qty Invoiced"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__product_cw_uom_qty
+msgid "CW Qty Ordered"
+msgstr "CW Qty Ordered"
+
+#. modules: tis_cw_mrp, tis_catch_weight, tis_cw_web_sale
+#. openerp-web
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_move_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_at_date
+#: model:ir.model.fields,field_description:tis_catch_weight.field_report_stock_forecast__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__scrap_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_body_print_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_inventory_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_quant_package_form_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_production_form_lot_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_produced
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_bom_form_view_cw_inherit
+#: code:addons/tis_cw_web_sale/static/src/xml/website_sale_dashboard_cw.xml:5
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#, python-format
+msgid "CW Quantity"
+msgstr "Quantidade CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_qty_available
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "CW Quantity On Hand"
+msgstr "Quantidade de CW à mão"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "CW Quantity Produced"
+msgstr "Quantidade produzida em CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity Reserved"
+msgstr "CW Quantidade Reservada"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_remaining
+msgid "CW Quantity To Be Produced"
+msgstr "Quantidade CW a ser produzida"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_product_qty
+msgid "CW Quantity To Produce"
+msgstr "CW Quantidade Para Produzir"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:30
+#, python-format
+msgid "CW Quantity cannot be negative."
+msgstr "A quantidade de CW não pode ser negativa."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Quantity in stock that can still be reserved for this move"
+msgstr "CW Quantidade em estoque que ainda pode ser reservada para este movimento"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_product_qty
+msgid "CW Quantity in the default UoM of the product"
+msgstr "Quantidade de CW na UM padrão do produto"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity that has already been reserved for this move"
+msgstr "CW Quantidade que já foi reservada para este movimento"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_product_qty
+msgid "CW Real Quantity"
+msgstr "Quantidade real de CW"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_reserved
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Reserved"
+msgstr "CW Reserved"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_reserved_quantity
+msgid "CW Reserved Quantity"
+msgstr "Quantidade reservada de CW"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.actions.report,name:tis_cw_stock_report_xls.cw_stock_xlsx
+msgid "CW Stock Report"
+msgstr "Relatório de estoque da CW"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_to_consume
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW To Consume"
+msgstr "CW para consumir"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_to_invoice
+msgid "CW To Invoice"
+msgstr "CW para fatura"
+
+#. modules: tis_cw_mrp, tis_catch_weight, tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_tree2_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__product_cw_uom_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+msgid "CW UOM"
+msgstr "UOM da CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id_ok
+msgid "CW Unit Of Measure"
+msgstr "Unidade de Medida CW"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__product_cw_uom_id
+msgid "CW Unit of Measure"
+msgstr "Unidade de Medida CW"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+msgid "CW-Initial Demand"
+msgstr "Demanda inicial de CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom_qty
+msgid "CW-Qty"
+msgstr "CW-Qty"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_product_tree_cw_
+msgid "CW-Quantity Done"
+msgstr "Quantidade de CW concluída"
+
+#. modules: tis_catch_weight, tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__product_cw_uom
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+#: selection:product.category,purchase_price_base:0
+#: selection:product.category,sale_price_base:0
+#: selection:product.template,purchase_price_base:0
+#: selection:product.template,sale_price_base:0
+#: selection:set.cw.multiple.products,purchase_price_base:0
+#: selection:set.cw.multiple.products,sale_price_base:0
+#: selection:stock.warehouse.orderpoint,reordering_based_on:0
+msgid "CW-UOM"
+msgstr "CW-UOM"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_calamari_frozen_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_calamari_frozen_pack_product_template
+msgid "Calamari Frozen Pack"
+msgstr "Calamari Frozen Pack"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_tuna
+#: model:product.template,name:tis_cw_demo_data.product_product_tuna_product_template
+msgid "Can of Tuna"
+msgstr "Lata de atum"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:75
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: tis_cw_web_sale
+#: model:ir.model.fields,field_description:tis_cw_web_sale.field_sale_order__cart_cw_quantity
+msgid "Cart CW Quantity"
+msgstr "Quantidade do carrinho CW"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_apple_product_template
+msgid "Carton of Apples"
+msgstr "Caixa de maçãs"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:86
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__group_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Catch Weight"
+msgstr "Pegar peso"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch Weight Management"
+msgstr "Gerenciamento de peso de captura"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__catch_weight_ok
+msgid "Catch Weight Product"
+msgstr "Catch Weight Product"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id
+msgid "Catch Weight UOM"
+msgstr "UOM de Peso Capturado"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_inventory.py:167
+#, python-format
+msgid "Catch Weight quantity cannot be negative for %s"
+msgstr "A quantidade de captura de peso não pode ser negativa para% s"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch weight Demo Data"
+msgstr "Pegar peso Demo Data"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "CatchW8"
+msgstr "CatchW8"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Category"
+msgstr "Categoria"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr "Alterar quantidade do produto"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_change_production_qty
+msgid "Change Production Qty"
+msgstr "Alterar quantidade de produção"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Check to enable catch weight management system"
+msgstr "Verifique para ativar o sistema de gerenciamento de peso de captura"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_cheese
+#: model:product.template,name:tis_cw_demo_data.product_product_cheese_product_template
+msgid "Cheese Wheel"
+msgstr "Roda de queijo"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_chicken_bag
+#: model:product.template,name:tis_cw_demo_data.product_product_chicken_bag_product_template
+msgid "Chicken Bag"
+msgstr "Saco de frango"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_res_config_settings
+msgid "Config Settings"
+msgstr "Definições de configuração"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_inventory_line__product_cw_uom_category_id
+msgid "Conversion between Units of Measure can only occur if they belong to the same category. The conversion will be made based on the ratios."
+msgstr "A conversão entre unidades de medida só pode ocorrer se pertencer à mesma categoria. A conversão será feita com base nos índices."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight_ok
+msgid "Convert Product"
+msgstr "Converter produto"
+
+#. module: tis_catch_weight
+#: model:ir.actions.act_window,name:tis_catch_weight.action_view_activate_catch_weight
+msgid "Convert Product(CW/NOT)"
+msgstr "Converter produto (CW / NOT)"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "Current CW Qty"
+msgstr "Qt CW atual"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_producing
+msgid "Currently Produced CW Quantity"
+msgstr "Quantidade de CW atualmente produzida"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__cw_quantity
+msgid "Cw Quantity"
+msgstr "Quantidade de Cw"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:73
+#, python-format
+msgid "Delivered CW Quantity"
+msgstr "Quantidade entregue de CW"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__display_name
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__display_name
+msgid "Display Name"
+msgstr "Mostrar nome"
+
+#. module: tis_cw_demo_data
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_tuna
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_yarn
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_tuna_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_yarn_product_template
+msgid "Dozen(s)"
+msgstr "Dúzia (s)"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:22
+#, python-format
+msgid "Enter the CW Done quantity for the product %r."
+msgstr "Digite a quantidade CW Done para o produto% r."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:24
+#, python-format
+msgid "Enter the Done quantity for the product %r."
+msgstr "Digite a quantidade Done para o produto% r."
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Excel"
+msgstr "Excel"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Export Stock report with cw quantity"
+msgstr "Exportar relatório de estoque com quantidade cw"
+
+#. module: tis_cw_stock_report_xls
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Export cw stock"
+msgstr "Exportar estoque cw"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in Ecommerce/Shop"
+msgstr "Buscar quantidade média no comércio eletrônico / loja"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in sales and purchase"
+msgstr "Buscar quantidade média em vendas e compras"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fish
+msgid "Fish"
+msgstr "Peixe"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "forecasted cw Quantity"
+msgstr "Quantidade prevista de cw"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_freezer_pack_meet
+#: model:product.template,name:tis_cw_demo_data.product_product_freezer_pack_meet_product_template
+msgid "Freezer Pack Meat"
+msgstr "Embalagem para congelador"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_fresh_milk
+#: model:product.template,name:tis_cw_demo_data.product_product_fresh_milk_product_template
+msgid "Fresh Milk"
+msgstr "Leite fresco"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_shark
+#: model:product.template,name:tis_cw_demo_data.product_product_shark_product_template
+msgid "Fresh Shark Fillet Tray"
+msgstr "Bandeja de filé de tubarão fresco"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_shrimp
+#: model:product.template,name:tis_cw_demo_data.product_product_shrimp_product_template
+msgid "Frozen Shrimp Pack"
+msgstr "Pacote de Camarão Congelado"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fruit
+msgid "Fruits"
+msgstr "frutas"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:3
+#, python-format
+msgid "Get this feature and much more with Technaureus!"
+msgstr "Obtenha este recurso e muito mais com a Technaureus!"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_beef
+#: model:product.template,name:tis_cw_demo_data.product_product_beef_product_template
+msgid "Ground Beef Bundle (40 Packs)"
+msgstr "Pacote de carne moída (40 pacotes)"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_is_produced
+msgid "Has Been Produced(CW)"
+msgstr "Foi Produzido (CW)"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__id
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__id
+msgid "ID"
+msgstr "identidade"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_immediate_transfer
+msgid "Immediate Transfer"
+msgstr "Transferência Imediata"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid "Informative, not used in matching"
+msgstr "Informativo, não usado em correspondência"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:154
+#, python-format
+msgid "Invalid domain left operand %s"
+msgstr "Domínio inválido operando à esquerda% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:156
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr "Operador de domínio inválido% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:158
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr "Domínio inválido operando à direita% s"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventário"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Linha de Inventário"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Linha de fatura"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:74
+#, python-format
+msgid "Invoiced CW Quantity"
+msgstr "Quantidade CW faturada"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr "Estatísticas de faturas"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_search_view_cw
+msgid "Is Catch Weight"
+msgstr "É pegar peso"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:296
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW Quantity you have in stock."
+msgstr "Não é possível reservar mais produtos de% s do que a quantidade CW que você tem em estoque."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:197
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW quantity you have in stock."
+msgstr "Não é possível reservar mais produtos de% s do que a quantidade CW que você tem em estoque."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:194
+#, python-format
+msgid "It is not possible to reserve more products of %s than you have in stock."
+msgstr "Não é possível reservar mais produtos de% s do que você tem em estoque."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:207
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have  in stock."
+msgstr "Não é possível não cobrar mais produtos de% s do que a quantidade de CW que você tem em estoque."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:303
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have in stock."
+msgstr "Não é possível não cobrar mais produtos de% s do que a quantidade de CW que você tem em estoque."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:203
+#, python-format
+msgid "It is not possible to unreserve more products of %s than you have in stock."
+msgstr "Não é possível não cobrar mais produtos de% s do que você tem em estoque."
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_move_line
+msgid "Journal Item"
+msgstr "Item de diário"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_kangaroo_bbq_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_kangaroo_bbq_pack_product_template
+msgid "Kangaroo BBQ Pack"
+msgstr "Kangaroo BBQ Pack"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products____last_update
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report____last_update
+msgid "Last Modified on"
+msgstr "Última modificação em"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_uid
+msgid "Last Updated by"
+msgstr "Última atualização por"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_date
+msgid "Last Updated on"
+msgstr "Última atualização em"
+
+#. module: tis_cw_demo_data
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_fresh_milk
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_fresh_milk_product_template
+msgid "Liter(s)"
+msgstr "Litro (s)"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lote / Serial"
+
+#. module: tis_catch_weight
+#: model:res.groups,name:tis_catch_weight.group_catch_weight
+msgid "Manage Catch Weight for the Inventory"
+msgstr "Gerenciar peso de captura para o inventário"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_mrp
+msgid "Manufacturing CW Products"
+msgstr "Fabricação de produtos CW"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Mapping cw quantity in procurement"
+msgstr "Mapeando a quantidade cw no suprimento"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_meat_plant
+#: model:product.template,name:tis_cw_demo_data.product_product_meat_plant_product_template
+msgid "Meat Plant"
+msgstr "Planta de carne"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_min_cw_qty
+msgid "Minimum CW Quantity"
+msgstr "Quantidade mínima de CW"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Regra Mínima de Inventário"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:8
+#, python-format
+msgid "Mobile support"
+msgstr "Suporte móvel"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_mutton_dices
+#: model:product.template,name:tis_cw_demo_data.product_product_mutton_dices_product_template
+msgid "Mutton Dices"
+msgstr "Carneiro corta"
+
+#. module: tis_catch_weight
+#: selection:set.cw.multiple.products,catch_weight:0
+msgid "NO"
+msgstr "NO"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_change_product_qty__new_cw_quantity
+msgid "New CW Quantity on Hand"
+msgstr "Nova quantidade de CW à mão"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:7
+#, python-format
+msgid "New design"
+msgstr "Novo design"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:101
+#, python-format
+msgid "No negative quantities allowed"
+msgstr "Nenhuma quantidade negativa permitida"
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Normal"
+msgstr "Normal"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:262
+#, python-format
+msgid "Not enough inventory!"
+msgstr "Não há estoque suficiente!"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_onion
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_onion_product_template
+msgid "Onion Bag"
+msgstr "Saco De Cebola"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:70
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__ordered_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__ordered_cw_qty
+#, python-format
+msgid "Ordered CW Quantity"
+msgstr "Quantidade pedida de CW"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_mussels
+#: model:product.template,name:tis_cw_demo_data.product_product_mussels_product_template
+msgid "Organic Mussels Bag"
+msgstr "Saco de mexilhões orgânicos"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_production
+msgid "Original Production Quantity"
+msgstr "Quantidade de produção original"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/wizard/mrp_product_produce.py:39
+#, python-format
+msgid "Please enter a lot or serial number for %s !"
+msgstr "Por favor insira um número de série ou lote para% s!"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:44
+#, python-format
+msgid "Please enter the CW Quantity"
+msgstr "Por favor insira a Quantidade de CW"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:24
+#: code:addons/tis_catch_weight/models/sale.py:25
+#: code:addons/tis_catch_weight/models/stock_inventory.py:165
+#, python-format
+msgid "Please enter the CW Quantity for %s"
+msgstr "Por favor, digite a quantidade de CW para% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:46
+#, python-format
+msgid "Please enter the Quantity"
+msgstr "Por favor insira a Quantidade"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:26
+#: code:addons/tis_catch_weight/models/sale.py:27
+#: code:addons/tis_catch_weight/models/stock_inventory.py:163
+#, python-format
+msgid "Please enter the Quantity for %s"
+msgstr "Por favor insira a Quantidade para% s"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_workorder.py:141
+#, python-format
+msgid "Please set the CW Quantity you are currently producing. It should be different from zero."
+msgstr "Por favor, defina a quantidade de CW que você está produzindo atualmente. Deve ser diferente de zero."
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_poultry
+msgid "Poultry"
+msgstr "Aves de capoeira"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_prawns
+#: model:product.template,name:tis_cw_demo_data.product_product_prawns_product_template
+msgid "Prawns Tray"
+msgstr "Bandeja de camarão"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_procurement_group
+msgid "Procurement Group"
+msgstr "Grupo de Aquisições"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_procurement
+msgid "Procurement on CW Products"
+msgstr "Suprimento de produtos CW"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_product
+msgid "Product"
+msgstr "produtos"
+
+#. modules: tis_catch_weight, all_channels_sales_cw_report
+#: model:ir.model.fields,field_description:all_channels_sales_cw_report.field_report_all_channels_sales__product_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_report__product_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_report__unit_cw_quantity
+msgid "Product CW Quantity"
+msgstr "Ilość CW produktu"
+
+#. modules: tis_cw_mrp, tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_cw_uom
+msgid "Product CW Unit of Measure"
+msgstr "Unidade de Medida CW de Produto"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_category
+msgid "Product Category"
+msgstr "Categoria de Produto"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_move_line
+#: model:ir.model,name:tis_cw_mrp.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Бүтээгдэхүүний хөдөлгөөн (Хөрөнгө шилжүүлэх шугам)"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_replenish
+msgid "Product Replenish"
+msgstr "Reposição de Produto"
+
+#. modules: tis_cw_average_qty, tis_cw_web_sale_avg, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_template
+#: model:ir.model,name:tis_cw_average_qty.model_product_template
+#: model:ir.model,name:tis_cw_web_sale_avg.model_product_template
+msgid "Product Template"
+msgstr "Modelo de produto"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__product_cw_uom_id
+msgid "Product Unit of Measure"
+msgstr "Unidade de medida do produto"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_production
+msgid "Production Order"
+msgstr "Ordem de produção"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_order
+msgid "Purchase Order"
+msgstr "Ordem de compra"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Linha de ordem de compra"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base
+msgid "Purchase Price Base"
+msgstr "Base de Preços de Compra"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Purchase Price Based On"
+msgstr "Base de Preços de Compra em"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__purchase_price_base
+msgid "Purchase Price Based on"
+msgstr "Base de Preços de Compra em"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_report
+msgid "Purchases Orders"
+msgstr "Ordens de compras"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_production_lot__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+msgid "Quantity"
+msgstr "Quantidade"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_qty_produced
+msgid "Quantity Produced"
+msgstr "Quantidade produzida"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_quant
+msgid "Quants"
+msgstr "Quantos"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_inventory_cw_line_tree2_inherit_catchweight
+msgid "Real CW Quantity"
+msgstr "Quantidade real de CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_received
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Received CW Qty"
+msgstr "Qtd recebido de CW"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce
+msgid "Record Production"
+msgstr "Produção de Registros"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce_line
+msgid "Record Production Line"
+msgstr "Linha de Produção Record"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_red_meat
+msgid "Red Meat"
+msgstr "Carne vermelha"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Remove one"
+msgstr "Remova um"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__reordering_based_on
+#: model_terms:ir.ui.view,arch_db:tis_cw_procurement.view_warehouse_orderpoint_purchase_form_catch_weight
+msgid "Reordering Based On"
+msgstr "Reordenação baseada em"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking
+msgid "Return Picking"
+msgstr "Retornar Picking"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking_line
+#: model:ir.model,name:tis_cw_average_qty.model_stock_return_picking_line
+msgid "Return Picking Line"
+msgstr "Linha de Retirada"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_polyester
+#: model:product.template,name:tis_cw_demo_data.product_product_polyester_product_template
+msgid "Roll of Polyester"
+msgstr "Rolo de poliéster"
+
+#. modules: tis_catch_weight, tis_cw_web_sale
+#: model:ir.model,name:tis_catch_weight.model_sale_order
+#: model:ir.model,name:tis_cw_web_sale.model_sale_order
+msgid "Sale Order"
+msgstr "Ordem de venda"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base
+msgid "Sale Price Base"
+msgstr "Base de Preços de Venda"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Sale Price Based On"
+msgstr "Base de Preços de Venda On"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__sale_price_base
+msgid "Sale Price Based on"
+msgstr "Base de Preços de Venda On"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Relatório de análise de vendas"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha de ordem de vendas"
+
+#. module: all_channels_sales_cw_report
+#: model:ir.model,name:all_channels_sales_cw_report.model_report_all_channels_sales
+msgid "Sales by Channel (All in One)"
+msgstr "Vendas por canal (tudo em um)"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_salmon
+#: model:product.template,name:tis_cw_demo_data.product_product_salmon_product_template
+msgid "Salmon Fillet Tray"
+msgstr "Bandeja de filé de salmão"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_scrap
+msgid "Scrap"
+msgstr "Sucatear"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale
+msgid "Sell CW products online"
+msgstr "Vender produtos CW online"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_set_cw_multiple_products
+msgid "Set Cw Multiple Products"
+msgstr "Set Cw Multiple Products"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:59
+#, python-format
+msgid "Some of your components are tracked, you have to specify a manufacturing order in order to retrieve the correct components."
+msgstr "Alguns de seus componentes são rastreados, é necessário especificar uma ordem de produção para recuperar os componentes corretos."
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_steak_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_steak_pack_product_template
+msgid "Steak Pack"
+msgstr "Pacote de Bife"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_report_stock_forecast
+msgid "Stock Forecast Report"
+msgstr "Relatório de previsão de estoque"
+
+#. modules: tis_cw_mrp, tis_catch_weight, tis_cw_procurement
+#: model:ir.model,name:tis_catch_weight.model_stock_move
+#: model:ir.model,name:tis_cw_mrp.model_stock_move
+#: model:ir.model,name:tis_cw_procurement.model_stock_move
+msgid "Stock Move"
+msgstr "Mover estoque"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model,name:tis_cw_stock_report_xls.model_stock_quantity_history
+msgid "Stock Quantity History"
+msgstr "Histórico de quantidade de estoque"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_stock_report_xls
+msgid "Stock 

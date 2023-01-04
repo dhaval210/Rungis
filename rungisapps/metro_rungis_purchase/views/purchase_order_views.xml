@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_tree_inherit_mail_sent" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inherit.mail.sent</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[last()]" position="after">
+                <field name="is_mail_sent_fail" invisible="1"/>
+                <button icon="fa-envelope-o" attrs="{'invisible': [('is_mail_sent_fail', '=', False)]}" class="btn-outline-danger"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

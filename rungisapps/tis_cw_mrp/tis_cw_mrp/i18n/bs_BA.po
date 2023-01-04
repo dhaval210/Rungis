@@ -1,0 +1,1536 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* tis_cw_average_qty
+#	* tis_cw_demo_data
+#	* tis_cw_web_sale_avg
+#	* tis_catch_weight
+#	* tis_cw_web_sale
+#	* tis_cw_procurement
+#	* tis_cw_mrp
+#	* tis_cw_stock_report_xls
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-24 06:42+0000\n"
+"PO-Revision-Date: 2019-06-24 06:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:258
+#, python-format
+msgid "\n"
+"There are %s %s available across all warehouses."
+msgstr "U svim skladištima postoji% s% s."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_demo_data
+msgid " CW Products demo data"
+msgstr "CW proizvodi demo podaci"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid " CW Quantity Finished Product"
+msgstr "CW količina gotovog proizvoda"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_stock_quantity_history__report_type
+msgid " Report Type"
+msgstr "Type Report"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW Forecasted</span>"
+msgstr "<span class=\"o_stat_text\">CW prognoza</span>"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW On Hand</span>"
+msgstr "<span class=\"o_stat_text\">CW pod ruku</span> "
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_popover
+msgid "<span>CW Qty:</span>"
+msgstr "<span>CW Qty:</span>"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "<span>CW Quantity</span>\n"
+"                            <span>(</span>"
+msgstr "<span>CW količina</span>\n"
+"                            <span>(</span>"
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:6
+#, python-format
+msgid "Access to all Enterprise Apps"
+msgstr "Pristup svim aplikacijama za preduzeća"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activate catch weight system"
+msgstr "Aktivirajte sistem utega ulova"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in Ecommerce"
+msgstr "Aktiviranje funkcija utega u e-trgovini"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in manufacturing"
+msgstr "Aktiviranje karakteristika težine ulova u proizvodnji"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Add one"
+msgstr "Dodajte jedan"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:11
+#, python-format
+msgid "And more"
+msgstr "I više"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Apply"
+msgstr "Primjeni"
+
+#. module: tis_cw_average_qty
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_product__average_cw_quantity
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_template__average_cw_quantity
+msgid "Average CW Quantity"
+msgstr "Prosečna CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_average_qty
+msgid "Average quantity on CW Products"
+msgstr "Prosječna količina na CW proizvodima"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale_avg
+msgid "Average quantity on CW Products in ecommerce"
+msgstr "Prosječna količina na CW proizvodima u e-trgovini"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_apple_product_template
+msgid "Basket of Apples"
+msgstr "Košarica jabuka"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Below are applicable to catch weight product(s)."
+msgstr "Ispod se primjenjuju na proizvod (e) mase ulova"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Sastavnica"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Stavka sastavnice"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_invoiced
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Billed CW Qty"
+msgstr "Naplaćeno CW Qty"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+msgid "Box of Avocado"
+msgstr "Kutija avokada"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+msgid "Box of Cherry"
+msgstr "Kutija trešnje"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_strawberry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_strawberry_product_template
+msgid "Box of Strawberry"
+msgstr "Kutija jagoda"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:10
+#, python-format
+msgid "Bugfixes guarantee"
+msgstr "Bugfixes garancija"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_banana_product_template
+msgid "Bunch of Banana"
+msgstr ""
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+msgid "Bundle of beetroot"
+msgstr "Paket korijena repe"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+msgid "Bundle of Bitter Gourd"
+msgstr "snop gorke tikve"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.template,name:tis_cw_demo_data.product_product_butter_me_up_product_template
+msgid "Butter Me Up"
+msgstr "Podmazi me"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Consumed"
+msgstr "CW konzumirano"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_delivered
+msgid "CW Delivered"
+msgstr "CW je isporučen"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Delivered Quantity"
+msgstr "CW isporučena količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom_qty
+msgid "CW Demand"
+msgstr "CW potražnja"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_qty_done
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+msgid "CW Done"
+msgstr "CW učinjeno"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_virtual_available
+msgid "CW Forecast Quantity"
+msgstr "CW prognoza"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_virtual_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Forecasted Quantity"
+msgstr "CW prognozirana količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_incoming_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_incoming_qty
+msgid "CW Incoming"
+msgstr "CW dolazni"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_invoiced
+msgid "CW Invoiced"
+msgstr "CW Fakturirano"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Invoiced Quantity"
+msgstr "CW Fakturisana količina"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+msgid "CW On Hand"
+msgstr "CW pod ruku"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_kanban_cw_onhand
+msgid "CW On hand:"
+msgstr "CW Na ruci:"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_outgoing_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_outgoing_qty
+msgid "CW Outgoing"
+msgstr "CW Odlazni"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_invoice_catchweight
+msgid "CW QTY"
+msgstr "CW QTY"
+
+#. modules: tis_cw_web_sale, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_delivery_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_qoutation_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_sale_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stockpicking_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_summary_cw_qty
+msgid "CW Qty"
+msgstr "CW Qty"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_delivered
+msgid "CW Qty Delivered"
+msgstr "CW Qty isporučeno"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_invoiced
+msgid "CW Qty Invoiced"
+msgstr "Fakturirana CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__product_cw_uom_qty
+msgid "CW Qty Ordered"
+msgstr "Uređeno CW kol"
+
+#. modules: tis_cw_web_sale, tis_cw_mrp, tis_catch_weight
+#. openerp-web
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_move_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_at_date
+#: model:ir.model.fields,field_description:tis_catch_weight.field_report_stock_forecast__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__scrap_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_body_print_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_inventory_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_quant_package_form_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_production_form_lot_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_produced
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_bom_form_view_cw_inherit
+#: code:addons/tis_cw_web_sale/static/src/xml/website_sale_dashboard_cw.xml:5
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#, python-format
+msgid "CW Quantity"
+msgstr "CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_qty_available
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "CW Quantity On Hand"
+msgstr "CW količina na raspolaganju"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "CW Quantity Produced"
+msgstr "Proizvedena CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity Reserved"
+msgstr "CW količina Rezervirano"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_remaining
+msgid "CW Quantity To Be Produced"
+msgstr "CW količina koju treba proizvesti"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_product_qty
+msgid "CW Quantity To Produce"
+msgstr "CW količina za proizvodnju"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:30
+#, python-format
+msgid "CW Quantity cannot be negative."
+msgstr "CW Količina ne može biti negativna."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Quantity in stock that can still be reserved for this move"
+msgstr "CW Količina na lageru koja i dalje može biti rezervisana za ovaj potez"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_product_qty
+msgid "CW Quantity in the default UoM of the product"
+msgstr "CW Količina u standardnom UoM proizvoda"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity that has already been reserved for this move"
+msgstr "CW Količina koja je već rezervisana za ovaj potez"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_reserved
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Reserved"
+msgstr "CW rezervisano"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_reserved_quantity
+msgid "CW Reserved Quantity"
+msgstr "CW rezervirana količina"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.actions.report,name:tis_cw_stock_report_xls.cw_stock_xlsx
+msgid "CW Stock Report"
+msgstr "Izvještaj o CW dionicama"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_to_consume
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW To Consume"
+msgstr "CW Za konzumiranje"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_to_invoice
+msgid "CW To Invoice"
+msgstr "CW Za fakturu"
+
+#. modules: tis_cw_web_sale, tis_cw_mrp, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_tree2_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__product_cw_uom_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+msgid "CW UOM"
+msgstr "CW UOM"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id_ok
+msgid "CW Unit Of Measure"
+msgstr "CW jedinica mjere"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__product_cw_uom_id
+msgid "CW Unit of Measure"
+msgstr "CW jedinica mjere"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+msgid "CW-Initial Demand"
+msgstr "CW-inicijalna potražnja"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom_qty
+msgid "CW-Qty"
+msgstr "CW-Qty"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_product_tree_cw_
+msgid "CW-Quantity Done"
+msgstr "CW-quantity Gotovo"
+
+#. modules: tis_cw_procurement, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__product_cw_uom
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+#: selection:product.category,purchase_price_base:0
+#: selection:product.category,sale_price_base:0
+#: selection:product.template,purchase_price_base:0
+#: selection:product.template,sale_price_base:0
+#: selection:set.cw.multiple.products,purchase_price_base:0
+#: selection:set.cw.multiple.products,sale_price_base:0
+#: selection:stock.warehouse.orderpoint,reordering_based_on:0
+msgid "CW-UOM"
+msgstr "CW-UOM"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:75
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Cancel"
+msgstr "Otkaži"
+
+#. module: tis_cw_web_sale
+#: model:ir.model.fields,field_description:tis_cw_web_sale.field_sale_order__cart_cw_quantity
+msgid "Cart CW Quantity"
+msgstr "Košarica CW Quantity"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch W8"
+msgstr "Catch W8"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:86
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__group_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Catch Weight"
+msgstr "Težina ulova"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch Weight Management"
+msgstr "Upravljanje težinom ulova"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__catch_weight_ok
+msgid "Catch Weight Product"
+msgstr "Težina ulova proizvoda"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id
+msgid "Catch Weight UOM"
+msgstr "Težina ulova UOM"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_inventory.py:167
+#, python-format
+msgid "Catch Weight quantity cannot be negative for %s"
+msgstr "Količina ulovne težine ne može biti negativna za% s"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch weight Demo Data"
+msgstr "Demo podaci o ulovu"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Category"
+msgstr "Kategorija"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr "Promjeni količinu proizvoda"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_change_production_qty
+msgid "Change Production Qty"
+msgstr "Promjeni količinu proizvodnje"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Check to enable catch weight management system"
+msgstr "Provjerite da biste omogućili sustav upravljanja težinom ulova"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_res_config_settings
+msgid "Config Settings"
+msgstr "Postavke konfiguracije"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_inventory_line__product_cw_uom_category_id
+msgid "Conversion between Units of Measure can only occur if they belong to the same category. The conversion will be made based on the ratios."
+msgstr "Konverzija između jedinica mjera može samo da se pojavi ako pripadaju istoj kategoriji. Konverzija se izvršava na osnovu omjera."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight_ok
+msgid "Convert Product"
+msgstr "Pretvori proizvod"
+
+#. module: tis_catch_weight
+#: model:ir.actions.act_window,name:tis_catch_weight.action_view_activate_catch_weight
+msgid "Convert Product(CW/NOT)"
+msgstr "Pretvori proizvod (CW / NOT)"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_uid
+msgid "Created by"
+msgstr "Kreirao"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_date
+msgid "Created on"
+msgstr "Kreirano"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "Current CW Qty"
+msgstr "struja CW kom"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_producing
+msgid "Currently Produced CW Quantity"
+msgstr "Trenutno proizvedena CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__cw_quantity
+msgid "Cw Quantity"
+msgstr "CW količina"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:73
+#, python-format
+msgid "Delivered CW Quantity"
+msgstr "Isporučena CW količina"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__display_name
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__display_name
+msgid "Display Name"
+msgstr "Prikazani naziv"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:22
+#, python-format
+msgid "Enter the CW Done quantity for the product %r."
+msgstr "Unesite količinu CW Done za proizvod% r."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:24
+#, python-format
+msgid "Enter the Done quantity for the product %r."
+msgstr "Unesite količinu Gotovo za proizvod% r"
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Excel"
+msgstr "Excel"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Export Stock report with cw quantity"
+msgstr "Izveštaj o izvoznoj zalihi sa cw količinom"
+
+#. module: tis_cw_stock_report_xls
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Export cw stock"
+msgstr "Izvoz cw zalihe"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in Ecommerce/Shop"
+msgstr "Nabavite prosječnu količinu u e-trgovini / trgovini"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in sales and purchase"
+msgstr "Nabavite prosječnu količinu u prodaji i kupnji"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fish
+msgid "Fish"
+msgstr "Riba"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "forecasted cw Quantity"
+msgstr "količina prekomjerne količine"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fruit
+msgid "Fruits"
+msgstr "Voće"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:3
+#, python-format
+msgid "Get this feature and much more with Technaureus!"
+msgstr "Uzmite ovu funkciju i još mnogo toga uz Technaureus!"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_beef
+#: model:product.template,name:tis_cw_demo_data.product_product_beef_product_template
+msgid "Ground Beef Bundle (40 Packs)"
+msgstr "bundle od goveđeg mesa (40 paketića)"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_is_produced
+msgid "Has Been Produced(CW)"
+msgstr "Proizvedeno (CW)"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__id
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_immediate_transfer
+msgid "Immediate Transfer"
+msgstr "Odmah prenesi"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid "Informative, not used in matching"
+msgstr "Informativno, ne koristi se u preklapanju"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:154
+#, python-format
+msgid "Invalid domain left operand %s"
+msgstr "Nevažeći operand% lijeve domene% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:156
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr "Nevažeći operator domene% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:158
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr "Nevažeći operand% desnog domena"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory
+msgid "Inventory"
+msgstr "Skladište"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Stavka inventure"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice
+msgid "Invoice"
+msgstr "Faktura"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Stavka fakture"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:74
+#, python-format
+msgid "Invoiced CW Quantity"
+msgstr "Fakturisana CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr "Statistika faktura"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_search_view_cw
+msgid "Is Catch Weight"
+msgstr "Težina ulova"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:294
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW Quantity you have in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s nego CW količina koju imate na lageru."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:195
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW quantity you have in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s nego CW količina koju imate na lageru"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:192
+#, python-format
+msgid "It is not possible to reserve more products of %s than you have in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s nego što ih imate na lageru."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:205
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have  in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s od CW Quantity koji imate na lageru"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:301
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s od CW Quantity koji imate na lageru"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:201
+#, python-format
+msgid "It is not possible to unreserve more products of %s than you have in stock."
+msgstr "Nije moguće rezervisati više proizvoda od% s nego što ih imate na lageru."
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_move_line
+msgid "Journal Item"
+msgstr "Stavka dnevnika"
+
+#. modules: tis_cw_stock_report_xls, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products____last_update
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report____last_update
+msgid "Last Modified on"
+msgstr "Zadnje mijenjano"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_uid
+msgid "Last Updated by"
+msgstr "Zadnji ažurirao"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_date
+msgid "Last Updated on"
+msgstr "Zadnje ažurirano"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Lot/Serijski"
+
+#. module: tis_catch_weight
+#: model:res.groups,name:tis_catch_weight.group_catch_weight
+msgid "Manage Catch Weight for the Inventory"
+msgstr "Upravljanje težinom ulova za inventar"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_mrp
+msgid "Manufacturing CW Products"
+msgstr "Proizvodnja CW proizvoda"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Mapping cw quantity in procurement"
+msgstr "Mapiranje količine cw u nabavci"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_min_cw_qty
+msgid "Minimum CW Quantity"
+msgstr "Minimalna CW količina"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Pravilo minimalne zalihe"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:8
+#, python-format
+msgid "Mobile support"
+msgstr "Mobilna podrška"
+
+#. module: tis_catch_weight
+#: selection:set.cw.multiple.products,catch_weight:0
+msgid "NO"
+msgstr "ne"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_change_product_qty__new_cw_quantity
+msgid "New CW Quantity on Hand"
+msgstr "Nova CW količina na ruci"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:7
+#, python-format
+msgid "New design"
+msgstr "Novi dizajn"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:101
+#, python-format
+msgid "No negative quantities allowed"
+msgstr "Nema dozvoljenih negativnih količina"
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Normal"
+msgstr "Normalno"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:262
+#, python-format
+msgid "Not enough inventory!"
+msgstr "Nema dovoljno inventara!"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:70
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__ordered_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__ordered_cw_qty
+#, python-format
+msgid "Ordered CW Quantity"
+msgstr "Naručio je CW Quantity"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_production
+msgid "Original Production Quantity"
+msgstr "Originalna količina proizvodnje"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/wizard/mrp_product_produce.py:39
+#, python-format
+msgid "Please enter a lot or serial number for %s !"
+msgstr "Unesite broj ili serijski broj za% s!"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:44
+#, python-format
+msgid "Please enter the CW Quantity"
+msgstr "Unesite CW količinu"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:24
+#: code:addons/tis_catch_weight/models/sale.py:25
+#: code:addons/tis_catch_weight/models/stock_inventory.py:165
+#, python-format
+msgid "Please enter the CW Quantity for %s"
+msgstr "Molimo unesite CW količinu za% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:46
+#, python-format
+msgid "Please enter the Quantity"
+msgstr "Unesite količinu"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:26
+#: code:addons/tis_catch_weight/models/sale.py:27
+#: code:addons/tis_catch_weight/models/stock_inventory.py:163
+#, python-format
+msgid "Please enter the Quantity for %s"
+msgstr "Unesite količinu za% s"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_workorder.py:141
+#, python-format
+msgid "Please set the CW Quantity you are currently producing. It should be different from zero."
+msgstr "Molimo vas da postavite CW količinu koju trenutno proizvodite. Trebalo bi da se razlikuje od nule."
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_poultry
+msgid "Poultry"
+msgstr "Perad"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_procurement_group
+msgid "Procurement Group"
+msgstr "Grupa naručivanja"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_procurement
+msgid "Procurement on CW Products"
+msgstr "Nabavka CW proizvoda"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_product
+msgid "Product"
+msgstr "Proizvod"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_report__product_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_report__unit_cw_quantity
+msgid "Product CW Quantity"
+msgstr "Proizvod CW Količina"
+
+#. modules: tis_cw_procurement, tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_cw_uom
+msgid "Product CW Unit of Measure"
+msgstr ""
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_category
+msgid "Product Category"
+msgstr "Kategorija proizvoda"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_move_line
+#: model:ir.model,name:tis_cw_mrp.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Kretanje proizvoda (Stavka kretanja zalihe)"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_replenish
+msgid "Product Replenish"
+msgstr "Dobavi proizvod"
+
+#. modules: tis_cw_average_qty, tis_cw_web_sale_avg, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_template
+#: model:ir.model,name:tis_cw_average_qty.model_product_template
+#: model:ir.model,name:tis_cw_web_sale_avg.model_product_template
+msgid "Product Template"
+msgstr "Predlog proizvoda"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__product_cw_uom_id
+msgid "Product Unit of Measure"
+msgstr "Jedinica mjere proizvoda"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_order
+msgid "Purchase Order"
+msgstr "Nabavna narudžba"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Stavka nabavne narudžbe"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base
+msgid "Purchase Price Base"
+msgstr "Baza kupovne cijene"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Purchase Price Based On"
+msgstr "Cena na osnovu kupovine"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__purchase_price_base
+msgid "Purchase Price Based on"
+msgstr "Cena kupovine na osnovu"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_report
+msgid "Purchases Orders"
+msgstr "Narudžbe kupovine"
+
+#. modules: tis_cw_mrp, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_production_lot__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+msgid "Quantity"
+msgstr "Količina"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_qty_produced
+msgid "Quantity Produced"
+msgstr "Proizvedena količina"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_quant
+msgid "Quants"
+msgstr "Kvanti"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_inventory_cw_line_tree2_inherit_catchweight
+msgid "Real CW Quantity"
+msgstr "stvarna količina CW"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_product_qty
+msgid "Real Quantity"
+msgstr "Stvarna količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_received
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Received CW Qty"
+msgstr "Primljen CW broj"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce
+msgid "Record Production"
+msgstr "Zabilježi proizvodnju"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce_line
+msgid "Record Production Line"
+msgstr "Evidentiraj stavke proizvodnje"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_red_meat
+msgid "Red Meat"
+msgstr "Crveno meso"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Remove one"
+msgstr "Uklonite jednu"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__reordering_based_on
+#: model_terms:ir.ui.view,arch_db:tis_cw_procurement.view_warehouse_orderpoint_purchase_form_catch_weight
+msgid "Reordering Based On"
+msgstr "Promjena redoslijeda na temelju"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking
+msgid "Return Picking"
+msgstr "Prikupljanje proizvoda povrata"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking_line
+#: model:ir.model,name:tis_cw_average_qty.model_stock_return_picking_line
+msgid "Return Picking Line"
+msgstr "Povrat stavke prikupljanja"
+
+#. modules: tis_cw_web_sale, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_order
+#: model:ir.model,name:tis_cw_web_sale.model_sale_order
+msgid "Sale Order"
+msgstr "Prodajni nalog"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base
+msgid "Sale Price Base"
+msgstr "Prodajna cijena Baza"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Sale Price Based On"
+msgstr "Prodajna cijena Baza"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__sale_price_base
+msgid "Sale Price Based on"
+msgstr "Prodajna cijena Na temelju"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Izvještaj analize prodaje"
+
+#. modules: tis_cw_average_qty, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Stavka prodajne narudžbe"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_scrap
+msgid "Scrap"
+msgstr "Otpis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale
+msgid "Sell CW products online"
+msgstr "Prodaja CW proizvoda online"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_set_cw_multiple_products
+msgid "Set Cw Multiple Products"
+msgstr "Postavite Cw više proizvoda"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:59
+#, python-format
+msgid "Some of your components are tracked, you have to specify a manufacturing order in order to retrieve the correct components."
+msgstr "Neke od vaših komponenti su praćene, morate odrediti proizvodni nalog kako biste dohvatili ispravne komponente"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_report_stock_forecast
+msgid "Stock Forecast Report"
+msgstr "Izvještaj predviđanja zaliha"
+
+#. modules: tis_cw_procurement, tis_cw_mrp, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_move
+#: model:ir.model,name:tis_cw_mrp.model_stock_move
+#: model:ir.model,name:tis_cw_procurement.model_stock_move
+msgid "Stock Move"
+msgstr "Kretanje zalihe"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model,name:tis_cw_stock_report_xls.model_stock_quantity_history
+msgid "Stock Quantity History"
+msgstr "Istorija kvanta zalihe"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_stock_report_xls
+msgid "Stock Report on CW Products"
+msgstr "Izveštaj o zalihama CW proizvoda"
+
+#. modules: tis_cw_procurement, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_rule
+#: model:ir.model,name:tis_cw_procurement.model_stock_rule
+msgid "Stock Rule"
+msgstr "Pravilo zalihe"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_mrp_workorder__product_cw_uom_id
+msgid "Technical: used in views only."
+msgstr "Tehničko: koristi se samo na pogledima."
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_textile
+msgid "Textile"
+msgstr "Tekstil"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_bom.py:132
+#, python-format
+msgid "The Product Unit of Measure for Catch Weight you chose has a different category than in the product form."
+msgstr "Jedinica mjere mjere za težinu ulova koju ste odabrali ima drugačiju kategoriju nego u obliku proizvoda"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_bom.py:31
+#, python-format
+msgid "The Product Unit of Measure for Catch Weight, you chose has a different category than in the product form."
+msgstr "Jedinica mjere mjere za težinu ulova, koju ste izabrali, ima drugačiju kategoriju nego u obliku proizvoda"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/wizard/mrp_product_produce.py:52
+#, python-format
+msgid "The production order for '%s' has no CW quantity specified."
+msgstr "Proizvodni nalog za '% s' nema specificiranu CW količinu"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:71
+#, python-format
+msgid "The quantity done for the product \"%s\" doesn't respect the rounding precision                                                                           defined on the unit of measure \"%s\". Please change the quantity done or the                                                                           rounding precision of your unit of measure."
+msgstr "Količina izvršena za proizvod \"% s\" ne poštuje preciznost zaokruživanja definisanu na jedinici mere \"% s\". Molimo promijenite izvršenu količinu ili preciznost zaokruživanja vaše mjerne jedinice"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:41
+#, python-format
+msgid "The requested operation cannot be processed because of a programming error setting the `CW Product_QTY` field instead of the `product_cw_uom_qty`."
+msgstr "Zatražena operacija se ne može obraditi zbog greške u programiranju koje postavlja `CW Product_QTY` polje umjesto` product_cw_uom_qty '"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move.py:134
+#, python-format
+msgid "The requested operation cannot be processed because of a programming error setting the `cw_product_qty` field instead of the `product_cw_uom_qty`."
+msgstr "Zatražena operacija se ne može obraditi zbog greške u programiranju koje postavlja polje `cw_product_qty` umjesto` product_cw_uom_qty '"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__theoretical_cw_qty
+msgid "Theoretical CW Quantity"
+msgstr ""
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+msgid "Total CW Qty"
+msgstr "Ukupna CW količina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory__total_cw_qty
+msgid "Total CW Quantity"
+msgstr "Ukupno CW količina"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_mrp_workorder__cw_qty_produced
+msgid "Total CW Quantity already handled by this work order"
+msgstr "Ukupna CW količina već obrađena ovim radnim nalogom"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_traceability_report
+msgid "Traceability Report"
+msgstr "Izvještaj praćenja"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_picking
+msgid "Transfer"
+msgstr "Prenos"
+
+#. modules: tis_cw_procurement, tis_catch_weight
+#: selection:product.category,purchase_price_base:0
+#: selection:product.category,sale_price_base:0
+#: selection:product.template,purchase_price_base:0
+#: selection:product.template,sale_price_base:0
+#: selection:set.cw.multiple.products,purchase_price_base:0
+#: selection:set.cw.multiple.products,sale_price_base:0
+#: selection:stock.warehouse.orderpoint,reordering_based_on:0
+msgid "UOM"
+msgstr "UOM"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_unbuild
+msgid "Unbuild Order"
+msgstr "Nalog rastavljanja"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:39
+#, python-format
+msgid "Unbuild Order product CW Quantity has to be strictly positive."
+msgstr "unbuild Naručite proizvod CW Količina mora biti strogo pozitivna."
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_stock_move__cw_unit_factor
+msgid "Unit Factor"
+msgstr "Omjer jedinice"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_quantity_form_view
+msgid "Unit Of Measure"
+msgstr "Jedinica mjere"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_production_lot__product_cw_uom
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+msgid "Unit of Measure"
+msgstr "Jedinica mjere"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_mrp_bom__product_cw_uom_id
+#: model:ir.model.fields,help:tis_cw_mrp.field_mrp_bom_line__product_cw_uom_id
+msgid "Unit of Measure (Unit of Measure) is the unit of measurement for the inventory control"
+msgstr "Jedinica mjere je jedinica mjere za kontrolu inventure"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_uom_name
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_uom_name
+msgid "Unit of Measure Name"
+msgstr "Naziv jedinice mjere"
+
+#. module: tis_cw_demo_data
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_beef
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_box_of_strawberry
+#: model:product.product,uom_name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_beef_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_apple_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_banana_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_box_of_strawberry_product_template
+#: model:product.template,uom_name:tis_cw_demo_data.product_product_butter_me_up_product_template
+msgid "Unit(s)"
+msgstr "kom (komad)"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__product_cw_uom_id
+msgid "Unity of measure"
+msgstr "Jedinica mjere"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__product_cw_uom_category_id
+msgid "Uom category"
+msgstr "Kategorija JM"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:69
+#, python-format
+msgid "Upgrade now"
+msgstr "Nadogradi sada"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:15
+#, python-format
+msgid "Upgrade to enterprise"
+msgstr "Nadogradnja na preduzeće"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:9
+#, python-format
+msgid "Upgrade to future versions"
+msgstr "Nadogradite na buduće verzije"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_vegetable
+msgid "Vegetables"
+msgstr "Povrće"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_stock_quantity_history__category_ids
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_stock_quantity_history__warehouse_ids
+msgid "Warehouse"
+msgstr "Skladište"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_bom.py:31
+#: code:addons/tis_cw_mrp/models/mrp_bom.py:132
+#, python-format
+msgid "Warning"
+msgstr "Upozorenje"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,help:tis_cw_procurement.field_stock_warehouse_orderpoint__product_min_cw_qty
+msgid "When the virtual stock goes below the Min CW Quantity specified for this field, Odoo generates a procurement to bring the forecasted quantity to the Max Quantity."
+msgstr "Kada se virtualna zaliha spusti ispod Min CW količine koja je određena za ovo polje, Odoo generira nabavku kako bi prognoziranu količinu doveli do maksimalne količine."
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_white_meat
+msgid "White Meat"
+msgstr "belo meso"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_workorder
+msgid "Work Order"
+msgstr "Radni nalog"
+
+#. module: tis_catch_weight
+#: selection:set.cw.multiple.products,catch_weight:0
+msgid "YES"
+msgstr "DA"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "You can change normal product(s) to catch weight product(s) or vice versa."
+msgstr "Možete promeniti normalan proizvod (e) da bi uhvatili težinu proizvoda ili obrnuto."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:57
+#, python-format
+msgid "You cannot change cw quantities!"
+msgstr "Ne možete mijenjati količine cw!"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/stock_move.py:34
+#, python-format
+msgid "You cannot consume the same serial number twice. Please correct the serial numbers encoded."
+msgstr "Ne možete dva puta potrošiti isti serijski broj. Ispravite kodirane serijske brojeve."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:133
+#, python-format
+msgid "You cannot decrease the ordered cw quantity below the received cw quantity.\n"
+"Create a return first."
+msgstr "Ne možete smanjiti naručenu količinu cw ispod primljene količine cw. \n
+Prvo kreirajte povratak"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:53
+#, python-format
+msgid "You cannot unbuild a undone manufacturing order."
+msgstr "Ne možete poništiti poništeni proizvodni nalog"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:117
+#, python-format
+msgid "You cannot update CW quantity without updating quantity for validated receipts."
+msgstr "Ne možete ažurirati CW količinu bez ažuriranja količine za potvrđene račune."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_immediate_transfer.py:19
+#, python-format
+msgid "You cannot validate a transfer if no CW quantities are reserved nor done. To force the transfer, switch in edit mode and encode the CW done quantities."
+msgstr "Ne možete da potvrdite transfer ako nijedna CW količina nije rezervisana niti izvršena. Da biste primorali transfer, prebacite u edit i još više kodirajte CW količine"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:99
+#, python-format
+msgid "You need to supply a lot/serial number for %s."
+msgstr "Morate da navedete broj serijskog broja za% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:253
+#, python-format
+msgid "You plan to sell %s %s but you only have %s %s available in %s warehouse."
+msgstr "Planirate prodati% s% s, ali u% s skladištu imate samo% s% s."
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:49
+#, python-format
+msgid "You should provide a lot number for the final product."
+msgstr "Treba da navedete broj partije za konačni proizvod."
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_workorder.py:190
+#, python-format
+msgid "You should provide a lot/serial number for a component."
+msgstr "Trebalo bi da navedete lot / serijski broj za komponentu."
+
+#. module: tis_cw_demo_data
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_beef
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_beef
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_box_of_strawberry
+#: model:product.product,weight_uom_name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_beef_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_apple_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_banana_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_butter_me_up_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_beef_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_apple_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_banana_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_box_of_strawberry_product_template
+#: model:product.template,weight_uom_name:tis_cw_demo_data.product_product_butter_me_up_product_template
+msgid "kg"
+msgstr "kg"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model,name:tis_cw_stock_report_xls.model_report_tis_cw_stock_report_xls_cw_stock_report
+msgid "report.tis_cw_stock_report_xls.cw_stock_report"
+msgstr "report.tis_cw_stock_report_xls.cw_stock_report"
+

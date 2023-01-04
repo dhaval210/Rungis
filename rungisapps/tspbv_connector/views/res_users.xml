@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- res.users inherit form view -->
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.inherit.view.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']/group/field[@name='partner_id']" position="after">
+                <field name="is_picker"/>
+                <field name="picker_count"/>
+                <field name="workflow_id"/>
+            </xpath>
+        </field>
+    </record>
+    <!-- res.users inherit form view -->
+    <record id="view_users_simple_form" model="ir.ui.view">
+        <field name="name">res.users.inherit.view.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='company_id']" position="before">
+                <group>
+                    <field name="is_picker"/>
+                    <field name="picker_count"/>
+                    <field name="workflow_id"/>
+                </group>
+            </xpath>
+            
+        </field>
+    </record>
+</odoo>

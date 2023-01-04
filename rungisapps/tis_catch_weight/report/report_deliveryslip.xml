@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_delivery_catchweight" inherit_id="stock.report_delivery_document">
+<!--        <xpath expr="//table[@class='table table-sm mt48'][1]/thead/tr/th[2]" position="after">-->
+        <xpath expr="//table[hasclass('mt48')][1]/thead/tr/th[2]" position="after">
+            <th width="10%" class="text-right" groups="tis_catch_weight.group_catch_weight">CW Qty</th>
+        </xpath>
+        <xpath expr="//table[hasclass('mt48')][1]/tbody/tr/td[2]" position="after">
+<!--        <xpath expr="//table[@class='table table-sm mt48'][1]/tbody/tr/td[2]" position="after">-->
+            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                <span t-field="move.product_cw_uom_qty"/>
+                <span t-field="move.product_cw_uom"/>
+            </td>
+        </xpath>
+<!--        <xpath expr="//table[@class='table table-sm mt48'][2]/thead/tr/th[3]" position="after">-->
+        <xpath expr="//table[hasclass('mt48')][2]/thead/tr/th[3]" position="after">
+            <th width="10%" class="text-right" groups="tis_catch_weight.group_catch_weight">CW Qty</th>
+        </xpath>
+<!--        <xpath expr="//table[@class='table table-sm mt48'][2]/tbody/tr/td[4]" position="after">-->
+        <xpath expr="//table[hasclass('mt48')][2]/tbody/tr/td[4]" position="after">
+            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                <span t-field="move_line.move_id.product_cw_uom_qty"/>
+                <span t-field="move_line.move_id.product_cw_uom"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

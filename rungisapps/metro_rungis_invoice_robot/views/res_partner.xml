@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_partner_form_inherited" model="ir.ui.view">
+			<field name="name">res.partner.form.inherit</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@name='accounting_disabled']" position="after">
+					<page string="Process Controls" name="process_controls" groups="metro_rungis_invoice_robot.group_process_control">
+						<group>
+							<group string="General Information">
+								<field name="transfert_mode" widget="radio" />
+								<field name="invoice_format" />
+								<field name="date_create_invoice" />
+								<label for="date_create_interval">Invoice Creation Interval</label>
+								<div>
+									<field name="date_create_interval" class="oe_inline" style="margin-right: 3px;" />
+									<field name="date_create_interval_unit" class="oe_inline" />
+								</div>
+							</group>
+							<group string="E-Mail Information" attrs="{'invisible': [['transfert_mode', '!=', 'mail']]}">
+								<!-- With this attrs field the email cannot be changed anymore when transfer mode is set to email -->
+								<!-- Either remove the readonly attribute from this field or make a small computed email_str which can be displayed as a string -->
+								<!-- <field name="email" attrs="{'readonly': [['transfert_mode', '=', 'mail']]}" /> -->
+								<field name="email" />
+							</group>
+							<group string="Portal Access" attrs="{'invisible': [['transfert_mode', '!=', 'portal']]}">
+								<field name="portal" widget="url" />
+							</group>
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

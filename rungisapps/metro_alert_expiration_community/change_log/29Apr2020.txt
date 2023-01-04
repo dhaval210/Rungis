@@ -1,0 +1,2 @@
+29 Apr 2020:
+- as of version 1.9 to version 1.10, alert creation done by superuser.

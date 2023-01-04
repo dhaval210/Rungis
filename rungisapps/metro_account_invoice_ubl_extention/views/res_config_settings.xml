@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ubl_extension_config_settings" model="ir.ui.view">
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account_e-invoice_generate.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='e-invoices']" position="inside">
+                <div class="o_setting_left_pane">
+                    <field name="ubl_use_softm_delivery_note"/>
+                </div>
+                <div class="o_setting_right_pane">
+                    <label for="ubl_use_softm_delivery_note"/>
+                    <div class="text-muted">
+                        Use data for Delivery Notes from the softm interface instead from odoo.
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

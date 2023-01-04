@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock_location_transfer_product_wizard" model="ir.ui.view">
+        <field name="name">Wizard for transferring products between locations</field>
+        <field name="model">stock.location.transfer.wizard</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <script>
+                    // Initial setup
+                    $(document).ready(function() {
+                        setTimeout(function() {
+                            // Focus source location
+                            $('.source_location').focus();
+                            //$('.product_quant').focus();
+                        }, 50);
+
+                        // Hide save and discard button
+                        $(".o_form_buttons_edit").css("visibility", "hidden");
+
+                        // When source location loses focus, jump to destination location
+                        $(".source_location").focusout(() => {
+                            $(".product_quant").focus();
+                        });
+                        $(".product_quant").focusout(() => {
+                            $(".dest_location").focus();
+                        })
+                    })
+                </script>
+                <group>
+                    <group>
+                        <field name="catch_weight_ok" invisible="1"/>
+                        <field name="location_id" options="{'no_create': True}" class="source_location o_input"
+                               widget="location_barcode_field"/>
+                        <field name="product_id" readonly="1" options="{'no_open': True}" force_save="1"/>
+                        <field name="quant_id" class="product_quant o_input"/>
+                        <field name="product_qty" readonly="1" force_save="1"/>
+                        <field name="edit_boolean" invisible="1"/>
+                        <field name="save_boolean" invisible="1"/>
+                        <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                               readonly="1" options="{'no_open': True}"/>
+                        <field name="product_uom" attrs="{'invisible': [('catch_weight_ok', '=', True)]}" readonly="1"
+                               options="{'no_open': True}" force_save="1"/>
+                        <field name="lot_id"
+                               attrs="{'readonly':[('edit_boolean','=',False)],'invisible':[('edit_boolean','=',True)]}"
+                               options="{'no_open': True}" force_save="1"/>
+                        <field name="product_bbd" force_save="1"
+                               attrs="{'readonly':[('edit_boolean','=',False)],'invisible':[('edit_boolean','=',True)]}"/>
+                        <field name="new_lot_id"
+                               attrs="{'readonly':[('edit_boolean','=',False)],'invisible':[('edit_boolean','=',False)]}"
+                               force_save="1"/>
+                        <field name="new_product_bbd"
+                               attrs="{'readonly':[('edit_boolean','=',False)],'invisible':[('edit_boolean','=',False)]}"
+                               force_save="1"/>
+                    </group>
+                    <group>
+                        <field name="location_dest_id" options="{'no_create': True}" class="dest_location o_input"  widget="location_barcode_field"/>
+                        <field name="transfer_complete" invisible="1" />
+                        <field name="error_free_source_location" invisible="1" />
+                        <field name="error_free_dest_location" invisible="1" />
+                        <field name="error_free_location" invisible="1" />
+                        <field name="warning_dest_location" invisible="1" />
+                        <div class="alert alert-warning" role="alert" attrs="{'invisible': [('warning_dest_location', '=', False)]}">
+                            <p><strong>Warning!</strong></p>
+                            <p>The destination location contains the same product but with different lot(s).<br/>If you want to move the products anyways click on the transfer button.</p>
+                        </div>
+                    </group>
+                </group>
+
+                <footer>
+                    <button string="Cancel" special="cancel" />
+                    <button string="Transfer" class="oe_highlight" type="object" name="transfer_products"
+                            attrs="{'invisible': ['|', ('error_free_location', '=', False), ('transfer_complete', '=', True)]}"/>
+                    <button string="Edit" class="edit_lot_bbd" type="object" name="edit_lot_bbd"
+                            groups="metro_rungis_transfer_products_location.group_edit_lot_bbd_user"
+                            attrs="{'invisible':[('save_boolean','=',True)]}"/>
+                    <button string="Save" class="save_lot_bbd" type="object" name="save_button"
+                            groups="metro_rungis_transfer_products_location.group_edit_lot_bbd_user"
+                            attrs="{'invisible':[('save_boolean','=',False)]}"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_stock_location_transfer_product_wizard" model="ir.actions.act_window">
+        <field name="name">Transfer products between locations</field>
+        <field name="res_model">stock.location.transfer.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="stock_location_transfer_product_wizard" />
+    </record>
+
+    <menuitem name="Transfer products between locations" id="menu_transfer_product_wizard" 
+        parent="stock.menu_stock_warehouse_mgmt" action="action_stock_location_transfer_product_wizard" sequence="999" />
+</odoo>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>              
+        <record id="order_grid_report_view_form" model="ir.ui.view">
+            <field name="name">Order Grid Report</field>
+            <field name="model">order.grid.report</field>
+            <field name="arch" type="xml">
+                <form string="Generate Order Grid">
+                    <group>
+                        <group>
+                            <div >
+                                <label for="grid_type" style="font-weight: bold;" />
+                                <field name="grid_type" widget="radio" options="{'horizontal': true}" />
+                            </div>
+                            <newline />
+                            <div attrs="{'invisible': [('is_vendor_grid', '=', False)]}" >
+                                <label for="vendor_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="vendor_id" required="False" attrs="{'required': [('is_vendor_grid', '=', True)]}" />
+                                </div>
+                            </div>
+                            <newline />
+                            <div attrs="{'invisible': [('is_vendor_grid', '=', True)]}" >
+                                <label for="category_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="category_id" required="False" attrs="{'required': [('is_vendor_grid', '=', False)]}" />
+                                </div>
+                                <label for="category_vendor_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="category_vendor_id" required="False" />
+                                </div>                                
+                            </div>
+                            <newline />
+                            <div>
+                                <label for="warehouse_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="warehouse_id" required="True"/>
+                                </div>
+                            </div>
+                            <newline />
+                            <button name="generate_lines" type="object" class="btn-primary" string="generate lines"/>
+                        </group>
+                        <group>
+                            <field name="is_vendor_grid" invisible="1" />
+                            <field name="ordered_qty_flag" invisible="1" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="grid_line_ids" nolabel="1">
+                        <tree 
+                            editable="top" 
+                            decoration-danger="is_danger is True" 
+                            decoration-success="is_success is True" 
+                            create="false" 
+                            delete="false"
+                            limit="1000" 
+                            default_order="suggested_qty desc, avg_sale_qty desc" 
+                        >
+                            <field name="product_id" readonly="1" />
+                            <button name="open_supplierinfo_view" type="object" icon="fa-truck"/>
+                            <field name="current_order_date" readonly="1" />
+                            <field name="current_delivery_date" widget="date" readonly="1" />
+                            <field name="ordered_qty" attrs="{'column_invisible':[('parent.ordered_qty_flag', '==', False)]}"/>
+                            <field name="suggested_qty" string="suggestion" readonly="1" />
+                            <field name="qty" string="order qty"/>
+                            <field name="uom_id" readonly="1" />
+                            <field name="lpp" readonly="1" />
+                            <field name="on_hand_qty" readonly="1" />
+                            <button name="open_quant_view" type="object" icon="fa-building-o"/>    
+                            <field name="reach_date" widget="date" readonly="1" />
+                            <field name="warn" readonly="1" />
+                            <field name="avg_sale_qty" readonly="1" string="avg sale qty (week)" />
+                            <button name="open_avg_sale_line_view" type="object" icon="fa-money"/>
+                            <field name="lifetime" readonly="1" />
+                            <field name="next_order_date" readonly="1" />
+                            <field name="next_delivery_date" widget="date" readonly="1" />
+                            <field name="checkbox" widget="boolean_toggle" />
+                            <button name="open_detail_view" type="object" icon="fa-bars" />
+                            <field name="is_danger" invisible="1" />
+                            <field name="is_success" invisible="1" />
+                        </tree>
+                    </field>                    
+                    <footer>
+                        <button name="generate_po" type="object" class="btn-primary" string="create purchase order"/>
+                        <button name="cancel_grid" type="object" class="btn-secondary" string="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!--  add picking to batch action -->
+        <record id="metro_order_grid_report_action" model="ir.actions.act_window">
+            <field name="name">Generate Order Grid</field>
+            <field name="res_model">order.grid.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="order_grid_report_view_form"/>
+            <field name="target">main</field>
+        </record>
+        <act_window id="order_grid_report_action_schedule"
+            multi="True"
+            key2="client_action_multi" name="Generate Order Grid"
+            res_model="order.grid.report" src_model="cache.order.grid"
+            view_mode="form" target="main" view_type="form"
+        />
+
+        <menuitem id="menu_order_grid" name="Order Grid" parent="purchase.menu_purchase_root" sequence="2" action="metro_order_grid.metro_order_grid_report_action"/>
+
+        <record id="order_grid_report_view_form_readonly" model="ir.ui.view">
+            <field name="name">Order Grid Report</field>
+            <field name="model">order.grid.report</field>
+            <field name="arch" type="xml">
+                <form string="Generate Order Grid">
+                    <group>
+                        <group>
+                            <div >
+                                <label for="grid_type" style="font-weight: bold;" />
+                                <field name="grid_type" widget="radio" options="{'horizontal': true}" readonly="1"/>
+                            </div>
+                            <newline />
+                            <div attrs="{'invisible': [('is_vendor_grid', '=', False)]}" >
+                                <label for="vendor_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="vendor_id" required="False" attrs="{'required': [('is_vendor_grid', '=', True)]}" readonly="1"/>
+                                </div>
+                            </div>
+                            <newline />
+                            <div attrs="{'invisible': [('is_vendor_grid', '=', True)]}" >
+                                <label for="category_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="category_id" required="False" attrs="{'required': [('is_vendor_grid', '=', False)]}" readonly="1"/>
+                                </div>
+                                <label for="category_vendor_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="category_vendor_id" required="False" readonly="1"/>
+                                </div>                                
+                            </div>
+                            <newline />
+                            <div>
+                                <label for="warehouse_id" style="font-weight: bold;" />
+                                <div>
+                                    <field name="warehouse_id" required="True" readonly="1"/>
+                                </div>
+                            </div>
+                            <newline />
+                        </group>
+                        <group>
+                            <field name="is_vendor_grid" invisible="1" readonly="1"/>
+                            <field name="ordered_qty_flag" invisible="1" readonly="1"/>
+                        </group>
+                    </group>
+                    <field name="grid_line_ids" nolabel="1">
+                        <tree 
+                            decoration-danger="is_danger is True" 
+                            decoration-success="is_success is True" 
+                            create="false" 
+                            delete="false"
+                            editable="false" 
+                            limit="1000" 
+                            default_order="suggested_qty desc, avg_sale_qty desc" 
+                        >
+                            <field name="product_id" readonly="1" />
+                            <field name="current_order_date" readonly="1" />
+                            <field name="current_delivery_date" widget="date" readonly="1" />
+                            <field name="ordered_qty" attrs="{'column_invisible':[('parent.ordered_qty_flag', '==', False)]}"/>
+                            <field name="suggested_qty" string="suggestion" readonly="1" />
+                            <field name="qty" string="order qty" readonly="1"/>
+                            <field name="uom_id" readonly="1" />
+                            <field name="lpp" readonly="1" />
+                            <field name="on_hand_qty" readonly="1" />
+                            <field name="reach_date" widget="date" readonly="1" />
+                            <field name="warn" readonly="1" />
+                            <field name="avg_sale_qty" readonly="1" string="avg sale qty (week)" />
+                            <field name="lifetime" readonly="1" />
+                            <field name="next_order_date" readonly="1" />
+                            <field name="next_delivery_date" widget="date" readonly="1" />
+                            <field name="checkbox" widget="boolean_toggle" readonly="1" />
+                            <field name="is_danger" invisible="1" />
+                            <field name="is_success" invisible="1" />
+                        </tree>
+                    </field>                    
+                </form>
+            </field>
+        </record>
+
+    </data> 
+</odoo>

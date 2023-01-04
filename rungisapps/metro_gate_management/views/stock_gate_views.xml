@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <!-- Tree View Action -->
+    <record model="ir.actions.act_window" id="metro_gate_management.action_window_list">
+        <field name="name">Gate Management</field>
+        <field name="res_model">stock.gate</field>
+        <field name="context">{"search_default_active": "assigned"}</field>
+        <field name="view_mode">tree,form</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="name"/>
+                <field name="active"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record model="ir.ui.view" id="stock_gate_view_search">
+        <field name="name">stock_gate_view_search</field>
+        <field name="model">stock.gate</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="active" string="Active" domain="['|', ('active', '=', False), ('active', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu Item for Config -->
+    <menuitem id="metro_gate_management_menu_configuration" name="Gate Management" parent="stock.menu_stock_config_settings"/>
+
+    <!-- Menu Item for Gates -->
+    <menuitem id="metro_gate_management_menu_configuration_gates" name="Gates" parent="metro_gate_management_menu_configuration" action="metro_gate_management.action_window_list"/>
+
+    </data>
+</odoo>

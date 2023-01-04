@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.lot.attribute.lines form view -->
+    <record id="stock_lot_attribute_lines_view_form" model="ir.ui.view">
+        <field name="name">stock.lot.attribute.lines.view.form</field>
+        <field name="model">stock.lot.attribute.lines</field>
+        <field name="arch" type="xml">
+            <form string="Attribute Line">
+                <sheet>
+                    <group>
+                        <field name="attribute_id"/>
+                        <field name="value_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

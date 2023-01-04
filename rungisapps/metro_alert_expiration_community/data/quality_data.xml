@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="reason_time_ratio" model="quality.fail.reason">
+            <field name="name">Remaining Shelf time too short</field>
+        </record>
+    </data>
+    <!--<data noupdate="1">
+           test_type selection fields in v10 [('time_ratio', 'Use time ratio')]
+          <record id="test_type_time_ratio" model="quality.control.point.test.type">
+              <field name="name">Use time ratio</field>
+              <field name="technical_name">time_ratio</field>
+          </record>
+      </data>-->
+
+    <record id="quality_test_type_3" model="quality.control.point.test.type">
+        <field name="name">Use time ratio</field>
+        <field name="code">UTR</field>
+        <field name="test_type">time_ratio</field>
+    </record>
+
+</odoo>

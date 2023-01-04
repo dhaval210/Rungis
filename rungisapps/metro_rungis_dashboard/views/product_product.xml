@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="stock_days_tree_view" model="ir.ui.view">
+            <field name="name">stock.days.tree.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Stock Days" create="false">
+                    <field name="categ_id"/>
+                    <field name="sub_category"/>
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="sale_order_amount" widget="monetary"/>
+                    <field name="stock_quantity"/>
+                    <field name="stock_amount" widget="monetary"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="average_sale_amount" widget="monetary"/>
+                    <field name="stock_days"/>
+                    <field name="last_stock_date"/>
+                    <field name="incoming_qty"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="stock_days_pivot_view" model="ir.ui.view">
+            <field name="name">stock.days.pivot.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <pivot string="Stock Days">
+                    <field name="name" type="row"/>
+                    <field name="qty_available" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="stock_days_graph_view" model="ir.ui.view">
+            <field name="name">stock.days.graph.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <graph string="Stock Days">
+                    <field name="name"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="stock_days_report_search" model="ir.ui.view">
+            <field name="name">stock.days.report.search</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Stock Days">
+                    <field name="name" string="Product"/>
+                    <field name="default_code" string="Article Number"/>
+                    <field name="sub_category" string="Sub Category"/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Category" name="category" domain="[]" context="{'group_by':'categ_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="stock_days_product_action" model="ir.actions.act_window">
+            <field name="name">Stock Days</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('stock_days_tree_view')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('stock_days_pivot_view')}),
+                (0, 0, {'view_mode': 'graph', 'view_id': ref('stock_days_graph_view')})]"/>
+            <field name="search_view_id" ref="stock_days_report_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="stock_days_product_action" id="menu_stock_days"
+                  parent="stock.menu_warehouse_report"/>
+
+        <record id="buying_price_tree_view" model="ir.ui.view">
+            <field name="name">buying.price.tree.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree string="Buying Price" create="false">
+                    <field name="default_code"/>
+                    <field name="name"/>
+                    <field name="sale_ytd" widget="monetary"/>
+                    <field name="purchase_amount_12_per_month" widget="monetary"/>
+                    <field name="purchase_amount_3" widget="monetary"/>
+                    <field name="purchase_amount_6" widget="monetary"/>
+                    <field name="purchase_amount_12" widget="monetary"/>
+                    <field name="product_purchase_rank"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="buying_price_graph_view" model="ir.ui.view">
+            <field name="name">buying.price.graph.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <graph string="Buying Price">
+                    <field name="name"/>
+                    <field name="purchase_amount_3" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="buying_price_pivot_view" model="ir.ui.view">
+            <field name="name">buying.price.pivot.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <pivot string="Buying Price">
+                    <field name="name" type="row"/>
+                    <field name="purchase_amount_3" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="buy_price_report_search" model="ir.ui.view">
+            <field name="name">buy.price.report.search</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <search string="Stock Days">
+                    <field name="name" string="Product"/>
+                    <field name="default_code" string="Article Number"/>
+                    <separator/>
+                    <filter string="Top 10 Products" name="top_product"
+                            domain="[('product_purchase_rank', '&lt;=', 10), ('product_purchase_rank', '&gt;=', 1)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="buying_price_product_action" model="ir.actions.act_window">
+            <field name="name">Buy Price Development per Article</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="domain">[('product_purchase_rank', '&gt;', 0)]</field>
+            <field name="context">{}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('buying_price_tree_view')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('buying_price_pivot_view')}),
+                (0, 0, {'view_mode': 'graph', 'view_id': ref('buying_price_graph_view')})]"/>
+            <!--            <field name="search_view_id" ref="stock_days_report_search"/>-->
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="buying_price_product_action" id="menu_buying_price"
+                  parent="stock.menu_warehouse_report"/>
+    </data>
+</odoo>

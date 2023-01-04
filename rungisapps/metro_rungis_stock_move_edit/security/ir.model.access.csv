@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_move_edit_user,stock.move.edit user,model_stock_move_edit,metro_security_roles.group_stock_wareneingang,1,1,1,0
+access_stock_move_edit_line_user,stock.move.edit.line user,model_stock_move_edit_line,metro_security_roles.group_stock_wareneingang,1,1,1,0
+access_stock_move_edit_manager,stock.move.edit manager,model_stock_move_edit,stock.group_stock_manager,1,1,1,1
+access_stock_move_edit_line_manager,stock.move.edit.line manager,model_stock_move_edit_line,stock.group_stock_manager,1,1,1,1
+

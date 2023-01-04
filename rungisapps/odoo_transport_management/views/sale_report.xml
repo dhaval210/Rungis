@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <template id="transport_management_sale_report_view" inherit_id = "sale.report_saleorder_document">
+            <xpath expr="//div[5]" position="after">
+                <div t-if="doc.transporter_id" class="col-xs-3">
+                    <strong>Transporter:</strong>
+                    <p t-field="doc.transporter_id.name"/>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Group Category -->
+    <record model="ir.module.category" id="module_category_metro_dashboard">
+        <field name="name">MetroDashboard</field>
+        <field name="description">This category is all about METRO specific dashboards.</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <!-- 
+        Groups
+    -->
+
+    <!-- User Group -->
+    <record model="res.groups" id="group_metro_dashboard_user">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_metro_dashboard" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="comment">The user of the MetroDashboard will be able to see his dashboard.</field>
+    </record>
+
+    <!-- Manager Group -->
+    <record model="res.groups" id="group_metro_dashboard_manager">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_metro_dashboard" />
+        <field name="implied_ids" eval="[(4, ref('metro_dashboard.group_metro_dashboard_user'))]" />
+        <field name="comment">The manager is able to create/update/delete dashboards and see his own dashboard.</field>
+    </record>
+
+    <!-- 
+        Rules
+    -->
+
+    <!-- Users can only see their own tiles -->
+    <record model="ir.rule" id="rule_metro_dashboard_user_view_tiles">
+        <field name="name">MetroDashboard Users Tiles View Rule</field>
+        <field name="model_id" ref="metro_dashboard.model_metro_dashboard_tile" />
+        <field name="groups" eval="[(4, ref('metro_dashboard.group_metro_dashboard_user'))]" />
+        <field name="domain_force">[("user_ids", "in", user.id)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_write">0</field>
+        <field name="perm_create">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Managers can see all the tiles -->
+    <record model="ir.rule" id="rule_metro_dashboard_manager_view_tiles">
+        <field name="name">MetroDashboard Managers Tiles View Rule</field>
+        <field name="model_id" ref="metro_dashboard.model_metro_dashboard_tile" />
+        <field name="groups" eval="[(4, ref('metro_dashboard.group_metro_dashboard_manager'))]" />
+        <field name="domain_force">[(1, "=", 1)]</field>
+    </record>
+
+    <!-- Override Goal Rules -->
+    <!-- Temporarily make the goal rule updateable -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'gamification'), ('name', '=', 'goal_user_visibility')]" />
+        </function>
+        <value eval="{'noupdate': False}" />
+    </function>
+
+    <!-- Update the rule -->
+    <record model="ir.rule" id="gamification.goal_user_visibility">
+        <field name="domain_force">
+            [
+                '|',
+                    ('user_id','=',user.id),
+                    '|',
+                        ('dashboard_ids', 'in', user.dashboard_id),
+                        '&amp;',
+                            ('challenge_id.user_ids','in',user.id),
+                            ('challenge_id.visibility_mode','=','ranking')]
+        </field>
+    </record>
+
+    <!-- Cleanup: Set noupdate to true again -->
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value eval="[('module', '=', 'gamification'), ('name', '=', 'goal_user_visibility')]" />
+        </function>
+        <value eval="{'noupdate': True}" />
+    </function>
+
+    <!-- Assign to admin users -->
+    <record model="res.users" id="base.user_root">
+        <field name="groups_id" eval="[(4, ref('metro_dashboard.group_metro_dashboard_manager'))]" />
+    </record>
+
+    <record model="res.users" id="base.user_admin">
+        <field name="groups_id" eval="[(4, ref('metro_dashboard.group_metro_dashboard_manager'))]" />
+    </record>
+</odoo>

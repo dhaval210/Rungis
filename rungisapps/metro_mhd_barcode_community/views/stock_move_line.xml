@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.move.line inherit form view -->
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">stock.move.line.inherit.view.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="after">
+                <field name="tracking" invisible="1"/>
+                <field name="no_expiry" invisible="1"/>
+                <field name="picking_type_use_create_lots" invisible="1"/>
+                <field 
+                    name="lot_name"
+                    groups="metro_security_roles.group_stock_wareneingang"
+                    attrs="{
+                        'invisible': ['|', ('tracking', '=', 'none'), ('picking_type_use_create_lots', '=', False)],
+                        'required': [('location_id', '=', 8)],
+                        'readonly': [('location_id', '!=', 8)]
+                    }"
+                />                    
+                <field 
+                    name="metro_mhd"
+                    widget="Date"
+                    groups="metro_security_roles.group_stock_wareneingang"
+                    attrs="{
+                        'invisible': [('location_id', '!=', 8)],
+                        'required': [('location_id', '=', 8), ('no_expiry', '=', False)],
+                        'readonly': [('no_expiry', '!=', False)]
+                    }"                    
+                />
+            </xpath>      
+            <xpath expr="//field[@name='lot_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('picking_type_use_create_lots', '=', True)]}</attribute>
+            </xpath>
+        </field>
+    </record>    
+</odoo>

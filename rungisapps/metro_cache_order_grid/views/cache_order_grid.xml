@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cache.order.grid tree view -->
+    <record id="cache_order_grid_view_tree" model="ir.ui.view">
+        <field name="name">cache.order.grid.view.tree</field>
+        <field name="model">cache.order.grid</field>
+        <field name="arch" type="xml">
+            <tree 
+                create='false'
+                decoration-muted="in_past is True"
+            >
+                <field name="vendor_id"/>
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="daily_qty_diff"/>
+                <field name="in_past" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- cache.order.grid search view -->
+    <record id="cache_order_grid_view_search" model="ir.ui.view">
+        <field name="name">cache.order.grid.view.search</field>
+        <field name="model">cache.order.grid</field>
+        <field name="arch" type="xml">
+            <search string="Grid Data">
+                <field name="vendor_id"/>
+                <field name="product_tmpl_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- cache.order.grid pivot view -->
+    <record id="cache_order_grid_view_pivot" model="ir.ui.view">
+        <field name="name">cache.order.grid.view.pivot</field>
+        <field name="model">cache.order.grid</field>
+        <field name="arch" type="xml">
+            <pivot string="Pivot Description">
+                <field name="in_past" invisible="1"/>
+                <field name="vendor_id"/>
+                <field name="product_tmpl_id"/>
+                <field name="product_id"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- cache.order.grid action window -->
+    <record id="cache_order_grid_action" model="ir.actions.act_window">
+        <field name="name">cache.order.grid.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cache.order.grid</field>
+        <field name="view_mode">tree,pivot</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem 
+        id="cache_order_grid_menu_root"
+        name="Grid"
+        web_icon="metro_cache_order_grid,static/description/icon.png"
+        groups="metro_cache_order_grid.group_cache_admin"
+        sequence="99"
+    />
+    <!-- This Menu Item Must have a parent -->
+    <menuitem 
+        id="cache_order_grid_menu_categ" 
+        name="Cache" 
+        groups="metro_cache_order_grid.group_cache_admin"
+        parent="metro_cache_order_grid.cache_order_grid_menu_root" 
+        sequence="10"
+    />
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem 
+        id="cache_order_grid_menu_act"
+        name="Grid" 
+        groups="metro_cache_order_grid.group_cache_admin"
+        parent="metro_cache_order_grid.cache_order_grid_menu_categ" 
+        action="metro_cache_order_grid.cache_order_grid_action" 
+        sequence="10"
+    />
+</odoo>

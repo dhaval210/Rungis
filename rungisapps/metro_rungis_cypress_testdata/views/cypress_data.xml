@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cypress.data form view -->
+    <record id="cypress_data_view_form" model="ir.ui.view">
+        <field name="name">cypress.data.view.form</field>
+        <field name="model">cypress.data</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>                    
+                    <group>
+                        <group>
+                            <field name="product_id" id="cypress_product" required="True"/>
+                        </group>
+                        <group>
+                            <button name="action_set_qty_one_location" class="btn btn-primary" id='cypress_1_loc' type="object" string="Qty 1 Location"/>
+                            <br/>
+                            <button name="action_set_qty_two_locations" class="btn btn-primary" id='cypress_2_loc' type="object" string="Qty 2 Locations"/>
+                        </group>                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="cypress_po_view_form" model="ir.ui.view">
+        <field name="name">cypress.data.view.form</field>
+        <field name="model">cypress.data</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="product_id" id="cypress_product" required="True"/>
+                        </group>
+                        <group>
+                            <field name="partner_id" required="True"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="cypress_data_view_tree" model="ir.ui.view">
+        <field name="name">cypress.po.data.view.tree</field>
+        <field name="model">cypress.data</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Receipts">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cypress_po_view_tree" model="ir.ui.view">
+        <field name="name">cypress.po.data.view.tree</field>
+        <field name="model">cypress.data</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Receipts">
+                <field name="name"/>
+                <field name="partner_id"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- cypress.data action window -->
+    <record id="cypress_data_action" model="ir.actions.act_window">
+        <field name="name">cypress.data.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cypress.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('cypress_data_view_tree')})]"/>
+    </record>
+
+    <record id="cypress_data_po_action" model="ir.actions.act_window">
+        <field name="name">cypress.data.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cypress.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('cypress_po_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('cypress_po_view_form')})]"/>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="cypress_menu_root" name="Cypress Test" sequence="99"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="cypress_menu_categ" name="Cypress" parent="cypress_menu_root" sequence="10"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="cypress_menu_act" name="Set Testdata Qty" parent="cypress_menu_categ" action="cypress_data_action" sequence="10"/>
+    <menuitem id="cypress_menu_po" name="Test Purchase Receipt" parent="cypress_menu_categ" action="cypress_data_po_action" sequence="20"/>
+</odoo>

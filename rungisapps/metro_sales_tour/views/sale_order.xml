@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+
+<odoo>
+
+    <!-- Sales Orders views, actions and filters for Calling Assignment -->
+
+    <record id="view_order_form_tour_assignment" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="partner_shipping_id" position="after">
+                <field name="calling_time" widget="float_time"/>
+                <field name="calling_date"/>
+                <field name="tour_default_departure" widget="float_time"/>
+            </field>
+            <field name="user_id" position="after">
+                <field name="original_user_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_order_calling_plan_calendar" model="ir.ui.view">
+        <field name="name">sale.order.calling.calendar</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Sales Orders" date_start="calling_date" color="state">
+                <field name="partner_id"/>
+                <field name="user_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_calling_order_tree" model="ir.ui.view">
+        <field name="name">sale.order.calling.tree</field>
+        <field name="model">sale.order</field>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <tree string="Sales Orders" decoration-bf="message_needaction==True" decoration-muted="state=='cancel'" default_order='calling_date'>
+                <field name="message_needaction" invisible="1"/>
+                <field name="name" string="Order Number"/>
+                <field name="calling_time" widget="float_time"/>
+                <field name="calling_date"/>
+                <field name="tour_id"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="original_user_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="view_sales_order_call_filter" model="ir.ui.view">
+        <field name="name">sale.order.tour.list.select</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Sales Order">
+                <field name="name" string="Sales Order" filter_domain="['|','|',('name','ilike',self),('client_order_ref','ilike',self),('partner_id','child_of',self)]"/>
+                <field name="partner_id" operator="child_of"/>
+                <field name="user_id"/>
+                <field name="team_id" string="Sales Team"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <field name="order_line" string="Product" filter_domain="[('order_line.product_id', 'ilike', self)]"/>
+                <filter string="My Orders" domain="[('user_id','=',uid)]" name="my_sale_orders_filter"/>
+                <separator/>
+                <filter string="Call Today" name="call_today"
+                    domain="[('calling_date','&gt;=',context_today().strftime('%Y-%m-%d')),
+        ('calling_date','&lt;',(context_today() + relativedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Future Calls" name="call_future"
+                    domain="[('calling_date','&gt;=',context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by':'user_id'}"/>
+                    <filter string="Tour" name="tour" domain="[]" context="{'group_by':'tour_id'}"/>
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Order Date" name="order_month" domain="[]" context="{'group_by':'date_order'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="calling_plan_action" model="ir.actions.act_window">
+        <field name="name">Anrufsplan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,kanban</field>
+        <field name="search_view_id" ref="view_sales_order_call_filter"/>
+        <field name="context">{'search_default_my_sale_orders_filter': 1, 'search_default_call_today' : 1}</field>
+        <field name="domain">[('calling_date','!=',False)]</field>
+    </record>
+
+    <record id="calling_plan_substitute" model="ir.actions.act_window">
+        <field name="name">Vertretungen</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,kanban</field>
+        <field name="search_view_id" ref="view_sales_order_call_filter"/>
+        <field name="context"></field>
+        <field name="domain"></field>
+    </record>
+
+    <record model="ir.ui.view" id="view_sale_order_calling_kanban">
+        <field name="name">sale.order.calling.kanban</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" default_order='calling_date'>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="calling_date"/>
+                <field name="calling_time"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><span><t t-esc="record.partner_id.value"/></span></strong>
+                                </div>
+                                <div class="o_kanban_record_headings mt4">
+                                    <span><t t-esc="record.user_id.value"/></span>
+                                </div>
+                                <strong><field name="amount_total" widget="monetary"/></strong>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span><t t-esc="record.name.value"/> <t t-esc="record.calling_date.value"/></span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'done': 'success'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <record id="sales_assignment_action_today" model="ir.actions.act_window">
+        <field name="name">Verkäuferzuweisung</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban</field>
+        <field name="search_view_id" ref="view_sales_order_call_filter"/>
+        <field name="context">{'group_by':'user_id', 'search_default_call_today' : 1}</field>
+        <field name="domain"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_sale_order_calling_kanban')}),]"/>
+    </record>
+
+    <!-- Sales Orders views, filters and actions for Tour planning -->
+
+    <record model="ir.ui.view" id="view_sale_order_tour_planning_kanban">
+        <field name="name">sale.order.tour.planning.kanban</field>
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column o_kanban_project_tasks" default_group_by="tour_id" default_order='sequence' js_class="sale_tour_kanban">
+            <!--<div t-attf-class="oe_kanban_card oe_kanban_global_click">-->
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="commitment_date"/>
+                <field name="state"/>
+                <field name="weight" sum="Gewicht"/>
+                <field name="volume"/>
+                <field name="state" />
+                <field name="tour_id" />
+                <progressbar field="tour_id" colors='{"more": "danger", "less": "success"}' sum_field="weight"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><span><t t-esc="record.partner_id.value"/></span></strong>
+                                </div>
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong><span><t t-esc="record.partner_id.city"/></span></strong>
+                                </div>
+
+                                <strong>Drop Off Nr.<field name="sequence"/></strong>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div>
+                                    <strong>Gewicht <field name="weight"/>kg</strong>
+                                    <strong>Volumen <field name="volume"/>m3</strong>
+                                </div>
+                                <div class="oe_kanban_bottom_left text-muted">
+                                    <span><t t-esc="record.name.value"/> <t t-esc="record.commitment_date.value"/></span>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'cancel': 'default', 'done': 'success'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_sales_order_tour_filter" model="ir.ui.view">
+        <field name="name">sale.order.tour.list.select</field>
+        <field name="model">sale.order</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Sales Order">
+                <field name="name" string="Sales Order" filter_domain="['|','|',('name','ilike',self),('client_order_ref','ilike',self),('partner_id','child_of',self)]"/>
+                <field name="partner_id" operator="child_of"/>
+                <field name="user_id"/>
+                <field name="team_id" string="Sales Team"/>
+                <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                <field name="order_line" string="Product" filter_domain="[('order_line.product_id', 'ilike', self)]"/>
+                <filter string="My Orders" domain="[('user_id','=',uid)]" name="my_sale_orders_filter"/>
+                <separator/>
+                <filter string="Today" name="tour_today"
+                    domain="[('commitment_date','&gt;=',context_today().strftime('%Y-%m-%d')),
+        ('commitment_date','&lt;',(context_today() + relativedelta(days=1)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Future" name="tour_future"
+                    domain="[('commitment_date','&gt;=',context_today().strftime('%Y-%m-%d'))]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by':'user_id'}"/>
+                    <filter string="Tour" name="tour" domain="[]" context="{'group_by':'tour_id'}"/>
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Order Date" name="order_month" domain="[]" context="{'group_by':'date_order'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="tour_planning_action_today" model="ir.actions.act_window">
+        <field name="name">Tourenplanung</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban</field>
+        <field name="search_view_id" ref="view_sales_order_tour_filter"/>
+<!--        <field name="context">{'group_by':'tour_id', 'search_default_tour_today':1}</field>-->
+        <field name="context">{'group_by':'tour_id', 'search_default_tour_future':1}</field>
+        <field name="domain">[('commitment_date','!=',False),('order_line','!=',False)]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+        (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_sale_order_tour_planning_kanban')}),]"/>
+    </record>
+
+</odoo>

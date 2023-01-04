@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="metro_dashboard_var_list" model="ir.ui.view">
+        <field name="name">metro.dashboard.variable.tree</field>
+        <field name="model">metro.dashboard.variable</field>
+        <field name="arch" type="xml">
+            <tree string="Dashboard Variables">
+                <field name="name" />
+                <field name="var_type" />
+                <field name="value_preview" />
+                <field name="dependency_count" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_var_form" model="ir.ui.view">
+        <field name="name">metro.dashboard.variable.form</field>
+        <field name="model">metro.dashboard.variable</field>
+        <field name="arch" type="xml">
+            <form string="Variable Form">
+                <header>
+                    <button name="execute_code" type="object" string="Recalculate" class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="o_not_full oe_button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-power-off">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'inactive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" />
+                        <field name="var_type" />
+                    </group>
+                    <group>
+                        <field name="compute_code" />
+                    </group>
+
+                    <notebook>
+                        <page string="Current Value">
+                            <field name="value" context="{'readonly': 1}" />
+                        </page>
+                        <page string="Dependencies">
+                            <group>
+                                <field name="uninstalled_dependencies" />
+                                <field name="dependency_count" />
+                                <field name="dependencies" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_var_search" model="ir.ui.view">
+        <field name="name">metro.dashboard.variable.search</field>
+        <field name="model">metro.dashboard.variable</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+
+                <!-- Inactive -->
+                <filter name="filter_inactive" string="Inactive" domain="[('active', '=', False)]" />
+                <!-- Filter by types -->
+                <filter name="filter_type_bool" string="Type: Boolean" domain="[('var_type', '=', 'bool')]" />
+                <filter name="filter_type_int" string="Type: Integer" domain="[('var_type', '=', 'int')]" />
+                <filter name="filter_type_float" string="Type: Float" domain="[('var_type', '=', 'float')]" />
+                <filter name="filter_type_dict" string="Type: Dictionary" domain="[('var_type', '=', 'dict')]" />
+                <filter name="filter_type_list" string="Type: List/Array" domain="[('var_type', '=', 'list')]" />
+                <filter name="filter_type_string" string="Type: String" domain="[('var_type', '=', 'string')]" />
+                
+                <group string="Group By">
+                    <filter name="group_by_type" string="Type" context="{'group_by': 'var_type'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree View: Action (Dropdown button) -->
+    <record id="metro_dashboard_var_action_update" model="ir.actions.server">
+        <field name="name">Update Values</field>
+        <field name="model_id" ref="metro_dashboard.model_metro_dashboard_variable" />
+        <field name="binding_model_id" ref="metro_dashboard.model_metro_dashboard_variable" />
+        <field name="state">code</field>
+        <field name="code">records.action_update()</field>
+    </record>
+
+    <record id="metro_dashboard_var_action" model="ir.actions.act_window">
+        <field name="name">Dashboard Variables</field>
+        <field name="res_model">metro.dashboard.variable</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="metro_dashboard_edit_variables"
+        name="Variables"
+        parent="metro_dashboard_edit_item"
+        action="metro_dashboard_var_action"
+        groups="metro_dashboard.group_metro_dashboard_manager" />
+</odoo>

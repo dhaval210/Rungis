@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_user,lot.purchase.user,stock.model_stock_production_lot,purchase.group_purchase_user,1,0,0,0
+access_product_template_article,product.template.article,product.model_product_template,group_article,1,1,0,0
+access_product_product_article,product.product.article,product.model_product_product,group_article,1,1,0,0
+access_res_partner_contact,res.partner.contact,base.model_res_partner,group_contact,1,1,0,0
+access_ir_config_parameter_contact,ir.config.parameter.contact,base.model_ir_config_parameter,group_contact,1,1,0,0
+
+
+
+
+
+
+

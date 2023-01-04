@@ -1,0 +1,82 @@
+<ion-view class="main-scan-block">
+
+    <ion-header-bar class="bar bar-header bar-stable">
+        <h1 class="title loading_item move-title">{{'Scanner' | translate}}</h1>
+        <span class="top-right-icon cancel-icon ion-android-cancel" ui-sref="list_move({picking_type_id: params.picking_type_id,picking_id: params.picking_id})" ></span>
+    </ion-header-bar>
+
+    <ion-content class="has-header" id="main_move" data-ng-init="init()">
+
+        <p class="title">{{'Product' | translate}}</p>
+
+        <p class="product-name">{{data.currentMove.product.display_name}}</p>
+
+        <p class="title">{{'Quantity' | translate}} {{data.currentMove.qty_done}} / {{data.currentMove.qty_expected}} {{data.currentMove.uom.name}}</p>
+
+        <p>
+            <input type="number" id="qty_done" min="0" ng-model="data.inputData" placeholder="{{'Barcode or Quantity' | translate}}" ng-change="clearValidation()" autocomplete="off" class="theme-input"/>
+        </p>
+
+        <div ng-show="data.currentMove.catch_weight_ok != false">
+            <p class="title">{{'Catch Weight' | translate}} {{data.currentMove.cw_qty_done}} / {{data.currentMove.product_cw_uom_qty}} {{data.currentMove.product_cw_uom.name}}</p>
+
+            <p>
+                <input type="number" id="weight" min="0" max="{{data.currentMove.product_cw_uom_qty}}" ng-model="data.catchWeight" placeholder="{{'Catch Weight' | translate}}" ng-change="clearValidation()" autocomplete="off" class="theme-input"/>
+            </p>
+        </div>
+
+        <!-- <div ng-show="data.operationCode == 'incoming'"> -->
+        <div ng-show="data.packNumber != '' || data.operationCode == 'incoming'">
+            <p class="title">{{'Lot name' | translate}}</p>
+
+            <p>
+                <input type="text" id="lot" ng-model="data.lotName" placeholder="{{'Lot name' | translate}}" autocomplete="off" ng-change="clearValidation()" class="theme-input"/>
+            </p>
+
+            <div ng-show="data.currentMove.product.no_expiry == false">
+                <p class="title">{{'Best before' | translate}}</p>
+                <p>
+                    <md-datepicker id="mhd" ng-model="data.bestBefore" md-placeholder="Enter date" md-min-date="data.minDate" ng-change="clearValidation()" md-open-on-focus></md-datepicker>
+                </p>
+            </div>
+
+            <p class="title">{{'Pack number' | translate}}</p>
+
+            <p>
+                <form name="myform" >
+                <input type="text" id="pack" name="packs" ng-model="data.packNumber" placeholder="{{'Pack number' | translate}}" autocomplete="off" ng-change="packNumberValidation()" class="theme-input"
+                ng-maxlength="8" pattern="^[a-zA-Z]{1,2}[0-9]{6,6}$" ng-pattern-restrict />
+                </form>
+            </p>
+            <div ng-show="data.currentMove.generic_attributes" id="generic">
+                <div ng-repeat="g_input in data.currentMove.generic_attributes">
+                    <p class="title">{{g_input.attribute_label | translate}} <span ng-show="g_input.mandatory">*</span></p>
+                    <p>
+                        <md-select name="line_{{g_input.attribute_line_id}}" class="item-input" id="line_{{g_input.attribute_line_id}}" ng-change="getSaveBtnStatus()" ng-required="g_input.mandatory == true" ng-model="data.currentMove.generic.line_[g_input.attribute_line_id]" class="theme-input">
+                            <md-option ng-repeat="option in g_input.valid_values" value="{{option.id}}" ng-selected="option.selected == true">{{option.label}}</md-option>
+                        </md-select>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-footer>
+        <div class="btn-footer">
+          
+            <button class="button cancel" translate="Discard" ui-sref="list_move({picking_type_id: params.picking_type_id,picking_id: params.picking_id})"></button>
+            
+            <!-- Save Button -->
+            <button class="button btn-grey save" ng-show="(data.currentMove.qty_done > data.currentMove.qty_expected || data.inputData == '' || data.inputData == null || data.lotName == '' || data.lotName == null || data.packNumber == '' || data.packNumber == null || data.packNumber == myform.pack.$error.pattern)" translate="Save"  ng-click="save()"></button>
+            <button class="button btn-dark-green save" ng-show="(data.currentMove.qty_done <= data.currentMove.qty_expected && data.inputData != '' && data.inputData != null && data.lotName != '' && data.lotName != null && data.packNumber != '' && data.packNumber != null )" translate="Save" ng-click="save()"></button>
+        </div>
+    </ion-footer>
+
+    <ion-footer-bar class="bar-assertive" ng-show="data.errorMessage">
+      <h1 class="title">{{ data.errorMessage }}</h1>
+      <span class="top-right-icon cancel-icon ion-android-cancel" style="top: 0;
+      line-height: 35px;" ng-click="data.errorMessage = ''"></span>
+    </ion-footer-bar>
+
+</ion-view>

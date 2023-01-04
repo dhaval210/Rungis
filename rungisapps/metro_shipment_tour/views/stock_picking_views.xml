@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_shipment_assignation" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.shipment.assignation</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="before">
+                <field name="customer_delivery_date"/>
+                <field name="truck"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_tree_shipment_assignation" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit.shipment.assignation</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="before">
+                <field name="customer_delivery_date"/>
+                <field name="truck"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_internal_search_shipment" model="ir.ui.view">
+        <field name="name">stock.picking.internal.search.inherit.shipment.assignation</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='picking_type']" position="after">
+                <filter name="customer_delivery_date" string="Customer Delivery Date (Day)" domain="[]" context="{'group_by':'customer_delivery_date:day'}"/>
+                <filter name="truck" string="Truck ID" domain="[]" context="{'group_by':'truck'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

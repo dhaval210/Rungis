@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>              
+        <record id="transporter_hub_report_view_form" model="ir.ui.view">
+            <field name="name">Hub Report</field>
+            <field name="model">transporter.hub.report</field>
+            <field name="arch" type="xml">
+                <form string="Generate Schedule">
+                    <group col="4">
+                        <field name="schedule_date"/>
+                    </group>
+                    <field name="hub_line_ids" nolabel="1">
+                        <tree editable="top">
+                            <field name="hub_id"/>
+                            <field name="planned_arrival_float" widget="float_time"/>
+                            <field name="planned_departure_float" widget="float_time"/>
+                        </tree>
+                    </field>                    
+                    <footer>
+                        <button name="generate_lines" type="object" string="Save"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <!--  add picking to batch action -->
+        <record id="transporter_hub_report_action" model="ir.actions.act_window">
+            <field name="name">Generate Schedule</field>
+            <field name="res_model">transporter.hub.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="transporter_hub_report_view_form"/>
+            <field name="target">new</field>
+        </record>
+        <act_window id="transporter_hub_report_action_hub_schedule"
+            multi="True"
+            key2="client_action_multi" name="Generate Schedule"
+            res_model="transporter.hub.report" src_model="transporter.hub"
+            view_mode="form" target="new" view_type="form"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="stock_backorder_mail" model='mail.template'>
+            <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model" />
+            <field name="email_to">${object.purchase_id.user_id.partner_id.email}</field>
+            <field name="email_from">no-reply@rungisexpress.com</field>
+            <field name="lang">${object.purchase_id.user_id.lang}</field>
+            <field name="name">Backorder notification</field>
+            <field name="subject">Fehllieferung Bestellung: ${object.origin}</field>
+            <field name="body_html">Guten Tag ${object.purchase_id.user_id.name},
+                &lt;br/&gt;&lt;br/&gt;
+                bei der von dir platzierten Bestellung ${object.origin} vom Lieferanten ${object.partner_id.name} gab es bei der Buchung des Wareneingangs eine Abweichung zur Bestellmenge bei: 
+                &lt;br/&gt;
+                % for row in object.move_ids_without_package:
+                [${row.product_id.default_code}] ${row.product_id.name} &lt;br/&gt;
+
+                %endfor
+                &lt;br/&gt;
+                Bitte nehmen Sie mit dem Lieferanten Kontakt auf.
+            </field>
+        </record>
+    </data>
+</odoo>

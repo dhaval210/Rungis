@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="min_supplier_tree_view" model="ir.ui.view">
+            <field name="name">mini.supplier.tree.view</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="25"/>
+            <field name="arch" type="xml">
+                <tree string="Mini Supplier" create="false">
+                    <field name="ref"/>
+                    <field name="name"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="purchase_amount_last_1_month" widget="monetary"/>
+                    <field name="purchase_amount_average_last_6" widget="monetary"/>
+                    <field name="purchase_amount_last_6" widget="monetary"/>
+                    <field name="product_count"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="min_supplier_pivot_view" model="ir.ui.view">
+            <field name="name">mini.supplier.pivot.view</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="25"/>
+            <field name="arch" type="xml">
+                <pivot string="Mini Supplier">
+                    <field name="name" type="row"/>
+                    <field name="purchase_amount_last_1_month" type="measure"/>
+                    <field name="purchase_amount_last_6" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_mini_supplier_report_search" model="ir.ui.view">
+            <field name="name">mini.supplier.report.search</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Mini Supplier">
+                    <field name="name"/>
+                    <field name="ref"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_mini_supplier" model="ir.actions.act_window">
+            <field name="name">Mini Supplier</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,pivot</field>
+            <field name="domain">[('supplier', '=', True), ('purchase_order_count', '&gt;=', 1), ('purchase_ranking', '&gt;=',
+                1), ('purchase_amount_last_1_month', '&gt;=', 1), ('purchase_amount_last_1_month', '&lt;=', 1000)]
+            </field>
+            <field name="context">{}</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('min_supplier_tree_view')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('min_supplier_pivot_view')})]"/>
+            <field name="search_view_id" ref="view_mini_supplier_report_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_mini_supplier" id="menu_mini_supplier"
+                  parent="purchase.purchase_report"/>
+
+
+    </data>
+</odoo>

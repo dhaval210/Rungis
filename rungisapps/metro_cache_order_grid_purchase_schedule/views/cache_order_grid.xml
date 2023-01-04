@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cache.order.grid inherit tree view -->
+    <record id="cache_order_grid_view_tree" model="ir.ui.view">
+        <field name="name">cache.order.grid.inherit.view.tree</field>
+        <field name="model">cache.order.grid</field>
+        <field name="inherit_id" ref="metro_cache_order_grid.cache_order_grid_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-info">is_order_date is True and in_past is not True</attribute>
+                <attribute name="decoration-success">is_delivery_date is True and in_past is not True</attribute>
+            </xpath>
+            <field name="in_past" position="after">
+                <field name="is_order_date"/>
+                <field name="is_delivery_date"/>
+            </field>
+        </field>
+    </record>
+</odoo>

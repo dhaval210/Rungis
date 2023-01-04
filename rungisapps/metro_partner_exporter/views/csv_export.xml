@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Backend -->
+    <record id="view_csv_export_form" model="ir.ui.view">
+        <field name="name">csv.export.form</field>
+        <field name="model">csv.export</field>
+        <field name="arch" type="xml">
+            <form string="CSV EXPORT" edit="false" create="false">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="export_date"/>
+                        <field name="exported_file" filename="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_csv_export_tree" model="ir.ui.view">
+        <field name="name">csv.export.tree</field>
+        <field name="model">csv.export</field>
+        <field name="arch" type="xml">
+            <tree string="CSV Exports" edit="false" create="false">
+                <field name="name"/>
+                <field name="export_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_csv_export" model="ir.actions.act_window">
+        <field name="name">CSV Export</field>
+        <field name="context">{'search_default_backend_id': active_id, 'default_backend_id': active_id}</field>
+        <field name="domain">[('backend_id','=',active_id)]</field>
+        <field name="res_model">csv.export</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+
+

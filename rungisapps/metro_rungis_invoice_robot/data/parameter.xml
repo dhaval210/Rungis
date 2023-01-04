@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="create_invoice_picking_start_date" model="ir.config_parameter">
+            <field name="key">metro_rungis_invoice_robot.create_invoice_picking_start_date</field>
+            <field name="value">2021-10-01</field>
+        </record>
+    </data>
+</odoo>

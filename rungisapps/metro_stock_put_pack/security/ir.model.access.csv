@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_pack_rule,access_stock_pack_rule,model_stock_pack_rule,,1,1,1,1
+access_stock_pack_product_rule,access_stock_pack_product_rule,model_stock_pack_product_rule,,1,1,1,1
+access_stock_pack_rule_value,access_stock_pack_rule_value,model_stock_pack_rule_value,,1,1,1,1

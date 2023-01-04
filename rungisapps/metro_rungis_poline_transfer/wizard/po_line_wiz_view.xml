@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_po_line_transfer_wiz" model="ir.ui.view">
+            <field name="name">po.line.transfer.wiz.form</field>
+            <field name="model">po.line.transfer.wiz</field>
+            <field name="arch" type="xml">
+                <form string="PO Lines Wizard">
+                    <field name='po_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                    <field name='line_ids' options="{'no_create': True}">
+                        <tree editable="bottom" create="false" delete="false">
+                            <field name='product_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <field name='vendor_id' options="{'no_create': True, 'no_open': True}"  readonly="1"/>    
+                            <field name='order_id' options="{'no_open': True}" context="{'wiz_po_name':True}"/> 
+                            <field name='product_qty'  readonly="1"/> 
+                            <field name='uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/> 
+                            <field name='lpp' readonly="1"/>
+                            <field name='price_unit' readonly="1"/>
+                            <field name='po_date_planned' readonly="1"/>
+
+                            <field name='is_order_id_updated' invisible="1"/>   
+                        </tree>
+                        <form>
+                            <group>
+                                <field name='product_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name='vendor_id' options="{'no_create': True, 'no_open': True}"  readonly="1"/>    
+                                <field name='order_id' options="{'no_create': True, 'no_open': True}" readonly="1"/> 
+                                <field name='product_qty' readonly="1"/> 
+                                <field name='uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/> 
+                                <field name='lpp' readonly="1"/>
+                                <field name='price_unit' readonly="1"/>
+                                <field name='po_date_planned' readonly="1"/>
+                                <field name='order_line_id' options="{'no_create': True, 'no_open': True}" invisible="1"/>
+                            </group>
+                        </form>
+                    </field>
+                    <footer>
+                        <button name="process" string="Apply" type="object" class="btn-primary"/>
+                        OR
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_po_line_transfer_wiz" model="ir.actions.act_window">
+            <field name="name">PO Line Wiz</field>
+            <field name="res_model">po.line.transfer.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_po_line_transfer_wiz"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

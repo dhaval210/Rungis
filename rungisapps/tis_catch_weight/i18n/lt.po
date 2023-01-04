@@ -1,0 +1,1329 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* tis_cw_procurement
+#	* tis_cw_web_sale
+#	* tis_cw_mrp
+#	* tis_cw_stock_report_xls
+#	* tis_cw_average_qty
+#	* tis_cw_web_sale_avg
+#	* tis_cw_demo_data
+#	* tis_catch_weight
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-24 07:17+0000\n"
+"PO-Revision-Date: 2019-06-24 07:17+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:258
+#, python-format
+msgid "\n"
+"There are %s %s available across all warehouses."
+msgstr "Visuose sandėliuose yra% s% s."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_demo_data
+msgid " CW Products demo data"
+msgstr "CW produktų demonstraciniai duomenys"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid " CW Quantity Finished Product"
+msgstr "CW kiekis gatavas produktas"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_stock_quantity_history__report_type
+msgid " Report Type"
+msgstr "Ataskaitos tipas"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW Forecasted</span>"
+msgstr "<span class=\"o_stat_text\">CW Prognozuojama</span>"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_form_view_button_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_form_view_button_catch_weight
+msgid "<span class=\"o_stat_text\">CW On Hand</span>"
+msgstr "<span class=\"o_stat_text\">CW On Hand</span>"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_popover
+msgid "<span>CW Qty:</span>"
+msgstr "<span>CW Kiekis:</span>"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "<span>CW Quantity</span>\n"
+"                            <span>(</span>"
+msgstr "<span>CW kiekis</span>\n"
+"                            <span>(</span>"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:310
+#: code:addons/tis_catch_weight/models/product_template.py:317
+#, python-format
+msgid "A CatchWeight product cannot be a service product."
+msgstr "„CatchWeight“ produktas negali būti paslaugų produktas."
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:6
+#, python-format
+msgid "Access to all Enterprise Apps"
+msgstr "Prieiga prie visų „Enterprise Apps“"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activate catch weight system"
+msgstr "Įjungti sugavimo svorio sistemą"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in Ecommerce"
+msgstr "Suaktyvinkite sugavimo svorio funkcijas el. Prekyboje"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Activating catch weight features in manufacturing"
+msgstr "Suaktyvinti sugavimo svorio ypatybes gamyboje"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Add one"
+msgstr "Pridėti vieną"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:11
+#, python-format
+msgid "And more"
+msgstr "Ir dar"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Apply"
+msgstr "Taikyti"
+
+#. module: tis_cw_average_qty
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_product__average_cw_quantity
+#: model:ir.model.fields,field_description:tis_cw_average_qty.field_product_template__average_cw_quantity
+msgid "Average CW Quantity"
+msgstr "Vidutinis CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_average_qty
+msgid "Average quantity on CW Products"
+msgstr "Vidutinis CW produktų kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale_avg
+msgid "Average quantity on CW Products in ecommerce"
+msgstr "Vidutinis CW produktų kiekis el. Prekyboje"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+msgid "Below are applicable to catch weight product(s)."
+msgstr "Žemiau pateikiami duomenys apie svorį (-ius)."
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom
+msgid "Bill of Material"
+msgstr "Medžiaga"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_bom_line
+msgid "Bill of Material Line"
+msgstr "Medžiagų eilutė"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_invoiced
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Billed CW Qty"
+msgstr "Apskaitos CW kiekis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_avocado
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_avocado_product_template
+msgid "Box of Avocado"
+msgstr "Avokado langelis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_cherry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_cherry_product_template
+msgid "Box of Cherry"
+msgstr "Vyšnių dėžutė"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_strawberry
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_strawberry_product_template
+msgid "Box of Strawberry"
+msgstr "Braškių dėžutė"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:10
+#, python-format
+msgid "Bugfixes guarantee"
+msgstr "Klaidų taisymo garantija"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_banana
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_banana_product_template
+msgid "Bunch of Banana"
+msgstr "Bananų krūva"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_beet_root
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_beet_root_product_template
+msgid "Bundle of beetroot"
+msgstr "Runkelių šaknis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_bitter_gourd
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_bitter_gourd_product_template
+msgid "Bundle of Bitter Gourd"
+msgstr "Bitter Gourd"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_cotton
+#: model:product.template,name:tis_cw_demo_data.product_product_cotton_product_template
+msgid "Bundle of Cotton"
+msgstr "Medvilnės paketas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_spinach
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_spinach_product_template
+msgid "Bundle of Spinach"
+msgstr "Špinatų paketas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_butter
+#: model:product.template,name:tis_cw_demo_data.product_product_butter_product_template
+msgid "Butter"
+msgstr "sviestas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_butter_me_up
+#: model:product.template,name:tis_cw_demo_data.product_product_butter_me_up_product_template
+msgid "Butter Me Up"
+msgstr "sviestas mane"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Consumed"
+msgstr "CW Consumed"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_delivered
+msgid "CW Delivered"
+msgstr "CW pristatyta"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Delivered Quantity"
+msgstr "CW pristatytas kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom_qty
+msgid "CW Demand"
+msgstr " CW paklausa"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_qty_done
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_qty_done
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+msgid "CW Done"
+msgstr "CW Atlikta"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_virtual_available
+msgid "CW Forecast Quantity"
+msgstr "CW prognozės kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_virtual_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Forecasted Quantity"
+msgstr "Prognozuojamas CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_incoming_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_incoming_qty
+msgid "CW Incoming"
+msgstr "CW įeina"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_invoiced
+msgid "CW Invoiced"
+msgstr " CW sąskaitos faktūros"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+msgid "CW Invoiced Quantity"
+msgstr "CW sąskaitoje faktūroje nurodytas kiekis"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+msgid "CW On Hand"
+msgstr "CW On Hand"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_kanban_cw_onhand
+msgid "CW On hand:"
+msgstr "CW On Hand"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_outgoing_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_outgoing_qty
+msgid "CW Outgoing"
+msgstr "CW Išeinantis"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_invoice_catchweight
+msgid "CW QTY"
+msgstr "CW QTY"
+
+#. modules: tis_cw_web_sale, tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_delivery_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_purchase_qoutation_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_sale_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stockpicking_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_summary_cw_qty
+msgid "CW Qty"
+msgstr "CW QTY"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_delivered
+msgid "CW Qty Delivered"
+msgstr " Pateiktas CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__cw_qty_invoiced
+msgid "CW Qty Invoiced"
+msgstr "CW Kiekis Sąskaitoje"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_report__product_cw_uom_qty
+msgid "CW Qty Ordered"
+msgstr " CW užsakytas kiekis"
+
+#. modules: tis_cw_web_sale, tis_catch_weight, tis_cw_mrp
+#. openerp-web
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_move_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_at_date
+#: model:ir.model.fields,field_description:tis_catch_weight.field_report_stock_forecast__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_quantity
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__scrap_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_body_print_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.report_stock_inventory_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_quant_package_form_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_sale_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_production_form_lot_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__cw_product_qty
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_produced
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_bom_form_view_cw_inherit
+#: code:addons/tis_cw_web_sale/static/src/xml/website_sale_dashboard_cw.xml:5
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#, python-format
+msgid "CW Quantity"
+msgstr "CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_qty_available
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_qty_available
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "CW Quantity On Hand"
+msgstr " CW kiekis rankoje"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "CW Quantity Produced"
+msgstr "CW pagamintas kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity Reserved"
+msgstr " CW kiekis rezervuotas"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_remaining
+msgid "CW Quantity To Be Produced"
+msgstr "CW kiekis, kurį reikia gaminti"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_product_qty
+msgid "CW Quantity To Produce"
+msgstr "CW kiekis, kurį reikia gaminti"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:30
+#, python-format
+msgid "CW Quantity cannot be negative."
+msgstr "CW kiekis negali būti neigiamas."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_availability
+msgid "CW Quantity in stock that can still be reserved for this move"
+msgstr "CW Kiekis sandėlyje, kuris vis dar gali būti rezervuotas šiam perkėlimui"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__cw_product_qty
+msgid "CW Quantity in the default UoM of the product"
+msgstr "CW Kiekis gaminio numatytame UoM"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_move__reserved_cw_availability
+msgid "CW Quantity that has already been reserved for this move"
+msgstr "CW Kiekis, kuris jau buvo rezervuotas šiam judėjimui"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__cw_product_qty
+msgid "CW Real Quantity"
+msgstr "CW tikrasis kiekis"
+
+#. modules: tis_catch_weight, tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_picking_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_tree_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_form_catchweight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_quant_tree_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_reserved
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW Reserved"
+msgstr "CW rezervuota"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__cw_stock_reserved_quantity
+msgid "CW Reserved Quantity"
+msgstr "CW rezervuotas kiekis"
+
+#. module: tis_cw_stock_report_xls
+#: model:ir.actions.report,name:tis_cw_stock_report_xls.cw_stock_xlsx
+msgid "CW Stock Report"
+msgstr "CW atsargų ataskaita"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__cw_qty_to_consume
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_form_view_cw_inherit
+msgid "CW To Consume"
+msgstr "CW vartoti"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__cw_qty_to_invoice
+msgid "CW To Invoice"
+msgstr "CW į sąskaitą faktūrą"
+
+#. modules: tis_cw_web_sale, tis_catch_weight, tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_tree2_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__product_cw_uom_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+msgid "CW UOM"
+msgstr "CW UOM"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id_ok
+msgid "CW Unit Of Measure"
+msgstr "CW matavimo vienetas"
+
+#. modules: tis_catch_weight, tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_form_catchweight
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__product_cw_uom_id
+msgid "CW Unit of Measure"
+msgstr "CW matavimo vienetas"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+msgid "CW-Initial Demand"
+msgstr "CW pirminis poreikis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom_qty
+msgid "CW-Qty"
+msgstr "CW-Qty"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_stock_move_line_product_tree_cw_
+msgid "CW-Quantity Done"
+msgstr "CW-Quantity Done"
+
+#. modules: tis_cw_procurement, tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_quant__product_cw_uom
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_scrap__product_cw_uom
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_cw_qty_tree
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_move_tree_cw
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_move_tree_receipt_picking_cw
+#: selection:product.category,purchase_price_base:0
+#: selection:product.category,sale_price_base:0
+#: selection:product.template,purchase_price_base:0
+#: selection:product.template,sale_price_base:0
+#: selection:set.cw.multiple.products,purchase_price_base:0
+#: selection:set.cw.multiple.products,sale_price_base:0
+#: selection:stock.warehouse.orderpoint,reordering_based_on:0
+msgid "CW-UOM"
+msgstr "CW-UOM"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_calamari_frozen_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_calamari_frozen_pack_product_template
+msgid "Calamari Frozen Pack"
+msgstr "Calamari Frozen Pack"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_tuna
+#: model:product.template,name:tis_cw_demo_data.product_product_tuna_product_template
+msgid "Can of Tuna"
+msgstr "Tunus galima"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:75
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#. module: tis_cw_web_sale
+#: model:ir.model.fields,field_description:tis_cw_web_sale.field_sale_order__cart_cw_quantity
+msgid "Cart CW Quantity"
+msgstr "Krepšelis CW Kiekis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_apple
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_apple_product_template
+msgid "Carton of Apples"
+msgstr "Obuolių dėžutė"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/js/buy_apps.js:86
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__group_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.set_cw_for_multiple_products
+#, python-format
+msgid "Catch Weight"
+msgstr "Sugavimo svoris"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch Weight Management"
+msgstr "Sugavimo svorio valdymas"
+
+#. modules: tis_catch_weight, tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_sale_order_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_return_picking_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_product_produce_line__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__catch_weight_ok
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_unbuild__catch_weight_ok
+msgid "Catch Weight Product"
+msgstr "Sugavimo svorio produktas"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__cw_uom_id
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__cw_uom_id
+msgid "Catch Weight UOM"
+msgstr "Sugavimo svoris UOM"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_inventory.py:167
+#, python-format
+msgid "Catch Weight quantity cannot be negative for %s"
+msgstr "Sugavimo svoris negali būti neigiamas %s"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Catch weight Demo Data"
+msgstr "Sugavimo svoris Demo duomenys"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "CatchW8"
+msgstr "CatchW8"
+
+#. modules: tis_catch_weight, tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Category"
+msgstr "Kategorija"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_change_product_qty
+msgid "Change Product Quantity"
+msgstr "Pakeisti produkto kiekį"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_change_production_qty
+msgid "Change Production Qty"
+msgstr "Keisti produkcijos kiekį"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Check to enable catch weight management system"
+msgstr "Patikrinkite, ar įgalinta sugavimo svorio valdymo sistema"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_cheese
+#: model:product.template,name:tis_cw_demo_data.product_product_cheese_product_template
+msgid "Cheese Wheel"
+msgstr "Sūrio ratas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_chicken_bag
+#: model:product.template,name:tis_cw_demo_data.product_product_chicken_bag_product_template
+msgid "Chicken Bag"
+msgstr "Vištienos maišelis"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigūravimo nustatymai"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,help:tis_catch_weight.field_product_replenish__product_cw_uom_category_id
+#: model:ir.model.fields,help:tis_catch_weight.field_stock_inventory_line__product_cw_uom_category_id
+msgid "Conversion between Units of Measure can only occur if they belong to the same category. The conversion will be made based on the ratios."
+msgstr "Konversijos tarp matavimo vienetų gali įvykti tik tuo atveju, jei jos priklauso tai pačiai kategorijai. Konversija bus atlikta pagal santykius."
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight_ok
+msgid "Convert Product"
+msgstr " Konvertuoti produktą"
+
+#. module: tis_catch_weight
+#: model:ir.actions.act_window,name:tis_catch_weight.action_view_activate_catch_weight
+msgid "Convert Product(CW/NOT)"
+msgstr "Konvertuoti produktą (CW / NOT)"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_uid
+msgid "Created by"
+msgstr "Sukurta"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__create_date
+msgid "Created on"
+msgstr "Sukurtas"
+
+#. module: tis_cw_mrp
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_workorder_form_view_cw_inherit
+msgid "Current CW Qty"
+msgstr "Dabartinis CW kiekis"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_producing
+msgid "Currently Produced CW Quantity"
+msgstr "Šiuo metu gaminamas CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_replenish__cw_quantity
+msgid "Cw Quantity"
+msgstr "Cw kiekis"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:73
+#, python-format
+msgid "Delivered CW Quantity"
+msgstr "Pristatytas CW kiekis"
+
+#. modules: tis_catch_weight, tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__display_name
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__display_name
+msgid "Display Name"
+msgstr "Rodomas pavadinimas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_tuna
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_yarn
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_tuna_product_template
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_yarn_product_template
+msgid "Dozen(s)"
+msgstr "Tuzinai)"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:22
+#, python-format
+msgid "Enter the CW Done quantity for the product %r."
+msgstr "Įveskite CW Done kiekį produktui% r."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_picking.py:24
+#, python-format
+msgid "Enter the Done quantity for the product %r."
+msgstr "Įveskite produkto kiekį% r."
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Excel"
+msgstr "„Excel“"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Export Stock report with cw quantity"
+msgstr "Eksporto atsargų ataskaita su cw kiekiu"
+
+#. module: tis_cw_stock_report_xls
+#: model_terms:ir.ui.view,arch_db:tis_cw_stock_report_xls.view_stock_quantity_history_inherit
+msgid "Export cw stock"
+msgstr "Eksporto cw atsargos"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in Ecommerce/Shop"
+msgstr "Parsisiųskite vidutinį kiekį el. Prekyboje / parduotuvėje"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Fetch average quantity in sales and purchase"
+msgstr "Parsisiųskite vidutinį kiekį pardavimui ir pirkimui"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fish
+msgid "Fish"
+msgstr "Žuvys"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_product_product_tree_catch_weight
+msgid "forecasted cw Quantity"
+msgstr "forecasted cw Kiekis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_freezer_pack_meet
+#: model:product.template,name:tis_cw_demo_data.product_product_freezer_pack_meet_product_template
+msgid "Freezer Pack Meat"
+msgstr "Šaldiklio paketas Mėsa"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_fresh_milk
+#: model:product.template,name:tis_cw_demo_data.product_product_fresh_milk_product_template
+msgid "Fresh Milk"
+msgstr "Šviežias pienas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_shark
+#: model:product.template,name:tis_cw_demo_data.product_product_shark_product_template
+msgid "Fresh Shark Fillet Tray"
+msgstr "Šviežia ryklių filė"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_shrimp
+#: model:product.template,name:tis_cw_demo_data.product_product_shrimp_product_template
+msgid "Frozen Shrimp Pack"
+msgstr "Šaldytos krevečių pakuotės"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_fruit
+msgid "Fruits"
+msgstr "vaisiai"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:3
+#, python-format
+msgid "Get this feature and much more with Technaureus!"
+msgstr "Gaukite šią funkciją ir daug daugiau su „Technaureus“!"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_beef
+#: model:product.template,name:tis_cw_demo_data.product_product_beef_product_template
+msgid "Ground Beef Bundle (40 Packs)"
+msgstr "Grūdų jautienos rinkinys (40 pakuočių)"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_is_produced
+msgid "Has Been Produced(CW)"
+msgstr "Buvo pagamintas (CW)"
+
+#. modules: tis_catch_weight, tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__id
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_immediate_transfer
+msgid "Immediate Transfer"
+msgstr "Skubus pervedimas"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,help:tis_cw_mrp.field_stock_move_line__cw_lot_produced_qty
+msgid "Informative, not used in matching"
+msgstr "Informacinė, nenaudojama derinant"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:154
+#, python-format
+msgid "Invalid domain left operand %s"
+msgstr "Netinkamas domeno kairysis operandas% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:156
+#, python-format
+msgid "Invalid domain operator %s"
+msgstr "Netinkamas domeno operatorius% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/product_template.py:158
+#, python-format
+msgid "Invalid domain right operand %s"
+msgstr "Netinkamas domeno teisės operandas %s"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory
+msgid "Inventory"
+msgstr "Inventorius"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr "Inventoriaus eilutė"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice
+msgid "Invoice"
+msgstr "Sąskaita"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Sąskaitos faktūros eilutė"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:74
+#, python-format
+msgid "Invoiced CW Quantity"
+msgstr "Sąskaitoje išrašytas CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_invoice_report
+msgid "Invoices Statistics"
+msgstr "Sąskaitų faktūrų statistika"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_template_search_view_cw
+msgid "Is Catch Weight"
+msgstr "Ar sugavimo svoris"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:294
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW Quantity you have in stock."
+msgstr "Negalima rezervuoti daugiau produktų, kurių kiekis yra %s, nei atsargų kiekis."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:195
+#, python-format
+msgid "It is not possible to reserve more products of %s than CW quantity you have in stock."
+msgstr "Negalima rezervuoti daugiau produktų, kurių kiekis yra% s, nei atsargų kiekis."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:192
+#, python-format
+msgid "It is not possible to reserve more products of %s than you have in stock."
+msgstr "Negalima rezervuoti daugiau nei% s produktų, nei turite."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:205
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have  in stock."
+msgstr "Negalima atkurti daugiau kaip% s produktų nei CW Kiekis, kurį turite sandėlyje."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:301
+#, python-format
+msgid "It is not possible to unreserve more products of %s than CW Quantity you have in stock."
+msgstr "Negalima atkurti daugiau kaip% s produktų nei CW Kiekis, kurį turite sandėlyje."
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_quant.py:201
+#, python-format
+msgid "It is not possible to unreserve more products of %s than you have in stock."
+msgstr "Negalima atkurti daugiau nei% s produktų, nei turite."
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_account_move_line
+msgid "Journal Item"
+msgstr "Žurnalo elementas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_kangaroo_bbq_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_kangaroo_bbq_pack_product_template
+msgid "Kangaroo BBQ Pack"
+msgstr "Kangaroo BBQ Pack"
+
+#. modules: tis_catch_weight, tis_cw_stock_report_xls
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products____last_update
+#: model:ir.model.fields,field_description:tis_cw_stock_report_xls.field_report_tis_cw_stock_report_xls_cw_stock_report____last_update
+msgid "Last Modified on"
+msgstr "Paskutinį kartą modifikuota"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_uid
+msgid "Last Updated by"
+msgstr "Paskutinį kartą atnaujino"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__write_date
+msgid "Last Updated on"
+msgstr "Paskutinį kartą atnaujinta"
+
+#. module: tis_cw_demo_data
+#: model:product.product,cw_uom_name:tis_cw_demo_data.product_product_fresh_milk
+#: model:product.template,cw_uom_name:tis_cw_demo_data.product_product_fresh_milk_product_template
+msgid "Liter(s)"
+msgstr "Litras (-ai)"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Partija / Serija"
+
+#. module: tis_catch_weight
+#: model:res.groups,name:tis_catch_weight.group_catch_weight
+msgid "Manage Catch Weight for the Inventory"
+msgstr "Valdyti inventoriaus svorį"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_mrp
+msgid "Manufacturing CW Products"
+msgstr "Gamyba CW produktai"
+
+#. module: tis_catch_weight
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.res_config_settings_view_form
+msgid "Mapping cw quantity in procurement"
+msgstr "Cw kiekio nustatymas pirkime"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_meat_plant
+#: model:product.template,name:tis_cw_demo_data.product_product_meat_plant_product_template
+msgid "Meat Plant"
+msgstr "Mėsos gamykla"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_min_cw_qty
+msgid "Minimum CW Quantity"
+msgstr "Minimalus CW kiekis"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr "Minimali inventoriaus taisyklė"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:8
+#, python-format
+msgid "Mobile support"
+msgstr "Mobilus palaikymas"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_mutton_dices
+#: model:product.template,name:tis_cw_demo_data.product_product_mutton_dices_product_template
+msgid "Mutton Dices"
+msgstr "Avienos kauliukai"
+
+#. module: tis_catch_weight
+#: selection:set.cw.multiple.products,catch_weight:0
+msgid "NO"
+msgstr "NE"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_change_product_qty__new_cw_quantity
+msgid "New CW Quantity on Hand"
+msgstr "Naujas CW kiekis rankoje"
+
+#. module: tis_catch_weight
+#. openerp-web
+#: code:addons/tis_catch_weight/static/src/xml/buy_apps.xml:7
+#, python-format
+msgid "New design"
+msgstr "Naujas dizainas"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/stock_move_line.py:101
+#, python-format
+msgid "No negative quantities allowed"
+msgstr "Neleidžiami neigiami kiekiai"
+
+#. module: tis_cw_stock_report_xls
+#: selection:stock.quantity.history,report_type:0
+msgid "Normal"
+msgstr "Normalus"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:262
+#, python-format
+msgid "Not enough inventory!"
+msgstr "Nepakanka inventoriaus!"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_box_of_onion
+#: model:product.template,name:tis_cw_demo_data.product_product_box_of_onion_product_template
+msgid "Onion Bag"
+msgstr "Svogūnų maišelis"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/sale.py:70
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__ordered_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move_line__ordered_cw_qty
+#, python-format
+msgid "Ordered CW Quantity"
+msgstr "Užsakytas CW kiekis"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_mussels
+#: model:product.template,name:tis_cw_demo_data.product_product_mussels_product_template
+msgid "Organic Mussels Bag"
+msgstr "Ekologiški midijos maišeliai"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_workorder__cw_qty_production
+msgid "Original Production Quantity"
+msgstr "Originalus gamybos kiekis"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/wizard/mrp_product_produce.py:39
+#, python-format
+msgid "Please enter a lot or serial number for %s !"
+msgstr "Įveskite partijos arba serijos numerį% s!"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:44
+#, python-format
+msgid "Please enter the CW Quantity"
+msgstr "Įveskite CW kiekį"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:24
+#: code:addons/tis_catch_weight/models/sale.py:25
+#: code:addons/tis_catch_weight/models/stock_inventory.py:165
+#, python-format
+msgid "Please enter the CW Quantity for %s"
+msgstr "Įveskite CW kiekį% s"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/wizard/stock_change_product_qty.py:46
+#, python-format
+msgid "Please enter the Quantity"
+msgstr "Įveskite kiekį"
+
+#. module: tis_catch_weight
+#: code:addons/tis_catch_weight/models/purchase.py:26
+#: code:addons/tis_catch_weight/models/sale.py:27
+#: code:addons/tis_catch_weight/models/stock_inventory.py:163
+#, python-format
+msgid "Please enter the Quantity for %s"
+msgstr "Įveskite% s kiekį"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_workorder.py:141
+#, python-format
+msgid "Please set the CW Quantity you are currently producing. It should be different from zero."
+msgstr "Nustatykite šiuo metu gaminamą CW kiekį. Ji turėtų skirtis nuo nulio."
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_poultry
+msgid "Poultry"
+msgstr "Naminiai paukščiai"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_prawns
+#: model:product.template,name:tis_cw_demo_data.product_product_prawns_product_template
+msgid "Prawns Tray"
+msgstr "Krevetės dėklas"
+
+#. module: tis_cw_procurement
+#: model:ir.model,name:tis_cw_procurement.model_procurement_group
+msgid "Procurement Group"
+msgstr "Pirkimų grupė"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_procurement
+msgid "Procurement on CW Products"
+msgstr "CW produktų pirkimas"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_product
+msgid "Product"
+msgstr "Produktas"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_account_invoice_report__product_cw_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_report__unit_cw_quantity
+msgid "Product CW Quantity"
+msgstr "Produkto CW kiekis"
+
+#. modules: tis_cw_procurement, tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_bom__product_cw_uom_id
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__product_cw_uom
+msgid "Product CW Unit of Measure"
+msgstr "Produkto CW matavimo vienetas"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_category
+msgid "Product Category"
+msgstr "produkto kategorija"
+
+#. modules: tis_catch_weight, tis_cw_mrp
+#: model:ir.model,name:tis_catch_weight.model_stock_move_line
+#: model:ir.model,name:tis_cw_mrp.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "Produkto perkėlimas (atsargų perkėlimo linija)"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_product_replenish
+msgid "Product Replenish"
+msgstr "Produkto papildymas"
+
+#. modules: tis_catch_weight, tis_cw_web_sale_avg, tis_cw_average_qty
+#: model:ir.model,name:tis_catch_weight.model_product_template
+#: model:ir.model,name:tis_cw_average_qty.model_product_template
+#: model:ir.model,name:tis_cw_web_sale_avg.model_product_template
+msgid "Product Template"
+msgstr "Produkto šablonas"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__product_cw_uom_id
+msgid "Product Unit of Measure"
+msgstr "Produkto matavimo vienetas"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_production
+msgid "Production Order"
+msgstr "Gamybos užsakymas"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pirkimo užsąkymas"
+
+#. modules: tis_catch_weight, tis_cw_average_qty
+#: model:ir.model,name:tis_catch_weight.model_purchase_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Pirkimo užsakymo eilutė"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__purchase_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base
+msgid "Purchase Price Base"
+msgstr "Pirkimo kainos bazė"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__purchase_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Purchase Price Based On"
+msgstr "Įsigijimo kaina pagrįsta"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__purchase_price_base
+msgid "Purchase Price Based on"
+msgstr "Įsigijimo kaina pagrįsta"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_purchase_report
+msgid "Purchases Orders"
+msgstr "Pirkimų užsakymai"
+
+#. modules: tis_catch_weight, tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_production_lot__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_mrp.mrp_production_tree_view_cw_inherit
+msgid "Quantity"
+msgstr "Kiekis"
+
+#. module: tis_cw_mrp
+#: model:ir.model.fields,field_description:tis_cw_mrp.field_mrp_production__cw_qty_produced
+msgid "Quantity Produced"
+msgstr "Pagamintas kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_quant
+msgid "Quants"
+msgstr "Kiek"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_inventory_line__cw_product_qty
+#: model:ir.model.fields,field_description:tis_catch_weight.field_stock_move__cw_product_qty
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.stock_inventory_cw_line_tree2_inherit_catchweight
+msgid "Real CW Quantity"
+msgstr "Nekilnojamasis CW kiekis"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_purchase_order_line__cw_qty_received
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.view_purchase_form_catchweight
+msgid "Received CW Qty"
+msgstr "Gautas CW kiekis"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce
+msgid "Record Production"
+msgstr "Įrašų gamyba"
+
+#. module: tis_cw_mrp
+#: model:ir.model,name:tis_cw_mrp.model_mrp_product_produce_line
+msgid "Record Production Line"
+msgstr "Įrašų gamybos linija"
+
+#. module: tis_cw_demo_data
+#: model:product.category,name:tis_cw_demo_data.product_category_red_meat
+msgid "Red Meat"
+msgstr "Raudona mėsa"
+
+#. module: tis_cw_web_sale
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.cart_lines_cw_qty
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_configurator_configure_optional_products_cw
+#: model_terms:ir.ui.view,arch_db:tis_cw_web_sale.product_cw_quantity
+msgid "Remove one"
+msgstr "Pašalinkite vieną"
+
+#. module: tis_cw_procurement
+#: model:ir.model.fields,field_description:tis_cw_procurement.field_stock_warehouse_orderpoint__reordering_based_on
+#: model_terms:ir.ui.view,arch_db:tis_cw_procurement.view_warehouse_orderpoint_purchase_form_catch_weight
+msgid "Reordering Based On"
+msgstr "Pertvarkymas pagrįstas"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking
+msgid "Return Picking"
+msgstr "Grįžti rinkimas"
+
+#. modules: tis_catch_weight, tis_cw_average_qty
+#: model:ir.model,name:tis_catch_weight.model_stock_return_picking_line
+#: model:ir.model,name:tis_cw_average_qty.model_stock_return_picking_line
+msgid "Return Picking Line"
+msgstr "Grįžti rinkimo liniją"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_polyester
+#: model:product.template,name:tis_cw_demo_data.product_product_polyester_product_template
+msgid "Roll of Polyester"
+msgstr "Poliesterio ritinys"
+
+#. modules: tis_cw_web_sale, tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_order
+#: model:ir.model,name:tis_cw_web_sale.model_sale_order
+msgid "Sale Order"
+msgstr "Pardavimo pavedimas"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_product__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_template__sale_price_base
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base
+msgid "Sale Price Base"
+msgstr "Pardavimo kainos bazė"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_set_cw_multiple_products__sale_price_base_ok
+#: model_terms:ir.ui.view,arch_db:tis_catch_weight.product_category_catch_weight_form_inherit
+msgid "Sale Price Based On"
+msgstr "Pardavimo kaina pagrįsta"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_product_category__sale_price_base
+msgid "Sale Price Based on"
+msgstr "Pardavimo kaina pagrįsta"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Pardavimo analizės ataskaita"
+
+#. modules: tis_catch_weight, tis_cw_average_qty
+#: model:ir.model,name:tis_catch_weight.model_sale_order_line
+#: model:ir.model,name:tis_cw_average_qty.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Pardavimo užsakymų eilutė"
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_salmon
+#: model:product.template,name:tis_cw_demo_data.product_product_salmon_product_template
+msgid "Salmon Fillet Tray"
+msgstr "Lašišos filė"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_stock_scrap
+msgid "Scrap"
+msgstr "Laužas"
+
+#. module: tis_catch_weight
+#: model:ir.model.fields,field_description:tis_catch_weight.field_res_config_settings__module_tis_cw_web_sale
+msgid "Sell CW products online"
+msgstr "Parduokite CW produktus internetu"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_set_cw_multiple_products
+msgid "Set Cw Multiple Products"
+msgstr "Nustatykite kelis produktus (Cw)"
+
+#. module: tis_cw_mrp
+#: code:addons/tis_cw_mrp/models/mrp_unbuild.py:59
+#, python-format
+msgid "Some of your components are tracked, you have to specify a manufacturing order in order to retrieve the correct components."
+msgstr "Kai kurie jūsų komponentai yra stebimi, norėdami gauti teisingus komponentus turite nurodyti gamybos tvarką."
+
+#. module: tis_cw_demo_data
+#: model:product.product,name:tis_cw_demo_data.product_product_steak_pack
+#: model:product.template,name:tis_cw_demo_data.product_product_steak_pack_product_template
+msgid "Steak Pack"
+msgstr "„Steak Pack“"
+
+#. module: tis_catch_weight
+#: model:ir.model,name:tis_catch_weight.model_report_stock_forecast
+msgid "Stock Forecast Report"
+msgstr "Akcijų prognozės ataskaita"
+
+#. modules: tis_cw_procurement, tis_catch_weight, tis_cw_mrp
+#: model:ir.model,name:tis_catch_weight.model_stock_move

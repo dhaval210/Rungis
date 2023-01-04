@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="order_grid_view_tree" model="ir.ui.view">
+        <field name="name">order.grid.view.tree</field>
+        <field name="model">cache.order.grid</field>
+        <field name="arch" type="xml">
+            <tree 
+                create='false'
+                delete="false"
+                decoration-info="is_order_date is True"
+                decoration-success="is_delivery_date is True"
+                limit="5000"
+            >
+                <field name="product_id"/>
+                <field name="date"/>
+                <field name="qty_on_hand"/>                       
+                <field name="is_order_date" invisible="1"/>
+                <field name="is_delivery_date" invisible="1"/>
+                <field name="incoming_confirmed_qty"/>
+                <field name="incoming_planned_qty"/>
+                <field name="outgoing_planned_qty"/>
+                <field name="outgoing_confirmed_qty"/>
+                <!-- <field name="outgoing_demand_qty"/>-->
+                <field name="removal_qty"/>
+                <field name="transit_in_qty"/>
+                <field name="transit_out_qty"/>                
+            </tree>
+        </field>
+    </record>    
+</odoo>

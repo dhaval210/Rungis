@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="metro_margin_invoice_form">
+            <field name="name">account.invoice.metro.margin.view.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree/field[@name='price_unit']" position="after">
+                   <field name="margin_percent"/>
+                </xpath>
+                <xpath expr="//field[@name='comment']" position="after">
+                    <group name="margin" string="Margin">
+                        <field name="margin"/>
+                        <field name="landed_costs"/>
+                        <field name="margin_lc"/>
+                        <field name="margin_percent"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="metro_margin_invoice_line_form">
+            <field name="name">account.invoice.line.metro.margin.view.form</field>
+            <field name="model">account.invoice.line</field>
+            <field name="inherit_id" ref="account.view_invoice_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='currency_id']" position="after">
+                   <field name="purchase_price"/>
+                   <field name="margin"/>
+                   <field name="landed_costs"/>
+                   <field name="margin_lc"/>
+                   <field name="margin_percent"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

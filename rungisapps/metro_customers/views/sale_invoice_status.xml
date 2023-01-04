@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="view_sale_customer_status" model="ir.ui.view">
+        <field name="name">sale.order.status</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+                 <xpath expr="//group/field[@name='partner_id']" position="before">
+                    <field name="new_customer_inherited" invisible="1"/>
+                    <field name="lost_customer_inherited" invisible="1" />
+                </xpath>
+        </field>
+    </record>
+    <record id="view_res_partner_filter_inherits" model="ir.ui.view">
+        <field name="name">res.partner.inherits.filter</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="arch" type="xml">
+             <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                 <filter string="New Customer" name="new_customer" domain="[('new_customer_inherited','=',True)]"/>
+                 <filter string="Buying Customer" name="buy_customer"  domain="[('buy_customer_inherited','=',True)]"/>
+                 <filter string="Lost Customer" name="lost_customer"  domain="[('lost_customer_inherited','=',True)]"/>
+            </xpath>
+            <separator/>
+        </field>
+    </record>
+
+    <record id="view_invoice_customer_status" model="ir.ui.view">
+        <field name="name">account.invoice.status</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+                 <xpath expr="//group/field[@name='partner_id']" position="before">
+                    <field name="new_customer_inherit" invisible="1"/>
+                    <field name="lost_customer_inherit" invisible="1" />
+                </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_invoice_filter_inherits" model="ir.ui.view">
+        <field name="name">invoice.inherit.filter</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+             <xpath expr="//filter[@name='draft']" position="before">
+                 <filter string="New Customer" name="new_customer" domain="[('new_customer_inherit','=',True)]"/>
+                 <filter string="Buying Customer" name="buy_customer"  domain="[('buy_customer_inherit','=',True)]"/>
+                 <filter string="Lost Customer" name="lost_customer"  domain="[('lost_customer_inherit','=',True)]"/>
+            </xpath>
+            <separator/>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="mail_alias_quality_alert" model="mail.alias">
+        <field name="alias_name">alert</field>
+        <field name="alias_model_id" ref="model_quality_control_alert"/>
+        <field name="alias_user_id" ref="base.user_root"/>
+        <field name="alias_parent_model_id" ref="model_quality_control_alert_team"/>
+    </record>
+
+    <record id="quality_alert_team_main" model="quality.control.alert.team">
+        <field name="name">Main Quality Team</field>
+        <field name="alias_id" ref="mail_alias_quality_alert"/>
+    </record>
+    <record id="quality_alert_team_incoming" model="quality.control.alert.team">
+        <field name="name">Incoming Quality Inspection Team</field>
+        <field name="alias_id" ref="mail_alias_quality_alert"/>
+    </record>
+    <record id="quality_alert_team_inprogress" model="quality.control.alert.team">
+        <field name="name">In-progress Quality Inspection Team</field>
+        <field name="alias_id" ref="mail_alias_quality_alert"/>
+    </record>
+    <record id="quality_alert_team_final" model="quality.control.alert.team">
+        <field name="name">Final Quality Inspection Team</field>
+        <field name="alias_id" ref="mail_alias_quality_alert"/>
+    </record>
+
+    <record id="quality_alert_stage_0" model="quality.control.alert.stage">
+        <field name="name">New</field>
+    </record>
+    <record id="quality_alert_stage_1" model="quality.control.alert.stage">
+        <field name="name">Confirmed</field>
+    </record>
+    <record id="quality_alert_stage_2" model="quality.control.alert.stage">
+        <field name="name">Action Proposed</field>
+    </record>
+    <record id="quality_alert_stage_3" model="quality.control.alert.stage">
+        <field name="name">Solved</field>
+        <field name="folded">True</field>
+        <field name="done">True</field>
+    </record>
+    <record id="quality_alert_stage_4" model="quality.control.alert.stage">
+        <field name="name">Scraped</field>
+        <field name="folded">True</field>
+        <field name="scraped">True</field>
+    </record>
+
+    <record id="sequence_quality_control_point" model="ir.sequence">
+        <field name="name">Quality Control Point</field>
+        <field name="code">quality.control.point</field>
+        <field name="prefix">QCP</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="sequence_quality_control_point_line" model="ir.sequence">
+        <field name="name">Quality Control Point Line</field>
+        <field name="code">quality.control.point.line</field>
+        <field name="prefix">QCPL</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="sequence_quality_inspection" model="ir.sequence">
+        <field name="name">Quality Inspection</field>
+        <field name="code">quality.inspection</field>
+        <field name="prefix">QI</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="sequence_quality_inspection_line" model="ir.sequence">
+        <field name="name">Quality Inspection Line</field>
+        <field name="code">quality.inspection.line</field>
+        <field name="prefix">IL</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="sequence_quality_alert" model="ir.sequence">
+        <field name="name">Quality Control Alert</field>
+        <field name="code">quality.control.alert</field>
+        <field name="prefix">QA</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        <field eval="False" name="company_id"/>
+    </record>
+
+    <record id="quality_test_type_0" model="quality.control.point.test.type">
+        <field name="name">Measure</field>
+        <field name="code">MS</field>
+        <field name="test_type">measure</field>
+    </record>
+    <record id="quality_test_type_1" model="quality.control.point.test.type">
+        <field name="name">Image</field>
+        <field name="code">IG</field>
+        <field name="test_type">image</field>
+    </record>
+    <record id="quality_test_type_2" model="quality.control.point.test.type">
+        <field name="name">Choice</field>
+        <field name="code">CH</field>
+        <field name="test_type">choice</field>
+    </record>
+
+    <record id="quality_control_point_version_1" model="quality.control.point.version">
+        <field name="name">1.0</field>
+    </record>
+
+    <record id="quality_control_point_version_2" model="quality.control.point.version">
+        <field name="name">2.0</field>
+    </record>
+
+    <record id="quality_control_point_version_3" model="quality.control.point.version">
+        <field name="name">3.0</field>
+    </record>
+</odoo>

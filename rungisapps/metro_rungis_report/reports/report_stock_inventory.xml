@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="inventory_without_quantity_report"
+            model="stock.inventory"
+            string="Inventory without quantity"
+            report_type="qweb-pdf"
+            name="metro_rungis_report.report_inventory_without_quantity"
+            file="metro_rungis_report.report_inventory_without_quantity"
+            attachment_use="False"
+            print_report_name="'Inventory without quantity - %s' % object.name"
+        />
+        <template id="report_inventory_without_quantity">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <br/>
+                            <h2>Stock Inventory</h2>
+
+                            <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th><strong>Inventory</strong></th>
+                                    <th><strong>Date</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.date"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+
+                            <t t-set="locations" t-value="o.line_ids.mapped('location_id')"/>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th groups="stock.group_stock_multi_locations"><strong>Location</strong></th>
+                                        <th><strong>Product</strong></th>
+                                        <th groups="stock.group_production_lot"><strong>Production Lot</strong></th>
+                                        <th groups="stock.group_production_lot"><strong>BBD</strong></th>
+                                        <th class="text-right"><strong>Quantity</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="locations" t-as="location">
+                                        <tr groups="stock.group_stock_multi_locations">
+                                            <td colspan="2"><strong t-esc="location.display_name"/></td>
+                                            <td groups="stock.group_production_lot"/>
+                                            <td groups="stock.group_tracking_lot"/>
+                                            <td></td>
+                                        </tr>
+                                        <tr t-foreach="o.line_ids.filtered(lambda line: line.location_id.id == location.id)" t-as="line">
+                                            <td groups="stock.group_stock_multi_locations"/>
+                                            <td><span t-field="line.product_id"/></td>
+                                            <td groups="stock.group_production_lot"><span t-field="line.prod_lot_id"/></td>
+                                            <td groups="stock.group_production_lot"><span t-esc="line.prod_lot_id.use_date.date()" t-if="line.prod_lot_id and line.prod_lot_id.use_date"/></td>
+                                            <td/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                 </t>
+             </t>
+        </template>
+        <report
+            id="evaluated_inventory_deviation_report"
+            model="stock.inventory"
+            string="Evaluated inventory deviation report"
+            report_type="qweb-pdf"
+            name="metro_rungis_report.report_evaluated_inventory_deviation"
+            file="metro_rungis_report.report_evaluated_inventory_deviation"
+            attachment_use="False"
+            print_report_name="'Evaluated inventory deviation report'"
+        />
+        <template id="report_evaluated_inventory_deviation">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <h2>Evaluated inventory deviation report</h2>
+                        <div class="page">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Inventory Name</strong></th>
+                                        <th><strong>User Name</strong></th>
+                                        <th><strong>Created on</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td t-esc="o.name"/>
+                                        <td t-esc="o.create_uid.name"/>
+                                        <td t-esc="o.create_date.strftime('%d-%m-%Y %H:%M:%S')"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Preset Reason Name</strong></th>
+                                        <th><strong>Display Name</strong></th>
+                                        <th><strong>SoftM Lg</strong></th>
+                                        <th><strong>Internal Reference</strong></th>
+                                        <th><strong>Average CW Quantity</strong></th>
+                                        <th><strong>Last Purchase Price</strong></th>
+                                        <th><strong>Theoretical Quantity</strong></th>
+                                        <th><strong>Checked Quantity</strong></th>
+                                        <th><strong>Theoretical CW Quantity</strong></th>
+                                        <th><strong>Real CW Quantity</strong></th>
+                                        <th><strong>Value impact</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.line_ids.sorted('discrepancy_qty', reverse=True)" t-as="line">
+                                        <t t-set="llp" t-value="1 if line.product_id.last_purchase_price == 0 else line.product_id.last_purchase_price"/>
+                                        <t t-set="current_value" t-value="line.discrepancy_qty * llp"/>
+                                        <t t-if="line.product_id.catch_weight_ok">
+                                            <t t-set="current_value" t-value="line.discrepancy_qty * llp * line.product_id.average_cw_quantity"/>
+                                        </t>
+                                        <td><t t-esc="line.preset_reason_id.name"/></td>
+                                        <td><t t-esc="line.product_id.name"/></td>
+                                        <td><t t-esc="line.product_id.softm_location_number"/></td>
+                                        <td><t t-esc="line.product_id.default_code"/></td>
+                                        <td><t t-esc="line.product_id.average_cw_quantity"/></td>
+                                        <td><t t-esc="llp"/></td>
+                                        <td><t t-esc="line.theoretical_qty"/></td>
+                                        <td><t t-esc="line.product_qty"/></td>
+                                        <td><t t-esc="line.theoretical_cw_qty"/></td>
+                                        <td><t t-esc="line.cw_product_qty"/></td>
+                                        <td><t t-esc="current_value"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                 </t>
+             </t>
+        </template>
+    </data>
+</odoo>

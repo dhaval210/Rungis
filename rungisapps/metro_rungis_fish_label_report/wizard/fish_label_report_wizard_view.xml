@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="create_fish_product_report_view" model="ir.ui.view">
+            <field name="name">Product Label</field>
+            <field name="model">fish.product.label.report</field>
+            <field name="arch" type="xml">
+                <form string="Product Label">
+                    <group col="4">
+                        <field name="product_label_moves" nolabel="1">
+                            <kanban class="o_kanban_mobile" string="Product Label" create="0">
+                                <field name="product_id"/>
+                                <field name="print_copy"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <strong>
+                                                        <field name="product_id"/>
+                                                    </strong>
+                                                    <br/>
+                                                    <strong>
+                                                        <span>No. Copies:</span>
+                                                    </strong>
+                                                    <field name="print_copy"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="action_fish_product_label" type="object" string="Print Fish Product Labels"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_report_wizard" model="ir.actions.act_window">
+            <field name="name">Fish Product Label Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">fish.product.label.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="create_fish_product_report_view"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

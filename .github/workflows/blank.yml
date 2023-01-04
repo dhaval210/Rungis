@@ -1,12 +1,12 @@
 on:
   push:
-    branches: [ "preprod" ]
+    branches: [ "prod" ]
   workflow_call:
   
 jobs:
-  Deploy_to_preprod:
+  Deploy_to_prod:
     runs-on: ubuntu-latest
-    environment: pp
+    environment: prod
 
     steps:
     - name: Checkout

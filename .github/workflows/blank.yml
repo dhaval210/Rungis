@@ -13,7 +13,15 @@ jobs:
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "dev, preprod"
+        destination_branch: "dev"
+  Copy_code_in_preprod:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "preprod"
 
 
 #  call-workflow:

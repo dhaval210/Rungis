@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account e-invoice Generate',
-    'version': '12.0.1.0.0',
+    'name': 'Account invoice Generate',
+    'version': '12.0.1.0.1',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Technical module to generate PDF invoices with '

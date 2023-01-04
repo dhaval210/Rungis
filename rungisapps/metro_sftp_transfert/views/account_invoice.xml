@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="invoice_form_inherited" model="ir.ui.view">
+	    <field name="name">account.invoice.ubl.transfert.invoice.form</field>
+	    <field name="model">account.invoice</field>
+	    <field name="inherit_id" ref="account.invoice_form"/>
+	    <field name="arch" type="xml">
+	        <field name="company_id" position="after">
+	        	<field name="generated_invoice" invisible="1"/>
+	        </field>
+	    </field>
+	</record>
+</odoo>

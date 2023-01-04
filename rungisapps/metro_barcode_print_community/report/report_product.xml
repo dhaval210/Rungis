@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id='move-container'>
+            <div class="container-fluid" style="height:48mm;width:52mm;margin-left:-2mm;margin-right:-2mm;">
+                <div class="row" style="font-size:4.5mm;height: 7mm;overflow: hidden;text-overflow: ellipsis;text-align: right;">
+                    <div class="col-12">
+                        <t t-if="pick.partner_id.ref">
+                            <strong>Kunde:</strong>
+                            <strong t-field="pick.partner_id.ref" style="font-size:5.5mm;"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row" style="font-size:3mm;height: 9mm;overflow: hidden;text-overflow: ellipsis;">
+                    <div class="col-12">
+                        <t t-if="pick.partner_id.name">
+                            <strong t-esc="pick.partner_id.name[:80]"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row" style="font-size:3mm;height: 8.5mm;overflow: hidden;text-overflow: ellipsis;">
+                    <div class="col-12">
+                        <span t-esc="product.display_name[:80]"/>
+                    </div>
+                </div>
+                <div class="row" style="height: 3mm;overflow: hidden;text-overflow: ellipsis;font-size:2mm;">
+                    <div class="col-12">
+                        <span>1</span>
+                        <span t-field="move_id.product_uom_id"/>
+                        <t t-if="move_id.cw_qty_done">
+                            <span t-esc="round((move_id.cw_qty_done / move_id.qty_done), 3)"/>
+                        </t>
+                        <t t-if="move_id.product_cw_uom">
+                            <span t-field="move_id.product_cw_uom"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row" style="height: 6.5mm;font-size:2mm;">
+                    <div class="col-7">
+                            <span>LOT NO:</span><br/>
+                            <span t-field="move_id.lot_id.name"/>
+                    </div>
+                    <div class="col-5">
+                        <!-- don't display for now -->
+                        <t t-if="True == False">
+                            <span>MHD:</span><br/>
+                            <span t-esc="(move_id.lot_id.use_date).date().strftime('%d-%m-%Y')"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row" style="height: 7mm;">
+                    <div class="col-6">
+                        <t t-if="pick.name">
+                            <left><span style="font-size:2mm;" t-field="pick.name"/></left>
+                        </t>
+                    </div>
+                </div>
+                <div class="row" style="height: 7mm; margin-top:-2mm;">
+                    <div class="col-12">
+                        <t t-if="pick.transporter_route_id">
+                            <strong style="font-size:2.75mm;">Tour:</strong><strong style="font-size:6.5mm;" t-esc="pick.transporter_route_id.name"/>|<strong style="font-size:6.5mm;" t-esc="pick.run_up_point"/>|
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="print_product_labels">
+            <t t-call="web.basic_layout">
+                <t t-foreach="move" t-as="move_id">
+                    <t t-set="product" t-value="move_id.product_id"/>
+                    <t t-if="separate_page">
+                        <t t-foreach="print_copy[move_id.id]" t-as="count">
+                            <div class="page" style="margin-left: -2mm;margin-right: -2mm;">
+                                <t t-call="metro_barcode_print_community.move-container" />
+                                <p style="page-break-before:always;"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="same_page">
+                        <div class="page" style="margin-left: -2mm;margin-right: -2mm;">
+                            <t t-foreach="print_copy[move_id.id]" t-as="count">
+                                <t t-call="move-container" />
+                            </t>
+                        </div>
+                        <p style="page-break-before:always;"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

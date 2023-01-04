@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <form t-extend="mrp.report_bom_search">
+        <t t-jquery="div:first" t-operation="after">
+            <div class="form-group col-lg-4">
+                <label>CW Quantity:</label>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input type="number" step="any" t-att-value="bom_cw_qty" min="1"
+                               class="o_input o_mrp_bom_report_qty"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <t t-if="is_uom_applied" t-esc="bom_cw_uom_name"/>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </form>
+</templates>

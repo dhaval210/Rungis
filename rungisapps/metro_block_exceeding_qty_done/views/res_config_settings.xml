@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='stock']" position="inside">
+
+                    <h2 id="schedule_info">Picking block exceeding Qty Done</h2>
+
+                    <div class="row mt16 mb16 o_settings_container" modifiers="{}">
+                        <div class="col-12 col-lg-6 o_setting_box" modifiers="{}">
+                            <div class="o_setting_left_pane" modifiers="{}"/>
+                            <div class="o_setting_right_pane" modifiers="{}">
+                                <span class="o_form_label" modifiers="{}">
+                                    Allow blocking
+                                </span>
+                                <div class="text-muted" modifiers="{}">
+                                    <field name="block_exceeding_qty" modifiers="{}"/>
+                                </div>
+                                <span class="o_form_label" modifiers="{}">
+                                    Picking filter
+                                </span>
+                                <div class="text-muted" modifiers="{}">
+                                    <field name="block_qty_filter_id" modifiers="{}"/>
+                                </div>                            
+                            </div>
+                        </div>
+                    </div>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

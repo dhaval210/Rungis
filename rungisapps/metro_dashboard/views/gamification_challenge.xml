@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dashboard_challenge_checkbox" model="ir.ui.view">
+        <field name="name">Challenge Form Inherit</field>
+        <field name="model">gamification.challenge</field>
+        <field name="inherit_id" ref="gamification.challenge_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category']" position="after">
+                <group string="METRO Dashboard">
+                    <field name="display_one_tile" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

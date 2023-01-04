@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- tspbv.dialoglist form view -->
+    <record id="tspbv_dialoglist_view_form" model="ir.ui.view">
+        <field name="name">tspbv.dialoglist.view.form</field>
+        <field name="model">tspbv.dialoglist</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="default_code"/>
+                        <field name="model_id"/>
+                        <field name="start"/>
+                        <field name="dialog_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="tspbv_dialoglist_view_tree" model="ir.ui.view">
+        <field name="name">tspbv.dialoglist.view.tree</field>
+        <field name="model">tspbv.dialoglist</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="display_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- tspbv.dialoglist action window -->
+    <record id="tspbv_dialoglist_action" model="ir.actions.act_window">
+        <field name="name">tspbv.dialoglist.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tspbv.dialoglist</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="tspbv_dialoglist_menu_act" name="Dialoglist" parent="tspbv_connector_menu_categ"
+              action="tspbv_dialoglist_action" sequence="8"/>
+</odoo>

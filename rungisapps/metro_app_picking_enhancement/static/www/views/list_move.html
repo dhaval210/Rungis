@@ -1,0 +1,138 @@
+<ion-view class="list-move-block">
+
+  <ion-header-bar class="bar bar-header bar-stable">
+      <span class="back-icon ion-ios-arrow-left" ui-sref="list_picking({
+        picking_type_id: params.picking_type_id})" ></span>
+      <h1 class="title loading_item move-title">{{data.picking.name}}</h1>
+      <span class="top-right-icon info-icon" >i</span>
+      <button menu-toggle="right" class="button button-icon ion-navicon top-right-icon"></button>
+  </ion-header-bar>
+
+  <div class="head-title">
+    <span ng-show="data.operationCode == 'incoming'">
+      {{'Select product to put in pack' | translate}}
+    </span>
+
+    <span ng-show="data.operationCode == 'internal'">
+      <span ng-show="data.highlightPicking == false">
+        {{'Scan products' | translate}}
+      </span>
+
+      <span ng-show="data.highlightPicking == true">
+        <span ng-show="data.is_lastScanned == true">      
+          {{'Scan location barcode' | translate}}
+        </span>
+
+        <span ng-show="data.is_lastScanned == false">      
+          {{'Scan package for transfer' | translate}}
+        </span>
+      </span>
+    </span>
+
+  </div>
+
+  <div class="move-to">
+    <span>To: </span><span class="move-name">{{data.picking.name}}</span>
+  </div>
+
+  <ion-content overflow-scroll="true" class="has-header" data-ng-init="init()">
+    
+      <!-- Div to render the HTML for PDF -->
+      <div id="pdf-content" style="display: none;"></div>
+
+      <!--                     -->
+      <!-- -List of Moves      -->
+      <!--                     -->
+
+      <div ng-repeat="move in data.moves | filter:{display_state: data.filter}" class="row" style="padding: 0;" >
+        <div class="product-list" id="move-{{move.id}}" ng-class="checkLastScan(move)">
+          <div class="product-name">
+            <span class="icon ion-pricetag"></span>
+            <span>{{'Name' | translate}} : {{move.product.display_name}}</span>
+          </div>
+
+          <!-- Show if done quantity is not zero -->
+          <div ng-show="data.operationCode == 'incoming' && move.qty_done > 0">
+            <div class="product-name" ng-show="move.lot_id">
+              <span class="icon ion-pricetag"></span>
+              <span>{{'Lot' | translate}} : {{move.lot_id}}</span>
+            </div>
+
+            <div class="product-name" ng-show="(move.package_id ? move.package_id : move.result_package_id)">
+              <span class="icon ion-cube"></span>
+              <span>{{'Package' | translate}} : {{(move.package_id ? move.package_id : move.result_package_id)}}</span>
+            </div>
+
+            <div class="product-name" ng-show="(move.pack_mhd ? move.pack_mhd : move.lot_mhd)">
+              <span class="icon ion-calendar"></span>
+              <span>{{'Best before' | translate}} : {{(move.pack_mhd ? move.pack_mhd : move.lot_mhd)}}</span>
+            </div>
+
+          </div>
+
+          <!-- When operation code is not incoming -->
+          <div ng-show="data.operationCode != 'incoming'">
+            <div class="product-name" ng-show="move.lot_id">
+              <span class="icon ion-pricetag"></span>
+              <span>{{'Lot' | translate}} : {{move.lot_id}}</span>
+            </div>
+
+            <div class="product-name" ng-show="(move.package_id ? move.package_id : move.pack_number)">
+              <span class="icon ion-cube"></span>
+              <span>{{'Package' | translate}} : {{(move.package_id ? move.package_id : move.pack_number)}}</span>
+            </div>
+
+            <div class="product-name" ng-show="(move.pack_mhd ? move.pack_mhd : move.lot_mhd)">
+              <span class="icon ion-calendar"></span>
+              <span>{{'Best before' | translate}} : {{(move.pack_mhd ? move.pack_mhd : move.lot_mhd)}}</span>
+            </div>
+
+          </div>
+
+          <div class="product-name" ng-show="move.catch_weight_ok">
+            <span class="icon ion-android-checkbox-outline"></span>
+            <span>{{'Catch Weight' | translate}} : {{move.cw_qty_done}} / {{move.product_cw_uom_qty}} {{move.product_cw_uom.name}}</span>
+          </div>
+
+        <div ng-show="move.generic_attributes" id="generic">
+            <div ng-repeat="g_input in move.generic_attributes">
+                <span class="icon ion-cube"></span>
+                <span>{{g_input.attribute_label | translate}} : </span>
+                <span ng-repeat="option in g_input.valid_values" ng-show="option.selected == true">{{option.label}}</span>
+            </div>
+        </div>          
+
+          <div class="product-detail">
+            <span class="icon ion-cube"></span>
+            <span>{{'Quantity' | translate}} : {{move.qty_done}} / {{move.qty_expected}} {{move.uom.name}}</span>
+          </div>
+
+          <div ng-show="data.showLocationInfo">
+            <div class="icon" style="display: block;"></div>
+            <div class="product-name" style="display: inline-flex;">
+              <span class="icon" style="min-width: 25px;"></span>
+              <span>{{'Location from' | translate}} : {{move.location_from}}</span>
+              <span class="icon" style="padding: 0px !important;margin: 0 10px !important;"><img src="static/img/right-arrow.png"></span>
+              <span>{{'Location to' | translate}} : {{move.location_to}}</span>
+            </div>
+          </div>
+
+          <span class="product-edit icon ion-edit" ng-click="see_move(move)"></span>
+        </div>
+      </div>
+
+  </ion-content>
+
+  <ion-footer>
+    <div class="btn-footer">
+      
+      <button class="button cancel" translate="Do not Validate" ui-sref="list_picking({picking_type_id: params.picking_type_id})"></button>
+      
+
+      <button class="button validate btn-green" ng-show="validate_class == 'btn-green'" translate="Validate" ui-sref="picking_validate({picking_type_id: params.picking_type_id,picking_id: params.picking_id})"></button>
+      <button class="button validate btn-grey" ng-show="validate_class == 'btn-grey'" translate="Validate" ui-sref="picking_validate({picking_type_id: params.picking_type_id,picking_id: params.picking_id})"></button>
+      
+    </div>
+  </ion-footer>
+
+</ion-view>

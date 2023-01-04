@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <template id="metro_assets_backend" name="metro assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/metro_inventory_ui/static/src/css/barcode.css" />
+            </xpath>            
+        </template>
+    </data>
+</odoo>

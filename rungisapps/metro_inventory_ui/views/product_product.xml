@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- product.product inherit search view -->
+    <record id="product_search_form_view" model="ir.ui.view">
+        <field name="name">product.product.inherit.view.search</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="categ_ids" string="Extra Category"/>
+                <field name="categ2_ids" string="Extra Category2"/>
+            </field>
+        </field>
+    </record>
+</odoo>

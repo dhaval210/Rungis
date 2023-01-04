@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- <record model="res.groups" id="group_no_gate_assigned">
+    <field name="name">No Gate Assigned</field>
+    <field name="category_id" ref="base.module_category_sales_management"/>
+  </record>
+
+  <record model="res.groups" id="group_gate_assigned">
+    <field name="name">Gate Assigned</field>
+    <field name="category_id" ref="base.module_category_sales_management"/>
+  </record> -->
+
+  <!-- Only show Pickings (Receipts) when gate is assigned  -->
+  <!-- <record model="ir.rule" id="metro_gate_assigned_view_rule">
+    <field name="name">Only show Receipts with Gate assigned</field>
+    <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+    <field name="groups" eval="[(4,ref('stock.group_stock_user'))]"></field>
+    <field name="domain_force">['|', ('picking_type_id.code','!=','incoming'), ('gate_id', '!=', False)]</field>
+  </record> -->
+
+  <!-- Only show Pickings (Receipts) when no gate is assigned  -->
+  <!-- <record model="ir.rule" id="metro_no_gate_assigned_view_rule">
+    <field name="name">Only show Receipts with no Gate assigned</field>
+    <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+    <field name="groups" eval="[(4,ref('stock.group_stock_manager'))]"></field>
+    <field name="domain_force">['|', ('picking_type_id.code','!=','incoming'), ('gate_id', '=', False)]</field>
+  </record> -->
+
+</odoo>

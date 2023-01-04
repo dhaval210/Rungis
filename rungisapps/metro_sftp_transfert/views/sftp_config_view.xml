@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sftp_config_view" model="ir.ui.view">
+            <field name="name">transfer.sftp.conf</field>
+            <field name="model">sftp.transfert</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name='sftp_test_connection' string="SFTP Test Connection" type="object" class="oe_highlight" groups="base.group_user" />
+                    </header>
+                    <sheet>
+                        <h1 class="mt0">
+                            <field name="name" />
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="sftp_host" />
+                                <field name="sftp_user" />
+                                <field name="auth_mode" />
+                                <field name="sftp_password" password="True" attrs="{'invisible': [('auth_mode', '!=', 'password')]}"/>
+                                <field name="sftp_private_key" attrs="{'invisible': [('auth_mode', '!=', 'key')]}" />
+                                <field name="sftp_key_pass" password="True" attrs="{'invisible': [('auth_mode', '!=', 'key')]}" />
+                                <field name="sftp_port" />
+                                <field name="sftp_path" />
+                                <field name="sftp_hostkeys" />
+                            </group>
+                            <group>
+                                <field name="sftp_active" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="sftp_config_view_tree" model="ir.ui.view">
+            <field name="name">transfer.sftp.conf.tree</field>
+            <field name="model">sftp.transfert</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="sftp_host" />
+                    <field name="sftp_user" />
+                    <field name="sftp_password" password="True" />
+                    <field name="sftp_port" />
+                    <field name="sftp_path" />
+                    <field name="sftp_hostkeys" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="sftp_transfer_action" model="ir.actions.act_window">
+            <field name="name">Sftp Config</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sftp.transfert</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sftp_transfer_config" name="Sftp Config" parent="base.menu_administration" />
+
+        <menuitem id="sftp_transfer_config2" sequence="10" action="sftp_transfer_action" parent="metro_sftp_transfert.sftp_transfer_config" />
+        <!-- parent="account.account_account_menu" -->
+
+    </data>
+</odoo>

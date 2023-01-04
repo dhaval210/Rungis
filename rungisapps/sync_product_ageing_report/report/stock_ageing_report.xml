@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="stock_report_ageing_analysis">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <h2 style="text-align:center;">Stock Ageing Analysis</h2>
+                        <div class="row mt32 mb32">
+                            <div class="col-auto" name="date">
+                                <strong style="text-align:center;">Date</strong>
+                                <p t-field="o.from_date"/>
+                            </div>
+                            <div class="col-auto" name="interval">
+                                <strong style="text-align:center;">Interval(Days)</strong>
+                                <p t-field="o.interval"/>
+                            </div>
+                            <div class="col-auto" name="product" t-if="o.product_ids">
+                                <strong style="text-align:center;">Products</strong>
+                                <p t-esc="', '.join(o.product_ids.mapped('name'))"/>
+                            </div>
+                            <div class="col-auto" name="product_categ" t-if="o.product_categ">
+                                <strong style="text-align:center;">Product Category</strong>
+                                <p t-esc="', '.join(o.product_categ.mapped('display_name'))"/>
+                            </div>
+                            <div class="col-auto" name="location_id" t-if="o.location_id">
+                                <strong style="text-align:center;">Location</strong>
+                                <p t-esc="', '.join(o.location_id.mapped('display_name'))"/>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2" style="text-align:left;"><span>Product</span></th>
+                                    <th rowspan="2" style="text-align:left;"><span>Internal Reference</span></th>
+                                    <th rowspan="2" style="text-align:right;"><span>Total Qty</span></th>
+                                    <th rowspan="3" style="text-align:right;"><span>Total Value</span></th>
+                                    <t t-foreach="o.get_interval()" t-as="interval">
+                                        <th colspan="2" style="text-align:center;"><span t-esc="interval"/></th>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t t-foreach="o.get_interval()" t-as="interval">
+                                        <th style="text-align:right;"><span>Qty</span></th>
+                                        <th style="text-align:right;"><span>Value</span></th>
+                                    </t>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.get_products()" t-as="p">
+                                    <tr>
+                                        <td style="text-align:left;">
+                                            <span t-esc="o.get_products()[p]['product']"/>
+                                        </td>
+                                        <td style="text-align:left;">
+                                            <span t-esc="o.get_products()[p]['product_code']"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="o.get_products()[p]['total_qty']"/>
+                                        </td>
+                                        <td style="text-align:right;">
+                                            <span t-esc="o.get_products()[p]['total_value']"/>
+                                        </td>
+                                        <t t-set="i" t-value="0"/>
+                                        <t t-foreach="o.get_products()[p]['qty']" t-as="qty">
+                                            <td style="text-align:right;">
+                                               <span t-esc="qty"/>
+                                            </td>
+                                            <td style="text-align:right;">
+                                               <span t-esc="o.get_products()[p]['val'][i]"/>
+                                            </td>
+                                            <t t-set="i" t-value="i+1"/>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <report
+        id="report_product_ageing"
+        model="stock.ageing"
+        report_type="qweb-pdf"
+        string="Stock Ageing Analysis"
+        name="sync_product_ageing_report.stock_report_ageing_analysis"
+        file="sync_product_ageing_report.stock_report_ageing_analysis"
+        menu="False"
+    />
+</odoo>

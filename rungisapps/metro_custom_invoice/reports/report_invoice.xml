@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit_metro" inherit_id="account.report_invoice_document">
+            <!-- Customer Invoices -->
+<!--             <xpath expr="//div[@name='invoice_address']" position="attributes">
+                <t t-if="o.type in ['out_invoice','out_refund']">
+                    <attribute name="class">col-xs-5</attribute>
+                </t>
+            </xpath>
+ -->            <xpath expr="//t[@t-set='address']" position="before">
+                <t t-if="o.type in ['out_invoice','out_refund']">
+                    <div class="col-xs-7">
+                        <span>102516141</span><br/>
+                        <span t-field="o.company_id.vat"/><br/>
+                        <span t-field="o.company_id.company_registry"/><br/>
+                    </div>
+                </t>
+            </xpath>
+            <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+                <t t-if="o.type in ['out_invoice','out_refund']">
+                    <div class="row">
+                        <div class="col-xs-7 col-xs-offset-5" style="margin-top:20px">
+                            <table style="width:100%">
+                                <tbody>
+                                    <tr>
+                                        <td width="60%">Thereof Returned amount (Credit note)</td>
+                                        <td width="40%" style="border: 1px solid black"/>
+                                    </tr>
+                                    <tr>
+                                        <td width="60%">Outstanding amount Balance</td>
+                                        <td width="40%" style="border: 1px solid black"/>
+                                    </tr>
+                                    <tr>
+                                        <td width="60%">Payment amount received</td>
+                                        <td width="40%" style="border: 1px solid black"/>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:20px">
+                        <span>The following Amount Due is still open as per </span><span t-field="o.date_invoice"/>
+                    </div>
+                    <div class="row" style="margin-top:20px">
+                        <span>(including the above mentioned amount): </span><span t-field="o.partner_id.credit"/>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5" style="margin-top:20px">
+                            <table style="width:100%">
+                                <tbody>
+                                    <tr>
+                                        <th height="150px" style="border: 1px solid black; vertical-align: bottom" >Delivery Executive</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-xs-5 col-xs-offset-2" style="margin-top:20px">
+                            <table style="width:100%">
+                                <tbody>
+                                    <tr>
+                                        <th height="150px" style="border: 1px solid black; vertical-align: bottom">
+                                            <span t-field="o.partner_id.name"/>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:20px">
+                        <p>Sales transaction already approved by Head of Sales</p>
+                    </div>
+                </t>
+            </xpath>
+    </template>
+</odoo>

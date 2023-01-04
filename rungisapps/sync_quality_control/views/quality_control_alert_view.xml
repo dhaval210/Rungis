@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- QUALITY CONTROL ALERT -->
+    <record id="quality_control_alert_view_form" model="ir.ui.view">
+        <field name="name">quality.control.alert.view.form</field>
+        <field name="model">quality.control.alert</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="stage_id" widget="statusbar" clickable="True" options="{'fold_field': 'folded'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_tmpl_id"/>
+                            <field name="product_id" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="reason_ids" widget="many2many_tags" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="lot_id" readonly="1" attrs="{'invisible': ['|', ('product_id', '=', False), ('lot_id', '=', False)], 'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="lot_name" readonly="1" attrs="{'invisible': ['|', ('product_id', '=', False), ('lot_name', '=', False)], 'readonly': [('readonly_field', '=', True)]}" />
+                        </group>
+                        <group>
+                            <field name="create_date" string="Date" readonly="1"/>
+                            <field name="team_id" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="user_id" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="quality_inspection_id" required="1" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="quality_inspection_line_id" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="company_id" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                            <field name="readonly_field" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="corrective_action" string="Corrective Actions">
+                            <field name="action_corrective" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                        </page>
+                        <page name="preventive_action" string="Priventive Actions">
+                            <field name="action_preventive" attrs="{'readonly': [('readonly_field', '=', True)]}"/>
+                        </page>
+                        <page name="description" string="Description">
+                            <field name="description" attrs="{'readonly': [('readonly_field', '=', True)]}" />
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+
+        </field>
+    </record>
+
+    <record id="quality_control_alert_view_form_small" model="ir.ui.view">
+        <field name="name">quality.control.alert.view.form.small</field>
+        <field name="model">quality.control.alert</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="stage_id" widget="statusbar" clickable="True" options="{'fold_field': 'folded'}"/>
+                    <button name="action_send_mail" string="Send Mail" type="object"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_tmpl_id" invisible="1"/>
+                            <field name="product_id"/>
+                            <field name="picking_id"/>
+                            <field name="reason_ids" widget="many2many_tags"/>
+                            <field name="lot_id" attrs="{'invisible': ['|', ('product_id', '=', False), ('lot_id', '=', False)]}"/>
+                            <field name="lot_name" readonly="1" attrs="{'invisible': ['|', ('product_id', '=', False), ('lot_name', '=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="create_date" string="Date" readonly="1"/>
+                            <field name="team_id"/>
+                            <field name="user_id"/>
+                            <field name="quality_inspection_id" required="1"/>
+                            <field name="quality_inspection_line_id"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="corrective_action" string="Corrective Actions">
+                            <field name="action_corrective"/>
+                        </page>
+                        <page name="preventive_action" string="Preventive Actions">
+                            <field name="action_preventive"/>
+                        </page>
+                        <page name="description" string="Description">
+                            <field name="description"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_view_tree" model="ir.ui.view">
+        <field name="name">quality.control.alert.view.tree</field>
+        <field name="model">quality.control.alert</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="product_id"/>
+                <field name="quality_inspection_id"/>
+                <field name="stage_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_action_small" model="ir.actions.act_window">
+        <field name="name">Quality Control Alert Small</field>
+        <field name="res_model">quality.control.alert</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="quality_control_alert_view_form_small"/>
+    </record>
+
+    <record id="quality_control_alert_action" model="ir.actions.act_window">
+        <field name="name">Quality Control Alerts</field>
+        <field name="res_model">quality.control.alert</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+              Create Quality Alerts.
+            </p>
+        </field>
+    </record>
+
+    <!-- QUALITY CONTROL ALERT STAGE -->
+    <record id="quality_control_alert_stage_view_tree" model="ir.ui.view">
+        <field name="name">quality.control.alert.stage.tree</field>
+        <field name="model">quality.control.alert.stage</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_stage_action" model="ir.actions.act_window">
+        <field name="name">Quality Alert Stages</field>
+        <field name="res_model">quality.control.alert.stage</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+              Quality Alert stages define the different steps a quality alert should go through.
+            </p>
+        </field>
+    </record>
+
+    <record id="quality_fail_reason_form" model="ir.ui.view">
+        <field name="name">quality.fail.reason.view.form</field>
+        <field name="model">quality.fail.reason</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_fail_reason_tree" model="ir.ui.view">
+        <field name="name">quality.fail.reason.view.tree</field>
+        <field name="model">quality.fail.reason</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_fail_reason_action" model="ir.actions.act_window">
+        <field name="name">Quality Reason</field>
+        <field name="res_model">quality.fail.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="quality_fail_reason_tree"/>
+    </record>
+</odoo>

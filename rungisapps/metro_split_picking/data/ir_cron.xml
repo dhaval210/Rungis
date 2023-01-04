@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="split_by_capacity" model="ir.cron">
+        <field name="name">Picking: Split outgoing transfers by maximum capacity</field>
+        <field name="model_id" ref="model_stock_picking"/>
+        <field name="state">code</field>
+        <field name="code">
+picking_ids = model.search([('state','not in',['done', 'cancel']),('picking_type_id.split_by_capacity', '=',True),('picking_treated','=', False)])
+for picking in picking_ids:
+    model.do_split(picking)
+    picking.write({'picking_treated': True})
+        </field>
+        <field name='interval_number'>5</field>
+        <field name='interval_type'>minutes</field>
+        <field name="numbercall">-1</field>
+    </record>
+</odoo>

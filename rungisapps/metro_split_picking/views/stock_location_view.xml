@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="stock_location_form_view">
+            <field name="name">Stock Location</field>
+            <field name="model">stock.location</field>
+            <field name="inherit_id" ref="stock.view_location_form"/>
+            <field name="arch" type="xml">
+                <field name="putaway_strategy_id" position="after">
+                    <field name="transport_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

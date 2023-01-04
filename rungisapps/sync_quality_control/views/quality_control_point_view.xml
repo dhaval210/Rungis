@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- QUALITY CONTROL POINT -->
+    <record id="quality_control_point_view_search" model="ir.ui.view">
+        <field name="name">quality.control.point.view.search</field>
+        <field name="model">quality.control.point</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="quality_control_point_view_tree" model="ir.ui.view">
+        <field name="name">quality.control.point.view.tree</field>
+        <field name="model">quality.control.point</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="picking_type_id"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_control_point_view_form" model="ir.ui.view">
+        <field name="name">quality.control.point.view.form</field>
+        <field name="model">quality.control.point</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="product_tmpl_id"/>
+                            <field name="product_id"/>
+                            <field name="picking_type_id" string="Operation"/>
+                        </group>
+                        <group>
+                            <field name="version_id" required="1"/>
+                            <field name="team_id"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="sequence"/>
+                            <field name="is_restrict"/>
+                            <field name="detailed_quality_inspection"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Control Point lines">
+                            <field name="quality_control_point_line_ids">
+                                <tree>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="test_type"/>
+                                    <field name="measure_frequency_type"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <field name="reason" placeholder="Describe why you need to perform this quality check..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="quality_control_point_action">
+        <field name="name">Quality Control Points</field>
+        <field name="res_model">quality.control.point</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="quality_control_point_view_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to add a new Quality Control Points
+            </p><p>
+              Quality Control Points are places in your logistics process
+                where you want to do quality control.
+            </p>
+        </field>
+    </record>
+
+    <!--QUALITY CONTROL ALERT TEAM -->
+    <record id="quality_control_alert_team_view_form" model="ir.ui.view">
+        <field name="name">quality.control.alert.team.view.form</field>
+        <field name="model">quality.control.alert.team</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Team Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="group_alias">
+                            <label for="alias_name" string="Email Alias"/>
+                            <div name="alias_def">
+                                <field name="alias_id" class="oe_read_only oe_inline"
+                                        string="Email Alias" required="0"/>
+                                <div class="oe_edit_only oe_inline" name="edit_alias" style="display: inline;" >
+                                    <field name="alias_name" class="oe_inline"/>@<field name="alias_domain" class="oe_inline" readonly="1"/>
+                                </div>
+                            </div>
+                            <field name="alias_contact" class="oe_inline" groups="base.group_no_one"
+                                    string="Accept Emails From"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_team_view_tree" model="ir.ui.view">
+        <field name="name">quality.control.alert.team.view.tree</field>
+        <field name="model">quality.control.alert.team</field>
+        <field name="arch" type="xml">
+            <tree string="Teams">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_team_view_kanban" model="ir.ui.view">
+        <field name="name">quality.control.alert.team.view.kanban</field>
+        <field name="model">quality.control.alert.team</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <strong><field name="name"/></strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_team_action_config" model="ir.actions.act_window">
+        <field name="name">Quality Control Alert Teams</field>
+        <field name="res_model">quality.control.alert.team</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('quality_control_alert_team_view_tree')}),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('quality_control_alert_team_view_kanban')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('quality_control_alert_team_view_form')})]"/>
+    </record>
+
+    <!-- QUALITY CONTROL POINT LINE -->
+    <record id="quality_control_point_line_view_form" model="ir.ui.view">
+        <field name="name">quality.control.point.line.view.form</field>
+        <field name="model">quality.control.point.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="test_type_id" />
+                            <field name="test_type" invisible="1"/>
+                            <label for="norm" attrs="{'invisible': [('test_type', '!=', 'measure')]}"/>
+                            <div class="o_row" attrs="{'invisible': [('test_type', '!=', 'measure')]}">
+                                <field name="norm" attrs="{'required': [('test_type', '=', 'measure')]}"/>
+                                <field name="norm_unit" attrs="{'required': [('test_type', '=', 'measure')]}"/>
+                            </div>
+                            <label for="tolerance_min" string="Tolerance" attrs="{'invisible': [('test_type', '!=', 'measure')]}"/>
+                            <div attrs="{'invisible': [('test_type', '!=', 'measure')]}" class="o_row">
+                                <span>from </span> <field name="tolerance_min"/>
+                                <span>to </span> <field name="tolerance_max"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="measure_frequency_type" string="Control Type"/>
+                            <label for="measure_frequency_value" string="Control Frequency" attrs="{'invisible': [('measure_frequency_type', '=', 'all')]}"/>
+                            <div class="o_row" attrs="{'invisible': [('measure_frequency_type', '=', 'all')]}">
+                                <span attrs="{'invisible': [('measure_frequency_type', '=', 'all')]}">Every </span>
+                                <field name="measure_frequency_value" nolabel="1" attrs="{'invisible': [('measure_frequency_type', '!=', 'random')]}"/>
+                                <label for="measure_frequency_value" string="% of the operation" attrs="{'invisible': [('measure_frequency_type', '!=', 'random')]}"/>
+                                <field name="measure_frequency_unit_value" nolabel="1" attrs="{'invisible': [('measure_frequency_type', '!=', 'periodical')]}"/>
+                                <field name="measure_frequency_unit" attrs="{'invisible': [('measure_frequency_type', '!=', 'periodical')]}"/>
+                            </div>
+                             <field name="limit" attrs="{'invisible': [('measure_frequency_type', '!=', 'periodical')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Instructions">
+                            <field name="note" placeholder="Describe the quality check to do..."/>
+                        </page>
+                        <page string="Message Failure">
+                            <field name="failure_message"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="quality_control_point_line_action">
+        <field name="name">Quality Control Point Lines</field>
+        <field name="res_model">quality.control.point.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to add a new Quality Control Points Lines
+            </p>
+        </field>
+    </record>
+
+    <!-- QUALITY.ALERT.TEAM -->
+    <record id="quality_control_alert_team_dashboard_view_kanban" model="ir.ui.view">
+        <field name="name">quality.control.alert.team.view.kanban</field>
+        <field name="model">quality.control.alert.team</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_quality_kanban" create="0">
+                <field name="name"/>
+                <field name="alias_id"/>
+                <field name="alias_name"/>
+                <field name="alias_domain"/>
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                            <div t-attf-class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title">
+                                    <div class="o_primary"><field name="name"/></div>
+                                    <div t-if="record.alias_name.value and record.alias_domain.value">
+                                        <small><i class="fa-envelope"></i>&amp;nbsp; <field name="alias_id"/></small>
+                                    </div>
+                                </div>
+                                <div class="o_kanban_manage_button_section">
+                                    <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_content">
+                                <div class="row mb4">
+                                    <div class="col-6 o_kanban_primary_left">
+                                        <button class="btn btn-primary" name="%(quality_control_alert_action)d" type="action">
+                                            <span>Quality Alerts</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4 o_setting_box o_kanban_primary_right">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-md-10 o_setting_box">
+                                                <a class="oe_kanban_stock_picking_type_list" name="%(quality_inspection_action_team)d" type="action">
+                                                    Checks In Progress
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                <div class="row">
+                                    <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_view">
+                                    </div>
+                                    <div class="col-xs-6 o_kanban_card_manage_section o_kanban_manage_new">
+                                    </div>
+                                </div>
+                                <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                    <div role="menuitem" aria-haspopup="true" class="col-8">
+                                        <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <a role="menuitem" type="edit">Settings</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="quality_control_alert_team_action" model="ir.actions.act_window">
+        <field name="name">Quality Dashboard</field>
+        <field name="res_model">quality.control.alert.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="quality_control_alert_team_dashboard_view_kanban" />
+        <field name="help" type="html">
+            <p>
+              Quality Teams group the different quality alerts/checks
+                according to the roles (teams) that need them.
+            </p>
+      </field>
+    </record>
+
+</odoo>

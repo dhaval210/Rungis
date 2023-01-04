@@ -1,0 +1,5 @@
+14 October 2019:
+- EMO-1129:Module created
+15 october 2019:
+-changes in validate button 
+-product_location_ids location is full, it will check the category wise

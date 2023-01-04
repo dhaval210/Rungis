@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="transport_management_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="transporter_id" domain="[('supplier','=', True)]"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="transport_management_search_form" model="ir.ui.view">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="transporter_id"/>
+                    <filter string="Transporter" context="{'group_by':'transporter_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

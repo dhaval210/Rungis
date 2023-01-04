@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="res_partner_view_inherited" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='ref']" position="replace"/>
+                <xpath expr="//div[@class='oe_title']" position="after">
+                    <group>
+                      <group></group>
+                      <group> <field name="ref"/></group>
+                      <group></group>
+                    </group>
+                </xpath>
+
+                <field name="phone" position="after">
+                    <field name="group_check"/>
+                </field>
+                <field name="image" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="company_type" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="parent_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="street" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="street_name" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="street_number" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="street_number2" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="street2" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="city" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="state_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="zip" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="country_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="vat" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="credit_limit" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="due_invoices_reminder" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="transporter_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="function" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="fax" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="title" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="lang" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="category_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="kac" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="picking_warn" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <xpath expr="//page[@name='internal_notes']//field[@name='comment']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+                 <xpath expr="//group[@name='sale']//field[@name='customer']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+                <field name="message_bounce" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                 <xpath expr="//group[@name='purchase']//field[@name='supplier']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+                <field name="buyer_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_supplier_payment_term_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="supplier_payment_mode_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="default_supplierinfo_discount" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="default_supplierinfo_discount2" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="default_supplierinfo_discount3" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="delay_calendar_type" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="supplier_global_discount_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="ref" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="barcode" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="company_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_customer" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="property_stock_supplier" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="removal_strategy_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+                <field name="vehicle_ids" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_view_buying_potential">
+            <field name="name">res.partner.view.buying.potential</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="metro_buying_potential.metro_res_partner_target_form_view_user"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='buying_potential']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_partner_view_purchase_currency">
+            <field name="name">res.partner.view.purchase.currency</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.view_partner_property_form"/>
+            <field name="priority" eval="22"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_purchase_currency_id']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_view_buttons_inherited" model="ir.ui.view">
+            <field name="name">res.partner.view.buttons.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_warn']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_view_purchase_buttons_inherited" model="ir.ui.view">
+            <field name="name">partner.view.buttons.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.res_partner_view_purchase_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='purchase_warn']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="partner_view_buttons_inherited" model="ir.ui.view">
+            <field name="name">partner.view.buttons.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_buttons"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_warn']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('group_check', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

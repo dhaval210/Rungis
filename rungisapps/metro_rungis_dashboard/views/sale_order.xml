@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="min_sale_tree_view" model="ir.ui.view">
+            <field name="name">mini.sale.tree.view</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <tree string="Mini Sales" create="false">
+                    <field name="user_id"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="expected_date"/>
+                    <field name="customer_number"/>
+                    <field name="partner_id"/>
+                    <field name="amount_untaxed" widget="monetary"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="customer_ranking"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mini_sales_report_search" model="ir.ui.view">
+            <field name="name">mini.sales.report.search</field>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <search string="Mini Sales">
+                    <field name="name" string="Sales Order"
+                           filter_domain="['|','|',('name','ilike',self),('client_order_ref','ilike',self),('partner_id','child_of',self)]"/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field name="user_id"/>
+                    <field name="team_id" string="Sales Team"/>
+                    <field name="customer_number" string="Customer Number"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('confirmation_date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('confirmation_date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('confirmation_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('confirmation_date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('confirmation_date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('confirmation_date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('confirmation_date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('confirmation_date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('confirmation_date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('confirmation_date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('confirmation_date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('confirmation_date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('confirmation_date','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('confirmation_date','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <filter string="Top 10 Customers" name="top_customers"
+                            domain="[('customer_ranking', '&lt;=', 10)]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Warehouse" name='warehouse' context="{'group_by':'warehouse_id'}"/>
+                        <filter string="Salesperson" name="salesperson" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter name="customer" string="Customer" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Confirmation Date" name="confirmation_day" domain="[]"
+                                context="{'group_by':'confirmation_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_min_sale_order" model="ir.actions.act_window">
+            <field name="name">Mini Sales</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,pivot</field>
+            <field name="domain">[('state', '=', 'sale'), ('amount_untaxed', '&lt;=', 150), ('amount_untaxed', '&gt;=', 1)]</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="min_sale_tree_view"/>
+            <field name="search_view_id" ref="view_mini_sales_report_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_min_sale_order" id="menu_mini_sales"
+                  parent="sale.menu_sale_report"/>
+    </data>
+</odoo>

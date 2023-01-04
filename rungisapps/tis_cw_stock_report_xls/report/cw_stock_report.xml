@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <report
+            id="cw_stock_xlsx"
+            model="stock.quantity.history"
+            string="CW Stock Report"
+            report_type="xlsx"
+            name="tis_cw_stock_report_xls.cw_stock_report"
+            file="tis_cw_stock_report_xls.cw_stock_report"
+            menu="False"
+            attachment_use="False"/>
+</odoo>

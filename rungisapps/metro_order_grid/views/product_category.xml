@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- product.category inherit form view -->
+    <record id="product_category_form_view" model="ir.ui.view">
+        <field name="name">product.category.inherit.view.form</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='first']" position="after">
+                <group name="order_grid" col="2">
+                    <field name="ultra_fresh_threshold" class="oe_inline"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

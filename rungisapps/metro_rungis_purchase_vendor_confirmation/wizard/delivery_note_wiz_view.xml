@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="form_delivery_note_wiz" model="ir.ui.view">
+            <field name="name">delivery.note.wiz.form</field>
+            <field name="model">delivery.note.wiz</field>
+            <field name="arch" type="xml">
+                <form string="Delivery Note Wizard">
+                    <field name='po_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                    <field name='line_ids' options="{'no_create': True}">
+                        <tree editable="bottom" create="false" delete="false" limit="5000">
+                            <field name='product_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                            <field name='product_desc' readonly="1"/>
+                            <field name='price_unit' readonly="1"/>
+                            <field name='price_unit_dn' string="DN Unit Price"/>
+                            <field name='calculated_lpp_price' string="LPP" invisible="1"/>
+                            <field name='product_qty'  readonly="1"/> 
+                            <field name='confirmed_qty'/>
+                            <field name='uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/> 
+                            <field name='confirmed_qty_cw'/>
+                            <field name='confirmed_cw_uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/> 
+                            <field name='is_qty_updated' invisible="1"/> 
+                            <field name='is_price_updated' invisible="1"/>   
+                              
+                        </tree>
+                        <form>
+                            <group>
+                                <field name='product_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name='product_desc' readonly="1"/>
+                                <field name='price_unit' readonly="1"/>
+                                <field name='price_unit_dn' string="DN Unit Price"/>
+                                <field name='product_qty'  readonly="1"/> 
+                                <field name='confirmed_qty'/>
+                                <field name='uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name='confirmed_qty_cw' readonly="1" force_save="1"/>
+                                <field name='confirmed_cw_uom_id' options="{'no_create': True, 'no_open': True}" readonly="1"/>
+                                <field name='order_line_id' options="{'no_create': True, 'no_open': True}" invisible="1"/>
+                            </group>
+                        </form>
+                    </field>
+                    <footer>
+                        <button name="process" string="Apply" type="object" class="btn-primary"/>
+                        OR
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_delivery_note_wiz" model="ir.actions.act_window">
+            <field name="name">Delivery Notew Wiz</field>
+            <field name="res_model">delivery.note.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_delivery_note_wiz"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

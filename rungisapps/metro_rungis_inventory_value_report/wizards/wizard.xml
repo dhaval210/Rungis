@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inventory_valuation_report_wizard_form_view" model="ir.ui.view">
+        <field name="name">stock.report.wizard.form</field>
+        <field name="model">stock.report.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="is_all_warehouse"/>
+<!--                    </group>-->
+<!--                    <group>-->
+                        <field name="date_from" readonly="0" invisible="1"/>
+                        <field name="date_to" readonly="0" invisible="1"/>
+                        <field name="warehouse_ids" widget="many2many_tags" attrs="{'required': [('is_all_warehouse','=',False)],
+                                                                'invisible': [('is_all_warehouse','=',True)]}"/>
+                    </group>
+
+                </group>
+                <group>
+                    <group>
+                        <field name="categ_id"/>
+                    </group>
+                    <group>
+                        <field name="product_id" widget="many2many_tags"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="PDF" name="print_pdf" type="object" class="oe_highlight"/>
+                    <button string="XLSX" name="print_xlsx" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

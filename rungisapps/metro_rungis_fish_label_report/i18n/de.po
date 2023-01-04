@@ -1,0 +1,175 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_fish_label_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-18 12:41+0000\n"
+"PO-Revision-Date: 2022-01-18 12:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.create_fish_product_report_view
+msgid "<br/>\n"
+"                                                    <strong>\n"
+"                                                        <span>No. Copies:</span>\n"
+"                                                    </strong>"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.move-container
+msgid "<strong>FAO Informations :</strong>\n"
+"                    <br/>\n"
+"                    <span>LOT NO :</span>"
+msgstr "<strong>FAO Informationen :</strong>\n"
+"                    <br/>\n"
+"                    <span>LOS NO :</span>"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.move-container
+msgid "<strong>Product Name :</strong>"
+msgstr "<strong>Artikelkennzeichnung :</strong>"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.move-container
+msgid "<strong>Product No :</strong>"
+msgstr "<strong>Artikel-Nr :</strong>"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.move-container
+msgid "<strong>Scientific Name :</strong>"
+msgstr "<strong>Wissenschaftlicher Name :</strong>"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.move-container
+msgid "<strong>Vendor :</strong>"
+msgstr "<strong>Lieferant :</strong>"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.create_fish_product_report_view
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__print_copy
+msgid "Copies"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__create_uid
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__create_date
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__display_name
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__display_name
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_report_metro_rungis_fish_label_report_fish_label_template__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.actions.act_window,name:metro_rungis_fish_label_report.create_report_wizard
+#: model:ir.model,name:metro_rungis_fish_label_report.model_fish_product_label_report
+msgid "Fish Product Label Report"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.actions.report,name:metro_rungis_fish_label_report.print_fish_report_pdf
+msgid "Fish product label Report"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__id
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__id
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_report_metro_rungis_fish_label_report_fish_label_template__id
+msgid "ID"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line____last_update
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report____last_update
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_report_metro_rungis_fish_label_report_fish_label_template____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__write_uid
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__write_date
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__move_line_id
+msgid "Move Line"
+msgstr "Buchungszeile"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__pic_id
+msgid "Pick id"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.create_fish_product_report_view
+msgid "Print Fish Product Labels"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.metro_stock_picking_view_form_inherit_print_fish_label
+msgid "Print Fish product Label"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__product_id
+msgid "Product"
+msgstr "Produkt"
+
+#. module: metro_rungis_fish_label_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_fish_label_report.create_fish_product_report_view
+msgid "Product Label"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model,name:metro_rungis_fish_label_report.model_fish_product_label_line
+msgid "Product Label Line"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_report__product_label_moves
+msgid "Product Label Moves"
+msgstr ""
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model,name:metro_rungis_fish_label_report.model_stock_picking
+msgid "Transfer"
+msgstr "Lieferung vornehmen"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model.fields,field_description:metro_rungis_fish_label_report.field_fish_product_label_line__wizard_id
+msgid "Wizard"
+msgstr "Assistent"
+
+#. module: metro_rungis_fish_label_report
+#: model:ir.model,name:metro_rungis_fish_label_report.model_report_metro_rungis_fish_label_report_fish_label_template
+msgid "report.metro_rungis_fish_label_report.fish_label_template"
+msgstr ""
+

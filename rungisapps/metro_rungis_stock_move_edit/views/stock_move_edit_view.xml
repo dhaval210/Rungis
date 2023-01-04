@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_move_edit_form" model="ir.ui.view">
+            <field name="name">Stock Move Edit</field>
+            <field name="model">stock.move.edit</field>
+            <field name="arch" type="xml">
+                <form >
+                    <header>
+                    <button type="object"
+                            string="Edit Data"
+                            name="edit_data"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ['done', 'cancel','progress'])]}"/>
+                    <button type="object"
+                            string="Update Moves"
+                            name="update_moves"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ['done', 'cancel','draft'])]}"/>
+                    <button type="object"
+                            string="Cancel"
+                            name="cancel"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ['done', 'cancel'])]}"/>
+
+                     <field name="status" widget="statusbar"/>
+                </header>
+                    <sheet>
+                    <group col="2">
+                        <field name="product_id" on_change="_onchange_product_id(product_id)" />
+                    </group>
+                    <field name="stock_move_edit_line_ids" nolabel="1" attrs="{'readonly': [('status', 'in', ['done', 'cancel'])]}">
+                        <tree editable="top">
+                            <field name="move_id"/>
+                            <field name="cost"/>
+                            <field name="unit_price"/>
+                            <field name="product_qty"/>
+                            <field name="cw_product_qty"/>
+                            <field name="value"/>
+                            <field name="remaining_qty"/>
+                            <field name="remaining_value"/>
+                        </tree>
+                    </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stock_move_edit_tree" model="ir.ui.view">
+            <field name="name">stock.move.edit.tree</field>
+            <field name="model">stock.move.edit</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_stock_move_edit" model="ir.actions.act_window">
+            <field name="name">Stock Move Edit</field>
+            <field name="res_model">stock.move.edit</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem name="Stock Move Edit" id="menu_stock_move_edit"
+        parent="stock.menu_stock_warehouse_mgmt" action="action_stock_move_edit" sequence="40" groups="base.group_user" />
+    </data>
+</odoo>

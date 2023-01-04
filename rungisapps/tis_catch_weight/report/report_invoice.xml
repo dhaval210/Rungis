@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_catchweight" inherit_id="account.report_invoice_document">
+        <xpath expr="//table/thead/tr/th[3]" position="after">
+            <th class="text-right" groups="tis_catch_weight.group_catch_weight">CW Qty</th>
+        </xpath>
+        <xpath expr="//table/tbody/t[2]/tr/t/td[3]" position="after">
+            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                <span t-field="line.product_cw_uom_qty"/>
+                <span t-field="line.product_cw_uom"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

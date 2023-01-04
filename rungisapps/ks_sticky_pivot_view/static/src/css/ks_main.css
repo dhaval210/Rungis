@@ -1,0 +1,16 @@
+.ks_header_cell_cover{
+  border-right: 1.5px solid #dee2e6;
+}
+.o_pivot table tbody tr td:first-child{position: relative;}
+.o_pivot table tbody tr td:first-child:after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    border-right: 1px solid #dee2e6;
+}
+
+.app-sidebar-panel{
+    z-index: 110;
+}

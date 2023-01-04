@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Configuration -->
+    <menuitem
+        id="menu_quality_control_root"
+        name="Quality" sequence="36"
+        groups="sync_quality_control.group_quality_user"/>
+
+    <menuitem
+        id="menu_quality_control_configuration"
+        name="Configuration"
+        parent="menu_quality_control_root"
+        sequence="25"
+        groups="sync_quality_control.group_quality_manager"/>
+
+    <menuitem
+        id="menu_quality_control_alert_team_config"
+        name="Quality Alert Teams"
+        action="quality_control_alert_team_action_config"
+        parent="menu_quality_control_configuration"
+        sequence="5"/>
+
+    <menuitem
+        id="menu_quality_config_alert_stage"
+        name="Quality Alert Stages"
+        action="quality_control_alert_stage_action"
+        parent="menu_quality_control_configuration"
+        sequence="15"
+        groups="base.group_no_one"/>
+
+    <menuitem
+        id="menu_quality_config_reason"
+        name="Quality Reason"
+        action="quality_fail_reason_action"
+        parent="menu_quality_control_configuration"
+        sequence="20"/>
+
+    <!-- Menu structure-->
+    <menuitem
+        id="menu_dashboard"
+        name="Dashboard"
+        parent="menu_quality_control_root"
+        action="quality_control_alert_team_action"
+        sequence="5"/>
+
+    <menuitem
+        id="menu_quality_control_point"
+        name="Quality Controls"
+        parent="menu_quality_control_root"
+        sequence="15"
+        groups="sync_quality_control.group_quality_user"/>
+
+    <!-- <menuitem
+        id="menu_quality_point_controls"
+        name="Quality Controls"
+        parent="menu_quality_control_point"
+        sequence="16"/> -->
+
+    <menuitem
+        id="menu_quality_control_points"
+        name="Control Points"
+        parent="menu_quality_control_point"
+        action="quality_control_point_action"
+        sequence="17"
+        groups="sync_quality_control.group_quality_manager"/>
+
+     <menuitem
+        id="menu_quality_inspection"
+        name="Quality Inspections"
+        action="quality_inspection_action_main"
+        parent="menu_quality_control_point"
+        sequence="18"/>
+
+    <menuitem
+        id="menu_quality_control_alerts"
+        name="Alerts"
+        parent="menu_quality_control_root"
+        sequence="19"/>
+
+    <menuitem
+        id="menu_quality_control_alert"
+        name="Quality Alerts"
+        action="quality_control_alert_action"
+        parent="menu_quality_control_alerts"
+        sequence="20"/>
+
+</odoo>

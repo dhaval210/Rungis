@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="metro_margin_sale_order_line_form">
+            <field name="name">sale.order.line.tree.metro.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="attributes">
+                   <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='purchase_price']" position="after">
+                   <field name="margin_percent" groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form/group/group/field[@name='purchase_price']" position="after">
+                    <field name="margin" groups="base.group_user"/>
+                    <field name="landed_costs" groups="base.group_user"/>
+                    <field name="margin_percent" groups="base.group_user"/>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="metro_margin_sale_order">
+            <field name="name">sale.order.metro.margin.view.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin']" position="after">
+                    <field name="landed_costs" groups="base.group_user"/>
+                    <field name="margin_percent" groups="base.group_user"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

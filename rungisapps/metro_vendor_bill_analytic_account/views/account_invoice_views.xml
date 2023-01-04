@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="metro_invoice_supplier_form_analytic_account">
+		<field name="name">metro.invoice.supplier.form.analytic.account</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_supplier_form" />
+		<field name="priority" eval="22" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='account_analytic_id']" position="attributes">
+				<attribute name="attrs">{'required': 1}</attribute>
+			</xpath>
+		</field>
+	</record>
+</odoo>

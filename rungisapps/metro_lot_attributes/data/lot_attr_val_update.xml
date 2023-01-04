@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_lot_attribute_value" forcecreate='True' model="ir.cron">
+            <field name="name">Update Lot attribute value</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field name="model_id" ref="model_stock_lot_attribute_lines"/>
+            <field name="state">code</field>
+            <field name="code">model.update_lot()</field>
+        </record>
+
+        <record id="model_purchase_order_action_share" model="ir.actions.server">
+            <field name="name">Attribute missing lot</field>
+            <field name="model_id" ref="stock.model_stock_production_lot"/>
+            <field name="binding_model_id" ref="stock.model_stock_production_lot"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_lot()</field>
+        </record>
+
+    </data>
+</odoo>

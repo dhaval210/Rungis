@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_customer_status">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" >
+                         <h2>
+                            Customer Status
+                         </h2>
+                        <table class="table table-condensed"  style="width:50%;">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No.</th>
+                                        <th>
+                                            <t t-if="type=='new_customer'">
+                                                <strong>New Customer</strong>
+                                            </t>
+                                            <t t-if="type=='buy_customer'">
+                                                <strong>Buying Customer</strong>
+                                            </t>
+                                            <t t-if="type=='lost_customer'">
+                                                <strong>Lost Customer</strong>
+                                            </t>
+
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                 <t t-set="sl_no" t-value='1'/>
+                                <tr t-foreach="customer" t-as="cust" style="font-size: 10px" >
+                                    <td><span t-esc="sl_no" /></td>
+                                    <td><span t-esc="cust" /></td>
+                                    <t t-set="sl_no" t-value='sl_no+1'/>
+                                </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
+

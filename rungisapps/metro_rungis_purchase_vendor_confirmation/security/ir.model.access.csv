@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+delivery_note_wiz_user_access,delivery.note.wiz,model_delivery_note_wiz,,1,1,0,0
+delivery_note_wiz_line_user_access,delivery.note.wiz.line,model_delivery_note_wiz_line,,1,1,0,0
+access_purchase_order_devlivery_note,access.purchase.order.delivery.note,model_purchase_order,metro_rungis_purchase_vendor_confirmation.group_delivery_note,1,1,0,0

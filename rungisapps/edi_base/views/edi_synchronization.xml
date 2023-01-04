@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="synchronization_error_tree_view" model="ir.ui.view">
+    <field name="name">edi.synchronization.error.tree</field>
+    <field name="model">edi.synchronization.error</field>
+    <field name="arch" type="xml">
+        <tree string="Synchronization errors" edit="0" create="0" delete="0">
+            <field name="synchronization_id"/>
+            <field name="create_date"/>
+            <field name="activity"/>
+            <field name="description"/>
+        </tree>
+    </field>
+</record>
+
+<record id="synchronization_error_form_view" model="ir.ui.view">
+    <field name="name">edi.synchronization.error.form</field>
+    <field name="model">edi.synchronization.error</field>
+    <field name="arch" type="xml">
+        <form string="Synchronization error" edit="0" create="0" delete="0">
+            <sheet>
+                <h1>
+                    <field name="synchronization_id"/>
+                </h1>
+                <group>
+                    <group>
+                        <field name="activity"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="synchronization_error_embedded_tree_view" model="ir.ui.view">
+    <field name="name">edi.synchronization.error.embedded.tree</field>
+    <field name="model">edi.synchronization.error</field>
+    <field name="inherit_id" ref="edi_base.synchronization_error_tree_view"/>
+    <field name="mode">primary</field>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='synchronization_id']" position="replace"/>
+    </field>
+</record>
+
+<record id="synchronization_form_view" model="ir.ui.view">
+    <field name="name">edi.synchronization.form</field>
+    <field name="model">edi.synchronization</field>
+    <field name="arch" type="xml">
+        <form string="Synchronization" edit="0" create="0" delete="0">
+            <field name="integration_id" invisible="1"/>
+            <field name="res_id" invisible="1"/>
+            <header>
+                <field name="stage_id" widget="statusbar"/>
+            </header>
+            <sheet>
+                <div class="oe_button_box" name="button_box">
+                </div>
+                <h1>
+                    <field name="name"/>
+                </h1>
+                <div>
+                    <field name="filename"/>
+                </div>
+                <separator string="Basic Information"/>
+                <group>
+                    <group>
+                        <field name="create_date"/>
+                        <field name="res_model_id"/>
+                    </group>
+                    <group>
+                        <field name="synchronization_date"/>
+                        <field name="resource_reference" attrs="{
+                            'invisible': [('res_id', '=', 0)]
+                        }"/>
+                    </group>
+                </group>
+                <notebook attrs="{
+                    'invisible': [
+                        ('error_ids', '=', []),
+                        ('content', '=', False)
+                    ]
+                }">
+                    <page string="Content" attrs="{
+                        'invisible': [('content', '=', False)]
+                    }">
+                        <group>
+                            <field name="content_type"/>
+                            <field name="content"
+                                attrs="{
+                                    'invisible': [('content_type', '=', 'pdf')]
+                                }"
+                            />
+                        </group>
+                    </page>
+                    <page string="Failures" attrs="{
+                        'invisible': [('error_ids', '=', [])]
+                    }">
+                        <field name="error_ids" context="{
+                                'tree_view_ref': 'edi_base.synchronization_error_embedded_tree_view',
+                                'sync_id': active_id
+                            }"
+                        />
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="synchronization_list_view" model="ir.ui.view">
+    <field name="name">edi.synchronization.tree</field>
+    <field name="model">edi.synchronization</field>
+    <field name="arch" type="xml">
+        <tree string="Synchronizations" edit="0" create="0" delete="0"
+            decoration-success="[('stage_state', '=', 'done')]"
+            decoration-bf="[('stage_state', '=', 'new')]"
+            decoration-muted="[('stage_state', '=', 'cancel')]"
+            decoration-danger="[('stage_state', '=', 'fail')]"
+        >
+            <field name="name"/>
+            <field name="content_type"/>
+            <field name="create_date"/>
+            <field name="synchronization_date"/>
+            <field name="synchronization_type" invisible="1"/>
+            <field name="stage_state" invisible="1"/>
+        </tree>
+    </field>
+</record>
+
+<record id="synchronization_kanban_view" model="ir.ui.view">
+    <field name="name">edi.syncrhonization.kanban.view</field>
+    <field name="model">edi.synchronization</field>
+    <field name="arch" type="xml">
+        <kanban string="Synchronizations" edit="0" create="0" delete="0">
+            <field name="name"/>
+            <field name="stage_state"/>
+            <field name="res_id"/>
+            <field name="res_model"/>
+            <field name="resource_reference"/>
+            <field name="has_records"/>
+            <field name="synchronization_date"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_card oe_kanban_global_click">
+                        <div class="o_dropdown_kanban dropdown" groups="base.group_user">
+                            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button">
+                                <span class="fa fa-bars fa-lg" title=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>
+                                    <a type="object" name="open_integration">Open integration</a>
+                                </li>
+                                <li t-if="record.has_records.raw_value">
+                                    <a type="object" name="open_resource_records">Open record(s)</a>
+                                </li>
+                                <t t-if="widget.editable">
+                                    <li groups="base.group_erp_manager">
+                                        <a type="edit">Edit Task</a>
+                                    </li>
+                                </t>
+                                <t t-if="widget.deletable">
+                                    <li groups="base.group_erp_manager">
+                                        <a type="object" data="action_cancel">Cancel</a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <h4 class="text-center">
+                                <strong>
+                                    <field name="name"/>
+                                    <t t-if="record.stage_state.raw_value == 'fail'">
+                                        <i class="fa fa-exclamation-circle" aria-label="Failed" title=""/>
+                                    </t>
+                                </strong>
+                            </h4>
+                            <div t-if="record.filename.raw_value" class="text-center">
+                                <i><field name="filename"/></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-calendar-plus-o" aria-label="Synchronization date" title=""/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <field name="create_date"/>
+                                </div>
+                            </div>
+                            <t t-if="record.synchronization_date.raw_value">
+                                <div class="col-xs-6">
+                                    <div class="col-xs-2">
+                                        <i class="fa fa-calendar-check-o" aria-label="Synchronization date" title=""/>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <field name="synchronization_date"/>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-database" title=""/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <field name="res_model_id"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-file-o" title=""/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <field name="content_type"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<record id="synchronization_search_view" model="ir.ui.view">
+    <field name="name">edi.syncrhonization.search.view</field>
+    <field name="model">edi.synchronization</field>
+    <field name="arch" type="xml">
+        <search string="Synchronization File">
+            <field name="name" filter_domain="['|', ('name', 'ilike', self), ('filename', 'ilike', self)]"/>
+            <field name="integration_id"/>
+            <field name="res_model_id"/>
+            <field name="content"/>
+            <filter name="in_synchronizations" string="Incoming Synchronizations"
+                domain="[('synchronization_type', '=', 'in')]"
+            />
+            <filter name="out_synchronizations" string="Outgoing Synchronizations"
+                domain="[('synchronization_type', '=', 'out')]"
+            />
+            <filter name="new" string="New" domain="[('stage_id.state', '=', 'new')]"/>
+            <filter name="done" string="Done" domain="[('stage_id.state', '=', 'done')]"/>
+            <filter name="fail" string="Failed" domain="[('stage_id.state', '=', 'fail')]"/>
+            <filter name="cancel" string="Cancelled" domain="[('stage_id.state', '=', 'cancel')]"/>
+            <filter name="this_week" string="This Week Synchronizations" domain="[
+                '|',
+                ('synchronization_date', '=', False),
+                '&amp;',
+                ('synchronization_date','&lt;=', context_today().strftime('%Y-%m-%d')),
+                ('synchronization_date','&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))
+            ]"/>
+            <filter name="this_month" string="This Month Synchronizations" domain="[
+                '|',
+                ('synchronization_date', '=', False),
+                ('synchronization_date','&gt;=', time.strftime('%%Y-%%m-01'))
+            ]"/>
+            <filter name="this_year" string="This Year Synchronizations" domain="[
+                '|',
+                ('synchronization_date', '=', False),
+                '&amp;',
+                ('synchronization_date','&lt;=', time.strftime('%%Y-12-31')),
+                ('synchronization_date','&gt;=',time.strftime('%%Y-01-01'))
+            ]"/>
+            <group string="Group By">
+                <filter name="group_by_integration" string="Integration" context="{'group_by': 'integration_id'}"/>
+                <filter name="group_by_res_model_id" string="Resource Model" context="{'group_by': 'res_model_id'}"/>
+                <filter name="group_by_type" string="Type" context="{'group_by': 'synchronization_type'}"/>
+                <filter name="group_by_content_type" string="Content Type" context="{'group_by': 'content_type'}"/>
+                <filter name="group_by_stage_id" string="Status" context="{'group_by': 'stage_id'}"/>
+                <filter name="group_by_synchronization_month" string="Synchronization Month" context="{'group_by': 'synchronization_date:month'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="synchronizations_act_window" model="ir.actions.act_window">
+    <field name="name">Synchronizations</field>
+    <field name="res_model">edi.synchronization</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="search_view_id" ref="edi_base.synchronization_search_view"/>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent">Here you will find the files created to be synchronized with the remote servers configured on your integrations.</p>
+    </field>
+    <field name="context" eval="{
+        'search_default_group_by_stage_id': True
+    }"/>
+</record>
+
+<menuitem id="synchronizations_menu" parent="root_menu" name="Synchronizations" sequence="20" action="synchronizations_act_window"/>
+
+</odoo>

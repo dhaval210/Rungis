@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="email_template_master_data_updation" model="mail.template">
+        <field name="name">New listing information</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="email_to">test@test.test</field>
+        <field name="subject">New listing information: ${object.name}</field>
+        <field name="body_html" type="html">
+            <div>
+                Hello master data team,
+                <br/>
+                <br/>
+                A new article has been listed in the joint Rungis Express article catalog.
+                <br/>
+                <br/>
+                % if object.default_code:
+                Internal reference : ${object.default_code}
+                <br/>
+                <br/>
+                % endif
+                <strong>${object.name}</strong>
+                from
+                <strong>${object.x_launch_date}</strong>
+                <br/>
+                <br/>
+                % if object.barcode :
+                Product Barcode : ${object.barcode}
+                <br/>
+                <br/>
+                % endif
+                Please check and complete the necessary information in the article master for Austria.
+            </div>
+            <div>
+                <a target="_blank" href="${object.base_url}/web#id=${object.id}&amp;model=product.template&amp;view_type=form">Click Here</a>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>

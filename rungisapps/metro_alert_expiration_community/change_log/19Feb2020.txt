@@ -1,0 +1,2 @@
+19 Feb 2020:
+- as of version 1.3, change name 'metro_alert_expiration' to 'metro_alert_expiration_community'.

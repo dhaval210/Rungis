@@ -1,0 +1,636 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_invoice_robot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-25 12:11+0000\n"
+"PO-Revision-Date: 2022-10-25 12:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_account_invoice__state
+msgid " * The 'Draft' status is used when a user is encoding a new and unconfirmed Invoice.\n"
+" * The 'Open' status is used when user creates invoice, an invoice number is generated. It stays in the open status till the user pays the invoice.\n"
+" * The 'In Payment' status is used when payments have been registered for the entirety of the invoice in a journal configured to post entries at bank reconciliation only, and some of them haven't been reconciled with a bank statement line yet.\n"
+" * The 'Paid' status is set automatically when the invoice is paid. Its related journal entries may or may not be reconciled.\n"
+" * The 'Cancelled' status is used when user cancel invoice.\n"
+" * The 'passed' status is used when the robot or responsible validate and check erroe in invoice data.\n"
+" * The 'merged' status is used when the robot has merged single invoices into collective invoices.\n"
+" * The 'sent' status is used when The robot finds some error and sent the invoice to the responsible to check it."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_partner__transfert_mode
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_users__transfert_mode
+msgid " * The Mail method will send the invoices to partners mail.\n"
+" * The Portal method will send the invoices to the portal account partner.\n"
+" * The SFTP will send the invoices to partner server."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_partner__invoice_format
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_users__invoice_format
+msgid " * The PDF format will send the invoice in normal format PDF.\n"
+" * The edi format will send the invoice in UBL/XML format.\n"
+" * The PDF (embedded UBL/XML) format will send the invoice UBL/XML embeded in PDF."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:mail.template,subject:metro_rungis_invoice_robot.mail_template_invoice_error
+msgid "${object.company_id.name} Invoice (Ref ${object.number or 'n/a'})"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/controllers/portal.py:41
+#, python-format
+msgid "%s is not the reference of a report"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:mail.template,body_html:metro_rungis_invoice_robot.mail_template_invoice_error
+msgid "<div style=\"margin: 0px; padding: 0px;\">\n"
+"					<p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"						Hello,\n"
+"						This invoice  \n"
+"						% if object.number:\n"
+"							<strong>${object.number}</strong>\n"
+"						%endif\n"
+"						% if object.origin:\n"
+"							(with reference: ${object.origin})\n"
+"						% endif\n"
+"						from ${object.company_id.name} was reported to have some errors. Please check it and fix the commented errors. \n"
+"					</p>\n"
+"					<br/>\n"
+"					<p style=\"margin-top: 24px; margin-bottom: 16px;\">\n"
+"						<a href=\"'/mail/view?model=%s&amp;res_id=%s' % (object._name, object.id)\" style=\"background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;\">\n"
+"							View\n"
+"							<t t-esc=\"model_description or 'document'\"/>\n"
+"						</a>\n"
+"					</p>\n"
+"				</div>\n"
+"			"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.edi_portal_invoice_page
+msgid "<i class=\"fa fa-download\"/> Download XML"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.edi_portal_invoice_page
+msgid "<i class=\"fa fa-download\"/> Download embedded PDF"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:mail.template,body_html:metro_rungis_invoice_robot.mail_template_invoice
+msgid "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"					<tr>\n"
+"						<td align=\"center\">\n"
+"							<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"								<tbody>\n"
+"									<!-- HEADER -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"right\">\n"
+"														<img src=\"/logo.png?company=${object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${object.company_id.name}\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td colspan=\"2\" style=\"text-align:center;\">\n"
+"														<hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"									<!-- CONTENT -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"top\" style=\"font-size: 13px;\">\n"
+"														<div>\n"
+"															<p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"																Dear ${object.partner_id.name}\n"
+"																% if object.partner_id.parent_id:\n"
+"																	(${object.partner_id.parent_id.name})\n"
+"																% endif\n"
+"																<br/>\n"
+"																<br/>\n"
+"																Here is your \n"
+"																% if object.number:\n"
+"																	invoice <strong>${object.number}</strong>\n"
+"																% else:\n"
+"																	invoice\n"
+"																%endif\n"
+"																% if object.origin:\n"
+"																	(with reference: ${object.origin})\n"
+"																% endif\n"
+"																amounting in\n"
+"																<strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"																from ${object.company_id.name}. <br/>\n"
+"																Do not hesitate to contact us if you have any question.\n"
+"															</p>\n"
+"														</div>\n"
+"													</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td style=\"text-align:center;\">\n"
+"														<hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"									<!-- FOOTER -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"left\">${object.company_id.name}</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"left\" style=\"opacity: 0.7;\">\n"
+"														${object.company_id.phone}\n"
+"														% if object.company_id.email\n"
+"															| <a href=\"'mailto:%s' % ${object.company_id.email}\" style=\"text-decoration:none; color: #454748;\">${object.company_id.email}</a>\n"
+"														% endif\n"
+"														% if object.company_id.website\n"
+"															| <a href=\"'%s' % ${object.company_id.website}\" style=\"text-decoration:none; color: #454748;\">${object.company_id.website}</a>\n"
+"														% endif\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"								</tbody>\n"
+"							</table>\n"
+"						</td>\n"
+"					</tr>\n"
+"				</table>\n"
+"			"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:mail.template,body_html:metro_rungis_invoice_robot.mail_template_invoice_portal
+msgid "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;\">\n"
+"					<tr>\n"
+"						<td align=\"center\">\n"
+"							<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"padding: 16px; background-color: white; color: #454748; border-collapse:separate;\">\n"
+"								<tbody>\n"
+"									<!-- HEADER -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"right\">\n"
+"														<img src=\"/logo.png?company=${object.company_id.id}\" style=\"padding: 0px; margin: 0px; height: auto; width: 80px;\" alt=\"${object.company_id.name}\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td colspan=\"2\" style=\"text-align:center;\">\n"
+"														<hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"									<!-- CONTENT -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"top\" style=\"font-size: 13px;\">\n"
+"														<div>\n"
+"															Dear ${object.partner_id.name},<br/><br/>\n"
+"															% if object.partner_id.parent_id:\n"
+"																(${object.partner_id.parent_id.name})\n"
+"															% endif\n"
+"															<br/><br/>\n"
+"															Here is your invoice\n"
+"															% if object.number:\n"
+"																<strong>${object.number}</strong>\n"
+"															%endif\n"
+"															.\n"
+"															<br/>\n"
+"															You can access your invoice in your portal:\n"
+"															<p style=\"margin-left:50%; font-size: 13px;\">\n"
+"																<a href=\"${'portal_url' in ctx and ctx['portal_url'] or ''}\" style=\"background-color:#875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px;\">Portal</a>\n"
+"															</p>\n"
+"															<br/>\n"
+"															<br/>\n"
+"															Do not hesitate to contact us if you have any question.\n"
+"														</div>\n"
+"													</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td style=\"text-align:center;\">\n"
+"														<hr width=\"100%\" style=\"background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"									<!-- FOOTER -->\n"
+"									<tr>\n"
+"										<td align=\"center\" style=\"min-width: 590px;\">\n"
+"											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style=\"min-width: 590px; background-color: white; font-size: 11px; padding: 0px 8px 0px 8px; border-collapse:separate;\">\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"left\">${object.company_id.name}</td>\n"
+"												</tr>\n"
+"												<tr>\n"
+"													<td valign=\"middle\" align=\"left\" style=\"opacity: 0.7;\">\n"
+"														${object.company_id.phone}\n"
+"														% if object.company_id.email\n"
+"															| <a href=\"'mailto:%s' % ${object.company_id.email}\" style=\"text-decoration:none; color: #454748;\">${object.company_id.email}</a>\n"
+"														% endif\n"
+"														% if object.company_id.website\n"
+"															| <a href=\"'%s' % ${object.company_id.website}\" style=\"text-decoration:none; color: #454748;\">${object.company_id.website}</a>\n"
+"														% endif\n"
+"													</td>\n"
+"												</tr>\n"
+"											</table>\n"
+"										</td>\n"
+"									</tr>\n"
+"								</tbody>\n"
+"							</table>\n"
+"						</td>\n"
+"					</tr>\n"
+"				</table>\n"
+"			"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice_line__add_a_note
+msgid "Add a note"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__comment
+msgid "Additional Information"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.invoice_form_inherited
+msgid "Approving invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Cancelled"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__date_create_interval_unit
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__date_create_interval_unit
+msgid "Date Create Interval Unit"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_partner__date_create_invoice
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_users__date_create_invoice
+msgid "Date when to create & transfer"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,date_create_interval_unit:0
+msgid "Days"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.edi_portal_invoice_page
+msgid "Download"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Draft"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_partner_form_inherited
+msgid "E-Mail Information"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,invoice_format:0
+msgid "EDI (UBL -> XML file)"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_tax__is_fake
+msgid "Fake VAT"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_partner_form_inherited
+msgid "General Information"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.server,name:metro_rungis_invoice_robot.ir_cron_generate_check_invoice_ir_actions_server
+#: model:ir.cron,cron_name:metro_rungis_invoice_robot.ir_cron_generate_check_invoice
+#: model:ir.cron,name:metro_rungis_invoice_robot.ir_cron_generate_check_invoice
+msgid "Generate and Check Invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_account_tax__is_fake
+msgid "Identifies taxes as fake which will lead to an error prone invoice when generated & checked by the robot."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_account_invoice__payment_term_id
+msgid "If you use payment terms, the due date will be computed automatically at the generation of accounting entries. If you keep the payment terms and the due date empty, it means direct payment. The payment terms may compute several due dates, for example 50% now, 50% in one month."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "In Payment"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_partner__date_create_interval
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_users__date_create_interval
+msgid "Interval which is used to recalculate the 'Invoice Schedule Date' after it is expired"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_account_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__date_create_interval
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__date_create_interval
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_partner_form_inherited
+msgid "Invoice Creation Interval"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__date_create_invoice
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__date_create_invoice
+msgid "Invoice Creation Schedule"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__invoice_format
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__invoice_format
+msgid "Invoice Format"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_account_invoice_line
+msgid "Invoice Line"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__invoice_line_ids
+msgid "Invoice Lines"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/models/account_invoice.py:62
+#, python-format
+msgid "Invoice must be in draft or passed state in order to validate it."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.act_window,name:metro_rungis_invoice_robot.action_invoice_all
+#: model:ir.ui.menu,name:metro_rungis_invoice_robot.menu_action_invoice_all
+msgid "Invoices and Credit Notes"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_partner__portal
+#: model:ir.model.fields,help:metro_rungis_invoice_robot.field_res_users__portal
+msgid "Link to access to Portal access"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,transfert_mode:0
+msgid "Mail"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.server,name:metro_rungis_invoice_robot.model_account_invoice_action_ubl
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.invoice_form_inherited
+msgid "Mark as error-prone"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.server,name:metro_rungis_invoice_robot.ir_cron_check_send_invoice_ir_actions_server
+#: model:ir.cron,cron_name:metro_rungis_invoice_robot.ir_cron_check_send_invoice
+#: model:ir.cron,name:metro_rungis_invoice_robot.ir_cron_check_send_invoice
+msgid "Merge Invoices"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.act_window,name:metro_rungis_invoice_robot.action_view_invoice_merge
+#: model:ir.model,name:metro_rungis_invoice_robot.model_invoice_merge
+msgid "Merge Partner Invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__is_merged
+msgid "Merged Invoice"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Merged into Collective"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,date_create_interval_unit:0
+msgid "Months"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/models/account_invoice.py:66
+#, python-format
+msgid "No account was found to create the invoice, be sure you have installed a chart of account."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Open"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,invoice_format:0
+msgid "PDF"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,invoice_format:0
+msgid "PDF (embedded UBL/XML)"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Paid"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.invoice_search_inherited
+msgid "Passed Error Validation"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__payment_term_id
+msgid "Payment Terms"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_invoice_merge_inherited
+msgid "Please note that:<br/><br/>\n"
+"                    Invoices will only be merged if:<br/>\n"
+"                    * Invoices are in <b>state 'passed'</b>.<br/>\n"
+"                    * Invoices belong to the <b>same</b> partner.<br/>\n"
+"                    * Invoices have the <b>same</b> company, partner, address,\n"
+"                    currency, journal, salesman, account and type.<br/><br/>\n"
+"                    Lines will only be merged if:<br/>\n"
+"                    * Invoice lines are exactly the same except for the\n"
+"                    product, quantity and unit.<br/>"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__portal
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__portal
+#: selection:res.partner,transfert_mode:0
+msgid "Portal"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_partner_form_inherited
+msgid "Portal Access"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:res.groups,name:metro_rungis_invoice_robot.group_process_control
+msgid "Process Control Access"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.view_partner_form_inherited
+msgid "Process Controls"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_company__run_invoice_robot
+msgid "Run invoice robot for this company"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,transfert_mode:0
+msgid "SFTP"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.actions.server,name:metro_rungis_invoice_robot.ir_cron_robot_send_invoices_ir_actions_server
+#: model:ir.cron,cron_name:metro_rungis_invoice_robot.ir_cron_robot_send_invoices
+#: model:ir.cron,name:metro_rungis_invoice_robot.ir_cron_robot_send_invoices
+msgid "Send Invoices"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.invoice_search_inherited
+msgid "Sent"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "Sent to responsible"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__state
+msgid "Status"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_account_tax
+msgid "Tax"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/models/account_invoice.py:60
+#, python-format
+msgid "The field Vendor is required, please complete it to validate the Vendor Bill."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model,name:metro_rungis_invoice_robot.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_partner__transfert_mode
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_res_users__transfert_mode
+msgid "Transportation Method"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model_terms:ir.ui.view,arch_db:metro_rungis_invoice_robot.invoice_search_inherited
+msgid "Type"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:res.partner,date_create_interval_unit:0
+msgid "Weeks"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/models/account_invoice_line.py:13
+#, python-format
+msgid "You can only delete an invoice line if the invoice is in either draft or sent state."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: code:addons/metro_rungis_invoice_robot/models/account_invoice.py:64
+#, python-format
+msgid "You cannot validate an invoice with a negative total amount. You should create a credit note instead."
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:mail.template,subject:metro_rungis_invoice_robot.mail_template_invoice
+#: model:mail.template,subject:metro_rungis_invoice_robot.mail_template_invoice_portal
+msgid "Your Invoice at ${object.company_id.name}"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_stock_picking__invoice_created
+msgid "invoice created"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: model:ir.model.fields,field_description:metro_rungis_invoice_robot.field_account_invoice__picking_invoice
+msgid "invoice created from picking"
+msgstr ""
+
+#. module: metro_rungis_invoice_robot
+#: selection:account.invoice,state:0
+msgid "passed error validation"
+msgstr ""
+

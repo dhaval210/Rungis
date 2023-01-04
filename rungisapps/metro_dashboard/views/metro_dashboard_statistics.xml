@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="metro_dashboard_statistics_form" model="ir.ui.view">
+        <field name="name">metro.dashboard.statistics.form</field>
+        <field name="model">metro.dashboard.statistics</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="update_value"
+                        group=""
+                        type="object"
+                        groups="metro_dashboard.group_metro_dashboard_manager"
+                        string="Recalculate"
+                        class="oe_highlight" />
+                </header>
+                <sheet>
+                    <div class="o_not_full oe_button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-power-off">
+                            <field name="active" widget="boolean_button" options="{'terminology': 'inactive'}"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="suffix" attrs="{'invisible': [('data_source', '=', 'data')]}" />
+                            <field name="monetary" />
+                        </group>
+                        <group>
+                            <field name="visualisation" />
+                            <field name="data_source" widget="radio" />
+                            <field name="use_timeframes" attrs="{'invisible': [('data_source', '=', 'data')]}" />
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="cust_timeframe" attrs="{'invisible': [('use_timeframes', '=', True)]}" />
+                        <field name="dataset_ids" widget="many2many_tags" attrs="{'invisible': [('data_source', '=', 'python')]}" />
+                        <field name="dataset_keys_id" domain="[('id', 'in', dataset_ids)]" options="{'no_create_edit': True}" attrs="{'invisible': [('data_source', '=', 'python')]}" />
+                        <field name="compute_code" attrs="{'invisible': [('data_source', '=', 'data')]}" />
+                    </group>
+
+                    <notebook>
+                        <page string="Assigned Tiles">
+                            <field name="tile_ids">
+                                <tree string="Tiles" create="false" delete="false" editable="false">
+                                    <field name="name" />
+                                    <field name="user_ids" />
+                                    <field name="dashboard_id" />
+                                    <field name="insert_new_line"/>
+                                    <field name="api_available" />
+                                    <field name="double_width" />
+                                    <field name="suffix" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Additional information">
+                            <group>
+                                <group>
+                                    <field name="empty" attrs="{'readonly': True}" />
+                                    <field name="value" attrs="{'readonly': True}" />
+                                    <field name="table_data" attrs="{'readonly': True}" />
+                                    <field name="keys" attrs="{'readonly': True}" />
+                                </group>
+                                <group>
+                                    <field name="empty90" attrs="{'readonly': True}" />
+                                    <field name="value90" attrs="{'readonly': True}" />
+                                    <field name="table_data90" attrs="{'readonly': True}" />
+                                    <field name="keys90" attrs="{'readonly': True}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Dependencies">
+                            <group>
+                                <field name="uninstalled_dependencies" attrs="{'readonly': True}" />
+                                <field name="dependency_count" attrs="{'readonly': True}" />
+                                <field name="dependencies" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_statistics_tree" model="ir.ui.view">
+        <field name="name">metro.dashboard.statistics.tree</field>
+        <field name="model">metro.dashboard.statistics</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="value_preview" />
+                <field name="suffix" />
+                <field name="use_timeframes" />
+                <field name="visualisation" />
+                <field name="dependency_count" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_statistics_search" model="ir.ui.view">
+        <field name="name">metro.dashboard.statistics.search</field>
+        <field name="model">metro.dashboard.statistics</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <!-- Inactive -->
+                <filter name="filter_inactive" string="Inactive" domain="[('active', '=', False)]" />
+                <!-- Used/Unused by tiles -->
+                <filter name="filter_used_stats" string="Used by Tiles" domain="[('tile_count', '&gt;', 0)]" />
+                <filter name="filter_unused_stats" string="Not used by Tiles" domain="[('tile_count', '=', 0)]" />
+                <!-- Visualisation Types -->
+                <filter name="filter_vis_number" string="Visualisation: Number" domain="[('visualisation', '=', 'number')]" />
+                <filter name="filter_vis_bar" string="Visualisation: Bar" domain="[('visualisation', '=', 'bar')]" />
+                <filter name="filter_vis_line" string="Visualisation: Line" domain="[('visualisation', '=', 'line')]" />
+                <filter name="filter_vis_pie" string="Visualisation: Pie" domain="[('visualisation', '=', 'pie')]" />
+                <!-- Monetary -->
+                <filter name="filter_monetary" string="Monetary Statistics" domain="[('monetary', '=', True)]" />
+                
+                <group string="Group By">
+                    <filter name="group_by_visualisation" string="Visualisation Type" context="{'group_by': 'visualisation'}" />
+                    <filter name="group_by_source" string="Data Source" context="{'group_by': 'data_source'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree View: Action (Dropdown button) -->
+    <record id="metro_dashboard_stats_action_update" model="ir.actions.server">
+        <field name="name">Update Values</field>
+        <field name="model_id" ref="metro_dashboard.model_metro_dashboard_statistics" />
+        <field name="binding_model_id" ref="metro_dashboard.model_metro_dashboard_statistics" />
+        <field name="state">code</field>
+        <field name="code">records.action_update()</field>
+    </record>
+
+    <record id="metro_dashboard_statistics_action" model="ir.actions.act_window">
+        <field name="name">Dashboard Statistics</field>
+        <field name="res_model">metro.dashboard.statistics</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="metro_dashboard_statistics_menu"
+        name="Statistics"
+        parent="metro_dashboard_edit_item"
+        action="metro_dashboard_statistics_action"
+        groups="metro_dashboard.group_metro_dashboard_manager" />
+    
+</odoo>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="enaio_deviation_remark_tree_view" model="ir.ui.view">
+        <field name="name">enaio.deviation.remark.view.tree</field>
+        <field name="model">enaio.deviation.remark</field>
+        <field name="arch" type="xml">
+            <tree editable="top" >
+                <field name="name"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="enaio_deviation_remark_action" model="ir.actions.act_window">
+        <field name="name">Enaio Deviation Remark</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">enaio.deviation.remark</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem id="enaio_menu_remark" name="Enaio Deviation Remark" parent="stock.menu_warehouse_config" sequence="30"/>
+
+    <menuitem
+        id="enaio_deviation_remark_menu"
+        name="Enaio Deviation Remarks"
+        parent="enaio_menu_remark"
+        action="enaio_deviation_remark_action"
+        groups="base.group_user"
+        sequence="4"/>
+
+    <record id="view_move_line_enaio_remark_form" model="ir.ui.view">
+        <field name="name">stock.move.line.enaio.remark.view.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="before">
+                <field name="enaio_remark_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

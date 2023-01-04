@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="transport_management_location_form_view" model="ir.ui.view">
+            <field name="name">route.location.form.view</field>
+            <field name="model">route.location</field>
+            <field name="arch" type="xml">
+                <form>
+                     <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                     </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="transport_management_location_tree_view" model="ir.ui.view">
+            <field name="name">route.location.tree</field>
+            <field name="model">route.location</field>
+            <field name="arch" type="xml">
+                 <tree>
+                    <field name="name"/>
+                 </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_transport_management_location">
+            <field name="name">Route Location</field>
+            <field name="res_model">route.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <menuitem id="menu_route_location" name="Route Locations" parent="menu_transport"/>
+        <menuitem id="menu_route_location_child" name="Route Locations" parent="menu_transporter_route" action="action_transport_management_location"/>
+
+           </data>
+        </odoo>

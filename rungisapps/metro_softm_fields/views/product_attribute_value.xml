@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- product.attribute.value inherit tree view -->
+    <record id="variants_tree_view" model="ir.ui.view">
+        <field name="name">product.attribute.value.inherit.view.tree</field>
+        <field name="model">product.attribute.value</field>
+        <field name="inherit_id" ref="product.variants_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="softm_key"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- product.attribute inherit form view -->
+    <record id="product_attribute_view_form" model="ir.ui.view">
+        <field name="name">product.attribute.inherit.view.form</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='value_ids']/tree/field[@name='name']" position="after">
+                <field name="softm_key"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

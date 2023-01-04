@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_article_statistics,Access Article Statistics,model_article_statistics,base.group_user,1,1,1,1
+access_buying_reorders,Access Buying Reorders,model_buying_reorders,base.group_user,1,1,1,1
+access_purchase_supply,Access Purchase Supply,model_purchase_supply,base.group_user,1,1,1,1

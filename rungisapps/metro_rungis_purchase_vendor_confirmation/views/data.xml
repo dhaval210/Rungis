@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="group_delivery_note" model="res.groups">
+            <field name="name">Group Delivery Note</field>
+        </record>
+        <record id="group_delivery_note_einkauf" model="res.groups">
+            <field name="name">Group Delivery Note Einkauf</field>
+        </record>
+        <record id="group_delivery_note_activate" model="res.groups">
+            <field name="name">Group Delivery Note Activate</field>
+        </record>
+    </data>
+</odoo>

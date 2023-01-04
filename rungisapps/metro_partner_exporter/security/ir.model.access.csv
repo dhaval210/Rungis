@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_csv_backend","csv_backend connector manager","model_csv_backend","connector.group_connector_manager",1,1,1,1
+"access_csv_backend_user","csv_backend user","model_csv_backend","base.group_user",1,0,0,0
+
+"access_csv_export","csv_export connector manager","model_csv_export","connector.group_connector_manager",1,1,1,1
+"access_csv_export_user","csv_export user","model_csv_export","base.group_user",1,0,0,0

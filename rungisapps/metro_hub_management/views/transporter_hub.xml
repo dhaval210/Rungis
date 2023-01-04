@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- transporter.hub form view -->
+    <record id="transporter_hub_view_form" model="ir.ui.view">
+        <field name="name">transporter.hub.view.form</field>
+        <field name="model">transporter.hub</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="arrival_time" readonly="1"/>
+                        <field name="departure_time" readonly="1"/>
+                        <field name="default_arrival_float" widget="float_time"/>
+                        <field name="default_departure_float" widget="float_time"/>
+                        <field name="active"/>
+                        <field name="schedule_ids">
+                            <tree>
+                                <field name="planned_arrival_date" />
+                                <field name="departure_day"/>
+                                <field name="picking_start_date" readonly="1"/>
+                                <field name="picking_end_date" readonly="1"/>
+                                <field name="real_arrival_date" />
+                                <field name="real_departure_day"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- transporter.hub tree view -->
+    <record id="transporter_hub_view_tree" model="ir.ui.view">
+        <field name="name">transporter.hub.view.tree</field>
+        <field name="model">transporter.hub</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- transporter.hub.schedule tree view -->
+    <record id="transporter_hub_schedule_view_tree" model="ir.ui.view">
+        <field name="name">transporter.hub.schedule.view.tree</field>
+        <field name="model">transporter.hub.schedule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="hub_id" />
+                <field name="planned_arrival_date" />
+                <field name="real_arrival_date" />
+                <field name="departure_day" />
+                <field name="real_departure_day" />
+                <field name="picking_start_date" />
+                <field name="picking_end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- transporter.hub.schedule form view -->
+    <record id="transporter_hub_schedule_view_form" model="ir.ui.view">
+        <field name="name">transporter.hub.schedule.view.form</field>
+        <field name="model">transporter.hub.schedule</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <!-- Add your fields here -->
+                        <field name="hub_id" readonly="1"/>
+                        <field name="planned_arrival_date" />
+                        <field name="real_arrival_date" />
+                        <field name="departure_day" />
+                        <field name="real_departure_day" />
+                        <field name="picking_start_date" readonly="1"/>
+                        <field name="picking_end_date" readonly="1"/>
+                        <field name="active" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- transporter.hub.schedule calendar view -->
+    <record id="transporter_hub_schedule_view_calendar" model="ir.ui.view">
+        <field name="name">transporter.hub.schedule.view.calendar</field>
+        <field name="model">transporter.hub.schedule</field>
+        <field name="arch" type="xml">
+            <calendar string="Hub Schedule" date_start="planned_arrival_date" date_stop="departure_day" mode="week">
+                <field name="hub_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <!-- transporter.hub action window -->
+    <record id="transporter_hub_schedule_action" model="ir.actions.act_window">
+        <field name="name">transporter.hub.schedule.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">transporter.hub.schedule</field>
+        <field name="view_mode">tree,form,calendar</field>
+        <field name="view_type">form</field>
+        <!-- <field name="domain">['|', ('active', '=', True), ('active', '=', False)]</field> -->
+    </record>
+    <!-- transporter.hub action window -->
+    <record id="transporter_hub_action" model="ir.actions.act_window">
+        <field name="name">transporter.hub.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">transporter.hub</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+</odoo>

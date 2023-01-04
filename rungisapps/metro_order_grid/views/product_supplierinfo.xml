@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>    <!-- product.supplierinfo tree view -->
+    <record id="product_supplierinfo_tree_view" model="ir.ui.view">
+        <field name="name">product.supplierinfo.view.tree</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" limit="5000">
+                <field name="name"/>
+                <field name="product_name"/>
+                <field name="product_tmpl_id"/>
+                <field name="min_qty"/>
+                <field name="price"/>
+                <field name="discount"/>
+                <field name="discount2"/>
+                <field name="discount3"/>
+                <field name="currency_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

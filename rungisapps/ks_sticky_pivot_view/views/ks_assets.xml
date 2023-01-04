@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="stickyheader_Theme" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/ks_sticky_pivot_view/static/src/css/ks_main.css"/>
+            <script type="text/javascript" src="/ks_sticky_pivot_view/static/src/lib/stickytableheaders/jquery.stickytableheaders_pivot.js"/>
+            <script type="text/javascript" src="/ks_sticky_pivot_view/static/src/js/ks_stick_headers.js"/>
+        </xpath>
+    </template>
+</odoo>

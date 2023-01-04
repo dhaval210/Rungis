@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" name="metro_gate_management assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/metro_gate_management/static/src/js/stock_picking.js"></script>
+                <script type="text/javascript" src="/metro_gate_management/static/src/js/column.js"></script>
+                <script type="text/javascript" src="/metro_gate_management/static/src/js/basic_model.js"></script>
+                <link rel="stylesheet" href="/metro_gate_management/static/src/css/style.css" />
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

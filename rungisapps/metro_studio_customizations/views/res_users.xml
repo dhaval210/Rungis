@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="res_user_customizations_tree" model="ir.ui.view">
+        <field name="name">METRO Customizations: Adding Related Partner to tree</field>
+        <field name="active" eval="True" />
+        <field name="inherit_id" ref="base.view_users_tree" />
+        <field name="model">res.users</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='login_date'][not(ancestor::field)]" position="after">
+                    <field name="partner_id" />
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

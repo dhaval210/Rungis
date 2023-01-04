@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="assets_backend" name="metro geolocalization assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+           <script type="text/javascript" src="metro_geolocalize/static/src/js/geolocalize.js"></script>
+        </xpath>
+    </template>
+</odoo>

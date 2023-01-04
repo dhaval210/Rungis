@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="lefo_removal" model="product.removal">
+            <field name="name">Last Expiry First Out (LEFO)</field>
+            <field name="method">lefo</field>
+        </record>
+
+    </data>
+</odoo>

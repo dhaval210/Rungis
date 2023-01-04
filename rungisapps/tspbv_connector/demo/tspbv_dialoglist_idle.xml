@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- idle voice dialog starts here -->
+    <record id="dialoglist_5" model="tspbv.dialoglist">
+        <field name="name">Idle Dialog</field>
+        <field name="start">idle</field>
+        <field name="default_code">idle</field>
+    </record>
+
+    <record id="output_5_1" model="tspbv.output">
+        <field name="lydia_output">Suche nach Auftrag läuft</field>
+    </record>
+    <record id="dialog_12" model="tspbv.dialog">
+        <field name="id_dialog">idle</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_5_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_5" />
+    </record>
+
+    <record id="link_19" model="tspbv.link">
+        <field name="rel">*</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location&amp;idle=True</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location&amp;idle=True'" />        
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_12" />
+    </record>
+    <!-- idle voice dialog ends here -->
+
+
+    <record id="dialoglist_5_1" model="tspbv.dialoglist">
+        <field name="name">Idle erfolglos Dialog</field>
+        <field name="start">idle</field>
+        <field name="default_code">idle_notok</field>
+    </record>
+
+    <record id="output_5_1_1" model="tspbv.output">
+        <field name="lydia_output">Es konnte kein Auftrag gefunden werden</field>
+    </record>
+    <record id="dialog_12_1" model="tspbv.dialog">
+        <field name="id_dialog">idle</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_5_1_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_5_1" />
+    </record>
+
+    <record id="link_19_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1'" />        
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_12_1" />
+    </record>
+</odoo>

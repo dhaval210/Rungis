@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <menuitem id="report_all_channels_sales"
+              action="sale.report_all_channels_sales_action"
+              name="All Channels Sales Orders"
+              parent="sale.menu_sale_report"
+              sequence="3"/>
+</odoo>

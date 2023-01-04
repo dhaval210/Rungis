@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- session qty dialog starts here -->
+    <record id="dialoglist_7_fast" model="tspbv.dialoglist">
+        <field name="name">PickQty Dialog</field>
+        <field name="start">startPick</field>
+        <field name="model_id" search="[('model','=','stock.move.line')]" model="ir.model" />
+        <field name="default_code">qty-fast</field>
+    </record>
+    <record id="output_7_1_fast" model="tspbv.output">
+        <field name="lydia_output">
+            ~[ if object.move_id.special_wishes: ]~
+                Sonderwunsch beachten
+            ~[ endif ]~
+            §PAUSE{500}
+            $[object.product_uom_qty | int] $[object.product_id.uom_id.name] in $[object.picking_id.name[-3:]]
+        </field>
+    </record>
+    <record id="dialog_7_1" model="tspbv.dialog">
+        <field name="id_dialog">startPick</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_1_fast" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+    <record id="link_7_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#qtycheck-fast</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_1" />
+    </record>
+
+    <record id="dialog_7_2_fast" model="tspbv.dialog">
+        <field name="id_dialog">qtycheck-fast</field>
+        <field name="lydia_output_id" ref="" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_7_1" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+
+    <record id="link_7_2" model="tspbv.link">
+        <field name="rel">qtychecknotok</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_7_3" />
+    </record>
+    <record id="link_7_3" model="tspbv.link">
+        <field name="rel">qtycheckok</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/item/commit?dialoglist_code=location&amp;qty=${qtycheck-fast}[1]'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+    <record id="link_7_3_1_1" model="tspbv.link">
+        <field name="rel">qtycheckNext</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/lines?dialoglist_code=location&amp;skip=True'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+
+    <record id="link_7_4" model="tspbv.link">
+        <field name="rel">qtycheckRepeat</field>
+        <field name="href">#startPick</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+    <record id="link_7_7" model="tspbv.link">
+        <field name="rel">qtycheckShortage</field>
+        <field name="href">#qtyShortage</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+    <record id="link_7_u_7" model="tspbv.link">
+        <field name="rel">qtycheckSuperset</field>
+        <field name="href">#qtySuperset</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+    <record id="link_7_7_2" model="tspbv.link">
+        <field name="rel">scrapqty</field>
+        <field name="href">#checkScrap</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>    
+    <record id="link_7_6" model="tspbv.link">
+        <field name="rel">qtycheckLocation</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_7_4" />
+    </record>    
+
+
+    <!-- mindermenge -->
+    <record id="output_7_4" model="tspbv.output">
+        <field name="lydia_output">(Mindermenge) bestätigen</field>
+    </record>
+    <record id="grammar_rule_7_5" model="tspbv.grammar.rule">
+        <field name="rule_name">confirmcheck</field>
+        <field name="content">(okay|fertig|zurück)</field>
+    </record>
+    <record id="input_7_2" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('metro_rungis_tspbv_template.grammar_rule_7_5')])]" />
+    </record>
+    <record id="recognition_7_7" model="tspbv.recognition">
+        <field name="rel">shortageOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_2" />
+    </record>
+    <record id="recognition_7_7_f" model="tspbv.recognition">
+        <field name="rel">shortageOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_2" />
+    </record>
+    <record id="recognition_7_7_1" model="tspbv.recognition">
+        <field name="rel">shortageNotOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_2" />
+    </record>
+
+    <record id="dialog_7_5" model="tspbv.dialog">
+        <field name="id_dialog">qtyShortage</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_4" />
+        <field name="lydia_input_id" ref="metro_rungis_tspbv_template.input_7_2" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+    <record id="link_7_7" model="tspbv.link">
+        <field name="rel">qtycheckShortage</field>
+        <field name="href">#qtyShortage</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+    </record>
+    <record id="output_7_5" model="tspbv.output">
+        <field name="lydia_output">Wieviel (Mindermenge)</field>
+    </record>
+    <record id="input_7_3" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7_1')])]" />
+    </record>
+    <record id="recognition_7_8" model="tspbv.recognition">
+        <field name="rel">shortageqtycheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">$1 &lt; $[object.product_uom_qty | int]</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_3" />
+    </record>
+    <record id="recognition_7_8_f" model="tspbv.recognition">
+        <field name="rel">shortageqtycheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">$1 &lt; $[object.product_uom_qty | int]</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_3" />
+    </record>
+    <record id="recognition_7_8_1" model="tspbv.recognition">
+        <field name="rel">shortageqtyNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1 >= $[object.product_uom_qty | int]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_3" />
+    </record>
+    <record id="recognition_7_8_1_f" model="tspbv.recognition">
+        <field name="rel">shortageqtyNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1 >= $[object.product_uom_qty | int]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_3" />
+    </record>    
+    <record id="dialog_7_6" model="tspbv.dialog">
+        <field name="id_dialog">checkShortage</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_5" />
+        <field name="lydia_input_id" ref="metro_rungis_tspbv_template.input_7_3" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+    <record id="link_7_8" model="tspbv.link">
+        <field name="rel">shortageNotOkay</field>
+        <field name="href">#startPick</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_5" />
+    </record>
+    <record id="link_7_9" model="tspbv.link">
+        <field name="rel">shortageOkay</field>
+        <field name="href">#checkShortage</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_5" />
+    </record>
+
+    <record id="link_7_10" model="tspbv.link">
+        <field name="rel">shortageqtycheckok</field>
+        <field name="href">#checkShortageQty</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_6" />
+    </record>
+
+    <record id="output_7_7_1" model="tspbv.output">
+        <field name="lydia_output">ungültig(e Anzahl)</field>
+    </record>
+    <record id="dialog_7_8_2" model="tspbv.dialog">
+        <field name="id_dialog">shortageqtychecknotok</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_7_1" />
+        <field name="lydia_input_id" ref="" />
+    </record>
+    <record id="link_7_13_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#checkShortage</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_8_2" />
+    </record>
+
+    <record id="link_7_10_1" model="tspbv.link">
+        <field name="rel">shortageqtyNotOk</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_6" />
+        <field name="sub_dialog_id" ref="metro_rungis_tspbv_template.dialog_7_8_2" />
+    </record>
+
+    <record id="input_7_4" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7_1'),ref('tspbv_connector.grammar_rule_7_1_1'),ref('tspbv_connector.grammar_rule_7_1_2')])]" />
+    </record>
+    <record id="recognition_7_9_1" model="tspbv.recognition">
+        <field name="rel">shortageAbortPick</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">abbrechen</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>
+    <record id="recognition_7_9_2" model="tspbv.recognition">
+        <field name="rel">shortageGoBack</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>
+    <record id="recognition_7_9" model="tspbv.recognition">
+        <field name="rel">shortagedoublecheck</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1==${checkShortage}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>
+    <record id="recognition_7_9_f" model="tspbv.recognition">
+        <field name="rel">shortagedoublecheck</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1==${checkShortage}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>
+    <record id="recognition_7_10" model="tspbv.recognition">
+        <field name="rel">shortagedoublecheckNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1!=${checkShortage}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>
+    <record id="recognition_7_10_f" model="tspbv.recognition">
+        <field name="rel">shortagedoublecheckNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1!=${checkShortage}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+    </record>    
+    <record id="output_7_6" model="tspbv.output">
+        <field name="lydia_output">Bestätige ${checkShortage}[1]</field>
+    </record>
+    <record id="dialog_7_7" model="tspbv.dialog">
+        <field name="id_dialog">checkShortageQty</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_6" />
+        <field name="lydia_input_id" ref="metro_rungis_tspbv_template.input_7_4" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+
+    <record id="output_7_7" model="tspbv.output">
+        <field name="lydia_output">ungültig(e Anzahl)</field>
+    </record>
+    <record id="dialog_7_8" model="tspbv.dialog">
+        <field name="id_dialog">shortageqtychecknotok</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_7" />
+        <field name="lydia_input_id" ref="" />
+    </record>
+    <record id="link_7_15" model="tspbv.link">
+        <field name="rel">shortageGoBack</field>
+        <field name="href">#qtyShortage</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_7" />
+    </record>
+    <record id="link_7_14" model="tspbv.link">
+        <field name="rel">shortageAbortPick</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/cancel?dialoglist_code=hold</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/cancel?dialoglist_code=hold'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_7" />
+    </record>
+    <record id="link_7_13" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#checkShortageQty</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_8" />
+    </record>
+    <record id="link_7_12" model="tspbv.link">
+        <field name="rel">shortagedoublecheckNotOk</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_7" />
+        <field name="sub_dialog_id" ref="metro_rungis_tspbv_template.dialog_7_8" />
+    </record>
+    <record id="link_7_11" model="tspbv.link">
+        <field name="rel">shortagedoublecheck</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/item/commit?dialoglist_code=location&amp;qty=${checkShortageQty}[1]</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/item/commit?dialoglist_code=location&amp;qty=${checkShortageQty}[1]'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_7" />
+    </record>
+    <!-- mindermenge ende -->
+
+    <!-- ausschuss start -->
+    <record id="output_7_10" model="tspbv.output">
+        <field name="lydia_output">Wieviel (Ausschuss)</field>
+    </record>
+
+    <record id="input_7_10" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7_1'),ref('tspbv_connector.grammar_rule_7_1_2')])]" />
+    </record>
+    <record id="recognition_7_10_1" model="tspbv.recognition">
+        <field name="rel">scrapOk</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">$1 &gt; 0</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+    </record>
+    <record id="recognition_7_10_1_f" model="tspbv.recognition">
+        <field name="rel">scrapOk</field>
+        <field name="input_type">recognition</field>
+        <field name="on_match">$1 &gt; 0</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+    </record>
+    <record id="recognition_7_10_2" model="tspbv.recognition">
+        <field name="rel">scrapNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1 &lt;= 0</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+    </record>
+    <record id="recognition_7_10_2_f" model="tspbv.recognition">
+        <field name="rel">scrapNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1 &lt;= 0</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+    </record>
+    <record id="recognition_7_10_3" model="tspbv.recognition">
+        <field name="rel">scrapGoBack</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+    </record>
+    <record id="dialog_7_10" model="tspbv.dialog">
+        <field name="id_dialog">checkScrap</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_10" />
+        <field name="lydia_input_id" ref="metro_rungis_tspbv_template.input_7_10" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+
+
+    <record id="link_7_a_8" model="tspbv.link">
+        <field name="rel">scrapNotOk</field>
+        <field name="href">#scrapqtynotok</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_10" />
+    </record>
+    <record id="link_7_a_9" model="tspbv.link">
+        <field name="rel">scrapOk</field>
+        <field name="href">#checkScrapQty</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_10" />
+    </record>
+
+    <record id="link_7_a_10" model="tspbv.link">
+        <field name="rel">scrapGoBack</field>
+        <field name="href">#startPick</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_10" />
+    </record>
+
+    <record id="output_7_a_7_1" model="tspbv.output">
+        <field name="lydia_output">ungültig(e Anzahl)</field>
+    </record>
+    <record id="dialog_7_a_8_2" model="tspbv.dialog">
+        <field name="id_dialog">scrapqtynotok</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_a_7_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+    <record id="link_7_a_13_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#checkScrap</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_8_2" />
+    </record>
+
+    <record id="input_7_4_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7_1'),ref('tspbv_connector.grammar_rule_7_1_1'),ref('tspbv_connector.grammar_rule_7_1_2')])]" />
+    </record>
+    <record id="recognition_7_9_1_1" model="tspbv.recognition">
+        <field name="rel">scrapAbortPick</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">abbrechen</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="recognition_7_9_2_1" model="tspbv.recognition">
+        <field name="rel">scrapGoBack</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="recognition_7_9_1_2" model="tspbv.recognition">
+        <field name="rel">scrapdoublecheck</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1==${checkScrap}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="recognition_7_9_1_2_f" model="tspbv.recognition">
+        <field name="rel">scrapdoublecheck</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1==${checkScrap}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="recognition_7_10_1_1" model="tspbv.recognition">
+        <field name="rel">scrapdoublecheckNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$1!=${checkScrap}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="recognition_7_10_1_1_f" model="tspbv.recognition">
+        <field name="rel">scrapdoublecheckNotOk</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$1!=${checkScrap}[1]</field>
+        <field name="input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+    </record>
+    <record id="output_7_6_1" model="tspbv.output">
+        <field name="lydia_output">Bestätige ${checkScrap}[1]</field>
+    </record>
+    <record id="dialog_7_a_7" model="tspbv.dialog">
+        <field name="id_dialog">checkScrapQty</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_6_1" />
+        <field name="lydia_input_id" ref="metro_rungis_tspbv_template.input_7_4_1" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+
+
+    <record id="dialog_7_a_8_3" model="tspbv.dialog">
+        <field name="id_dialog">scrapqtychecknotok</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_7_a_7_1" />
+        <field name="lydia_input_id" ref="" />
+    </record>
+
+    <record id="link_7_13_1_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#checkScrapQty</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_8_3" />
+    </record>
+    <record id="link_7_12_1_1" model="tspbv.link">
+        <field name="rel">scrapdoublecheckNotOk</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_7" />
+        <field name="sub_dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_8_3" />
+    </record>
+    <record id="link_7_11_1_1" model="tspbv.link">
+        <field name="rel">scrapdoublecheck</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/item/scrap?dialoglist_code=location&amp;qty=${checkScrapQty}[1]</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/item/scrap?dialoglist_code=location&amp;qty=${checkScrapQty}[1]'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_7" />
+    </record>
+
+    <record id="link_7_15_1_1" model="tspbv.link">
+        <field name="rel">scrapGoBack</field>
+        <field name="href">#checkScrap</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_7" />
+    </record>
+    <record id="link_7_14_1_1" model="tspbv.link">
+        <field name="rel">scrapAbortPick</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/cancel?dialoglist_code=hold</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/cancel?dialoglist_code=hold'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_a_7" />
+    </record>
+    <!-- scrap ende-->
+
+
+
+    <record id="dialoglist_tu_2_fast" model="tspbv.dialoglist">
+        <field name="name">Transport Unit Label Dialog</field>
+        <field name="start">getTransportUnitLabel</field>
+        <field name="default_code">transport_unit_label-fast</field>
+        <field name="model_id" search="[('model','=','tspbv.session')]" model="ir.model" />
+    </record>
+    <record id="output_tu_2" model="tspbv.output">
+        <field name="lydia_output">(nimm) Etikett $[object.tl_numbers]</field>
+    </record>
+    <record id="dialog_tu_2" model="tspbv.dialog">
+        <field name="id_dialog">getTransportUnitLabel</field>
+        <field name="lydia_output_id" ref="metro_rungis_tspbv_template.output_tu_2" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_tu_2_fast" />
+    </record>
+    <record id="link_tu_2" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/transport_location?dialoglist_code=location&amp;print=True'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_tu_2" />
+    </record>              
+
+    <record id="dialog_tu_qty_8_8_2" model="tspbv.dialog">
+        <field name="id_dialog">newstash</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_qty_8_7_1" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+        <field name="dialoglist_id" ref="metro_rungis_tspbv_template.dialoglist_7_fast" />
+    </record>
+    <record id="recognition_tu_qty_8_1" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>
+    <record id="recognition_tu_qty_8_1_f" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>
+    <record id="recognition_tu_qty_8_3" model="tspbv.recognition">
+        <field name="rel">newstashDruckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">nicht drucken</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>        
+
+    <record id="link_tu_qty_8_13_1_fast" model="tspbv.link">
+        <field name="rel">newstashok</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/label?dialoglist_code=qty-fast&amp;print=True'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_tu_qty_8_8_2" />
+    </record>
+
+    <record id="link_tu_qty_1" model="tspbv.link">
+        <field name="rel">stashfull</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="metro_rungis_tspbv_template.dialog_7_2_fast" />
+        <field name="sub_dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_qty_8_8_2" />
+    </record> 
+
+    <!-- fast workflow starts here -->
+    <record id="workflow_2" model="tspbv.workflow">
+        <field name="name">Fast Workflow</field>
+        <field name="dialoglist_ids" eval="[(6,0,[ref('tspbv_connector.dialoglist_3'),ref('tspbv_connector.dialoglist_4'),ref('tspbv_connector.dialoglist_5'),ref('tspbv_connector.dialoglist_6'), ref('metro_rungis_tspbv_template.dialoglist_7_fast'), ref('tspbv_connector.dialoglist_9'), ref('tspbv_connector.dialoglist_10'), ref('tspbv_connector_cw.dialoglist_cw_1'), ref('metro_rungis_tspbv_template.dialoglist_tu_2_fast'), ref('tspbv_connector.dialoglist_bf_1')])]" />
+        <field name="js_script_ids" eval="[(6,0,[ref('tspbv_connector_cw.javascript_code_1')])]" />
+        <field name="first_dialog_id" ref="tspbv_connector.dialoglist_3" />
+        <!-- replace with fast dialoglists -->
+        <field name="transport_unit_dialoglist" ref="metro_rungis_tspbv_template.dialoglist_tu_2_fast" />
+        <field name="stash_dialoglist" eval="False" />
+    </record>
+    <!-- fast workflow ends here -->
+
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <data>
+        <record id="product_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.inherit.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']"
+                       position="before">
+                    <label for="average_cw_quantity" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'invisible': ['|', ('catch_weight_ok', '=', False), '&amp;',('product_variant_count', '>', 1),  ('is_product_variant', '=', False)]}"/>
+                    <div class="o_row" groups="tis_catch_weight.group_catch_weight"
+                         attrs="{'invisible': ['|', ('catch_weight_ok', '=', False), '&amp;',('product_variant_count', '>', 1),  ('is_product_variant', '=', False)]}">
+                        <field name="average_cw_quantity" groups="tis_catch_weight.group_catch_weight"
+                               attrs="{'invisible': [('catch_weight_ok', '=', False)]}"/>
+                        <field name="cw_uom_id" readonly="1" groups="tis_catch_weight.group_catch_weight"
+                               attrs="{'invisible': [('catch_weight_ok', '=', False)]}"/>
+                        /
+                        <field name="uom_id" readonly="1" groups="tis_catch_weight.group_catch_weight"
+                               attrs="{'invisible': [('catch_weight_ok', '=', False)]}"/>
+                    </div>
+                    <label for="max_deviation" groups="tis_cw_average_qty.group_deviation_warning"/>
+                    <div class="o_row" groups="tis_catch_weight.group_catch_weight">
+                        <field name="max_deviation" groups="tis_cw_average_qty.group_deviation_warning"
+                               style="width:70%"/>
+                        <span groups="tis_cw_average_qty.group_deviation_warning">%</span>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+</odoo>

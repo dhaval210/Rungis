@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.move.line inherit form view -->
+    <record id="view_stock_move_line_form_catchweight" model="ir.ui.view">
+        <field name="name">stock.move.line.inherit.view.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="tis_catch_weight.view_stock_move_line_form_catchweight"/>
+        <field name="arch" type="xml">
+            <field name="product_cw_uom"  position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="product_cw_uom_qty"  position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_company_form_inherit_layout" model="ir.ui.view">
+            <field name="name">res.company.form.inherit.layout</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet//notebook//page" position="after">
+                    <page string="Header/Footer">
+                        <group>
+                            <field name="top_logo_header" widget="image" class="oe_avatar"/>
+                            <field name="mother_company_logo" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group>
+                            <field name="back_address" style="font-size: 16px;"/>
+                        </group>
+                         <group>
+                            <field name="field_1"/>
+                            <field name="field_2"/>
+                            <field name="field_3"/>
+                            <field name="field_4"/>
+                            <field name="field_5"/>
+                            <field name="field_6"/>
+                            <field name="field_7"/>
+                            <field name="field_8"/>
+                            <field name="field_9"/>
+                            <field name="field_10"/>
+                            <field name="field_11"/>
+                            <field name="field_12"/>
+                            <field name="field_13"/>
+                            <field name="field_14"/>
+                            <field name="field_15"/>
+                            <field name="field_16"/>
+                            <field name="field_17"/>
+                        </group>
+
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

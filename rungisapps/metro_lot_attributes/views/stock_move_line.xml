@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.move.line inherit form view -->
+    <record id="view_move_line_form" model="ir.ui.view">
+        <field name="name">stock.move.line.inherit.view.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[last()]" position="after">
+                <group>
+                    <field name="picking_type_create_lot_attributes" invisible="1" />
+                    <field name="lot_attribute_line_ids" widget="one2many_list" attrs="{'invisible': [('picking_type_create_lot_attributes', '=', False)]}">
+                        <tree editable="bottom" decoration-danger="mandatory == True" create="false" delete="false">
+                            <field name="attribute_id" options="{'no_create_edit': True}"/>
+                            <field name="valid_product_attribute_value_ids" invisible="1" />
+                            <field name="mandatory" invisible="1"/>
+                            <field name="value_ids" attrs="{'required': [('mandatory', '=', True)]}" domain="[('attribute_id', '=', attribute_id), ('id', 'in', valid_product_attribute_value_ids)]" options="{'no_create_edit': True}" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+
+            <field name="date" position="attributes">
+                <attribute name="attrs">{'invisible': [('picking_type_create_lot_attributes', '=', True)]}</attribute>
+            </field>
+            <field name="reference"  position="attributes" >
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="product_id"  position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <field name="location_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('picking_type_create_lot_attributes', '=', True)]}</attribute>
+            </field>
+            <field name="package_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('picking_type_create_lot_attributes', '=', True)]}</attribute>
+            </field>
+            <field name="owner_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('picking_type_create_lot_attributes', '=', True)]}</attribute>
+            </field>
+            <field name="product_uom_qty"  position="attributes">
+                <attribute name="readonly">1</attribute>
+            </field>
+            <xpath expr="//field[@name='product_uom_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

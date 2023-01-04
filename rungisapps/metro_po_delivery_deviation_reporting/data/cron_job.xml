@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="po_check_deviations">
+            <field name="name">Purchase Orders: Check for Delivery Deviations</field>
+            <field name="model_id" ref="model_purchase_order"/>
+            <field name="state">code</field>
+            <field name="code">model._deviations_cron_action()</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">True</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="report_mrporder_cw" inherit_id="mrp.report_mrporder">
+        <xpath expr="//table/thead/tr/th[2]" position="after">
+            <th class="text-right" groups="tis_catch_weight.group_catch_weight">CW Quantity</th>
+        </xpath>
+        <xpath expr="//table/tbody/t/t[2]/t[3]/tr/td[2]" position="after">
+            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                <span t-esc="ml.product_cw_uom_qty" t-if="ml.state !='done'"/>
+                <span t-esc="ml.cw_qty_done" t-if="ml.state =='done'"/>
+                <span t-field="ml.product_cw_uom" />
+            </td>
+        </xpath>
+    </template>
+</odoo>

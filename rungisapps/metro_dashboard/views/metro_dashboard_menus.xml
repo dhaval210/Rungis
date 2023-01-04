@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="metro_dashboard_root_menu" name="Metro Dashboard" groups="metro_dashboard.group_metro_dashboard_user" />
+    <menuitem id="metro_dashboard_edit_item" name="Edit" sequence="20" parent="metro_dashboard_root_menu"/>
+</odoo>

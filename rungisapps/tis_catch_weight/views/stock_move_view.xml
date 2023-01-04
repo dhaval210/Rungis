@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_move_cw_qty" model="ir.ui.view">
+        <field name="name">stock.move.form_cw_qty</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <label for="product_cw_uom_qty" string="CW-Initial Demand"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row">
+                    <field name="product_cw_uom_qty" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" options="{'no_open': True, 'no_create': True}" string="Unit of Measure"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_cw_qty_tree" model="ir.ui.view">
+        <field name="name">stock.move.form.cw.qty.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                <field name="product_cw_uom_qty" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight" string="CW-Initial Demand"/>
+                <field name="product_cw_uom" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       options="{'no_open': True, 'no_create': True}" string="CW-UOM"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--
+            Receipt Picking (By Stock Move)
+            From stock_partial_move_view
+        -->
+    <record id="view_move_tree_receipt_picking_cw" model="ir.ui.view">
+        <field name="name">stock.move.tree2</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+        <field name="priority" eval="6"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                <field name="product_cw_uom_qty" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight" string="CW-Initial Demand"/>
+                <field name="product_cw_uom" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       options="{'no_open': True, 'no_create': True}" string="CW-UOM"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_tree_cw" model="ir.ui.view">
+        <field name="name">Stock Moves CW</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.stock_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                <field name="product_cw_uom_qty" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight" string="CW-Initial Demand"/>
+                <field name="product_cw_uom" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                       options="{'no_open': True, 'no_create': True}" string="CW-UOM"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_cw_qty_main_form_view" model="ir.ui.view">
+        <field name="name">stock.move.form.cw.qty.main.form.view</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='quantity_done']" position="before">
+                <label for="product_cw_uom_qty" groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row">
+                    <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                    <span>
+                        <field name="product_cw_uom_qty" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                               readonly="1" nolabel="1" groups="tis_catch_weight.group_catch_weight"/>
+                    </span>
+                    <span>
+                        <field name="product_cw_uom" readonly="1" nolabel="1"
+                               attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                               options="{'no_open': True, 'no_create': True}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </span>
+                </div>
+            </xpath>
+            <xpath expr="//group/group/div[3]" position="after">
+                <label for="cw_qty_done" groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row">
+                    <span>
+                        <field name="cw_qty_done" readonly="1" nolabel="1"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </span>
+                    <span attrs="{'invisible': [('state', '=', 'done')]}" groups="tis_catch_weight.group_catch_weight">
+                        /
+                    </span>
+                    <span>
+                        <field name="reserved_cw_availability" groups="tis_catch_weight.group_catch_weight" nolabel="1"
+                               attrs="{'invisible': [('state', '=', 'done')]}"/>
+                    </span>
+                    <span>
+                        <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight" readonly="1"
+                               options="{'no_open': True, 'no_create': True}"
+                               nolabel="1"/>
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="stock_move_cw_quantity_form_view" model="ir.ui.view">
+        <field name="name">stock.move.cw.qty.main.form.view</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="before">
+                <label for="product_cw_uom_qty" groups="tis_catch_weight.group_catch_weight"/>
+                <div>
+                    <field name="product_cw_uom_qty" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" options="{'no_open': True, 'no_create': True}" string="Unit Of Measure"
+                           groups="tis_catch_weight.group_catch_weight" class="oe_inline"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_move_tree_cw" model="ir.ui.view">
+        <field name="name">stock.picking.move.tree.cw</field>
+        <field name="model">stock.move</field>
+        <field eval="50" name="priority"/>
+        <field name="inherit_id" ref="stock.view_picking_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                <field name="product_cw_uom_qty"
+                       attrs="{'readonly': ['|', ('is_initial_demand_editable', '=', False),
+                           ('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <field name="reserved_cw_availability" string="CW Reserved"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <field name="cw_qty_done" attrs="{'readonly': ['|',('is_quantity_done_editable', '=', False),
+                           ('catch_weight_ok', '=', False)]}"
+                       required="True" force_save="1" groups="tis_catch_weight.group_catch_weight"/>
+                <field name="product_cw_uom"
+                       attrs="{'readonly': ['|',('catch_weight_ok', '=', False),('state', '!=', 'draft'),
+                       ('additional', '=', False)]}" options="{'no_open': True, 'no_create': True}" force_save="1"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

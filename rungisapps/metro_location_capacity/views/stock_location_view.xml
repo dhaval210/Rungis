@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_location_capacity" model="ir.ui.view">
+        <field name="name">stock.location.inherited</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='localization']" position="after">
+                <group string="Location Capacity">
+                    <label for="location_capacity" string="Location Capacity"/>
+                    <div class="o_row">
+                        <field name="location_capacity"/>
+                        <field name="product_uom" groups="uom.group_uom"/>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+

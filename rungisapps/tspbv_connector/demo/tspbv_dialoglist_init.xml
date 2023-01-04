@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- init voice dialog starts here -->
+    <record id="dialoglist_3" model="tspbv.dialoglist">
+        <field name="name">Init Dialog</field>
+        <field name="start">startDialog</field>
+        <field name="default_code">init</field>
+    </record>
+    
+    <record id="dialog_8" model="tspbv.dialog">
+        <field name="id_dialog">startDialog</field>
+        <field name="lydia_output_id" ref="" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_3" />
+    </record>
+    
+    <record id="link_12" model="tspbv.link">
+        <field name="rel">*</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1'" />        
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_8" />
+    </record>
+    <!-- init voice dialog ends here -->
+</odoo>

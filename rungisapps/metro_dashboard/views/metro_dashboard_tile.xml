@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Dashboard tiles Form -->
+    <record id="metro_dashboard_tile_form" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.form</field>
+        <field name="model">metro.dashboard.tile</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Edit Dashboard Tiles">
+                <sheet>
+                    <div class="o_not_full oe_button_box" attrs="{'invisible': [('api_available', '!=', True)]}">
+                        <widget name="metro_tile_form_share" />
+                    </div>
+
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+
+                    <field name="id" invisible="1" />
+
+                    <group>
+                        <group>
+                            <field name="dashboard_id" />
+                            <field name="goal_id" />
+                            <field name="statistic_id" />
+                        </group>
+                        <group>
+                            <field name="api_available" />
+                            <field name="insert_new_line" />
+                            <field name="double_width" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Table lines">
+                            <field name="line_ids" />                        
+                        </page>
+                        <page string="Additional information">
+                            <group string="Statistic" attrs="{'invisible': [('statistic_id', '=', False)]}">
+                                <group>
+                                    <field name="result" />
+                                    <field name="result_short" />
+                                    <field name="keys" />
+                                    <field name="visualisation" />
+                                </group>
+                                <group>
+                                    <field name="result90" />
+                                    <field name="result_short90" />
+                                    <field name="keys90" />
+                                    <field name="suffix" />
+                                </group>
+                            </group>
+                            <group string="Goal" attrs="{'invisible': [('goal_id', '=', False)]}">
+                                <group>
+                                    <field name="current_progress" />
+                                    <field name="result_short" />
+                                    <field name="target" />
+                                    <field name="suffix" />
+                                    <field name="progress_difference"/>
+                                </group>
+                                <group>
+                                    <field name="current_progress90" />
+                                    <field name="result_short90" />
+                                    <field name="goal_condition" />
+                                    <field name="progress_difference90"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List of Tiles -->
+    <record id="metro_dashboard_tile_tree" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.tree</field>
+        <field name="model">metro.dashboard.tile</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Dashboard Tiles">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="dashboard_id" />
+                <field name="user_ids" />
+                <field name="api_available" />
+                <field name="insert_new_line" />
+                <field name="double_width" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View, primarily for filtering -->
+    <record model="ir.ui.view" id="metro_dashboard_tile_search">
+        <field name="name">Search</field>
+        <field name="model">metro.dashboard.tile</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="dashboard_id" />
+                <field name="user_ids" />
+
+                <!-- TODO -->
+                <filter name="current_user" string="Current User" domain="[('user_ids', 'in', uid)]" />
+                <filter name="filter_available_api" string="Available in the API" domain="[('api_available', '=', True)]" />
+                <filter name="filter_double_size" string="Tiles with doubled size" domain="[('double_width', '=', True)]" />
+                <filter name="filter_ref_goal" string="Referenced with Goal" domain="[('goal_id', '!=', None)]" />
+                <filter name="filter_ref_stat" string="Referenced with Statistic" domain="[('statistic_id', '!=', None)]" />
+                <filter name="filter_has_table" string="Tile with Table" domain="[('line_count', '&gt;', 0)]" />
+                <filter name="filter_no_table" string="Tile without Table" domain="[('line_count', '=', 0)]" />
+
+                <group string="Group By">
+                    <filter name="group_by_dashboard" string="Dashboard" context="{'group_by': 'dashboard_id'}" />
+                    <!-- <filter name="group_by_user" string="User" context="{'group_by': 'user_ids'}" /> -->
+                    <filter name="group_by_api" string="API Availability" context="{'group_by': 'api_available'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Dashboard View -->
+    <record id="metro_dashboard_tile_kanban" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.kanban</field>
+        <field name="model">metro.dashboard.tile</field>
+        <field name="type">kanban</field>
+        <field name="search_view_id" ref="metro_dashboard_tile_search" />
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id" />
+                <field name="name" />
+                <field name="current_progress" />
+                <field name="current_progress90" />
+                <field name="current_progress_int" />
+                <field name="current_progress90_int" />
+                <field name="progress_difference"/>
+                <field name="progress_difference90"/>
+                <field name="target" />
+                <field name="dashboard_id" />
+                <field name="goal_condition" />
+                <field name="suffix" />
+                <field name="line_ids" />
+                <field name="line_count" />
+                <field name="insert_new_line" />
+                <field name="use_linebreak" />
+                <field name="double_width" />
+                <field name="api_available" />
+
+                <field name="goal_id" />
+                <field name="challenge_line_id" />
+                <field name="statistic_id" />
+
+                <field name="result_short" />
+                <field name="result_short90" />
+                <field name="use_timeframes" />
+                <field name="cust_timeframe" />
+                <field name="missing_dependencies" />
+
+                <!-- Statistic specific -->
+                <field name="result" />
+                <field name="result90" />
+                <field name="visualisation" />
+                <field name="keys" />
+                <field name="keys90" />
+                <field name="empty" />
+                <field name="empty90" />
+                <field name="data_source" />
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <t t-if="record.use_linebreak.raw_value and record.double_width.raw_value">
+                            <t t-set="kanbanClasses">metro_kanban_nogrow_2x</t>
+                        </t>
+                        <t t-elif="record.use_linebreak.raw_value">
+                            <t t-set="kanbanClasses">metro_kanban_nogrow</t>
+                        </t>
+                        <t t-elif="record.double_width.raw_value">
+                            <t t-set="kanbanClasses">metro_kanban_2x_width</t>
+                        </t>
+                        <t t-else="">
+                            <t t-set="kanbanClasses"></t>
+                        </t>
+                        <div t-attf-class="oe_kanban_card metro_card {{ kanbanClasses }}">
+                            <div t-attf-class="oe_kanban_content">
+                                <h1 class="text-center" t-attf-id="header_{{record.id.raw_value}}"><field name="name" /></h1>
+                                <!-- If a goal is assigned to the current tile -->
+                                <t t-if="record.goal_id.value">
+                                    <p class="no-data-container" t-if="record.missing_dependencies.raw_value != ''">
+                                        <i class="fa fa-sitemap no-data-icon"></i>
+                                        <br/>Some dependencies are missing for this KPI to work:<br />
+                                        <span t-esc="record.missing_dependencies.raw_value"></span>
+                                    </p>
+                                    <!-- If the condition is higher -->
+                                    <div t-elif="record.goal_condition.raw_value == 'higher'">
+                                        <div class="days30">
+                                            <field name="current_progress" widget="gauge" class="days30" options="{'max_field': 'target', 'style': 'width:200px;height:150px;display:block!important;margin:auto;'}" />
+                                        </div>
+                                        <div class="days90" hidden="">
+                                            <field name="current_progress90" widget="gauge" class="days90" hidden="" options="{'max_field': 'target', 'style': 'width:200px;height:150px;display:block!important;margin:auto;'}" />
+                                        </div>
+
+                                        
+                                        <!-- Only show decimal places for percentages -->
+                                        <t t-if="record.suffix.value == '%'">
+                                            <div class="days30 inline">
+                                                <p class="text-muted text-center">
+                                                    <span t-esc="record.current_progress.value" />
+                                                    out of <span t-esc="record.target.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                </p>
+                                            </div>
+                                            <div class="days90 inline" hidden="">
+                                                <p class="text-muted text-center">
+                                                    <span t-esc="record.current_progress90.value" />
+                                                    out of <span t-esc="record.target.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                </p>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="days30 inline">
+                                                <p class="text-muted text-center">
+                                                    <span t-esc="record.current_progress_int.value" />
+                                                    out of <span t-esc="record.target.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                </p>
+                                            </div>
+                                            <div class="days90 inline" hidden="">
+                                                <p class="text-muted text-center">
+                                                    <span t-esc="record.current_progress90_int.value" />
+                                                    out of <span t-esc="record.target.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                </p>
+                                            </div>
+                                        </t>
+                                    </div>
+                                    <!-- If the condition is lower -->
+                                    <div class="md_condition_lower" t-else="">
+                                            <span class="text-muted">Current: </span>
+                                            <div class="days30 inline">
+                                                <span id="current" t-esc="record.result_short.value" />
+                                            </div>
+                                            <div class="days90 inline" hidden="">
+                                                <span id="current" t-esc="record.result_short90.value" />
+                                            </div>
+                                        <span class="text-muted">/ <field name="target" /></span><br />
+                                        <!-- Display the difference of the current value and the target -->
+                                        <t t-set="diff" t-value="record.current_progress.raw_value - record.target.raw_value" />
+                                        <t t-set="diff90" t-value="record.current_progress90.raw_value - record.target.raw_value" />
+                                        <t t-if="diff &gt;= 0">
+                                            <div class="days30 inline">
+                                                <p class="text-muted">
+                                                    <span t-esc="record.progress_difference.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                    more than the target
+                                                </p>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="diff" t-value="diff * -1" />
+                                            <div class="days30 inline">
+                                                <p class="light-success">
+                                                    <span t-esc="-record.progress_difference.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                    less than the target
+                                                </p>
+                                            </div>
+                                        </t>
+                                        <t t-if="diff90 &gt;= 0">
+                                            <div class="days90 inline" hidden="">
+                                                <p class="text-muted">
+                                                    <span t-esc="record.progress_difference90.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                    more than the target
+                                                </p>
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <t t-set="diff90" t-value="diff90 * -1" />
+                                            <div class="days90 inline" hidden="">
+                                                <p class="light-success">
+                                                    <span t-esc="-record.progress_difference90.value" />
+                                                    <span t-esc="record.suffix.value" />
+                                                    less than the target
+                                                </p>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </t>
+                                <!-- A statistic is assigned to the current tile -->
+                                <t t-elif="record.statistic_id.value">
+                                    <!-- Statistics : Number -->
+                                    <div class="visualisation_number" t-if="record.visualisation.raw_value == 'number'">
+                                        <div class="days30">
+                                            <t t-if="record.result.value &gt; 999999 or record.result.value &lt; -99999">
+                                                <span class="number" t-esc="record.result_short.value" />
+                                            </t>
+                                            <t t-elif="record.result.value &gt;= 10000">
+                                                <span class="number" t-esc="record.result.value.split('.')[0]" />
+                                            </t>
+                                            <t t-else="">
+                                                <span class="number" t-esc="record.result.value" />
+                                            </t>
+                                        </div>
+                                        <div class="days90" hidden="" t-if="record.use_timeframes.raw_value">
+                                            <t t-if="record.result.value &gt; 999999 or record.result.value &lt; -99999">
+                                                <span class="number" t-esc="record.result_short90.value" />
+                                            </t>
+                                            <t t-elif="record.result90.value &gt;= 10000">
+                                                <span class="number" t-esc="record.result90.value.split('.')[0]" />
+                                            </t>
+                                            <t t-else="">
+                                                <span class="number" t-esc="record.result90.value" />
+                                            </t>
+                                        </div>
+                                        <br />
+                                        <span class="suffix" t-esc="record.suffix.value" />
+                                    </div>
+                                    <!-- Statistics : Chart -->
+                                    <div class="visualisation_line_chart" t-else="">
+                                        <div class="days30">
+                                            <t t-if="record.empty.raw_value">
+                                                <p class="no-data-container">
+                                                    <i t-attf-class="fa fa-{{record.visualisation.raw_value}}-chart no-data-icon"></i>
+                                                    <br/>There is no data available
+                                                </p>
+                                            </t>
+                                            <t t-else="">
+                                                <widget name="metro_dashboard_chart" />
+                                            </t>
+                                        </div>
+                                        <div class="days90" hidden="" t-if="record.use_timeframes.raw_value">
+                                            <t t-if="record.empty90.raw_value">
+                                                <p class="no-data-container">
+                                                    <i t-attf-class="fa fa-{{record.visualisation.raw_value}}-chart no-data-icon"></i>
+                                                    <br/>There is no data available
+                                                </p>
+                                            </t>
+                                            <t t-else="">
+                                                <widget name="metro_dashboard_chart90" />
+                                            </t>
+                                        </div>
+                                    </div>
+                                </t>
+                                <!-- No goal is assigned but a challenge_line_id  -->
+                                <t t-elif="!record.goal_id.value and record.challenge_line_id.value">
+                                    <p class="no-data-container">
+                                        <i t-attf-class="fa fa-tachometer no-data-icon"></i>
+                                        <br/>There is no data available
+                                    </p>
+                                </t>
+                                <!-- A tile without any reference, will be removed with the next cron job -->
+                                <t t-else="">
+                                    <p class="no-data-container">
+                                        <i t-attf-class="fa fa-exclamation-triangle no-data-icon"></i>
+                                        <br/>This tile has no reference, it will be automatically removed when the dashboard refreshes the next time
+                                    </p>
+                                </t>
+
+                                <div class="button_bar" t-attf-id="button_bar_{{record.id.raw_value}}">
+                                    <button
+                                        type="object"
+                                        string="Refresh"
+                                        name="update_tile"
+                                        groups="metro_dashboard.group_metro_dashboard_manager"
+                                        class="btn btn-primary">Refresh</button>
+                                    <widget
+                                        name="metro_share_button"
+                                        attrs="{'invisible': [('api_available', '!=', True)]}"
+                                        groups="metro_dashboard.group_metro_dashboard_manager" />
+
+                                    <t t-if="record.use_timeframes.raw_value == true">
+                                        <widget name="tile_timeframe_dropdown" />
+                                    </t>
+                                    <t t-else="">
+                                        <span t-attf-class="show_timeframe" t-esc="record.cust_timeframe.value" />
+                                    </t>
+                                </div>
+
+                                <t t-if="record.line_count.raw_value &gt; 0">
+                                    <hr/>
+                                    <table class="metro_dashboard_tile_table">
+                                        <thead>
+                                            <tr>
+                                                <th>Label</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="table_body" class="days30">
+                                            <!-- Timeframe: Default or last 30 days -->
+                                            <!-- Content will be inserted via JS -->
+                                        </tbody>
+                                        <tbody id="table_body90" class="days90" hidden="">
+                                            <!-- Timeframe: Last 90 days -->
+                                            <!-- Content will be inserted via JS -->
+                                        </tbody>
+                                    </table>
+                                </t>
+                            </div>
+                        </div>
+                        <t t-if="record.insert_new_line.raw_value">
+                            <div class="metro_kanban_line_break" />
+                        </t>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Menu Actions -->
+    <record id="metro_dashboard_tile_action" model="ir.actions.act_window">
+        <field name="name">Tiles</field>
+        <field name="res_model">metro.dashboard.tile</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="metro_dashboard_view_action" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">metro.dashboard.tile</field>
+        <field name="view_mode">kanban</field>
+        <field name="context">{"search_default_current_user": 1}</field>
+        <field name="view_id" ref="metro_dashboard_tile_kanban" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent text-muted">There is no dashboard assigned to you.</p>
+        </field>
+    </record>
+
+    <menuitem id="metro_dashboard_view" name="Dashboard" parent="metro_dashboard_root_menu" sequence="10" action="metro_dashboard_view_action" />
+    <menuitem id="metro_dashboard_tile_menu" name="Tiles" parent="metro_dashboard_edit_item" action="metro_dashboard_tile_action" />
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <record model="ir.cron" id="product_expiry_alert_cron">
+            <field name="name">Check for Delivery Deviations</field>
+            <field name="model_id" ref="model_sale_order"/>
+             <field name="state">code</field>
+            <field name="code">model._deviations_cron_action()</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="doall">True</field>
+        </record>
+    </data>
+</odoo>
+
+
+

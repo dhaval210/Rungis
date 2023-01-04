@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- Disposition -->
+    <menuitem
+        id="disposition_menu_root"
+        name="Disposition"
+        web_icon="metro_sales_tour,static/description/icon.png"
+        sequence="10"
+        groups="group_dispo_user"
+    />
+    <menuitem
+        id="disposition_menu_categ"
+        name="Disposition"
+        parent="disposition_menu_root"
+        sequence="10"
+    />
+    <menuitem
+        id="dispo_tour_assignment_menu_act"
+        name="Rahmentourenplan"
+        parent="disposition_menu_categ"
+        action="tour_assignment_action"
+        sequence="25"
+    />
+    <menuitem
+        id="dispo_tour_planning_menu_today_act"
+        name="Tourenplanung"
+        parent="disposition_menu_categ"
+        action="tour_planning_action_today"
+        sequence="26"
+    />
+
+    <!-- sales -->
+    <menuitem
+        id="tour_assignment_menu_act"
+        name="Rahmentourenplan"
+        parent="sale.sale_order_menu"
+        action="tour_assignment_action"
+        sequence="25"
+    />
+    <menuitem
+        id="sales_assignment_today_menu_act"
+        name="Verkäuferzuweisung"
+        parent="sale.sale_order_menu"
+        action="sales_assignment_action_today"
+        sequence="26"
+    />
+    <menuitem
+        id="calling_plan_menu_act"
+        name="Anrufsplan"
+        parent="sale.sale_order_menu"
+        action="calling_plan_action"
+        sequence="27"
+    />
+</odoo>

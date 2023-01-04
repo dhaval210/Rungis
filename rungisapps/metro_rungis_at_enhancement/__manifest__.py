@@ -1,0 +1,17 @@
+{
+    'name': 'Set default VAT for product in AT ',
+    'version': '12.0.1.0.1',
+    'summary': 'This module helps to set deafault VAT for product in AT to 10%,RUN-841',
+    'description': 'RUN-841 : https://jira.metrosystems.net/browse/RUN-841 ',
+    'category': 'Enhancement',
+    'author': 'Cybrosys Techno Solutions',
+    'company': 'Cybrosys Techno Solutions',
+    'website': "https://www.cybrosys.com",
+    'maintainer': 'Cybrosys Techno Solutions',
+    'license': 'AGPL-3',
+    'depends': ['product', 'base', 'account', 'stock', 'sale_management'],
+    'data': [],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

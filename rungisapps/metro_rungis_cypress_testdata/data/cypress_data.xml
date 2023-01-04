@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="cypress_location_1" model="stock.location">
+            <field name="name">Cypress Test Location 1</field>
+            <field name="barcode">cypress-loc-1</field>
+            <field name="usage">internal</field>
+            <field name="location_id" eval="41" />
+        </record>
+        <record id="cypress_location_2" model="stock.location">
+            <field name="name">Cypress Test Location 2</field>
+            <field name="barcode">cypress-loc-2</field>
+            <field name="usage">internal</field>
+            <field name="location_id" eval="41" />
+        </record>
+
+
+        <record id="cypress_data_1" model="cypress.data">
+            <field name="name">CW Product 0.1kg</field>
+            <field name="product_id" ref="metro_rungis_cypress_testdata.test_cw_product_1" />
+        </record>
+        <record id="cypress_data_2" model="cypress.data">
+            <field name="name">CW Product 3kg</field>
+            <field name="product_id" ref="metro_rungis_cypress_testdata.test_cw_product_2" />
+        </record>
+        <record id="cypress_data_3" model="cypress.data">
+            <field name="name">Non CW Product 1</field>
+            <field name="product_id" ref="metro_rungis_cypress_testdata.test_non_cw_product_1" />
+        </record>
+        <record id="cypress_data_4" model="cypress.data">
+            <field name="name">Non CW Product 2</field>
+            <field name="product_id" ref="metro_rungis_cypress_testdata.test_non_cw_product_2" />
+        </record>
+    </data>
+</odoo>

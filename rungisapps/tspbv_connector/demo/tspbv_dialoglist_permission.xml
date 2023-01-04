@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- permission voice dialog starts here -->
+    <record id="dialoglist_31" model="tspbv.dialoglist">
+        <field name="name">Permission Dialog</field>
+        <field name="start">startDialog</field>
+        <field name="default_code">permission</field>
+    </record>
+    
+    <record id="output_81" model="tspbv.output">
+        <field name="lydia_output">Dem Anwender fehlen Berechtigungen</field>
+    </record>
+
+    <record id="dialog_81" model="tspbv.dialog">
+        <field name="id_dialog">startDialog</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_81" />
+        <field name="lydia_input_id" ref="" />
+        <field name="terminate">True</field>
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_31" />
+    </record>
+    <!-- permission voice dialog ends here -->
+</odoo>

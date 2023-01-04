@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add you code here -->
+        <record id="stock_gate_gr_without_gate" model="stock.gate">
+            <field name="name">GR's without Gate</field>
+        </record>
+    </data>
+</odoo>

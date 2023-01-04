@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<odoo>
+   <data>
+<!--
+        <record id="create_quality_wizard_form_view" model="ir.ui.view">
+           <field name="name">create.quality.wizard.form</field>
+           <field name="model">create.quality.wizard</field>
+           <field name="arch" type="xml">
+               <form string="Create Quality Wizard">
+                <p>This wizard will Create Quality Checks Based on Results.</p>
+                    <group>
+                        <group>
+                            <field name="custom_truck_type" invisible="1"/>
+                        </group>
+                        <group>
+                        </group>
+                   </group>
+                   <group>
+                        <group>
+                            <field name="product_id" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="product_type1"/>
+                        </group>
+                   </group>
+                   <group>
+                        <group>
+                            <field name="starcking_product_id" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="product_type2"/>
+                        </group>
+                   </group>
+                   <group>
+                        <group>
+                            <field name="door_product_id" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="product_type3"/>
+                        </group>
+                   </group>
+                   <group>
+                        <group>
+                            <field name="temprature_product_id" attrs="{'invisible':[('custom_truck_type','=','ambient')]}" readonly="True"/>
+                        </group>
+                        <group>
+                            <field name="product_type4" attrs="{'invisible':[('custom_truck_type','=','ambient')]}" />
+                        </group>
+                   </group>
+                   <group string="Quality Check Team">
+                        <group>
+                            <field name="team_id"/>
+                        </group>
+                        <group>
+                        </group>
+                   </group>
+                   <footer>
+                       <button string="Create Quality Checks" confirm="Are you sure you want to process and create quality checks.?" name="create_pass_quality" type="object" class="oe_highlight" /> or
+                       <button string="Fail" name="create_fail_quality" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="btn-default" special="cancel"/>
+                   </footer>
+               </form>
+           </field>
+       </record>
+
+       <record id="action_create_quality_wizard" model="ir.actions.act_window">
+            <field name="name">Create Quality Checks</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.quality.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+       
+-->
+   </data>
+</odoo>

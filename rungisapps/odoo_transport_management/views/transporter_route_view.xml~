@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="transport_management_route_form_view" model="ir.ui.view">
+            <field name="name">transporter.route.form.view</field>
+            <field name="model">transporter.route</field>
+            <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                        </h1>
+                    </div>
+                        <group>
+                            <group>
+                                <field name='name'/>
+                                <field name="transporter_id" domain="[('supplier','=', True)]"/>
+                            </group>
+                        </group>
+                    <notebook>
+                        <page string="Route Lines">
+                        <field name="route_line_ids" nolabel="1">
+                            <tree editable="True">
+                                <field name="source_location"/>
+                                <field name="destination_location"/>
+                                <field name="distance"/>
+                                <field name="hour" widget="float_time"/>
+                            </tree>
+                        </field>
+                    </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="transport_management_route_tree_view" model="ir.ui.view">
+            <field name="name">transporter.route.tree</field>
+            <field name="model">transporter.route</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name='name'/>
+                    <field name="transporter_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_transport_management_route">
+            <field name="name">Transport Routes</field>
+            <field name="res_model">transporter.route</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+        
+        <menuitem id="menu_transporter_route" name="Transport Routes" parent="menu_transport"/>
+        <menuitem id="menu_transporter_route_child" name="Transport Routes" parent="menu_transporter_route" action="action_transport_management_route"/>
+
+    </data>
+</odoo>

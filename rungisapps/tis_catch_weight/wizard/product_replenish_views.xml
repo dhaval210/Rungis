@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_replenish_cw_quantity" model="ir.ui.view">
+        <field name="name">Replenish.cw.quantity</field>
+        <field name="model">product.replenish</field>
+        <field name="inherit_id" ref="stock.view_product_replenish"/>
+        <field name="arch" type="xml">
+            <field name="date_planned" position="before">
+                <field name="catch_weight_ok" invisible="1"/>
+                <field name="product_cw_uom_category_id" invisible="1" groups="tis_catch_weight.group_catch_weight"/>
+                <label for="cw_quantity" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <div groups="tis_catch_weight.group_catch_weight"
+                     attrs="{'invisible': [('catch_weight_ok', '=', False)]}">
+                    <field name="cw_quantity" class="oe_inline"/>
+                    <field name="product_cw_uom_id"
+                           domain="[('category_id', '=', product_cw_uom_category_id)]"
+                           class="oe_inline"/>
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,307 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_sftp_transfert
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-25 12:14+0000\n"
+"PO-Revision-Date: 2022-10-25 12:14+0000\n"
+"Last-Translator: Niklas Hucke <n.hucke@hucke-media.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_res_partner__transfert_mode
+#: model:ir.model.fields,help:metro_sftp_transfert.field_res_users__transfert_mode
+msgid " * The Mail method will send the invoices to partners mail.\n"
+" * The Portal method will send the invoices to the portal account partner.\n"
+" * The SFTP will send the invoices to partner server."
+msgstr " * Bei dem Transfer per Mail wird dem Kunden eine E-Mail mit der Rechnung als Anhang gesendet.\n"
+" * Bei dem Transfer über das Portal kann der Kunde seine Rechnungen im jeweiligen Format aus dem Portal herunterladen.\n"
+" * Bei dem Transfer per SFTP wird die erzeugte Rechnung auf den SFTP Server des Kunden hochgeladen.\n"
+""
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_active
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: metro_sftp_transfert
+#: sql_constraint:sftp.transfert:0
+msgid "An SFTP Server is already activated"
+msgstr "Ein SFTP Server ist bereits aktiviert"
+
+#. module: metro_sftp_transfert
+#: model:ir.model,name:metro_sftp_transfert.model_ir_attachment
+msgid "Attachment"
+msgstr "Anhang"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__auth_mode
+msgid "Auth Mode"
+msgstr "Authentifizierungsmethode"
+
+#. module: metro_sftp_transfert
+#: model:ir.model,name:metro_sftp_transfert.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_host
+msgid "Host"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_hostkeys
+msgid "Hostkeys"
+msgstr "Hostkey"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__id
+msgid "ID"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_key_pass
+msgid "If your private key is protected with a password please enter it here."
+msgstr "Wenn der private key mit einem Passwort geschützt ist, gib dieses bitte hier ein."
+
+#. module: metro_sftp_transfert
+#: model:ir.model,name:metro_sftp_transfert.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_host
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_password
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_user
+msgid "Ip Address to transfer file"
+msgstr "IP Addresse für den Dateitransfer"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: metro_sftp_transfert
+#: selection:res.partner,transfert_mode:0
+msgid "Mail"
+msgstr "E-Mail"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__name
+msgid "Name of the server"
+msgstr "Name des Servers"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_password
+#: selection:sftp.transfert,auth_mode:0
+msgid "Password"
+msgstr "Passwort"
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/sftp_transfert.py:50
+#: code:addons/metro_sftp_transfert/models/sftp_transfert.py:58
+#, python-format
+msgid "Please enter either a password or a private key."
+msgstr "Bitte gebe entweder ein Passwort oder einen privaten Schlüssel ein."
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/account_invoice.py:194
+#: code:addons/metro_sftp_transfert/models/res_partner.py:58
+#: code:addons/metro_sftp_transfert/models/sftp_transfert.py:82
+#: code:addons/metro_sftp_transfert/models/sftp_transfert.py:152
+#, python-format
+msgid "Please enter either a private key or password before testing the connection."
+msgstr "Bitte gebe entweder einen privaten Schlüssel oder ein Passwort ein, bevor die Verbindung getestet wird."
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/res_partner.py:77
+#, python-format
+msgid "Please set a SFTP server"
+msgstr "Bitte setz ein SFTP server"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_port
+msgid "Port"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: selection:res.partner,transfert_mode:0
+msgid "Portal"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_key_pass
+msgid "Private Key Password"
+msgstr "Passwort für den Private Key"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_private_key
+msgid "Private Key Path"
+msgstr "Pfad zum Private Key"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_private_key
+msgid "Private key of user to identify with that instead of the password."
+msgstr "Private key um einen Benutzer per SSH anstelle mit einem Passwort identifizieren zu können."
+
+#. module: metro_sftp_transfert
+#: selection:res.partner,transfert_mode:0
+msgid "SFTP"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/res_partner.py:81
+#, python-format
+msgid "SFTP Host missing for SFTP server %s"
+msgstr "Der SFTP-Host fehlt für SFTP-Server %s."
+
+#. module: metro_sftp_transfert
+#: model_terms:ir.ui.view,arch_db:metro_sftp_transfert.view_partner_form_robot_inherited
+msgid "SFTP Informations"
+msgstr "SFTP Informationen"
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/res_partner.py:87
+#, python-format
+msgid "SFTP Path missing (/ must be entered at least) for SFTP server %s"
+msgstr "Der SFTP-Pfad fehlt (/ muss mindestens gegeben sein) für die SFTP-Server %s"
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/res_partner.py:85
+#, python-format
+msgid "SFTP Port missing for SFTP server %s"
+msgstr "Der SFTP-Port fehlt für SFTP-Server %s."
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_res_partner__sftp_server
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_res_users__sftp_server
+msgid "SFTP Server"
+msgstr "SFTP-Server"
+
+#. module: metro_sftp_transfert
+#: model_terms:ir.ui.view,arch_db:metro_sftp_transfert.sftp_config_view
+msgid "SFTP Test Connection"
+msgstr "SFTP Verbindung testen"
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/res_partner.py:83
+#, python-format
+msgid "SFTP User missing for SFTP server %s"
+msgstr "Der SFTP-Benutzer fehlt für SFTP-Server %s."
+
+#. module: metro_sftp_transfert
+#: selection:sftp.transfert,auth_mode:0
+msgid "SSH Keys"
+msgstr "SSH Schlüssel"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_hostkeys
+msgid "SSH key to secure ssh sever access"
+msgstr "SSH Schlüssel für einen sicheren Serverzugriff"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_port
+msgid "SSh Port by Default if 22"
+msgstr "SSH Port, standardmäßig 22"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__name
+msgid "Server Name"
+msgstr "Servername"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,help:metro_sftp_transfert.field_sftp_transfert__sftp_path
+msgid "Servers Storage path to send file"
+msgstr "Pfad auf dem Server in dem die Datei abgelegt werden soll"
+
+#. module: metro_sftp_transfert
+#: model:ir.actions.act_window,name:metro_sftp_transfert.sftp_transfer_action
+#: model:ir.ui.menu,name:metro_sftp_transfert.sftp_transfer_config
+#: model:ir.ui.menu,name:metro_sftp_transfert.sftp_transfer_config2
+msgid "Sftp Config"
+msgstr "SFTP Konfiguration"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_path
+msgid "Storage Directory Path"
+msgstr "Dateipfad"
+
+#. module: metro_sftp_transfert
+#: code:addons/metro_sftp_transfert/models/account_invoice.py:143
+#, python-format
+msgid "The SFTP Server %s (%d) is inactive."
+msgstr "Der SFTP-Server %s (%d) ist inaktiv."
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_res_partner__transfert_mode
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_res_users__transfert_mode
+msgid "Transportation Method"
+msgstr "Transportmethode"
+
+#. module: metro_sftp_transfert
+#: model:ir.actions.server,name:metro_sftp_transfert.ir_cron_transfert_ubl_invoice_ir_actions_server
+#: model:ir.cron,cron_name:metro_sftp_transfert.ir_cron_transfert_ubl_invoice
+#: model:ir.cron,name:metro_sftp_transfert.ir_cron_transfert_ubl_invoice
+msgid "UBL Invoice Transfer"
+msgstr "UBL Rechnungstransfer"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_sftp_transfert__sftp_user
+msgid "Username"
+msgstr "Benutzername"
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_ir_attachment__data_to_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_ir_attachment__to_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_mrp_document__data_to_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_mrp_document__to_transfert
+msgid "attachment to transfer"
+msgstr "Anlage zur Übermittlung"
+
+#. module: metro_sftp_transfert
+#: model:ir.model,name:metro_sftp_transfert.model_csv_export
+msgid "csv.export"
+msgstr ""
+
+#. module: metro_sftp_transfert
+#: model:ir.model.fields,field_description:metro_sftp_transfert.field_account_invoice__generated_invoice
+msgid "generated invoice"
+msgstr "Generierte Rechnung"
+
+#. module: metro_sftp_transfert
+#: model:ir.model,name:metro_sftp_transfert.model_sftp_transfert
+msgid "sftp.transfert"
+msgstr ""
+

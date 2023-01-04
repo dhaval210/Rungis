@@ -1,0 +1,112 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* metro_mobile_app_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e-20201204\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-16 16:17+0000\n"
+"PO-Revision-Date: 2021-01-04 15:46+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de_DE\n"
+"X-Generator: Poedit 2.4.2\n"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_stock_picking__mobile_available
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_stock_picking_type__mobile_available
+msgid "Available on Mobile"
+msgstr "Mobil verfügbar"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,help:metro_mobile_app_picking.field_stock_picking_type__mobile_backorder_create
+msgid "Check this box if you want that confirming a picking on mobile app generate a backorder by default."
+msgstr "Aktivieren Sie dieses Kontrollkästchen, um bei Bestätigung einer Kommissionierung in der Mobilen App eine Nachlieferung automatisch zu erstellen"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,help:metro_mobile_app_picking.field_stock_picking__mobile_available
+#: model:ir.model.fields,help:metro_mobile_app_picking.field_stock_picking_type__mobile_available
+msgid "Check this box if you want to make this picking type visible on the Mobile App"
+msgstr "Aktivieren Sie dieses Kontrollkästchen, wenn Sie diesen Entnahmetyp in der Mobilen App sichtbar machen möchten"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_stock_picking_type__mobile_backorder_create
+msgid "Create Backorder"
+msgstr "Nachlieferung erstellen"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_mobile_app_picking__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: metro_mobile_app_picking
+#: model_terms:ir.ui.view,arch_db:metro_mobile_app_picking.view_stock_picking_form
+#: model_terms:ir.ui.view,arch_db:metro_mobile_app_picking.view_stock_picking_type_form
+msgid "Mobile App"
+msgstr "Mobile App"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_stock_picking_type__hightlight_picking
+msgid "Move Packages to Locations"
+msgstr "Verschieben von Paketen an Speicherorte"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model,name:metro_mobile_app_picking.model_stock_picking_type
+msgid "Picking Type"
+msgstr "Vorgangstyp"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model.fields,field_description:metro_mobile_app_picking.field_stock_picking_type__mobile_product_field_ids
+msgid "Product Fields"
+msgstr "Produktfelder"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model,name:metro_mobile_app_picking.model_stock_picking
+msgid "Transfer"
+msgstr "Lieferung vornehmen"
+
+#. module: metro_mobile_app_picking
+#: code:addons/metro_mobile_app_picking/models/mobile_app_picking.py:105
+#, python-format
+msgid "incorrect value for model %s"
+msgstr "Falscher Wert für Modell-%s"
+
+#. module: metro_mobile_app_picking
+#: model:ir.model,name:metro_mobile_app_picking.model_mobile_app_picking
+msgid "mobile.app.picking"
+msgstr ""

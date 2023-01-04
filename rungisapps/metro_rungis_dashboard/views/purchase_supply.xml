@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="delayed_supply_tree_view" model="ir.ui.view">
+            <field name="name">delayed.supply.tree.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <tree string="Delayed Supply" create="false">
+                    <field name="supplier_number"/>
+                    <field name="partner_id"/>
+                    <field name="category_id"/>
+                    <field name="order_id"/>
+                    <field name="date_order"/>
+                    <field name="order_weight"/>
+                    <field name="order_amount" widget="monetary"/>
+                    <field name="purchase_percentage_in_last_6" widget="percentpie"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="delayed_supply_pivot_view" model="ir.ui.view">
+            <field name="name">delayed.supply.pivot.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <pivot string="Delayed Supply">
+                    <field name="partner_id" type="row"/>
+                    <field name="order_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="delayed_supply_graph_view" model="ir.ui.view">
+            <field name="name">delayed.supply.graph.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <graph string="Delayed Supply">
+                    <field name="partner_id"/>
+                    <field name="order_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="delayed_supply_report_search" model="ir.ui.view">
+            <field name="name">delayed.supply.report.search</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <search string="Delayed Supply">
+                    <field name="partner_id" string="Supplier"/>
+                    <field name="supplier_number" string="Supplier Number"/>
+                    <field name="category_id" string="Category"/>
+                    <field name="order_id" string="Purchase Order"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Category" name="category" domain="[]" context="{'group_by':'category_id'}"/>
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Purchase Order" name="purchase_order" domain="[]" context="{'group_by':'order_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="delayed_supply_product_action" model="ir.actions.act_window">
+            <field name="name">Delayed Supply</field>
+            <field name="res_model">purchase.supply</field>
+            <field name="context">{}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="view_id" eval="delayed_supply_tree_view"/>
+            <field name="search_view_id" ref="delayed_supply_report_search"/>
+        </record>
+
+
+        <record id="missing_supply_tree_view" model="ir.ui.view">
+            <field name="name">missing.supply.tree.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <tree string="missing Supply" create="false">
+                    <field name="supplier_number"/>
+                    <field name="partner_id"/>
+                    <field name="category_id"/>
+                    <field name="product_number"/>
+                    <field name="product_id"/>
+                    <field name="order_id"/>
+                    <field name="date_order"/>
+                    <field name="order_weight"/>
+                    <field name="order_amount" widget="monetary"/>
+                    <field name="receipt_date"/>
+                    <field name="receipt_weight"/>
+                    <field name="receipt_amount" widget="monetary"/>
+                    <field name="purchase_percentage_in_last_6" widget="percentpie"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="missing_supply_pivot_view" model="ir.ui.view">
+            <field name="name">missing.supply.pivot.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <pivot string="Missing Supply">
+                    <field name="partner_id" type="row"/>
+                    <field name="receipt_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="missing_supply_graph_view" model="ir.ui.view">
+            <field name="name">missing.supply.graph.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <graph string="Missing Supply">
+                    <field name="partner_id"/>
+                    <field name="receipt_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="missing_supply_report_search" model="ir.ui.view">
+            <field name="name">missing.supply.report.search</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <search string="Missing Supply">
+                    <field name="partner_id" string="Supplier"/>
+                    <field name="supplier_number" string="Supplier Number"/>
+                    <field name="category_id" string="Category"/>
+                    <field name="order_id" string="Purchase Order"/>
+                    <field name="product_id" string="Article"/>
+                    <field name="product_number" string="Art.Nr"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Category" name="category" domain="[]" context="{'group_by':'category_id'}"/>
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Purchase Order" name="purchase_order" domain="[]" context="{'group_by':'order_id'}"/>
+                        <filter string="Article" name="product" domain="[]" context="{'group_by':'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="missing_supply_product_action" model="ir.actions.act_window">
+            <field name="name">Missing Supply</field>
+            <field name="res_model">purchase.supply</field>
+            <field name="context">{}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('missing_supply_tree_view')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('missing_supply_pivot_view')}),
+                (0, 0, {'view_mode': 'graph', 'view_id': ref('missing_supply_graph_view')})]"/>
+            <field name="search_view_id" ref="missing_supply_report_search"/>
+        </record>
+
+        <record id="wrong_supply_tree_view" model="ir.ui.view">
+            <field name="name">wrong.supply.tree.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <tree string="Wrong Supply" create="false">
+                    <field name="supplier_number"/>
+                    <field name="partner_id"/>
+                    <field name="category_id"/>
+                    <field name="product_number"/>
+                    <field name="product_id"/>
+                    <field name="order_id"/>
+                    <field name="date_order"/>
+                    <field name="order_weight"/>
+                    <field name="order_amount" widget="monetary"/>
+                    <field name="currency_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="wrong_supply_pivot_view" model="ir.ui.view">
+            <field name="name">wrong.supply.pivot.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <pivot string="Missing Supply">
+                    <field name="partner_id" type="row"/>
+                    <field name="order_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="wrong_supply_graph_view" model="ir.ui.view">
+            <field name="name">wrong.supply.graph.view</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <graph string="Missing Supply">
+                    <field name="partner_id"/>
+                    <field name="order_amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="wrong_supply_report_search" model="ir.ui.view">
+            <field name="name">wrong.supply.report.search</field>
+            <field name="model">purchase.supply</field>
+            <field name="arch" type="xml">
+                <search string="Wrong Supply">
+                    <field name="partner_id" string="Supplier"/>
+                    <field name="supplier_number" string="Supplier Number"/>
+                    <field name="category_id" string="Category"/>
+                    <field name="order_id" string="Purchase Order"/>
+                    <field name="product_id" string="Article"/>
+                    <field name="product_number" string="Art.Nr"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <separator/>
+                    <group expand="1" string="Group By">
+                        <filter string="Category" name="category" domain="[]" context="{'group_by':'category_id'}"/>
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Purchase Order" name="purchase_order" domain="[]" context="{'group_by':'order_id'}"/>
+                        <filter string="Article" name="product" domain="[]" context="{'group_by':'product_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="wrong_supply_product_action" model="ir.actions.act_window">
+            <field name="name">Wrong Supply</field>
+            <field name="res_model">purchase.supply</field>
+            <field name="context">{}</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('wrong_supply_tree_view')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('wrong_supply_pivot_view')}),
+                (0, 0, {'view_mode': 'graph', 'view_id': ref('wrong_supply_graph_view')})]"/>
+            <field name="search_view_id" ref="wrong_supply_report_search"/>
+        </record>
+        
+    </data>
+</odoo>

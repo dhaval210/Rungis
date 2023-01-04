@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_location_capacity" model="ir.ui.view">
+        <field name="name">location.capacity</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='localization']" position="after">
+                <group string="Location Capacity">
+                    <label for="location_capacity" string="Location Capacity"/>
+                    <div class="o_row">
+                        <field name="location_capacity"/>
+                        <field name="product_uom" groups="uom.group_uom"/>
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_move_operations_inherit" model="ir.ui.view">
+        <field name="name">stock.move.operations.form.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_stock_move_operations"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">
+                <field name="no_availability" invisible="1"/>
+            </field>
+<!--            <xpath expr="//form" position="inside">-->
+<!--                <div class="alert alert-danger" role="alert"-->
+<!--                     style="margin-bottom:0px;"-->
+<!--                     attrs="{'invisible': [('no_availability','=',False)]}">-->
+<!--                    There is no available space to store the products.-->
+<!--                </div>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>
+
+

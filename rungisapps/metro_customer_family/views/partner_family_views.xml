@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_family" model="ir.ui.view">
+        <field name="name">metro.partner.family</field>
+        <field name="model">partner.family</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_partner_family">
+        <field name="name">Customer Family</field>
+        <field name="res_model">partner.family</field>
+    </record>
+    <menuitem name="Customer Family" id="menu_partner_family" parent="contacts.res_partner_menu_config"
+              action="action_partner_family"/>
+</odoo>

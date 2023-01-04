@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report 
+            id="picking_overview"
+            model="stock.picking"
+            string="Picking Overview"
+            report_type="qweb-pdf"
+            name="metro_rungis_report.picking_overview_report"
+            file="metro_rungis_report.picking_overview_report"
+            attachment_use="False"
+            attachment="" 
+        />
+
+        <template id="picking_overview_report">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <t t-set="i" t-value="0"/>
+                        <t t-foreach="docs" t-as="doc">
+                            <div class="container border" style="height: 10% !important;">
+                                <div class="row">
+                                    <div class="col-3" >
+                                        Origin: <span t-field="doc.origin"/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Ref: <span t-field="doc.name"/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Scheduled: <span t-field="doc.scheduled_date" t-options='{"format": "dd.MM.y"}'/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Batch: <span t-field="doc.batch_id.name"/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3" >
+                                        Customer No.: <br /><span t-field="doc.partner_id.ref"/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Customer: <br /><span t-field="doc.partner_id.name"/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Created: <br /><span t-field="doc.create_date" t-options='{"format": "dd.MM.y"}'/>
+                                    </div>
+                                    <div class="col-3" >
+                                        Done: <br /><span style="font-size: 20pt;">&#x25a2;</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-set="i" t-value="i + 1"/>
+                            <t t-if="i==10" >
+                                <p style="page-break-after:always;"/>
+                                <t t-set="i" t-value="0"/>
+                            </t>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

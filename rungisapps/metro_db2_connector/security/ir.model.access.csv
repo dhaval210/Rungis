@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_db2_backend_group_user,db2.backend.user,model_db2_backend,base.group_user,1,1,1,1
+access_db2_binding_group_user,db2.binding.user,model_db2_binding,base.group_user,1,1,1,1
+access_db2_sale_order_group_user,db2.sale.order.user,model_db2_sale_order,base.group_user,1,1,1,1
+access_db2_sale_order_line_group_user,db2.sale.order.line.user,model_db2_sale_order_line,base.group_user,1,1,1,1
+access_db2_filger_line_group_user,db2.filter.line.user,model_db2_filter_line,base.group_user,1,1,1,1

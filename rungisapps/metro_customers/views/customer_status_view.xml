@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partners_form_customer_status" model="ir.ui.view">
+        <field name="name">view.res.partner.form.customer.status</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/group/group[@name='purchase']" position="after">
+                <group string="Customer Status" name="customer_status" >
+                    <field name="new_customer" />
+                    <field name="buy_customer" />
+                    <field name="lost_customer" />
+                </group>
+           </xpath>
+        </field>
+    </record>
+
+   <record id="view_res_partner_filter_inherit" model="ir.ui.view">
+        <field name="name">res.partner.inherit.filter</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+             <xpath expr="//filter[@name='filter_my_partners']" position="after">
+                 <filter string="New Customer" name="new_customer" domain="[('new_customer','=',True)]"/>
+                 <filter string="Buying Customer" name="buy_customer"  domain="[('buy_customer','=',True)]"/>
+                 <filter string="Lost Customer" name="lost_customer"  domain="[('lost_customer','=',True)]"/>
+            </xpath>
+            <separator/>
+        </field>
+    </record>
+        <record id="view_order_product_search_inherit1" model="ir.ui.view">
+        <field name="name">sale.report.search.inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//filter[@name='Quotations']" position="after">
+                <filter name="new_customer" string="New Customer" domain="[('partner_id.new_customer','=', True)]"/>
+                <filter name="buy_customer" string="Buy Customer" domain="[('partner_id.buy_customer','=', True)]"/>
+                <filter name="lost_customer" string="Lost Customer" domain="[('partner_id.lost_customer','=', True)]"/>
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

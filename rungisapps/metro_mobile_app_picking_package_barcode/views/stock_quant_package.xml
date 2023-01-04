@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.quant.package form view -->
+    <record id="stock_quant_package_barcode_view_form" model="ir.ui.view">
+        <field name="name">stock.quant.package.view.form</field>
+        <field name="model">stock.quant.package</field>
+        <field name="arch" type="xml">
+            <form string="Assign Barcode">
+                <header>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" tabindex="-1">y</button>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" required="True"/>
+                    </group>
+                </sheet>
+                <footer>
+                        <button id="barcode-scan-trigger" string="Save" class="btn btn-primary barcode-pack" special="save"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

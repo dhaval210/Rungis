@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tile line form -->
+    <record id="metro_dashboard_tile_line_form" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.line.form</field>
+        <field name="model">metro.dashboard.tile.line</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Metro Dashboard Tile Line Form">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="tile_id" />
+                        <field name="progress" />
+                        <field name="target" />
+                    </group>
+                    <group>
+                        <field name="challenge_line_id" />
+                        <field name="goal_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_tile_line_tree" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.line.tree</field>
+        <field name="model">metro.dashboard.tile.line</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="tile_id" />
+                <field name="progress" />
+                <field name="target" />
+                <field name="goal_progress" />
+                <field name="goal_target" />
+                <field name="suffix" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_tile_line_search" model="ir.ui.view">
+        <field name="name">metro.dashboard.tile.line.search</field>
+        <field name="model">metro.dashboard.tile.line</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+
+                <filter name="ref_goal" string="Referenced with Goal" domain="[('goal_id', '!=', None)]" />
+                <filter name="ref_statistic" string="Generated with Statistic" domain="[('goal_id', '=', None)]" />
+                <group string="Group By">
+                    <filter name="group_by_tile" string="Tile" context="{'group_by': 'tile_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

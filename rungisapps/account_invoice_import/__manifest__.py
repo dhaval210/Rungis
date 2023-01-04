@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account Invoice Import',
-    'version': '12.0.1.0.0',
+    'name': 'Account E-Invoice Import',
+    'version': '12.0.1.0.1',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Import supplier invoices/refunds as PDF or XML files',

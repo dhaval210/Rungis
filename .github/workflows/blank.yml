@@ -14,6 +14,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: "dev"
+        pr_title: "Pulling ${{ github.ref }} into dev"
         
   Copy_code_in_preprod:
     runs-on: ubuntu-latest
@@ -23,6 +24,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: "preprod"
+        pr_title: "Pulling ${{ github.ref }} into preprod"
 
 
 #  call-workflow:

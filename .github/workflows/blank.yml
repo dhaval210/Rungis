@@ -3,7 +3,7 @@ name: Build and Deploy to GKE - developer
 on:
   push:
     branches:    
-      - developer 
+      - developer
 
 jobs:
   Copy_code_in_development:
@@ -14,6 +14,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: "dev"
+        
   Copy_code_in_preprod:
     runs-on: ubuntu-latest
     steps:

@@ -24,8 +24,8 @@
     'author': 'Ascetic Business Solution',
     'category': 'Sales',
     'summary': """Set minimum sales quantity limit on product""",
-    'license': 'AGPL-3',
-    'website': 'http://www.lnkasia.com',
+    'license': 'AGPL-4',
+    'website': 'http://www.asceticbs.com',
     'description': """
 """,
     'version': '12.0.0.1',

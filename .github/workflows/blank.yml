@@ -3,17 +3,17 @@ name: Build and Deploy to GKE - developer
 on:
   push:
     branches:    
-      - developer 
+      - dev
 
 jobs:
-  pull-request:
+  Copy_code_in_development:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
-        destination_branch: "dev"
+        destination_branch: "preprod"
 
 
 #  call-workflow:

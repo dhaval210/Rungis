@@ -1,32 +1,18 @@
-name: Build and Deploy to GKE - developer
-
 on:
   push:
-    branches:    
-      - developer
-
+    branches: [ "dev" ]
+  workflow_call:
+  
 jobs:
-  Copy_code_in_development:
+  Deploy_to_dev:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-      uses: repo-sync/pull-request@v2
-      with:
-        destination_branch: "dev"
-        pr_title: "Pulling ${{ github.ref }} into dev"
-        
-  Copy_code_in_preprod:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: pull-request
-      uses: repo-sync/pull-request@v2
-      with:
-        destination_branch: "preprod"
-        pr_title: "Pulling ${{ github.ref }} into preprod"
+    environment: dev
 
-
-#  call-workflow:
-#    uses: dhaval210/odoodev/.github/workflows/Build and Deploy on GKE.yml@dev
-#    secrets: inherit
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Sleep for 10 seconds
+      uses: dhaval210/wait-action@master
+      with:
+        time: '10s'

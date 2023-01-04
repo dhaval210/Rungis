@@ -28,7 +28,7 @@
     'website': 'http://www.lnkasia.com',
     'description': """
 """,
-    'version': '12.0.0.1',
+    'version': '12.0.0.0.2',
     'depends': ['base','sale_management','product','purchase'],
     'data': ['views/view_minimum_order_quantity.xml'
            ],

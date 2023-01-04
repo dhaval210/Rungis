@@ -1,0 +1,10 @@
+.o_kanban_header .o_kanban_header_title .o_kanban_map img{
+    width: 15px;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.o_kanban_header .o_kanban_header_title .o_kanban_map:hover img{
+    width: 16px;
+    opacity: 0.7;
+}

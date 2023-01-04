@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="web_wide_form" name="web_wide_form_css" inherit_id="web.assets_backend">
+      <xpath expr="//link[last()]" position="after">
+        <link rel="stylesheet" href="/ls_web_wide_form/static/src/css/web_wide_form.scss"/>
+      </xpath>
+    </template>
+  </data>
+</odoo>

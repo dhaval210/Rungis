@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_mrp_product_produce_wizard_inherit_metro_mrp" model="ir.ui.view">
+        <field name="name">mrp.product.produce.inherit.metro.mrp</field>
+        <field name="model">mrp.product.produce</field>
+        <field name="inherit_id" ref="mrp.view_mrp_product_produce_wizard"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer//button[@name='do_produce']" position="replace">
+                <button name="action_do_produce_generate_lot" type="object" string="Record Production and Auto Generate Lot" class="btn-primary" invisible="context.get('auto_lot', True)"/>
+                <button name="action_do_produce_generate_lot" type="object" string="Record Production" class="btn-primary" invisible="context.get('lot_auto', True)"/>
+            </xpath>
+            <xpath expr="//form//group[1]//group//field[@name='lot_id']" position="attributes">
+                <attribute name='attrs'>{'invisible': [('product_tracking', '=', 'none')]}</attribute>
+                <attribute name='required'>context.get('auto_lot', True)</attribute>
+            </xpath>
+            <xpath expr="//field[@name='produce_line_ids']//tree//field[@name='lot_id']" options="{'no_open': True, 'no_create': True}" position="after">
+                <field name="lot_produced_id" groups="stock.group_production_lot" context="{'default_product_id': product_id}" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

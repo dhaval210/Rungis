@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- simple workflow starts here -->
+    <record id="tspbv_connector.workflow_1" model="tspbv.workflow">
+        <field name="dialoglist_ids" eval="[(4, ref('tspbv_connector_cw.dialoglist_cw_1'))]" />
+        <field name="js_script_ids" eval="[(6,0,[ref('tspbv_connector_cw.javascript_code_1')])]" />
+    </record>
+    <!-- simple workflow ends here -->
+</odoo>

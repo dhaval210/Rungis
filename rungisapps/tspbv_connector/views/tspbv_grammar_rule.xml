@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- tspbv.dialoglist form view -->
+    <record id="tspbv_grammar_rule_view_form" model="ir.ui.view">
+        <field name="name">tspbv.grammar.rule.view.form</field>
+        <field name="model">tspbv.grammar.rule</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="rule_name"/>
+                        <field name="content"/>
+                        <field name="constraint_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tspbv_grammar_rule_view_tree" model="ir.ui.view">
+        <field name="name">tspbv.grammar.rule.view.tree</field>
+        <field name="model">tspbv.grammar.rule</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="display_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- tspbv.grammar.rule action window -->
+    <record id="tspbv_grammar_rule_action" model="ir.actions.act_window">
+        <field name="name">tspbv.grammar.rule.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tspbv.grammar.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="tspbv_grammar_rule_menu_act" name="Grammar Rule" parent="tspbv_connector_menu_categ"
+              action="tspbv_grammar_rule_action" sequence="10"/>
+</odoo>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_config_settings_debrand" model="ir.ui.view">
+        <field name="name">res.config.settings.debrand.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="100"/>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='business_documents']" position="before">
+                <h2>Metro Debrand Configuration</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="unsubscribe_auditlog"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="unsubscribe_auditlog"/>
+                            <div class="text-muted">
+                                Unsubscribe all the rules from auditlog
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="delete_mail_server"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="delete_mail_server"/>
+                            <div class="text-muted">
+                                Remove all configured mail servers
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="debrand_name"/>
+                            <div class="text-muted">
+                                Current Display name
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="debrand_name"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <div class="text-muted">
+                                Set Color
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16 row">
+                                    <label for="background_color" string="BG Color" class="col-3 o_light_label"/>
+                                    <field name="background_color" widget="color" class="oe_inline"/>
+                                    <div class="w-100"></div>
+                                    <label for="text_color" string="Text Color" class="col-3 o_light_label"/>
+                                    <field name="text_color" widget="color" class="oe_inline"/>
+                                    <div class="w-100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane"/>
+                        <div class="o_setting_right_pane">
+                            <label for="ir_cron"/>
+                            <div class="text-muted">
+                                Disable Schedule Action
+                            </div>
+                            <div class="content-group">
+                                <div class="mt16">
+                                    <field name="ir_cron" widget="many2many_tags"
+                                           options="{'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

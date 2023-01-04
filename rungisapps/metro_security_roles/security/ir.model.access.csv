@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+account_move_line_we_worker,we_worker_account_move_line,account.model_account_move_line,group_stock_wareneingang,1,0,0,0
+stock_quant_we_worker,we_worker_stock_quant,stock.model_stock_quant,group_stock_wareneingang,1,1,0,0
+stock_picking_we_worker,we_worker_stock_picking,stock.model_stock_picking,group_stock_wareneingang,1,1,0,0
+stock_quant_package_we_worker,we_worker_stock_quant_package,stock.model_stock_quant_package,group_stock_wareneingang,1,1,0,0
+stock_gate_we_worker,we_worker_stock_gate,metro_gate_management.model_stock_gate,group_stock_wareneingang,1,1,0,0
+account_move_line_taxi,taxi_account_move_line,account.model_account_move_line,group_stock_taxi,1,0,0,0
+stock_quant_taxi,taxi_stock_quant,stock.model_stock_quant,group_stock_taxi,1,1,0,0
+stock_picking_taxi,taxi_stock_picking,stock.model_stock_picking,group_stock_taxi,1,1,0,0
+stock_quant_package_taxi,taxi_stock_quant_package,stock.model_stock_quant_package,group_stock_taxi,1,1,0,0
+account_move_line_qa,qa_account_move_line,account.model_account_move_line,group_stock_qa_worker,1,0,0,0
+stock_quant_qa,qa_stock_quant,stock.model_stock_quant,group_stock_qa_worker,1,1,0,0
+stock_picking_qa,qa_stock_picking,stock.model_stock_picking,group_stock_qa_worker,1,1,0,0
+stock_quant_package_qa,qa_stock_quant_package,stock.model_stock_quant_package,group_stock_qa_worker,1,1,0,0

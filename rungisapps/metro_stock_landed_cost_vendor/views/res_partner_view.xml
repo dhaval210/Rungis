@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_supplier_landed_cost_form" model="ir.ui.view">
+        <field name="name">supplier.landed.cost.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='sales_purchases']"
+                   position="after">
+                <page string="Landed Cost &amp; Later Income" name="vendor_landed_cost"
+                      attrs="{'invisible': [('supplier','=',False)]}">
+                    <group>
+                        <group>
+                            <field name="landed_cost_journal_id" invisible="1"/>
+                            <field name="landed_cost_aggregate"/>
+                            <field name="landed_cost_line_ids">
+                                <tree string="Landed Cost Lines" editable="bottom">
+                                    <field name="product_id" context="{'default_landed_cost_ok': True}"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                        <group>
+                            <field name="later_income_journal_id" invisible="1"/>
+                            <field name="later_income_aggregate"/>
+                            <field name="later_income_line_ids">
+                                <tree string="Later Income Lines" editable="bottom">
+                                    <field name="product_id" context="{'default_landed_cost_ok': True}"/>
+                                    <field name="percentage"/>
+                                </tree>
+                            </field>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_supplierinfo_lc_li_form_view">
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+            <field name="date_end" position="after">
+                <field name="landed_cost_aggregate"/>
+                <field name="later_income_aggregate"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_supplierinfo_lc_li_tree_view">
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="date_end" position="after">
+                <field name="landed_cost_aggregate"/>
+                <field name="later_income_aggregate"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

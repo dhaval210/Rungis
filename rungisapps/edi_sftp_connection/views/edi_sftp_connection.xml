@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="sftp_connection_form_view" model="ir.ui.view">
+    <field name="name">sftp.connection.form</field>
+    <field name="model">edi.connection</field>
+    <field name="inherit_id" ref="edi_ftp_connection.ftp_connection_form_view"/>
+    <field name="priority" eval="999"/>
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='is_active']" position="attributes" >
+            <attribute name="attrs">{'invisible': [('connection_type', '=', 'sftp')]}</attribute>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

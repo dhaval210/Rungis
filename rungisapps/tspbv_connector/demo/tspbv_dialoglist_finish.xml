@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="dialoglist_9" model="tspbv.dialoglist">
+        <field name="name">Finish Dialog</field>
+        <field name="start">finish</field>
+        <field name="model_id" search="[('model','=','stock.location')]" model="ir.model" />
+        <field name="default_code">finish</field>
+    </record>
+
+    <!-- <record id="output_9_0" model="tspbv.output">
+            <field name="lydia_output">Ware abladen</field>
+        </record> -->
+    <record id="output_9_1" model="tspbv.output">
+        <field name="lydia_output">Ablegen in (Gang) $[object.posx], (Schrank) $[object.posy], (Fach) $[object.posz]</field>
+    </record>
+    <record id="output_9_2" model="tspbv.output">
+        <field name="lydia_output">ungültig(e Prüfziffer)</field>
+    </record>
+    <record id="output_9_3" model="tspbv.output">
+        <field name="lydia_output">(Auftrag) wird abgeschlossen</field>
+    </record>
+    <record id="constraint_9_1" model="tspbv.grammar.rule.constraint">
+        <field name="type">digits</field>
+        <field name="min">1</field>
+        <field name="max">3</field>
+    </record>
+    <record id="grammar_rule_9_2" model="tspbv.grammar.rule">
+        <field name="rule_name">locationok</field>
+        <field name="content">(okay|fertig)</field>
+        <field name="constraint_id" ref="tspbv_connector.constraint_9_1" />
+    </record>
+    <record id="input_9_2" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_9_2')])]" />
+    </record>
+    <record id="recognition_9_2" model="tspbv.recognition">
+        <field name="rel">locationchecknotok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$[object.check_digit] != $1</field>
+        <field name="input_id" ref="tspbv_connector.input_9_2" />
+    </record>
+    <record id="recognition_9_2_f" model="tspbv.recognition">
+        <field name="rel">locationchecknotok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$[object.check_digit] != $1</field>
+        <field name="input_id" ref="tspbv_connector.input_9_2" />
+    </record>
+    <record id="recognition_9_3" model="tspbv.recognition">
+        <field name="rel">locationcheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) okay</field>
+        <field name="on_match">$[object.check_digit] == $1</field>
+        <field name="input_id" ref="tspbv_connector.input_9_2" />
+    </record>
+    <record id="recognition_9_3_f" model="tspbv.recognition">
+        <field name="rel">locationcheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,3}) fertig</field>
+        <field name="on_match">$[object.check_digit] == $1</field>
+        <field name="input_id" ref="tspbv_connector.input_9_2" />
+    </record>
+    <!-- <record id="dialog_9_0" model="tspbv.dialog">
+            <field name="id_dialog">finish</field>
+            <field name="lydia_output_id" ref="tspbv_connector.output_9_0" />
+            <field name="lydia_input_id" ref="" />
+            <field name="dialoglist_id" ref="tspbv_connector.dialoglist_9" />
+    </record> -->
+    <record id="dialog_9_1" model="tspbv.dialog">
+        <field name="id_dialog">finish</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_9_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_9" />
+    </record>
+    <record id="dialog_9_2" model="tspbv.dialog">
+        <field name="id_dialog">locationcheck</field>
+        <field name="lydia_output_id" ref="" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_9_2" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_9" />
+    </record>
+    <record id="dialog_9_3" model="tspbv.dialog">
+        <field name="id_dialog">locationchecknotok</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_9_2" />
+        <field name="lydia_input_id" ref="" />
+        <!-- <field name="dialoglist_id" ref="tspbv_connector.dialoglist_6" /> -->
+    </record>
+    <record id="link_9_31" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#finish</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_3" />
+    </record>    
+    <record id="dialog_9_4" model="tspbv.dialog">
+        <field name="id_dialog">locationok</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_9_3" />
+        <field name="lydia_input_id" ref="" />
+        <!-- <field name="dialoglist_id" ref="tspbv_connector.dialoglist_6" /> -->
+    </record>
+    <record id="link_9_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#locationcheck</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_1" />
+    </record>
+    <record id="link_9_2" model="tspbv.link">
+        <field name="rel">locationcheckok</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_2" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_9_4" />
+    </record>
+    <record id="link_9_3" model="tspbv.link">
+        <field name="rel">locationchecknotok</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_2" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_9_3" />
+    </record>
+    <record id="link_9_4" model="tspbv.link">
+        <field name="rel">*</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/finish?dialoglist_code=session</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/finish?dialoglist_code=session'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_4" />
+    </record>
+    <record id="link_9_5" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#locationcheck</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9_3" />
+    </record>
+</odoo>

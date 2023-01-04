@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_purchase_schedule_form" model="ir.ui.view">
+        <field name="name">partner.purchase.schedule.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="PO cut off time" attrs="{'invisible':[('supplier', '=', False)]}">
+                    <field name="schedule_ids">
+                        <tree editable="top" default_order="order_deadline asc">
+                            <field name="name"/>
+                            <field name="order_deadline"/>
+                            <field name="time" widget="float_time"/>
+                            <field name="delivery_lead_time"/>
+                            <field name="partner_id" invisible="1"/>
+                            <field name="order_date" invisible="1"/>
+                            <field name="expire_date" invisible="1"/>
+                            <field name="last_update" invisible="1"/>
+                        </tree>
+
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']//group[@name='purchase']//field[@name='supplier']"
+                   position="after">
+                <field name="buyer_id"/>
+            </xpath>
+        </field>
+    </record>
+
+     <record id="view_calendar_event_form_inherit" model="ir.ui.view">
+        <field name="name">calendar.event.form.inherit.purchase.schedule</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="schedule_id" invisible="1"/>
+            </field>
+        </field>
+     </record>
+
+</odoo>

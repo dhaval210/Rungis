@@ -1,0 +1,2 @@
+13 Feb 2020:
+- as of version 1.2, removed the dependency of MWM local module "quality" add "sync_quality_control".

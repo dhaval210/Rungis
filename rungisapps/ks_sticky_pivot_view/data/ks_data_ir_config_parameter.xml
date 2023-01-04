@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.config_parameter" id="ks_pivot_sticky_status">
+            <field name="key">base_setup.ks_pivot_sticky_status</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

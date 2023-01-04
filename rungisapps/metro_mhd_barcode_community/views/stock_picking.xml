@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.picking inherit form view -->
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='lot_name']" position="after">
+                <field name="metro_mhd" attrs="{'readonly': [['parent.picking_type_code', '!=', 'incoming']]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

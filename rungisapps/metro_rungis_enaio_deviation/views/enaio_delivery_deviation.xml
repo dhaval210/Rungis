@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="enaio_delivery_deviation_form_view" model="ir.ui.view">
+        <field name="name">enaio.delivery.deviation.view.form</field>
+        <field name="model">enaio.delivery.deviation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object"
+                            string="Upload Deviations"
+                            name="upload_delivery_deviation"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ['done', 'cancel'])]}"/>
+                    <button type="object"
+                            string="Cancel"
+                            name="cancel"
+                            class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ['done', 'cancel'])]}"/>
+
+                     <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group colspan="2">
+                        <group >
+                            <field name="upload_date" attrs="{'readonly': [('status', 'in', ['done', 'cancel'])]}"/>
+                            <field name="deviation_zipfile" filename="file_name" help="Please upload zip file only"  attrs="{'readonly': [('status', 'in', ['done', 'cancel'])]}"/>
+                            <field name="file_name" invisible="1"/>
+                            <field name="log_file" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="enaio_delivery_deviation_tree_view" model="ir.ui.view">
+        <field name="name">enaio.delivery.deviation.view.tree</field>
+        <field name="model">enaio.delivery.deviation</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="upload_date"/>
+                <field name="file_name"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="enaio_delivery_deviation_action" model="ir.actions.act_window">
+        <field name="name">Enaio Delivery Deviation</field>
+        <field name="res_model">enaio.delivery.deviation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Click to add a new Deviation.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="enaio_menu_root" name="Enaio" parent="stock.menu_stock_warehouse_mgmt" sequence="30"/>
+
+    <menuitem
+        id="enaio_delivery_deviation_menu"
+        name="Enaio Delivery Deviation"
+        parent="enaio_menu_root"
+        action="enaio_delivery_deviation_action"
+        groups="base.group_user"
+        sequence="5"/>
+
+</odoo>

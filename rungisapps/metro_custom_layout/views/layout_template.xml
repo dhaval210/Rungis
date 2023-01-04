@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_common_custom_layout" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link type="text/scss" rel="stylesheet" href="/metro_custom_layout/static/src/scss/layout_custom.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

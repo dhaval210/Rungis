@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <t t-extend="main_menu">
+        <t t-jquery=".row" t-operation="replace">
+          <div class="col">
+              <button class="button_operations btn btn-block btn-primary mb-4 mb-sm-0">Operations</button>
+          </div>
+          <div class="col" t-if="widget.group_stock_manager">
+              <button class="button_inventory btn btn-block btn-primary">Inventory Adjustments</button>
+          </div>
+        </t>
+    </t>
+
+</templates>

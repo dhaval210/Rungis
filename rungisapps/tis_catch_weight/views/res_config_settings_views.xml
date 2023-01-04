@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.catchweight</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Catch Weight" string="CatchW8"
+                     data-key="tis_catch_weight">
+                    <h2>Catch Weight Management</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box"
+                             title="Check to enable catch weight management system">
+                            <div class="o_setting_left_pane">
+                                <field name="group_catch_weight"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_catch_weight"/>
+                                <div class="text-muted">
+                                    Activate catch weight system
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_demo_data" widget="purchase_catch_weight"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_demo_data"/>
+                                <div class="text-muted">
+                                    Demo Products
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_average_qty" widget="purchase_catch_weight"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_average_qty"/>
+                                <div class="text-muted">
+                                    Average Quantity for Catch Weight Products
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_theme" widget="purchase_catch_weight"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_theme"/>
+                                <div class="text-muted">
+                                    Activate Catch Weight Theme
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_all_channels_sales_cw_report" widget="pruchase_catch_weight"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_all_channels_sales_cw_report"/>
+                                <div class="text-muted">
+                                    Catch weight analysis report for 'All Channels Sales Order'
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Inventory</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_procurement" />
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_procurement"/>
+                                <div class="text-muted">
+                                    Mapping Catch Weight quantity in procurement
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_stock_picking_batch"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_stock_picking_batch"/>
+                                <div class="text-muted">
+                                    Activating catch weight features in batch picking
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_stock_report_xls"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_stock_report_xls"/>
+                                <div class="text-muted">
+                                    Export Stock report with Catch Weight quantity
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Manufacturing</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_mrp"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_mrp"/>
+                                <div class="text-muted">
+                                    Activating catch weight features in manufacturing
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_mrp_byproduct"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_mrp_byproduct"/>
+                                <div class="text-muted">
+                                    By-products
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_sale_mrp"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_sale_mrp"/>
+                                <div class="text-muted">
+                                    Sale Kit Products with Catch Weight
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_purchase_mrp"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_purchase_mrp"/>
+                                <div class="text-muted">
+                                    Purchase Kit Products with Catch Weight
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h2>Ecommerce</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_web_sale" widget="buy_apps"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_web_sale"/>
+                                <div class="text-muted">
+                                    Activating catch weight features in Ecommerce
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_tis_cw_web_sale_avg"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_tis_cw_web_sale_avg"/>
+                                <div class="text-muted">
+                                    Fetch average quantity in Ecommerce/Shop
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+
+

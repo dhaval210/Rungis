@@ -1,0 +1,13 @@
+<odoo>
+    <record model="ir.ui.view" id="metro_view_currency_move_form">
+		<field name="name">metro_view_currency_form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form" />
+		<field name="priority" eval="22" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='currency_id']" position="after">
+				<field name="disable_currency_onchange"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

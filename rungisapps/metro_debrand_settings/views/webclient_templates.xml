@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="assets_common_debrand" inherit_id="web_editor.assets_common">
+        <xpath expr="." position="inside">
+            <t t-set="display_name"
+               t-value="request.env['ir.config_parameter'].sudo().search([('key', '=', 'metro_debrand.debrand_name')])"/>
+            <t t-set="display_color"
+               t-value="request.env['ir.config_parameter'].sudo().search([('key', '=', 'metro_debrand.background_color')])"/>
+            <t t-set="display_text_color"
+               t-value="request.env['ir.config_parameter'].sudo().search([('key', '=', 'metro_debrand.text_color')])"/>
+
+            <t t-if="display_name">
+                <style>body:before
+                    { content: "
+                    <t t-esc="display_name.value"/>
+                    ";
+                    text-align: center; display: block; font-size: 16.5px; color:<t
+                            t-esc="display_text_color.value"/>;background-color:<t
+                            t-esc="display_color.value"/>;
+                    position:relative; z-index: 10; }
+                </style>
+            </t>
+        </xpath>
+    </template>
+</odoo>
+
+
+

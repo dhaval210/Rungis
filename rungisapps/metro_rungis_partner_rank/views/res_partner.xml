@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="res_partner_kanban_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.kanban.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <field name="mobile" position="after">
+                    <field name="customer_ranking"/>
+                    <field name="purchase_ranking"/>
+                    <field name="supplier"/>
+                    <field name="customer"/>
+                </field>
+                <xpath expr="//div[hasclass('oe_kanban_partner_links')]" position="inside">
+                    <span t-if="record.supplier.raw_value == true &amp;&amp; record.purchase_ranking.raw_value > 0" class="badge badge-pill"><img src="metro_rungis_partner_rank/static/src/img/rank.png" style="width: 16px;"/> <t t-esc="record.purchase_ranking.raw_value"/></span>
+                    <span t-if="record.customer.raw_value == true &amp;&amp; record.customer_ranking.raw_value > 0" class="badge badge-pill"><img src="metro_rungis_partner_rank/static/src/img/rank.png" style="width: 16px;"/> <t t-esc="record.customer_ranking.raw_value"/></span>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_lead_partner_kanban_view_inherits" model="ir.ui.view">
+            <field name="name">res.partner.kanban.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sale.crm_lead_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//i[hasclass('fa-usd')]" position="replace">
+                    <img src="metro_rungis_partner_rank /static/src/img/coins.svg" style="width: 16px;"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_partners_form_customer_status" model="ir.ui.view">
+        <field name="name">view.res.partner.form.customer.status</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+               <page string="KPI">
+                   <field name="data_ids">
+                       <tree>
+                           <field name="name"/>
+                           <field name="today"/>
+                           <field name="last_week"/>
+                           <field name="last_month"/>
+                           <field name="last_quarter"/>
+                           <field name="last_year"/>
+                           <field name="this_year"/>
+                       </tree>
+                   </field>
+               </page>
+           </xpath>
+        </field>
+    </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vendor_landed_cost_line,access_vendor_landed_cost_line,model_vendor_landed_cost_line,,1,1,1,1
+access_later_income_line,access_later_income_line,model_later_income_line,,1,1,1,1

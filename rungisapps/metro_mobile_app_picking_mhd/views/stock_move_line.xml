@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_move_line_product_selector" model="ir.ui.view">
+            <field name="name">stock.product.selector</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock_barcode.stock_move_line_product_selector"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lot_id']" position="after">
+                    <field name="lot_mhd" required="True" widget="Date" />
+                </xpath>
+                <xpath expr="//field[@name='lot_name']" position="replace">
+                    <field 
+                        name="lot_name"
+                        required="True"
+                        attrs="{'invisible': ['|', ('tracking', '=', 'none'), ('picking_type_use_create_lots', '=', False)]}"
+                    />
+                </xpath>                
+            </field>
+        </record>
+    </data>
+</odoo>

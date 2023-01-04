@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!--
+            Set Up Sales Challenge
+        -->
+        <record id="metro_sales_challenge" model="gamification.challenge">
+            <field name="name">Sales KPI's</field>
+            <field name="user_domain">[("id","=",2)]</field>
+            <field name="manager_id" search="[('id','=',2)]" />
+            <field name="period">monthly</field>
+            <field name="reward_id" search="[('name', 'ilike', 'Problem')]" />
+            <field name="state">inprogress</field>
+        </record>
+
+        <!-- New Customers KPI -->
+        <record id="metro_sales_new_customers" model="gamification.challenge.line">
+            <field name="challenge_id" eval="ref('metro_sales_challenge')" />
+            <field name="definition_id" eval="ref('metro_new_customers')" />
+            <field name="target_goal">20</field>
+        </record>
+
+        <!-- Buying Customers KPI -->
+        <record id="metro_sales_buying_customers" model="gamification.challenge.line">
+            <field name="challenge_id" eval="ref('metro_sales_challenge')" />
+            <field name="definition_id" eval="ref('metro_buying_customers')" />
+            <field name="target_goal">200</field>
+        </record>
+
+        <!-- Lost Customers KPI -->
+        <record id="metro_sales_lost customers" model="gamification.challenge.line">
+            <field name="challenge_id" eval="ref('metro_sales_challenge')" />
+            <field name="definition_id" eval="ref('metro_lost_customers')" />
+            <field name="target_goal">0</field>
+        </record>
+
+        <!-- Average Basket -->
+        <record id="metro_sales_avg_item_count" model="gamification.challenge.line">
+            <field name="challenge_id" eval="ref('metro_sales_challenge')" />
+            <field name="definition_id" eval="ref('metro_avg_sold_item_count')" />
+            <field name="target_goal">8</field>
+        </record>
+
+        <!-- Frequency of Sales -->
+        <record id="metro_sales_freq_sales" model="gamification.challenge.line">
+            <field name="challenge_id" eval="ref('metro_sales_challenge')" />
+            <field name="definition_id" eval="ref('metro_freq_sales')" />
+            <field name="target_goal">15</field>
+        </record>
+
+        <!-- 
+            Set Up Customer Sales Achievement (CSA) KPI
+         -->
+         <record id="metro_cust_sales_ach_challenge" model="gamification.challenge">
+            <field name="name">Customer Sales Achievement KPI</field>
+            <field name="user_domain">[("id","=",2)]</field>
+            <field name="manager_id" search="[('id','=',2)]" />
+            <field name="period">monthly</field>
+            <field name="display_one_tile">1</field>
+            <field name="reward_id" search="[('name', 'ilike', 'Problem')]" />
+            <field name="state">inprogress</field>
+        </record>
+
+        <!-- CSA / Target Sales Achievement KPI -->
+        <record id="metro_csa_tsa" model="gamification.challenge.line">
+            <field name="challenge_id" ref="metro_cust_sales_ach_challenge" />
+            <field name="definition_id" ref="metro_dashboard.metro_target_sales_achievement" />
+            <field name="target_goal">120</field>
+        </record>
+
+        <!-- Customers with Potential KPI -->
+        <record id="metro_csa_cust_potential" model="gamification.challenge.line">
+            <field name="challenge_id" ref="metro_cust_sales_ach_challenge" />
+            <field name="definition_id" ref="metro_customer_potential_count" />
+            <field name="target_goal">20</field>
+        </record>
+
+        <!-- Customers with Sales Targets -->
+        <record id="metro_csa_cust_sales_targets" model="gamification.challenge.line">
+            <field name="challenge_id" ref="metro_cust_sales_ach_challenge" />
+            <field name="definition_id" ref="metro_customer_sales_target_count" />
+            <field name="target_goal">20</field>
+        </record>
+
+        <!-- prt(Sales Target) -->
+        <record id="metro_csa_prt_st" model="gamification.challenge.line">
+            <field name="challenge_id" ref="metro_cust_sales_ach_challenge" />
+            <field name="definition_id" ref="metro_customer_sales_target_prt" />
+            <field name="target_goal">1000000</field>
+        </record>
+
+        <!-- As Is -->
+        <record id="metro_csa_as_is" model="gamification.challenge.line">
+            <field name="challenge_id" ref="metro_cust_sales_ach_challenge" />
+            <field name="definition_id" ref="metro_customer_sales_target_asis" />
+            <field name="target_goal">1000000</field>
+        </record>
+
+        <!--
+            Web Shop
+        -->
+        <record id="metro_web_shop_challenge" model="gamification.challenge">
+            <field name="name">Web Shop KPI's</field>
+            <field name="user_domain">[("id","=",2)]</field>
+            <field name="manager_id" search="[('id','=',2)]" />
+            <field name="period">monthly</field>
+            <field name="reward_id" search="[('name', 'ilike', 'Problem')]" />
+            <field name="state">inprogress</field>
+        </record>
+
+        <!-- Share of Web Shop Sales -->
+        <record id="metro_web_shop_sales_share" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_webshop_share_of_sales" />
+            <field name="target_goal">40</field>
+            <field name="challenge_id" ref="metro_web_shop_challenge" />
+        </record>
+
+        <!-- Share of Web Shop Sales -->
+        <record id="metro_web_shop_avg_val" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_webshop_avg_order_value" />
+            <field name="target_goal">600</field>
+            <field name="challenge_id" ref="metro_web_shop_challenge" />
+        </record>
+
+        <!--
+            Supply Chain Management KPI's
+        -->
+        <record id="metro_scm_challenge" model="gamification.challenge">
+            <field name="name">Supply Chain Management KPI's</field>
+            <field name="user_domain">[("id","=",2)]</field>
+            <field name="manager_id" search="[('id','=',2)]" />
+            <field name="period">monthly</field>
+            <field name="reward_id" search="[('name', 'ilike', 'Problem')]" />
+            <field name="state">inprogress</field>
+        </record>
+
+        <!-- Delivery Deviations -->
+        <record id="metro_scm_deldev" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_scm_delivery_deviations" />
+            <field name="target_goal">3</field>
+            <field name="challenge_id" ref="metro_scm_challenge" />
+        </record>
+
+        <!-- Perfect Order Share -->
+        <record id="metro_scm_perf_order" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_scm_perfect_order_share" />
+            <field name="target_goal">100</field>
+            <field name="challenge_id" ref="metro_scm_challenge" />
+        </record>
+
+        <!-- Lines moved per WH User -->
+        <record id="metro_scm_lines" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_scm_lines_moved" />
+            <field name="target_goal">1000</field>
+            <field name="challenge_id" ref="metro_scm_challenge" />
+        </record>
+
+        <!-- Units moved per WH User -->
+        <record id="metro_scm_units" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_scm_units_moved" />
+            <field name="target_goal">10000</field>
+            <field name="challenge_id" ref="metro_scm_challenge" />
+        </record>
+
+        <!--
+            Value Added Service KPI's
+        -->
+        <record id="metro_vas_challenge" model="gamification.challenge">
+            <field name="name">Value Added Service KPI's</field>
+            <field name="user_domain">[("id","=",2)]</field>
+            <field name="manager_id" search="[('id','=',2)]" />
+            <field name="period">monthly</field>
+            <field name="reward_id" search="[('name', 'ilike', 'Problem')]" />
+            <field name="state">inprogress</field>
+        </record>
+
+        <!-- Value created -->
+        <record id="metro_vas_val" model="gamification.challenge.line">
+            <field name="definition_id" ref="metro_vas_value_created" />
+            <field name="target_goal">10000</field>
+            <field name="challenge_id" ref="metro_vas_challenge" />
+        </record>
+    </data>
+</odoo>

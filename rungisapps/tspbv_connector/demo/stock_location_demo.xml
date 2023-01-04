@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="stock_hw_hucke_1" model="stock.location">
+        <field name="name">Gang 1</field>
+        <field name="posx">1</field>
+        <field name="posy">0</field>
+        <field name="posz">0</field>
+        <field name="usage">internal</field>
+        <field name="location_id" model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+    </record>
+    <record id="stock_hw_hucke_2" model="stock.location">
+        <field name="name">Gang 2</field>
+        <field name="posx">2</field>
+        <field name="posy">0</field>
+        <field name="posz">0</field>
+        <field name="usage">internal</field>
+        <field name="location_id" model="stock.location"
+            eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+    </record>
+    <record id="stock_shelf_hucke_1" model="stock.location">
+        <field name="name">Schrank 1</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">0</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_hw_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_1" model="stock.location">
+        <field name="name">Fach 1</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">1</field>
+        <field name="zone">2</field>
+        <field name="check_digit">2</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_2" model="stock.location">
+        <field name="name">Fach 2</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">2</field>
+        <field name="zone">2</field>
+        <field name="check_digit">8</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_3" model="stock.location">
+        <field name="name">Fach 3</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">3</field>
+        <field name="zone">2</field>
+        <field name="check_digit">5</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_4" model="stock.location">
+        <field name="name">Fach 4</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">4</field>
+        <field name="zone">2</field>
+        <field name="check_digit">3</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_5" model="stock.location">
+        <field name="name">Fach 5</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">5</field>
+        <field name="zone">2</field>
+        <field name="check_digit">7</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_6" model="stock.location">
+        <field name="name">Fach 6</field>
+        <field name="posx">1</field>
+        <field name="posy">1</field>
+        <field name="posz">6</field>
+        <field name="zone">2</field>
+        <field name="check_digit">1</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_1" />
+    </record>
+    <record id="stock_shelf_hucke_2" model="stock.location">
+        <field name="name">Schrank 2</field>
+        <field name="posx">1</field>
+        <field name="posy">2</field>
+        <field name="posz">0</field>
+        <field name="zone">2</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_hw_hucke_1" />
+    </record>
+    <record id="stock_place_hucke_7" model="stock.location">
+        <field name="name">Fach 1</field>
+        <field name="posx">1</field>
+        <field name="posy">2</field>
+        <field name="posz">1</field>
+        <field name="zone">2</field>
+        <field name="check_digit">6</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_2" />
+    </record>
+    <record id="stock_place_hucke_8" model="stock.location">
+        <field name="name">Fach 2</field>
+        <field name="posx">1</field>
+        <field name="posy">2</field>
+        <field name="posz">2</field>
+        <field name="zone">2</field>
+        <field name="check_digit">4</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_2" />
+    </record>
+    <record id="stock_place_hucke_9" model="stock.location">
+        <field name="name">Fach 3</field>
+        <field name="posx">1</field>
+        <field name="posy">2</field>
+        <field name="posz">3</field>
+        <field name="zone">2</field>
+        <field name="check_digit">9</field>
+        <field name="usage">internal</field>
+        <field name="location_id" ref="tspbv_connector.stock_shelf_hucke_2" />
+    </record>
+</odoo>

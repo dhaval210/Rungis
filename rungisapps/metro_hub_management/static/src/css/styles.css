@@ -1,0 +1,39 @@
+.hucke_hubs {
+    display: block ;
+}
+
+.hucke_hubs .o_kanban_group {
+    height: 150px;
+    overflow-y: scroll;
+    float: left;
+}
+
+.hucke_hubs .o_kanban_group .o_kanban_header {
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    color: black;
+    /* background-color: rgba(255, 0, 0, 1); */
+    background-color: #f9f9f9;
+}
+
+.hucke_hubs > .o_kanban_group:first-child {
+    height: calc(100vh);
+    overflow-y: scroll;
+}
+
+.hucke_hubs > .dropdown-menu.show {
+    left: unset !important;
+    right: 0px !important;
+}
+
+.hucke_hubs.ui-sortable.o_kanban_grouped::after {
+    content: '';
+    clear: both;
+    float: none;
+}
+.hucke_hubs .o_kanban_group:not(.o_column_folded) {
+    width: 400px;
+}

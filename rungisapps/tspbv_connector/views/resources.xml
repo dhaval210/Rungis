@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <template id="tspbv_asset_backend" name="website assets for tspbv" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/tspbv_connector/static/src/js/one2many.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="product_temp_report_pricecalculation"
+                string="Price calculation"
+                model="product.template"
+                report_type="qweb-html"
+                name="metro_article_calculation.report_pricecalculation"
+                file="metro_article_calculation.report_pricecalculation"
+                menu="False"
+        />
+        <report
+                id="product_product_report_pricecalculation"
+                string="Price calculation"
+                model="product.product"
+                report_type="qweb-html"
+                name="metro_article_calculation.report_pricecalculation"
+                file="metro_article_calculation.report_pricecalculation"
+                menu="False"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_move_lots_cw" model="ir.ui.view">
+        <field name="name">stock.move.lots.form</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="mrp.view_stock_move_lots"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_done']" position="before">
+                <field name="catch_weight_ok" invisible="1"/>
+                <label for="product_cw_uom_qty" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                     groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <field name="product_cw_uom_qty" readonly="1" nolabel="1"/>
+                    </span>
+                    <span>
+                        <field name="product_cw_uom" readonly="1" force_save="1" nolabel="1"/>
+                    </span>
+                </div>
+                <label for="cw_qty_done" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                     groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <field name="cw_qty_done"
+                               attrs="{'readonly': ['|', ('is_locked', '=', True), '|', ('finished_lots_exist', '=', True), ('has_tracking', '!=', 'none')]}"
+                               nolabel="1"/>
+                    </span>
+                    <span>/</span>
+                    <span>
+                        <field name="reserved_cw_availability" nolabel="1"/>
+                    </span>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='product_qty']" position="after">
+                <field name="catch_weight_ok" invisible="1"/>
+                <field name="product_cw_uom_qty" string="CW Reserved" readonly="1"
+                       attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+            <xpath expr="//field[@name='qty_done']" position="after">
+                <field name="catch_weight_ok" invisible="1"/>
+                <field name="cw_qty_done" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_finisehd_move_line_cw" model="ir.ui.view">
+        <field name="name">mrp.finished.move.line.form</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="mrp.view_finisehd_move_line"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lot_id']" position="before">
+                <field name="catch_weight_ok" invisible="1"/>
+                <label for="cw_qty_done" string="CW Quantity" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+                <div class="o_row" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                     groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <field name="cw_qty_done" readonly="1" nolabel="1"/>
+                    </span>
+                    <span>/</span>
+                    <span>
+                        <field name="product_cw_uom_qty" readonly="1" nolabel="1"/>
+                    </span>
+                    <span>
+                        <field name="product_cw_uom" attrs="{'readonly': [('id', '!=', False)]}" nolabel="1"/>
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Daily # Sale orders -->
+        <record id="metro_freq_sales" model="gamification.goal.definition">
+            <field name="name">Daily # Sale orders</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">sales per day</field>
+            <field name="use_timeframes">0</field>
+            <field name="dependencies">sale</field>
+            <field name="cust_timeframe">Last 365 days starting from 1. of the month</field>
+            <field name="compute_code">today = datetime.now().date().replace(day=1)
+first_day = today - timedelta(days=365)
+orders = env["sale.order"].search_count([
+    ("create_date", "&lt;=", str(today)),
+    ("create_date", "&gt;=", str(first_day)),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done")
+])
+result = orders / 365</field>
+        </record>
+
+        <!-- Average Basket Value -->
+        <record id="metro_avg_sold_item_count" model="gamification.goal.definition">
+            <field name="name">Average Basket Value</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Last 365 days starting from today</field>
+            <field name="dependencies">sale</field>
+            <field name="compute_code">first_day = object.last_day - timedelta(days=365)
+query = """SELECT a.SUM/a.COUNT FROM (
+    SELECT SUM(amount_untaxed), COUNT(*) FROM sale_order
+    WHERE state NOT IN ('draft', 'cancel') 
+    AND confirmation_date &gt;= '"""+str(first_day)+"""'
+    AND confirmation_date &lt;= '"""+str(object.last_day)+"""'
+) AS a;"""
+env.cr.execute(query)
+result = env.cr.fetchone()[0] or 0</field>
+        </record>
+
+        <!-- New Customers -->
+        <record id="metro_new_customers" model="gamification.goal.definition">
+            <field name="name">New Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Updated monthly</field>
+            <field name="dependencies">metro_customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([
+    ("new_customer", "=", True),
+    ("customer", "=", True),
+    ("parent_id", "=", False)
+])</field>
+        </record>
+
+        <!-- Buying Customers -->
+        <record id="metro_buying_customers" model="gamification.goal.definition">
+            <field name="name">Buying Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Updated monthly</field>
+            <field name="dependencies">metro_customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([
+    ("buy_customer", "=", True),
+    ("customer", "=", True),
+    ("parent_id", "=", False)
+])</field>
+        </record>
+
+        <!-- Lost Customers -->
+        <record id="metro_lost_customers" model="gamification.goal.definition">
+            <field name="name">Lost Customers</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Updated monthly</field>
+            <field name="dependencies">metro_customers,metro_buying_potential</field>
+            <field name="compute_code">customers = env["res.partner"].search([
+    ("lost_customer", "=", True),
+    ("customer", "=", True),
+    ("parent_id", "=", False)
+])
+result = len(customers)
+table = []
+kacs = []
+cust = []
+for c in customers:
+    customer = {
+        "label": c.name
+    }
+    customer["suffix"] = ""
+    if c.kac:
+        customer["value"] = c.buying_potential
+        kacs.append(customer)
+    else:
+        customer["value"] = ""
+        cust.append(customer)
+ordered = sorted(kacs, key=lambda d: d["value"], reverse=True)[:7]
+sequence = 0
+for kac in ordered:
+    kac["sequence"] = sequence
+    table.append(kac)
+    sequence += 1
+# 7 - len(table) is for limiting the table to have 7 TableLines, otherwise it would show something like: More items: 7
+table.extend(cust[:7-len(table)])</field>
+        </record>
+
+        <record id="metro_sales_cust_app_past" model="gamification.goal.definition">
+            <field name="name">Customer Visits (past)</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">appointments</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">calendar,metro_min_amount_so</field>
+            <field name="compute_code">kacs = env["res.partner"].search([
+    ("kac", "=", True)
+])
+# Build a map with the KAC's and their corresponding Salespersons (KAM)
+rel = {kac.id: kac.user_id.partner_id.id for kac in kacs}
+customer_ids = rel.keys()
+employee_ids = rel.values()
+# Find meetings with the KAC's and KAM's in their list of attendees
+meetings = env["calendar.event"].search([
+    ("partner_ids", "in", customer_ids),
+    ("partner_ids", "in", employee_ids),
+    ("start_datetime", "&gt;=", object.first_day),
+    ("start_datetime", "&lt;=", object.last_day)
+])
+result = 0
+for meeting in meetings:
+    attendees = [attendee.id for attendee in meeting.partner_ids]
+    customers = [attendee.id for attendee in meeting.partner_ids if attendee.kac == True]
+    # Check if the KAC is attending the meeting with the corresponding KAM
+    for customer in customers:
+        if rel[customer] in attendees:
+            # If so it could be count as a customer visit
+            result += 1
+            break</field>
+        </record>
+
+        <record id="metro_sales_cust_app_future" model="gamification.goal.definition">
+            <field name="name">Customer Visits</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">appointments</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Next 30 days</field>
+            <field name="dependencies">calendar,metro_min_amount_so</field>
+            <field name="compute_code">first_day = datetime.now()
+last_day = datetime.now() + timedelta(days=30)
+# Get all Key Account Customers (KAC)
+kacs = env["res.partner"].search([
+    ("kac", "=", True)
+])
+# Build a map with the KAC's and their corresponding Salespersons (KAM)
+rel = {kac.id: kac.user_id.partner_id.id for kac in kacs}
+customer_ids = rel.keys()
+employee_ids = rel.values()
+# Find meetings with the KAC's and KAM's in their list of attendees
+meetings = env["calendar.event"].search([
+    ("partner_ids", "in", customer_ids),
+    ("partner_ids", "in", employee_ids),
+    ("start_datetime", "&gt;=", first_day),
+    ("start_datetime", "&lt;=", last_day)
+])
+result = 0
+for meeting in meetings:
+    attendees = [attendee.id for attendee in meeting.partner_ids]
+    customers = [attendee.id for attendee in meeting.partner_ids if attendee.kac == True]
+    # Check if the KAC is attending the meeting with the corresponding KAM
+    for customer in customers:
+        if rel[customer] in attendees:
+            # If so it could be count as a customer visit
+            result += 1
+            break</field>
+        </record>
+
+        <!-- Target Sales Achievement -->
+        <record id="metro_target_sales_achievement" model="gamification.goal.definition">
+            <field name="name">Target Sales Achievement</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Bank Year</field>
+            <field name="dependencies">sale,metro_buying_potential</field>
+            <field name="compute_code">first_day, last_day = env["metro.dashboard.variable"].search([("name", "=", "bank_year")]).val()
+records = env["res.partner"].search([("buying_potential", "&gt;", 0.0), ("sales_target", "&gt;", 0.0)])
+target = 0
+as_is = 0
+result = 0
+prt = env["metro.dashboard.variable"].search([("name", "=", "pro_rata_temporis")]).val()
+if not prt:
+    prt = 1
+for rec in records:
+    orders = env["sale.order"].search([
+        ("partner_id", "=", rec.id),
+        ("date_order", "&gt;=", first_day),
+        ("date_order", "&lt;=", last_day)
+    ])
+    target += rec.sales_target
+    for order in orders:
+        as_is += order.amount_untaxed
+if target and prt:
+    result = (as_is / (target * prt)) * 100</field>
+        </record>
+
+        <!-- Number of customers with potential -->
+        <record id="metro_customer_potential_count" model="gamification.goal.definition">
+            <field name="name">Customers with Potential</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">General</field>
+            <field name="dependencies">metro_buying_potential</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("buying_potential", "&gt;", 0.0)])</field>
+        </record>
+
+        <!-- Number of customers with sales target -->
+        <record id="metro_customer_sales_target_count" model="gamification.goal.definition">
+            <field name="name">Customers with Sales Targets</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">customers</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">General</field>
+            <field name="dependencies">metro_buying_potential</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("sales_target", "&gt;", 0.0)])</field>
+        </record>
+
+        <!-- Customers with Sales target, summed up as pro rata temporis -->
+        <record id="metro_customer_sales_target_prt" model="gamification.goal.definition">
+            <field name="name">Sales Target pro rata temporis</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">General</field>
+            <field name="dependencies">metro_buying_potential</field>
+            <field name="compute_code">prt = float(env["metro.dashboard.variable"].search([("name", "=", "pro_rata_temporis")]).value)
+result = 0
+if not prt:
+    prt = 1
+records = env["res.partner"].search([("buying_potential", "&gt;", 0.0), ("sales_target", "&gt;", 0.0)])
+for rec in records:
+    result += rec.sales_target
+result = (result * prt)</field>
+        </record>
+
+        <!-- Customer Sales Achievement As Is -->
+        <record id="metro_customer_sales_target_asis" model="gamification.goal.definition">
+            <field name="name">Customer Sales As Is</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Bank Year</field>
+            <field name="dependencies">sale,metro_buying_potential</field>
+            <field name="compute_code">first_day, last_day = env["metro.dashboard.variable"].search([("name", "=", "bank_year")]).val()
+result = 0
+kacs = env["res.partner"].search([
+    ("buying_potential", "&gt;", 0.0),
+    ("sales_target", "&gt;", 0.0),
+])
+kac_ids = (obj["id"] for obj in kacs)
+for kac_id in kac_ids:
+    orders = env["sale.order"].search([
+        ("partner_id", "=", kac_id),
+        ("date_order", "&gt;=", first_day),
+        ("date_order", "&lt;=", last_day)
+    ])
+    for order in orders:
+        result += order.amount_untaxed</field>
+        </record>
+
+        <!-- Average Customer Order Frequency -->
+        <record id="metro_sales_no_orders_per_customer" model="gamification.goal.definition">
+            <field name="name">Avg customer order freq.</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">orders per Customer</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">sale,metro_customers</field>
+            <field name="compute_code">query = """SELECT so.total / 
+    CASE
+        WHEN CAST(p.total AS DECIMAL) &lt; 1 THEN 1
+        ELSE CAST(p.total AS DECIMAL)
+    END
+FROM (
+    -- Get the number of sale orders of buying customers
+    SELECT COUNT(*) total FROM sale_order
+    WHERE date_order&gt;='"""+str(object.first_day)+"""'
+    AND date_order&lt;='"""+str(object.last_day)+"""'
+    AND partner_id IN (
+        SELECT id FROM res_partner
+        WHERE buy_customer='t' AND customer='t'
+    ) AND state NOT IN ('draft', 'cancel')
+) AS so JOIN (
+    -- Get the number of buying customers
+    SELECT COUNT(*) total FROM res_partner
+    WHERE buy_customer='t' AND customer='t'
+    AND parent_id IS NULL
+) AS p ON 1=1;"""
+env.cr.execute(query)
+result = env.cr.fetchone()[0] or 0</field>
+        </record>
+        
+        <!-- Profit margin, hugely simplified -->
+        <record id="metro_profit_margin" model="gamification.goal.definition">
+            <field name="name">Profit margin (hugely simplified)</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">?</field>
+            <field name="dependencies">sale,purchase</field>
+            <field name="compute_code">recordset = env["sale.order"].search([
+    ("invoice_status", "=", "invoiced")
+])
+earnings = 0
+for r in recordset:
+    earnings = earnings + r.amount_untaxed
+recordset = env["purchase.order"].search([("invoice_status", "=", "invoiced")])
+costs = 0
+for r in recordset:
+    costs = costs + r.amount_untaxed
+result = earnings - costs</field>
+        </record>
+
+        <!-- 
+            Web Shop
+            -->
+        <!-- Share of Sales in % -->
+        <record id="metro_webshop_share_of_sales" model="gamification.goal.definition">
+            <field name="name">Share of Web Shop Sales</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">sale</field>
+            <field name="compute_code">records = env["sale.order"].search([
+    ("date_order", "&gt;=", object.first_day),
+    ("date_order", "&lt;=", object.last_day),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+total = 0
+webshop = 0
+result = 0
+for rec in records:
+    if rec.create_uid.id == 1:
+        webshop += rec.amount_untaxed
+    total += rec.amount_untaxed
+if total:
+    result = webshop / total * 100</field>
+        </record>
+
+        <!-- Average Order Value in Web Shop -->
+        <record id="metro_webshop_avg_order_value" model="gamification.goal.definition">
+            <field name="name">Web Shop Average Order Value</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Last 365 days</field>
+            <field name="dependencies">sale</field>
+            <field name="compute_code">last = datetime.now().date() + timedelta(days=1)
+first = datetime.now().date() - timedelta(days=365)
+orders = env["sale.order"].search([
+    ("date_order", "&gt;=", first),
+    ("date_order", "&lt;=", last),
+    ("create_uid", "=", 1),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+amount = 0
+result = 0
+for order in orders:
+    amount += order.amount_untaxed
+if len(orders):
+    result = amount / len(orders)</field>
+        </record>
+
+        <!--
+            SCM - Supply Chain Management
+        -->
+
+        <!-- Average Stock Days -->
+        <record id="metro_scm_avg_stock_days" model="gamification.goal.definition">
+            <field name="name">Average Stock Days</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">days</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Last 1. of march - Today</field>
+            <field name="dependencies">stock,account</field>
+            <field name="compute_code">first = datetime.now().date()
+if first &lt; datetime(first.year, 3, 1).date():
+    first = first.replace(year=first.year-1)
+first = first.replace(month=3, day=1)
+query = """SELECT inv.SUM/CAST(var.value as INT) FROM (
+    SELECT SUM(i.amount_untaxed) FROM account_invoice AS i
+    JOIN res_partner AS p ON i.partner_id=p.id
+    WHERE i.state = 'paid' AND i.write_date &gt;= '"""+str(first)+"""'
+    AND p.customer = 't'
+) AS inv
+JOIN (
+    SELECT value FROM metro_dashboard_variable
+    WHERE name='days_from_march'
+) AS var ON 1=1;
+"""
+env.cr.execute(query)
+sales_per_day = env.cr.fetchone()[0] or 1
+products = env["product.product"].search([])
+total_value = 0.0
+for product in products:
+    if product.qty_available and product.list_price:
+        total_value += product.qty_available * product.list_price
+result = 0
+if sales_per_day &gt; 1:
+    result = total_value / sales_per_day
+elif sales_per_day &lt; 1 and sales_per_day &gt; 0:
+    result = total_value * sales_per_day</field>
+        </record>
+
+        <!-- Delivery Deviations -->
+        <record id="metro_scm_delivery_deviations" model="gamification.goal.definition">
+            <field name="name">Delivery Deviations</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">orders</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">metro_delivery_deviation_reporting</field>
+            <field name="compute_code">deviations = env["packing.details"].search([
+    ("time_stamp", "&gt;=", object.first_day),
+    ("time_stamp", "&lt;=", object.last_day),
+])
+order_ids = []
+for d in deviations:
+    if d.order_id not in order_ids:
+        order_ids.append(d.order_id)
+result = len(order_ids)</field>
+        </record>
+
+        <!-- Delivery Deviations -->
+        <record id="metro_scm_po_delivery_deviations" model="gamification.goal.definition">
+            <field name="name">PO: Delivery Deviations</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">orders</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">metro_po_delivery_deviation_reporting</field>
+            <field name="compute_code">deviations = env["purchase.order.deviation"].search([
+    ("time_stamp", "&gt;=", object.first_day),
+    ("time_stamp", "&lt;=", object.last_day),
+])
+order_ids = []
+for d in deviations:
+    if d.order_id not in order_ids:
+        order_ids.append(d.order_id)
+result = len(deviations)</field>
+        </record>
+        
+        <!-- Perfect Order Share-->
+        <record id="metro_scm_perfect_order_share" model="gamification.goal.definition">
+            <field name="name">Perfect Order Share</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">%</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">sale,metro_delivery_deviation_reporting</field>
+            <field name="compute_code">deviations = env["packing.details"].search([
+    ("time_stamp", "&gt;=", object.first_day),
+    ("time_stamp", "&lt;=", object.last_day),
+])
+order_ids = []
+result = 0
+for d in deviations:
+    if d.order_id.id not in order_ids:
+        order_ids.append(d.order_id.id)
+perfect_orders = env["sale.order"].search_count([
+    ("id", "not in", list(order_ids)),
+    ("date_order", "&gt;=", object.first_day),
+    ("date_order", "&lt;=", object.last_day),
+])
+if perfect_orders or len(order_ids):
+    result = perfect_orders / (perfect_orders + len(order_ids)) * 100</field>
+        </record>
+
+        <!-- Lines moved -->
+        <record id="metro_scm_lines_moved" model="gamification.goal.definition">
+            <field name="name">Lines moved</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">movements</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">stock,mrp</field>
+            <field name="compute_code">query = """SELECT
+    c.COUNT / 
+    CASE WHEN b.COUNT &lt; 1 THEN 1 ELSE b.COUNT END
+FROM (
+    SELECT COUNT(a.*) FROM (
+        SELECT owner_id FROM stock_move_line
+        WHERE write_date &gt;= '"""+str(object.first_day)+"""' AND write_date &lt;= '"""+str(object.last_day)+"""'
+        AND done_move='t' GROUP BY owner_id
+    ) AS a
+) AS b JOIN (
+    -- Count the number of lines
+    SELECT COUNT(*) FROM stock_move_line
+    WHERE write_date &gt;= '"""+str(object.first_day)+"""' AND write_date &lt;= '"""+str(object.last_day)+"""'
+    AND done_move='t'
+) AS c ON 1=1;"""
+env.cr.execute(query)
+result = env.cr.fetchone()[0] or 0</field>
+        </record>
+
+        <!-- Units moved -->
+        <record id="metro_scm_units_moved" model="gamification.goal.definition">
+            <field name="name">Units moved</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">units moved</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">stock,mrp</field>
+            <field name="compute_code">query = """SELECT SUM(qty_done) FROM stock_move_line
+WHERE write_date &gt;= '"""+str(object.first_day)+"""' AND write_date &lt;= '"""+str(object.last_day)+"""'
+AND done_move='t';"""
+env.cr.execute(query)
+result = env.cr.fetchone()[0] or 0</field>
+        </record>
+
+        <record id="metro_scm_unsolved_tickets" model="gamification.goal.definition">
+            <field name="name">Open Tickets</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">tickets</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">General</field>
+            <field name="dependencies">helpdesk</field>
+            <field name="compute_code">closed_stages = env["helpdesk.stage"].search([
+    ("is_close", "=", True),
+])
+closed_ids = [stage.id for stage in closed_stages]
+result = env["helpdesk.ticket"].search_count([("stage_id", "not in", closed_ids)])</field>
+        </record>
+
+        <record id="metro_scm_avg_ticket_resolution" model="gamification.goal.definition">
+            <field name="name">Average ticket resolution time</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">minutes</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">helpdesk</field>
+            <field name="compute_code">closed_stages = env["helpdesk.stage"].search([
+    ("is_close", "=", True),
+])
+closed_ids = [stage.id for stage in closed_stages]
+tickets = env["helpdesk.ticket"].search([
+    ("stage_id", "in", closed_ids),
+    ("close_date", "&gt;=", object.first_day),
+    ("close_date", "&lt;=", object.last_day),
+])
+ticket_count = 0
+total_seconds = 0
+for ticket in tickets:
+    if ticket.close_date:
+        ticket_count += 1
+        diff = 0
+        if ticket.assign_date:
+            diff = ticket.close_date - ticket.assign_date
+        else:
+            diff = ticket.close_date - ticket.create_date
+        total_seconds += diff.seconds
+if ticket_count:
+    result = total_seconds / 60 / ticket_count
+else:
+    result = 0</field>
+        </record>
+
+        <record id="metro_scm_ticket_reactivity" model="gamification.goal.definition">
+            <field name="name">Ticket reactivity</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">minutes</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">helpdesk</field>
+            <field name="compute_code">tickets = env["helpdesk.ticket"].search([
+    ("create_date", "&gt;=", object.first_day),
+    ("create_date", "&lt;=", object.last_day),
+    ("assign_date", "!=", None),
+])
+ticket_count = 0
+total_seconds = 0
+for ticket in tickets:
+    ticket_count += 1
+    diff = ticket.assign_date - ticket.create_date
+    total_seconds += diff.seconds
+if ticket_count:
+    result = total_seconds / 60 / ticket_count
+else:
+    result = 0</field>
+        </record>
+
+        <record id="metro_scm_solved_after_deadline" model="gamification.goal.definition">
+            <field name="name">Solved after deadline</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">lower</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">tickets</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">helpdesk</field>
+            <field name="compute_code">solved_stages = env["helpdesk.stage"].search([
+    ("name", "ilike", "solve"),
+    ("is_close", "=", True),
+])
+solved_ids = [stage.id for stage in solved_stages]
+tickets = env["helpdesk.ticket"].search([
+    ("stage_id", "in", solved_ids),
+    ("close_date", "&gt;=", object.first_day),
+    ("close_date", "&lt;=", object.last_day),
+])
+result = 0
+for ticket in tickets:
+    if ticket.deadline and ticket.close_date:
+        if ticket.close_date &gt; ticket.deadline:
+            result += 1</field>
+        </record>
+
+        <!--
+            VAS - Value Added Service => Manufacturing
+        -->
+        
+        <!-- Value created -->
+        <record id="metro_vas_value_created" model="gamification.goal.definition">
+            <field name="name">Value created</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">1</field>
+            <field name="dependencies">mrp,metro_reverse_manufacture</field>
+            <field name="compute_code">mos = env["mrp.production"].search([
+    ("date_finished", "&gt;=", object.first_day),
+    ("date_finished", "&lt;=", object.last_day),
+    ("state", "=", "done"),
+])
+price_before = 0
+price_after = 0
+for mo in mos:
+    if mo.product_id.list_price and mo.product_qty:
+        if mo.product_id.reversed_bom:
+            for line in mo.move_raw_ids:
+                if line.product_id.list_price and line.product_uom_qty:
+                    price_after += line.product_id.list_price * line.product_uom_qty
+            price_before += mo.product_id.list_price * mo.product_qty
+        else:
+            for line in mo.move_raw_ids:
+                if line.product_id.list_price and line.product_uom_qty:
+                    price_before += line.product_id.list_price * line.product_uom_qty
+            price_after += mo.product_id.list_price * mo.product_qty
+result = price_after - price_before</field>
+        </record>
+
+        <!-- Finance and Controlling -->
+        <record id="metro_fnc_cash_flow" model="gamification.goal.definition">
+            <field name="name">Cash Flow</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="monetary">1</field>
+            <field name="use_timeframes">0</field>
+            <field name="cust_timeframe">Bank Year</field>
+            <field name="dependencies">account,account_reports</field>
+            <field name="compute_code">report = env.ref('account_reports.account_financial_report_cashsummary0')
+lines = env["account.financial.html.report.line"].search([("financial_report_id", "=", report.id)])
+result = 0.0
+date_from, date_to = env["metro.dashboard.variable"].search([("name", "=", "bank_year")]).val()
+date_from = datetime.strptime(date_from,"%Y-%m-%d").date()
+for line in lines:
+    res = None
+    if line.code == "CASHSTART":
+        to = date_from - timedelta(days=1)
+        res = line.with_context(strict_range=False, date_from=False, date_to=to)\
+            ._compute_line({}, report, group_by=line.groupby, domain=line.domain)
+        result -= res["amount_residual"]
+    elif line.code == "CASHEND":
+        res = line.with_context(strict_range=False, date_from=date_from, date_to=date_to)\
+            ._compute_line({}, report, group_by=line.groupby, domain=line.domain)
+        result += res["amount_residual"]</field>
+        </record>
+
+        <!-- IT -->
+        <record id="metro_it_customer_logins" model="gamification.goal.definition">
+            <field name="name">Number of customer log ins</field>
+            <field name="computation_mode">python</field>
+            <field name="condition">higher</field>
+            <field name="display_mode">progress</field>
+            <field name="suffix">log ins</field>
+            <field name="use_timeframes">1</field>
+            <field name="compute_code">result = env["res.users"].search_count([
+    ("login_date", "&gt;=", object.first_day),
+    ("share", "=", True),
+])</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="javascript_code_1" model="tspbv.script">
+        <field name="name">checkTolerance</field>
+        <field name="code">        this.checkTolerance = function(weight, demand, tolerance) {
+                        var cleanWeight = weight.split(' ').join('');
+                        cleanWeight = cleanWeight.split('komma').join('.');
+                        var minDemand = demand * ((100 - tolerance) / 100);
+                        var maxDemand = demand * ((100 + tolerance) / 100);
+                        if (cleanWeight &gt;= minDemand &amp;&amp; cleanWeight &lt;= maxDemand) {
+                            return true;
+                        }
+                        return false;
+                      };</field>
+    </record>
+
+
+    <!-- cw getweight voice dialog starts here -->
+    <record id="dialoglist_cw_1" model="tspbv.dialoglist">
+        <field name="name">CW getWeight Dialog</field>
+        <field name="start">getWeight</field>
+        <field name="default_code">cw_weight</field>
+        <field name="model_id" search="[('model','=','stock.move.line')]" model="ir.model" />
+    </record>
+
+    <record id="output_cw_1" model="tspbv.output">
+        <field name="lydia_output">(Artikel)gewicht (erfassen)</field>
+    </record>
+    <record id="dialog_cw_1" model="tspbv.dialog">
+        <field name="id_dialog">getWeight</field>
+        <field name="lydia_output_id" ref="tspbv_connector_cw.output_cw_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector_cw.dialoglist_cw_1" />
+    </record>
+
+    <record id="link_cw_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#checkWeight</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_1" />
+    </record>
+
+    <record id="constraint_cw_1" model="tspbv.grammar.rule.constraint">
+        <field name="type">float</field>
+        <field name="min">1</field>
+        <field name="decimalsmin">1</field>
+        <field name="max">4</field>
+        <field name="decimalsmax">4</field>
+    </record>
+    <record id="constraint_cw_1_1" model="tspbv.grammar.rule.constraint">
+        <field name="type">digits</field>
+        <field name="min">1</field>
+        <field name="max">4</field>
+    </record>
+    <record id="grammar_rule_cw_1" model="tspbv.grammar.rule">
+        <field name="rule_name">weightdigitokay</field>
+        <field name="content">(okay|fertig)</field>
+        <field name="constraint_id" ref="tspbv_connector_cw.constraint_cw_1" />
+    </record>
+    <record id="grammar_rule_cw_1_1" model="tspbv.grammar.rule">
+        <field name="rule_name">weightdigitintokay</field>
+        <field name="content">(okay|fertig)</field>
+        <field name="constraint_id" ref="tspbv_connector_cw.constraint_cw_1_1" />
+    </record>
+    <record id="input_cw_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_cw.grammar_rule_cw_1'),ref('tspbv_connector_cw.grammar_rule_cw_1_1')])]" />
+    </record>
+    <record id="recognition_cw_1" model="tspbv.recognition">
+        <field name="rel">weightOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4} komma [0-9]{1,4}) okay</field>
+        <field name="on_match">checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_1_f" model="tspbv.recognition">
+        <field name="rel">weightOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4} komma [0-9]{1,4}) fertig</field>
+        <field name="on_match">checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_1_1" model="tspbv.recognition">
+        <field name="rel">weightIntOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4}) okay</field>
+        <field name="on_match">checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_1_1_f" model="tspbv.recognition">
+        <field name="rel">weightIntOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4}) fertig</field>
+        <field name="on_match">checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_2" model="tspbv.recognition">
+        <field name="rel">weightNotOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4} komma [0-9]{1,4}) okay</field>
+        <field name="on_match">!checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_2_f" model="tspbv.recognition">
+        <field name="rel">weightNotOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4} komma [0-9]{1,4}) fertig</field>
+        <field name="on_match">!checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_2_1" model="tspbv.recognition">
+        <field name="rel">weightIntNotOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4}) okay</field>
+        <field name="on_match">!checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="recognition_cw_2_1_f" model="tspbv.recognition">
+        <field name="rel">weightIntNotOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{1,4}) fertig</field>
+        <field name="on_match">!checkTolerance('$1', ($[object.qty_done] * $[object.product_id.average_cw_quantity]), $[object.product_id.max_deviation | int])</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_1" />
+    </record>
+    <record id="dialog_cw_2" model="tspbv.dialog">
+        <field name="id_dialog">checkWeight</field>
+        <field name="lydia_output_id" ref="" />
+        <field name="lydia_input_id" ref="tspbv_connector_cw.input_cw_1" />
+        <field name="dialoglist_id" ref="tspbv_connector_cw.dialoglist_cw_1" />
+    </record>
+    <record id="output_cw_2_1" model="tspbv.output">
+        <field name="lydia_output">ungültig(es Gewicht)</field>
+    </record>
+    <record id="dialog_cw_2_1" model="tspbv.dialog">
+        <field name="id_dialog">checkWeightNotOk</field>
+        <field name="lydia_output_id" ref="tspbv_connector_cw.output_cw_2_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector_cw.dialoglist_cw_1" />
+    </record>
+    <record id="link_cw_2_2" model="tspbv.link">
+        <field name="rel">weightOkay</field>
+        <field name="href">#doubleCheckWeight</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_2" />
+    </record>
+    <record id="link_cw_2_2_1" model="tspbv.link">
+        <field name="rel">weightIntOkay</field>
+        <field name="href">#doubleCheckWeight</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_2" />
+    </record>
+    <record id="link_cw_2" model="tspbv.link">
+        <field name="rel">weightNotOkay</field>
+        <field name="href">#checkWeightNotOk</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_2" />
+    </record>
+    <record id="link_cw_2_1_1" model="tspbv.link">
+        <field name="rel">weightIntNotOkay</field>
+        <field name="href">#checkWeightNotOk</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_2" />
+    </record>
+    <record id="link_cw_2_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#getWeight</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_2_1" />
+    </record>
+    <record id="output_cw_3" model="tspbv.output">
+        <field name="lydia_output">${checkWeight}[1] okay?</field>
+    </record>
+    <record id="input_cw_3" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7_5')])]" />
+    </record>
+    <record id="recognition_cw_3" model="tspbv.recognition">
+        <field name="rel">doublecheckWeightOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_3" />
+    </record>
+    <record id="recognition_cw_3_f" model="tspbv.recognition">
+        <field name="rel">doublecheckWeightOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_3" />
+    </record>
+    <record id="recognition_cw_3_1" model="tspbv.recognition">
+        <field name="rel">doublecheckWeightBack</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="tspbv_connector_cw.input_cw_3" />
+    </record>
+    <record id="dialog_cw_3" model="tspbv.dialog">
+        <field name="id_dialog">doubleCheckWeight</field>
+        <field name="lydia_output_id" ref="tspbv_connector_cw.output_cw_3" />
+        <field name="lydia_input_id" ref="tspbv_connector_cw.input_cw_3" />
+        <field name="dialoglist_id" ref="tspbv_connector_cw.dialoglist_cw_1" />
+    </record>
+
+    <record id="link_cw_3" model="tspbv.link">
+        <field name="rel">doublecheckWeightOkay</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/item/commit?dialoglist_code=location&amp;qty=${checkWeight}[1]&amp;cw=True</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/item/commit?dialoglist_code=location&amp;qty=${checkWeight}[1]&amp;cw=True'"/>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_3" />
+    </record>
+    <record id="link_cw_3_1" model="tspbv.link">
+        <field name="rel">doublecheckWeightBack</field>
+        <field name="href">#getWeight</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_cw.dialog_cw_3" />
+    </record>
+    <!-- cw getweight voice dialog ends here -->
+
+</odoo>

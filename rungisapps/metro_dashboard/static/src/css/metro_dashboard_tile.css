@@ -1,0 +1,98 @@
+table.metro_dashboard_tile_table {
+    position: relative;
+    width: 100%;
+}
+
+table.metro_dashboard_tile_table * tr {
+    border-bottom: 1px solid gray;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.metro_card {
+    height: 100%;
+} 
+
+.md_condition_lower {
+    text-align: center;
+}
+
+.md_condition_lower * #current {
+    font-size: 46pt;
+    font-weight: bold;
+}
+
+.md_condition_lower * .text-muted {
+    position: relative;
+    margin-left: 0;
+    margin-top: 0;
+    display: inline-block;
+}
+
+.metro_kanban_nogrow {
+    -webkit-box-flex: 0;
+    flex: 0 1 auto !important;
+}
+
+.metro_kanban_nogrow_2x {
+    -webkit-box-flex: 0;
+    flex: 0 1 auto !important;
+    width: 616px !important;
+}
+
+.metro_kanban_2x_width {
+    width: 630px !important;
+}
+
+.metro_kanban_line_break {
+    width: 100% !important;
+    padding: 0px !important;
+    border: 0px !important;
+}
+
+.button_bar > .o_widget {
+    display: inline-block;
+}
+
+.visualisation_number {
+    text-align: center;
+}
+
+.visualisation_number * .number {
+    font-size: 62pt;
+    font-weight: bold;
+}
+
+.visualisation_number > .suffix {
+    font-size: 16pt;
+    color: gray;
+}
+
+h1.biggerCaption {
+    font-size: 2.6rem;
+}
+
+p.light-success {
+    color: rgba(39, 174, 96,0.6);
+}
+
+div.inline {
+    display: inline;
+}
+
+span.show_timeframe {
+    color: #345;
+    text-align: right;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+p.no-data-container {
+    text-align: center;
+}
+
+i.no-data-icon {
+    font-size: 64px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}

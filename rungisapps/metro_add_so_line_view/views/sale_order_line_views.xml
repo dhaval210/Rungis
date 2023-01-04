@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="metro_sos_line_tree" model="ir.ui.view">
+        <field name="name">metro.sos.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="order_partner_id"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"/>
+                <field name="price_unit"/>
+                <field name="discount"/>
+                <field name="price_subtotal"/>
+                <field name="qty_delivered"/>
+                <field name="qty_invoiced"/>
+                <field name="create_date"/>
+                <field name="state"/>
+                <field name="invoice_status"/>
+            </tree>
+        </field>
+    </record>
+    <record id="metro_sos_line_search" model="ir.ui.view">
+        <field name="name">metro.sos.line.search</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Sale Order Lines">
+                <group expand="0" string="Group By">
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'order_partner_id'}"/>
+                    <filter name="product_id" string="Product" domain="[]" context="{'group_by':'product_id'}"/>
+                    <filter name="order_reference" string="Order Reference" domain="[]" context="{'group_by':'order_id'}"/>
+                    <filter name="status" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_metro_sos_lines" model="ir.actions.act_window">
+        <field name="name">Sale Order Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="search_view_id" ref="metro_sos_line_search"/>
+    </record>
+
+    <record id="action_sos_lines_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="metro_sos_line_tree"/>
+        <field name="act_window_id" ref="action_metro_sos_lines"/>
+    </record>
+    
+    <menuitem name="Sale Order Lines"
+              id="menu_metro_so_lines"
+              parent="sale.sale_order_menu"
+              action="action_metro_sos_lines"/>
+</odoo>

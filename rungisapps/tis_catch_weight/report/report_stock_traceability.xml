@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_stock_inventory_cw" inherit_id="stock.report_stock_inventory">
+        <xpath expr="//thead/tr/th[7]" position="after">
+            <th class="o_report_line_header">CW Quantity</th>
+        </xpath>
+    </template>
+    <template id="report_stock_body_print_cw" inherit_id="stock.report_stock_body_print">
+        <xpath expr="//thead/tr/th[7]" position="after">
+            <th class="o_report_line_header">CW Quantity</th>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+    <record id="module_dispo_category" model="ir.module.category">
+            <field name="name">Disposition</field>
+            <field name="sequence">20</field>
+    </record>
+
+    <record id="group_dispo_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="category_id" ref="module_dispo_category"/>
+    </record>
+</data>
+</odoo>

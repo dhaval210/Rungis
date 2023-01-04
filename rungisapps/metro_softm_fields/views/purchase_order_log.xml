@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- softm.order.log tree view -->
+    <record id="purchase_order_log_view_tree" model="ir.ui.view">
+        <field name="name">softm.order.log.view.tree</field>
+        <field name="model">softm.order.log</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="order_ref_id" />
+                <field name="mode" />
+                <field name="send_to_softm" />
+                <field name="odoo_id" />
+                <field name="po_name" />
+                <field name="po_currency_id" />
+                <field name="po_company_id" />
+                <field name="po_partner_ref" />
+                <field name="po_partner_id" />
+                <field name="po_user" />
+                <field name="po_date_order" />
+                <field name="po_date_planned" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- softm.order.line.log tree view -->
+    <record id="purchase_order_line_log_view_tree" model="ir.ui.view">
+        <field name="name">softm.order.line.log.view.tree</field>
+        <field name="model">softm.order.line.log</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false" >
+                <field name="order_line_ref_id" />
+                <field name="mode" />
+                <field name="send_to_softm" />
+                <field name="ol_seq" />
+                <field name="ol_product_id" />
+                <field name="order_ref_id" />
+                <field name="ol_company_id" />
+                <field name="order_ref_name" />
+                <field name="ol_location_number" />
+                <field name="ol_product_qty" />
+                <field name="ol_product_uom" />
+                <field name="ol_product_cw_qty" />
+                <field name="ol_product_cw_uom" />
+                <field name="ol_price_unit" />
+
+                <field name="ol_product_uom_so_qty" />
+                <field name="ol_product_uom_so_id" />
+                <field name="ol_product_uom_price_unit" />
+
+                <field name="ol_date_planned" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- softm.order.log action window -->
+    <record id="softm_order_log_action" model="ir.actions.act_window">
+        <field name="name">softm.order.log.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">softm.order.log</field>
+        <field name="view_mode">tree</field>
+        <field name="view_type">form</field>
+    </record>
+    <!-- softm.order.line.log action window -->
+    <record id="softm_order_line_log_action" model="ir.actions.act_window">
+        <field name="name">softm.order.line.log.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">softm.order.line.log</field>
+        <field name="view_mode">tree</field>
+        <field name="view_type">form</field>
+    </record>
+
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="lieferanten_bestellungen_menu_root" name="Softm Bestellungen" sequence="90"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="softm_order_menu_categ" name="Lieferanten Bestellungen" parent="lieferanten_bestellungen_menu_root" sequence="10"/>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="softm_po_log_menu_act" name="Header Log" parent="softm_order_menu_categ" action="softm_order_log_action" sequence="10"/>
+    <menuitem id="softm_pol_log_menu_act" name="Positions Log" parent="softm_order_menu_categ" action="softm_order_line_log_action" sequence="20"/>
+
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <menuitem 
+        id="transporter_hub_menu_root"
+        name="Hubs"
+        web_icon="metro_hub_management,static/description/icon.png"
+        sequence="10"
+    />
+    <menuitem 
+        id="transporter_hub_menu_categ" 
+        name="Hub" 
+        parent="transporter_hub_menu_root" 
+        sequence="10"
+    />
+
+    <menuitem 
+        id="transporter_hub_schedule_menu_act"
+        name="Hub Schedule"
+        parent="transporter_hub_menu_categ"
+        action="transporter_hub_schedule_action"
+        sequence="25"
+    />
+    <menuitem 
+        id="transporter_hub_menu_act"
+        name="Hub"
+        parent="transporter_hub_menu_categ"
+        action="transporter_hub_action"
+        sequence="20"
+    />
+    <!-- Menu Item -->
+    <menuitem id="metro_hub_management_menu_tour_assignment"
+        name="Tour Assignment"
+        parent="metro_hub_management.transporter_hub_menu_root"
+        groups="stock.group_stock_manager"
+        action="metro_hub_management.action_window_kanban_tour_assignment"
+        sequence="30"
+    />
+    <!-- This Menu Item Must have a parent -->
+    <menuitem 
+        id="hub_stock_picking_batch_menu_categ"
+        name="Batches"
+        parent="metro_hub_management.transporter_hub_menu_root"
+        groups="stock.group_stock_manager"
+        action="metro_hub_management.hub_stock_picking_batch_action"
+        sequence="40"
+    />    
+</odoo>

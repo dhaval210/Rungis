@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchase_catchweight" inherit_id="purchase.report_purchaseorder_document">
+
+        <!-- Purchase Representative -->
+        <xpath expr="//t/t/p" position="after">
+            <!-- Vendor Internal Reference -->
+            <div t-if="o.partner_id.ref">
+                <br/>
+                <strong>Vendor Int. Ref:</strong>
+                <div t-field="o.partner_id.ref"/>
+                <br/>
+            </div>
+
+            <strong>Purchase Representative:</strong>
+            <div t-if="o.user_id">
+                <div t-field="o.user_id"/>
+                <div t-field="o.user_id.login"/>
+                <div t-field="o.user_id"
+                     t-options='{"widget": "contact", "fields": ["phone","mobile"], "phone_icons": True}'/>
+            </div>
+            <br/>
+        </xpath>
+
+        <!-- Delete Column 3 -->
+        <xpath expr="//table/thead/tr/th[2]" position="replace"/>
+        <xpath expr="//table/tbody/tr/td[2]" position="replace"/>
+
+        <!-- Remove time from Order Date -->
+        <xpath expr="//t/div/div/div[3]" position="replace">
+            <div t-if="o.date_order" class="col-3 bm-2">
+                <strong>Order Date:</strong>
+                <p t-esc="context_timestamp(o.date_order)" class="m-0" t-options='{"widget": "date"}'/>
+            </div>
+            <!-- Requested Date -->
+            <div t-if="o.po_date_planned" class="col-3 bm-2">
+                <strong>Scheduled Date:</strong>
+                <p t-esc="context_timestamp(o.po_date_planned)" class="m-0" t-options='{"widget": "date"}'/>
+            </div>
+        </xpath>
+
+        <!-- Rename CW Qty -->
+        <xpath expr="//table/thead/tr/th[2]" position="after">
+            <th class="text-right">Net Weight</th>
+        </xpath>
+
+        <!-- Adding Internal Reference to the table -->
+        <xpath expr="//table/thead/tr/th[1]" position="after">
+            <th>
+                <strong>RE Ref</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table/tbody/tr/td[1]" position="after">
+            <td class="text-left">
+                <span t-field="line.product_id.default_code"/>
+            </td>
+        </xpath>
+        <xpath expr="//table/tbody/tr/td[3]" position="after">
+            <td class="text-right">
+                <t t-set="net_weight"
+                   t-value="(line.product_qty * line.product_uom.factor_inv) * line.product_id.net_weight"/>
+                <span t-esc="'%.2f'% net_weight"/>
+                <span t-if="line.product_id.weight_uom_name" t-field="line.product_id.weight_uom_name"/>
+            </td>
+        </xpath>
+
+        <!--        Deleting sub total part-->
+        <xpath expr="//t/div/div[3]/div/table" position="replace"/>
+
+        <!-- Adding Default Text -->
+        <xpath expr="//t/t" position="inside">
+            <br>
+                <br>
+                    <br>
+                        <strong>NOTE: Please include the Order Reference into your Invoice and Delivery Slip.</strong>
+                    </br>
+                </br>
+            </br>
+        </xpath>
+
+        <!--TO REMOVE ZERO QTY LINE FROM FIRST PAGE-->
+        <xpath expr="//table" position="replace">
+            <table  style="width: 100%" class="table-sm o_main_table table-bordered" border="1">
+                <thead>
+                    <tr>
+                        <th><strong>Serial No.</strong></th>
+                        <th><strong>Description</strong></th>
+                        <th><strong>RE Ref</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right" groups="tis_catch_weight.group_catch_weight">Net Weight</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-set="lines_with_zero_qty" t-value="o.get_lines_without_zero_qty()"/>
+                    <t t-set="i" t-value="1" /> 
+                    <t t-foreach="lines_with_zero_qty" t-as="zero_qty_line">
+                        <tr style="width: 100%;">
+                            <td>
+                                <span t-esc="i"/> 
+                                <t t-set="i" t-value="i+1"/> 
+                            </td>
+                            <td>
+                                <span t-field="zero_qty_line.name"/>
+                            </td>
+                            <td class="text-left">
+                                <span t-field="zero_qty_line.product_id.default_code"/>
+                            </td>
+
+                            <td class="text-right">
+                                <span t-field="zero_qty_line.product_qty"/>
+                                <span t-field="zero_qty_line.product_uom.name" groups="uom.group_uom"/>
+                            </td>
+
+                            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                                <span t-field="zero_qty_line.product_cw_uom_qty"/>
+                                <span t-field="zero_qty_line.product_cw_uom"/>
+                            </td>
+                        </tr>
+                        <tr  t-if="zero_qty_line.recalculated_packaging_unit" class="width: 100%;">
+                            <td name="recalculated_packaging_unit" class="text-center" colspan="4">
+                                <span t-field="zero_qty_line.recalculated_packaging_unit"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </xpath>
+    </template>
+
+    <template id="report_purchase_catchweight_inherited" inherit_id="tis_catch_weight.report_purchase_catchweight">
+        <xpath expr="//table/tbody/tr/td[5]" position="replace"/>
+        <xpath expr="//table/thead/tr/th[5]" position="replace"/>
+        <xpath expr="//table/tbody/tr/td[2]" position="replace"/>
+        <xpath expr="//table/thead/tr/th[2]" position="replace"/>
+    </template>
+
+    <template id="report_purchaseorder_document_inherited" inherit_id="purchase_discount.report_purchaseorder_document">
+        <xpath expr="//table[1]/thead/tr//th[last()]" position="replace"/>
+        <xpath expr="//table[1]/thead/tr//th[last()]" position="replace"/>
+        <xpath expr="//table[1]/thead/tr//th[last()]" position="replace"/>
+        <xpath expr="//table[1]/tbody/tr//td[last()]" position="replace"/>
+        <xpath expr="//table[1]/tbody/tr//td[last()]" position="replace"/>
+        <xpath expr="//table[1]/tbody/tr//td[last()]" position="replace"/>
+    </template>
+
+    <template id="report_purchase_rfq_net_weight" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//table/thead/tr/th[4]" position="replace">
+            <th class="text-right">Net Weight</th>
+        </xpath>
+        <xpath expr="//table/tbody/tr/td[4]" position="replace">
+            <td class="text-right">
+                <t t-set="net_weight"
+                   t-value="(order_line.product_qty * order_line.product_uom.factor_inv) * order_line.product_id.net_weight"/>
+                <span t-esc="'%.2f'% net_weight"/>
+                <span t-if="order_line.product_id.weight_uom_name" t-field="order_line.product_id.weight_uom_name"/>
+            </td>
+        </xpath>
+    </template>
+
+
+
+    <!-- This report edited due to notify changes done on purchase order new lines or quantities -->
+    <template id="report_purchaseorder_document_po_changes" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t/t" position="inside">
+            <t t-set="history_line_new" t-value="o.get_history_lines_new()"/>
+            <t t-set="history_line_old" t-value="o.get_history_lines_old()"/>
+            <t t-set="history_line_delete" t-value="o.get_history_deleted_lines()"/>
+            <div t-if="o.state != 'draft' and  o.is_po_updated" style="page-break-before:always;">
+                    <t t-if="o.history_data">
+                        <t t-if="history_line_new or history_line_old or history_line_delete">
+                            <h4>LATEST CHANGES IN PURCHASE ORDER
+                                <span t-field="o.name"/>
+                                on
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                            </h4>
+                        </t>
+                        <t t-foreach="history_line_old" t-as="o_old_line">
+                            <li>
+                                <p style="color:#28282B">The ordered quantity has been updated.</p>
+                                <span t-field="o_old_line.product_id.display_name"/>
+                                <span>:</span>
+                                <br></br>
+                                <![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>
+                                <span>Ordered Qty :</span>
+                                <span t-field="o_old_line.prev_product_qty"/>
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="o_old_line.product_uom.name" groups="uom.group_uom"/>
+                                <span>-></span>
+                                <span t-field="o_old_line.product_qty"/>
+                                <![CDATA[&nbsp;]]>
+                                <span t-field="o_old_line.product_uom.name" groups="uom.group_uom"/>
+                            </li>
+                        </t>
+                        <br></br>
+                        <t t-foreach="history_line_new" t-as="o_new_line">
+                            <li>
+                                <p style="color:#28282B">
+                                    <span>New product line :</span>
+                                    <span t-field="o_new_line.product_id.display_name"/>
+                                </p>
+                            </li>
+                        </t>
+                        <br></br>
+                        <t t-if="history_line_delete">
+                            <t t-foreach="history_line_delete" t-as="o_delete_line">
+                                <li>
+                                    <p style="color:#28282B">
+                                        <span>Deleted product line:</span>
+                                        <span t-field="o_delete_line.display_name"/>
+                                    </p>
+                                </li>
+                            </t>
+                        </t>
+                    </t>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

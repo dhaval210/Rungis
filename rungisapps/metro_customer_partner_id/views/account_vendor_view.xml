@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!--<record id="purchase_order_form_inherit_internal_ref" model="ir.ui.view">-->
+        <!--<field name="name">purchase.order.form.inherit</field>-->
+        <!--<field name="model">purchase.order</field>-->
+        <!--<field name="inherit_id" ref="purchase.purchase_order_form"/>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<xpath expr="//field[@name='partner_id']" position="after">-->
+                <!--<field name="custom_internal_ref" invisible="1" />-->
+            <!--</xpath>-->
+        <!--</field>-->
+    <!--</record>-->
+
+    <!--<record id="view_purchase_order_filter_inherit_internal_ref" model="ir.ui.view">-->
+        <!--<field name="name">purchase.order.filter.inherit.internal_ref</field>-->
+        <!--<field name="model">purchase.order</field>-->
+        <!--<field name="inherit_id" ref="purchase.view_purchase_order_filter"/>-->
+        <!--<field name="arch" type="xml">-->
+            <!--<xpath expr="//search" position="inside">-->
+                <!--<field name="custom_internal_ref" invisible="1" />-->
+            <!--</xpath>-->
+        <!--</field>-->
+    <!--</record>-->
+
+
+    <!-- Partner -->
+    <record id="view_partner_tree_inherit" model="ir.ui.view">
+        <field name="name">res.partner.tree</field>
+        <field name="model">res.partner</field>
+        <field eval="8" name="priority"/>
+        <field name="arch" type="xml">
+            <tree string="Contacts">
+                <field name="display_name" string="Name"/>
+                <field name="function" invisible="1"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="user_id" invisible="1"/>
+                <field name="is_company" invisible="1"/>
+                <field name="country_id" invisible="1"/>
+                <field name="parent_id" invisible="1"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_partner_supplier_form_inherit" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="domain">[]</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="view_partner_tree_action_inherit" model="ir.actions.act_window.view">
+        <field eval="3" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_partner_tree_inherit"/>
+        <field name="act_window_id" ref="action_partner_supplier_form_inherit"/>
+    </record>
+
+    <!--Supplier menu-->
+    <record model="ir.ui.menu" id="account.menu_account_supplier">
+        <field name="action" eval="False" />
+    </record>
+
+    <menuitem id="menu_account_supplier_inherit" name="Vendors"
+            parent="account.menu_finance_payables"
+            action="action_partner_supplier_form_inherit" sequence="100"/>
+
+
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mrp_subproduct_view_cw" model="ir.ui.view">
+            <field name="name">mrp.bom.sub.product</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[3]/field/tree/field[@name='product_uom_id']" position="after">
+                    <field name="cw_product_qty" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom_id" groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+                <xpath expr="//page[3]/field/form/field[@name='product_uom_id']" position="after">
+                    <field name="cw_product_qty" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom_id" groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

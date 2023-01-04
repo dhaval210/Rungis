@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- AML specialized tree view -->
+        <record id="view_stock_account_aml_cw" model="ir.ui.view">
+            <field name="name">stock.account.aml.cw</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="stock_account.view_stock_account_aml"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_id']" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <field name="cw_quantity" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom_id" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- stock move specialized tree view -->
+        <record id="view_move_tree_valuation_at_date_cw" model="ir.ui.view">
+            <field name="name">stock.move.tree.valuation.at.date.cw</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock_account.view_move_tree_valuation_at_date"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom']" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <field name="product_cw_uom_qty" string="CW Quantity"
+                           attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" options="{'no_open': True, 'no_create': True}"
+                           string="CW Unit of Measure" attrs="{'readonly': [('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

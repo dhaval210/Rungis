@@ -1,0 +1,15 @@
+<odoo>
+
+    <data>
+
+        <record id="action_bom_virtual_available" model="ir.actions.act_window">
+            <field name="name">Bom Virtual Available</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">tree</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="bom_virtual_available_list_view"/>
+        </record>
+
+    </data>
+
+</odoo>

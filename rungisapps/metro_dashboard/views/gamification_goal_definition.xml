@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="metro_dashboard_timeframe_options" model="ir.ui.view">
+        <field name="name">Goal Definition Form Timeframe Options</field>
+        <field name="model">gamification.goal.definition</field>
+        <field name="inherit_id" ref="gamification.goal_definition_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[3]" position="after">
+                <group string="METRO Dashboard Options" attrs="{'invisible': [('computation_mode', '!=', 'python')]}">
+                    <field name="use_timeframes" />
+                    <field name="cust_timeframe" attrs="{'invisible': [('use_timeframes', '=', True)]}" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

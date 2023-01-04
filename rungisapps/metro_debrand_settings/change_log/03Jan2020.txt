@@ -1,0 +1,4 @@
+03 Jan 2020:
+- ' EMO-1197':Module Created
+29 May 2020:
+- Add dependency of color picker module : 'web_widget_color'

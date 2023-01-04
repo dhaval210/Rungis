@@ -1,0 +1,8 @@
+26 November 2019:
+- ' EMO-1220':Module is Created
+21 Jan 2020:
+- Add Reports To Barcode Module
+07 Feb 2020:
+- Module Added to community Version
+14 May 2020:
+- as from version 1.2 remove stock_barcodes dependency and some changes inside mobile view also

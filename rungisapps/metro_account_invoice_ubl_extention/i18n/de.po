@@ -1,0 +1,74 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_account_invoice_ubl_extention
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-08 13:45+0000\n"
+"PO-Revision-Date: 2021-12-08 13:45+0000\n"
+"Last-Translator: Niklas Tom Hucke <n.hucke@hucke-media.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_base_ubl
+msgid "Common methods to generate and parse UBL XML files"
+msgstr "Allgemeine Methoden für die Erstellung und das Parsen von UBL-XML-Dateien"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_res_company
+msgid "Companies"
+msgstr "Unternehmen"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.actions.server,name:metro_account_invoice_ubl_extention.model_account_invoice_action_ubl
+msgid "Generate UBL XML File"
+msgstr "UBL XML Datei generieren"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_account_invoice
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_account_invoice_line
+msgid "Invoice Line"
+msgstr "Rechungsposition"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model,name:metro_account_invoice_ubl_extention.model_res_config_settings
+msgid "Tspbv Settings"
+msgstr ""
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model.fields,field_description:metro_account_invoice_ubl_extention.field_account_invoice__xml_ubl
+msgid "UBL File"
+msgstr "UBL Datei"
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model.fields,help:metro_account_invoice_ubl_extention.field_res_company__ubl_use_softm_delivery_note
+#: model:ir.model.fields,help:metro_account_invoice_ubl_extention.field_res_config_settings__ubl_use_softm_delivery_note
+msgid "Use data for Delivery Notes from the softm interface instead from odoo"
+msgstr "Nutze Lieferscheindaten aus dem SOFTM Interface statt Odoo"
+
+#. module: metro_account_invoice_ubl_extention
+#: model_terms:ir.ui.view,arch_db:metro_account_invoice_ubl_extention.view_ubl_extension_config_settings
+msgid "Use data for Delivery Notes from the softm interface instead from odoo."
+msgstr "Nutze Lieferscheindaten aus dem SOFTM Interface statt Odoo."
+
+#. module: metro_account_invoice_ubl_extention
+#: model:ir.model.fields,field_description:metro_account_invoice_ubl_extention.field_res_company__ubl_use_softm_delivery_note
+#: model:ir.model.fields,field_description:metro_account_invoice_ubl_extention.field_res_config_settings__ubl_use_softm_delivery_note
+msgid "Use data for delivery notes from softm interface"
+msgstr "Nutze Lieferscheindaten aus SOFTM"
+

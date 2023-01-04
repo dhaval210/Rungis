@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_stock_quant_form_catchweight">
+            <field name="name">stock.quant.inherit</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='reserved_quantity']" position="before">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="cw_stock_quantity" string="CW On Hand"
+                           attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <div class="o_row">
+                        <field name="cw_stock_quantity" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='in_date']" position="before">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="cw_stock_reserved_quantity" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                           string="CW Reserved" groups="tis_catch_weight.group_catch_weight"/>
+                    <div class="o_row">
+                        <field name="cw_stock_reserved_quantity" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_stock_quant_tree_catchweight">
+            <field name="name">stock.quant_inherit_tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_id']" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <field name="cw_stock_reserved_quantity" string="CW Reserved"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="cw_stock_quantity" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                           string="CW On Hand" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_quant_package_form_cw_inherit">
+            <field name="name">stock.quant.package.form.cw.inherit</field>
+            <field name="model">stock.quant.package</field>
+            <field name="inherit_id" ref="stock.view_quant_package_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='quant_ids']/tree/field[@name='product_uom_id']" position="after">
+                    <field name="cw_stock_quantity" string="CW Quantity" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

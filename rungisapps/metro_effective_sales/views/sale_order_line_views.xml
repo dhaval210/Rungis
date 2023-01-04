@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="metro_so_line_tree" model="ir.ui.view">
+        <field name="name">metro.so.line.tree</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="order_id"/>
+                <field name="order_partner_id"/>
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"/>
+                <field name="price_unit"/>
+                <field name="discount"/>
+                <field name="price_subtotal"/>
+                <field name="qty_delivered"/>
+                <field name="effective_sales"/>
+                <field name="qty_invoiced"/>
+                <field name="create_date"/>
+                <field name="state"/>
+                <field name="invoice_status"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_so_line_form" model="ir.ui.view">
+        <field name="name">metro.so.line.form</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Sales Order Lines">
+                <group>
+                    <group>
+                        <field name="order_id" readonly="1"/>
+                        <field name="order_partner_id" readonly="1"/>
+                        <field name="partner_family_id" readonly="1"/>
+                        <field name="product_id" readonly="1" context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}" />
+                        <!-- <field name="layout_category_id" readonly="1" groups="sale.group_sale_layout"/> -->
+                        <field name="invoice_status" readonly="1"/>
+                        <field name="qty_to_invoice" readonly="1"/>
+                        <!-- <field name="qty_delivered_updateable" invisible="1"/> -->
+                        <!-- <field name="procurement_ids" readonly="1"/> -->
+                        <field name="price_subtotal" readonly="1"/>
+                        <field name="effective_sales" readonly="1"/>
+                        <label for="product_uom_qty" string="Ordered Quantity"/>
+                        <div>
+                            <field context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': parent.company_id}" name="product_uom_qty" class="oe_inline" readonly="1"/>
+                            <field name="product_uom" groups="product.group_uom" class="oe_inline oe_no_button" readonly="1"/>
+                        </div>
+                        <label for="qty_delivered" string="Delivered Quantity" invisible="context.get('hide_sale')"/>
+                        <div invisible="context.get('hide_sale')">
+                            <field name="qty_delivered" readonly="1"/>
+                        </div>
+                        <label for="qty_invoiced" string="Invoiced Quantity" invisible="context.get('hide_sale')"/>
+                        <div invisible="context.get('hide_sale')">
+                            <field name="qty_invoiced" readonly="1" invisible="context.get('hide_sale')"/>
+                        </div>
+                        <field name="price_unit" readonly="1"/>
+                        <label for="discount" groups="sale.group_discount_per_so_line"/>
+                        <div name="discount" groups="sale.group_discount_per_so_line">
+                            <field name="discount" readonly="1" class="oe_inline"/> %
+                        </div>
+                    </group>
+                    <group>
+                        <field name="tax_id" readonly="1" widget="many2many_tags" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                        <label for="customer_lead"/>
+                        <div>
+                            <field name="customer_lead" readonly="1" class="oe_inline"/> days
+                        </div>
+                        <label for="analytic_tag_ids" groups="analytic.group_analytic_accounting"/>
+                        <div>
+                            <field name="analytic_tag_ids" readonly="1" widget="many2many_tags" groups="analytic.group_analytic_accounting"/>
+                        </div>
+                    </group>
+                </group>
+                <label for="name"/>
+                <field name="name" readonly="1"/>
+                <div groups="base.group_no_one">
+                    <label for="invoice_lines"/>
+                    <field name="invoice_lines" readonly="1"/>
+                </div>
+                <field name="state" readonly="1"/>
+            </form>
+        </field>
+    </record>
+
+    <record id="metro_so_line_search" model="ir.ui.view">
+        <field name="name">metro.so.line.search</field>
+        <field name="model">sale.order.line</field>
+        <field name="arch" type="xml">
+            <search string="Sale Order Lines">
+                <field name="name" string="Sales Order" filter_domain="['|','|',('name','ilike', self),('client_order_ref','ilike',self),('partner_id','ilike', self)]"/>
+                <field name="order_partner_id" operator="child_of"/>
+                <field name="product_id"/>
+                <separator/>
+                <filter string="Quotations" domain="[('state','in',['draft','sent'])]" name="so_line_quotations"/>
+                <filter string="Sale Orders" domain="[('state','in',['sale','done'])]" name="so_line_sales"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="customer_family" string="Customer Family" domain="[]" context="{'group_by':'partner_family_id'}"/>
+                    <filter name="customer" string="Customer" domain="[]" context="{'group_by':'order_partner_id'}"/>
+                    <filter name="order_month" string="Order Month" domain="[]" context="{'group_by':'create_date'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_metro_so_lines" model="ir.actions.act_window">
+        <field name="name">Sale Order Lines</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sale.order.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,pivot,graph</field>
+        <field name="search_view_id" ref="metro_so_line_search"/>
+    </record>
+
+    <record id="action_so_lines_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="metro_so_line_tree"/>
+        <field name="act_window_id" ref="action_metro_so_lines"/>
+    </record>
+
+    <record id="action_so_lines_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="metro_so_line_form"/>
+        <field name="act_window_id" ref="action_metro_so_lines"/>
+    </record>
+
+    <menuitem name="Sale Order Lines"
+              id="menu_metro_so_lines"
+              parent="sale.menu_sale_report"
+              action="action_metro_so_lines"/>
+</odoo>

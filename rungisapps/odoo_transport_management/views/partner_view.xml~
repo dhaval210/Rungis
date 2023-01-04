@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="transport_management_transporter_vehicle_form" model="ir.ui.view">
+            <field name="name">res.partner.vehicle.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[3]" position="after">
+                    <page string="Vehicles">
+                        <field name="vehicle_ids" nolabel="1">
+                            <tree editable="True">
+                                <field name="model_id"/>
+                                <field name="license_plate"/>
+                                <field name="driver_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr = "//div[@name = 'button_box']" position="inside">
+                    <button class="oe_stat_button" type="object" name="show_vehicle"  icon="fa-tasks">
+                        <field name="vehicle_count" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

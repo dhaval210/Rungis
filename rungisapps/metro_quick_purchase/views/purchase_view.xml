@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="purchase_order_form_quick_po" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="order_line" type="object" position="before">
+                <button name="action_select_products" states="draft" string="Select Products" type="object"  class="oe_highlight oe_edit_only" />
+            </field>
+             <xpath expr="//notebook/page[1]/field[@name='order_line']/tree" position="inside">
+                <button name="open_packaging_info" type="object" string="Packages"  class="oe_highlight"/>
+             </xpath>
+        </field>
+    </record>
+</odoo>

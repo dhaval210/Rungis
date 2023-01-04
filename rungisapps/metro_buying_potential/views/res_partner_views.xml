@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="res_partner_pivot_view">
+        <field name="name">metro_view_partner_pivot</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="16" />
+        <field name="arch" type="xml">
+            <pivot string="Contacts">
+                <field name="user_id" type="row"/>
+                <field name="buying_potential" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_graph_view">
+        <field name="name">metro_view_partner_graph</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="16" />
+        <field name="arch" type="xml">
+            <graph string="Contacts">
+                <field name="user_id" type="row"/>
+                <field name="buying_potential" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="contacts.action_contacts" model="ir.actions.act_window">
+        <field name="view_mode">kanban,tree,form,pivot,graph</field>
+    </record>
+
+    <record model="ir.ui.view" id="metro_res_partner_target_form_view_user">
+        <field name="name">metro_res_partner_target_view_user</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="priority" eval="22" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="buying_potential"/>
+                <field name="sales_target" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="metro_res_partner_target_form_view_manager">
+        <field name="name">metro_res_partner_target_view_manager</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="metro_res_partner_target_form_view_user" />
+        <field name="priority" eval="22" />
+        <field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sales_target']" position="attributes">
+                <attribute name="readonly">0</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="metro_res_partner_target_tree_view">
+        <field name="name">metro_res_partner_target_tree_view</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="priority" eval="22" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="buying_potential"/>
+                <field name="sales_target" groups="sales_team.group_sale_manager"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

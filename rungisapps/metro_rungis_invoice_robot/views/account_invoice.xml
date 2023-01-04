@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="invoice_form_inherited" model="ir.ui.view">
+		<field name="name">account.invoice.ubl.transfert.invoice.form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_invoice_open']" position="attributes">
+				<attribute name="states">draft,passed</attribute>
+			</xpath>
+			<header position="inside">
+				<button name="passe_error_validation" string="Approving invoice" class="oe_highlight" type="object" attrs="{'invisible':[('state', 'in', ('open','passed','in_payment','paid', 'merged'))]}" />
+				<button name="action_mark_errorprone" string="Mark as error-prone" type="object" attrs="{'invisible': [('state', '!=', 'passed')]}" />
+			</header>
+			<field name="state" position="replace">
+				<field name="state" widget="statusbar" statusbar_visible="draft,open,sent,passed,paid,merged" />
+			</field>
+			<field name="type" position="after">
+				<field name="picking_invoice" invisible="1" />
+				<field name="is_merged" invisible="1" />
+			</field>
+		</field>
+	</record>
+
+	<record id="sale_account_invoice_form_readonly" model="ir.ui.view">
+		<field name="name">account.invoice.merged.readonly</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="sale.account_invoice_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='team_id']" position="attributes">
+				<attribute name="attrs">{'readonly': [('state', '=', 'merged')]}</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="invoice_tree_inherited" model="ir.ui.view">
+		<field name="name">account.invoice.tree.inherited</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_tree" />
+		<field name="arch" type="xml">
+			<field name="state" position="replace">
+				<field name="state" />
+			</field>
+		</field>
+	</record>
+
+	<record id="invoice_search_inherited" model="ir.ui.view">
+		<field name="name">account.invoice.search.view.inherited</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.view_account_invoice_filter" />
+		<field name="arch" type="xml">
+			<filter name="salesperson" position="after">
+				<filter name="type" string="Type" context="{'group_by':'type'}"/>
+			</filter>
+			<xpath expr="//filter[@name='draft']" position="after">
+                 <filter string="Passed Error Validation" name="passed" domain="[('state','=','passed')]"/>
+                 <filter string="Sent" name="sent" domain="[('state','=','sent')]"/>
+            </xpath>
+            <separator/>
+		</field>
+	</record>
+
+	<record id="invoice_tree_related_company_inherited11" model="ir.ui.view">
+	    <field name="name">account.invoice.tree.related.inherited11</field>
+	    <field name="model">account.invoice</field>
+	    <field name="inherit_id" ref="account.invoice_tree"/>
+	    <field name="arch" type="xml">
+	        <field name="partner_id" position="after">
+	        	<field name="partner_shipping_id"/>
+	        </field>
+	    </field>
+	</record>
+
+	<!-- Overwrite Send & Print action, change the default template -->
+	<record id="account.invoice_send" model="ir.actions.act_window">
+		<field name="context">{'default_template_id': ref('metro_rungis_invoice_robot.mail_template_invoice'), 'mark_invoice_as_sent': True}</field>
+	</record>
+
+        <record id="action_invoice_all" model="ir.actions.act_window">
+            <field name="name">Invoices and Credit Notes</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','in',('out_invoice','out_refund'))]</field>
+            <field name="context">{'journal_type': 'sale'}</field>
+            <field name="search_view_id" ref="metro_rungis_invoice_robot.invoice_search_inherited"/>
+        </record>
+
+        <record id="action_invoice_all_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="metro_rungis_invoice_robot.invoice_tree_inherited"/>
+            <field name="act_window_id" ref="action_invoice_all"/>
+        </record>
+
+        <record id="action_invoice_all_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="metro_rungis_invoice_robot.invoice_form_inherited"/>
+            <field name="act_window_id" ref="action_invoice_all"/>
+        </record>
+
+        <menuitem action="action_invoice_all"
+                  id="menu_action_invoice_all"
+                  parent="account.menu_finance_receivables"
+				  string="Invoices and Credit Notes"
+                  sequence="3"/>
+
+</odoo>

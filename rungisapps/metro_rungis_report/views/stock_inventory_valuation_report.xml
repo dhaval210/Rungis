@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="stock_inventory_valuation_report_inherited_location"
+                  inherit_id="stock_inventory_valuation_report.report_stock_inventory_valuation_report_filters">
+            <xpath expr="//div/div[hasclass('labels')]/div[2]" position="after">
+                <div t-if="o.warehouse_ids" class="act_as_cell">Location</div>
+            </xpath>
+            <xpath expr="//div/div[2]/div[2]" position="after">
+                <div t-if="o.warehouse_ids" class="act_as_cell">
+                    <t t-set="j" t-value="len(o.warehouse_ids)"/>
+                    <t t-set="i" t-value="1"/>
+                    <t t-foreach="o.warehouse_ids" t-as="warehouse">
+                        <span t-esc="warehouse.name"/>
+                        <t t-if="i != j">
+                            <span t-esc="','"/>
+                            <br/>
+                            <t t-set="i" t-value="i + 1"/>
+                        </t>
+                    </t>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="stock_inventory_valuation_report_inherited_cw"
+                  inherit_id="stock_inventory_valuation_report.report_stock_inventory_valuation_lines_header">
+            <xpath expr="//div/div/div[5]" position="after">
+                <div class="act_as_cell">CW On Hand</div>
+            </xpath>
+            <xpath expr="//div/div/div[7]" position="after">
+                <div class="act_as_cell">Purchase Price Base</div>
+            </xpath>
+        </template>
+
+        <template id="stock_inventory_valuation_report_inherited_cw_values"
+                  inherit_id="stock_inventory_valuation_report.report_stock_inventory_valuation_lines">
+            <xpath expr="//div/div[5]" position="after">
+                <div class="act_as_cell right">
+                    <t t-esc="'{0:,.3f}'.format(line.cw_qty_available)"/>
+                </div>
+            </xpath>
+            <xpath expr="//div/div[7]" position="after">
+                <div class="act_as_cell amount">
+                    <t t-esc="line.purchase_price_base"/>
+                </div>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

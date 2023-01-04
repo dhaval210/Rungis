@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="group_edit_lot_bbd_user" model="res.groups">
+        <field name="name">HHT Edit</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+    </record>
+
+</odoo>

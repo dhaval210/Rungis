@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="ftp_connection_form_view" model="ir.ui.view">
+    <field name="name">ftp.connection.form</field>
+    <field name="model">edi.connection</field>
+    <field name="inherit_id" ref="edi_base.connection_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//group[@name='details']" position="inside">
+            <field name="host" required="1"/>
+            <field name="user"/>
+            <field name="password" password="1"/>
+            <field name="folder"/>
+            <field name="is_active"/>
+        </xpath>
+        <xpath expr="//group[@name='configuration']" position="after">
+            <group>
+                <group>
+                    <field name="on_conflict"/>
+                    <field name="on_clean_integration"/>
+                </group>
+                <group>
+                    <field name="on_conflict_rename_extension" attrs="{
+                        'invisible': [('on_conflict', '!=', 'rename')],
+                        'required': [('on_conflict', '=', 'rename')]
+                    }"/>
+                    <field name="on_clean_integration_rename_extension" attrs="{
+                        'invisible': [('on_clean_integration', '!=', 'rename')],
+                        'required': [('on_clean_integration', '=', 'rename')]
+                    }"/>
+                </group>
+            </group>
+        </xpath>
+    </field>
+</record>
+
+</odoo>

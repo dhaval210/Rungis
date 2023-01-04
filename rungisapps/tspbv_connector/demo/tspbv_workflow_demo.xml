@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- simple workflow starts here -->
+    <record id="workflow_1" model="tspbv.workflow">
+        <field name="name">New Workflow</field>
+        <field name="dialoglist_ids" eval="[(6,0,[ref('tspbv_connector.dialoglist_3'),ref('tspbv_connector.dialoglist_4'),ref('tspbv_connector.dialoglist_5'),ref('tspbv_connector.dialoglist_6'), ref('tspbv_connector.dialoglist_7'), ref('tspbv_connector.dialoglist_9'), ref('tspbv_connector.dialoglist_10'), ref('tspbv_connector.dialoglist_bf_1')])]" />
+        <field name="first_dialog_id" ref="tspbv_connector.dialoglist_3" />
+    </record>
+    <!-- simple workflow ends here -->
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_purchase_order_deviation,access.purchase.order.deviation,model_purchase_order_deviation,purchase.group_purchase_manager,1,1,1,1
+access_purchase_order_deviation_line,access.purchase.order.deviation.line,model_purchase_order_deviation_line,purchase.group_purchase_manager,1,1,1,1

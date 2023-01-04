@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_external_layout">
+        <div class="header" t-att-style="report_header_style">
+            <div t-if="company.top_logo_header">
+                <center>
+                    <img t-if="company.top_logo_header" t-att-src="image_data_uri(company.top_logo_header)"
+                         align="center"
+                         style="max-height: 127px;"
+                         alt="Logo"/>
+                </center>
+            </div>
+        </div>
+        <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+
+
+        <div class="footer o_custom_footer">
+            <div class="text-muted"
+                 style="font-size: 8pt;text-align:right;margin-right: 50px;">
+                Page:
+                <span class="page"/>
+                /
+                <span class="topage"/>
+            </div>
+            <div class="text-center" style="border-top: 1px solid #275D38;position: absolute; margin-top: 1px;">
+                <div class="row mt4" style="text-align: left !important;line-height:1.1">
+                    <div class="col-xs-8 o_font" style="margin-left: 50px">
+                        <div t-esc="company.field_1" style="color: #275D38 !important;"/>
+                        <div t-esc="company.field_2"/>
+                        <div t-esc="company.field_3"/>
+                        <div t-esc="company.field_4"/>
+                    </div>
+                    <div class="col-xs-8 o_font" style="margin-left: 130px">
+                        <div t-esc="company.field_5"/>
+                        <div t-esc="company.field_6"/>
+                        <div t-esc="company.field_7"/>
+                        <div t-esc="company.field_8"/>
+                    </div>
+                    <div class="col-xs-8 o_font" style="margin-left: 130px">
+                        <div t-esc="company.field_9"/>
+                        <div t-esc="company.field_10"/>
+                        <div t-esc="company.field_11"/>
+                        <div t-esc="company.field_12"/>
+                    </div>
+                    <div class="col-xs-8 o_font" style="margin-left: 130px">
+                        <div t-esc="company.field_13"/>
+                        <div t-esc="company.field_14"/>
+                        <div t-esc="company.field_15"/>
+                        <div t-esc="company.field_16"/>
+                    </div>
+                </div>
+                <div class="row mt2" style="text-align: left !important;margin-top:20px;">
+                    <div class="col-xs-8" style="margin-left: 50px">
+                        <div t-esc="company.field_17" style="font-family: 'Gill Sans'; text-align: left;"/>
+                    </div>
+                    <div class="col-xs-8" style="margin-left: 50px">
+                        <img t-if="company.mother_company_logo" t-att-src="image_data_uri(company.mother_company_logo)"
+                             align="right"
+                             style="max-height: 29px;margin-top:-5px;"
+                             alt="Logo"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

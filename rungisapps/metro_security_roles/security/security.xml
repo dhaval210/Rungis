@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <!-- Groups -->
+    <record id="group_stock_wareneingang" model="res.groups">
+        <field name="name">Wareneingang</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <record id="group_stock_qa_worker" model="res.groups">
+        <field name="name">QA Worker</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <record id="group_stock_qa_manager" model="res.groups">
+        <field name="name">QA Manager</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_stock_qa_worker'))]"/>
+    </record>
+
+    <record id="group_stock_taxi" model="res.groups">
+        <field name="name">Taxi</field>
+        <field name="category_id" ref="base.module_category_warehouse_management"/>
+        <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+
+    <!-- Roles -->
+    <record id="role_wareneingang" model="res.users.role">
+      <field name="name">Wareneingang Role</field>
+      <field name="implied_ids" eval="[(4, ref('group_stock_wareneingang')),(4, ref('base.group_user'))]" />
+    </record>
+
+    <record id="role_qa_worker" model="res.users.role">
+      <field name="name">QA Worker Role</field>
+      <field name="implied_ids" eval="[(4, ref('group_stock_qa_worker')),(4, ref('base.group_user'))]" />
+    </record>
+
+    <!-- <record id="role_qa_manager" model="res.users.role">
+      <field name="name">QA Manager Role</field>
+      <field name="implied_ids" eval="[(4, ref('group_stock_qa_manager')), (4, ref('quality.group_quality_manager')),(4, ref('base.group_user'))]" />
+    </record> -->
+
+    <record id="role_taxi" model="res.users.role">
+      <field name="name">Taxi Role</field>
+      <field name="implied_ids" eval="[(4, ref('group_stock_taxi')),(4, ref('base.group_user'))]" />
+    </record>
+
+    <!-- Record Rules -->
+    <record model="ir.rule" id="rule_manager_picking_type">
+      <field name="name">Manager: show all picking type for Wareneingang</field>
+      <field name="model_id" search="[('model','=','stock.picking.type')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('stock.group_stock_manager'))]"></field>
+      <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+    <record model="ir.rule" id="rule_gate_assignment">
+      <field name="name">Manager Receipts with assigned gate</field>
+      <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('stock.group_stock_manager'))]"></field>
+      <field name="domain_force">[(1, '=', 1)]</field>
+    </record>
+    
+    <!-- <record model="ir.rule" id="rule_wareneingang_picking_type">
+      <field name="name">Wareneingang: Only show picking type for Wareneingang</field>
+      <field name="model_id" search="[('model','=','stock.picking.type')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('metro_security_roles.group_stock_wareneingang'))]"></field>
+      <field name="domain_force">[('id', 'in', [8, 42, 45, 39, 48, 57, 54, 51])]</field>
+    </record>
+    <record model="ir.rule" id="rule_gate_assignment">
+      <field name="name">Show only Receipts with assigned gate</field>
+      <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('metro_security_roles.group_stock_wareneingang'))]"></field>
+      <field name="domain_force">['|', ('gate_id', '!=', False), ('picking_type_id.id', '!=', 8)]</field>
+    </record>
+
+    <record model="ir.rule" id="rule_qa_worker_picking_type">
+      <field name="name">QA Worker: Only show picking type for QA</field>
+      <field name="model_id" search="[('model','=','stock.picking.type')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('metro_security_roles.group_stock_qa_worker'))]"></field>
+      <field name="domain_force">[('id', 'in', [52, 55, 58, 49, 40, 46, 43, 60, 61, 62, 63, 64, 65, 66])]</field>
+    </record>
+
+    <record model="ir.rule" id="rule_taxi_picking_type">
+      <field name="name">Taxi: Only show Puffer</field>
+      <field name="model_id" search="[('model','=','stock.picking.type')]" model="ir.model"/>
+      <field name="groups" eval="[(4,ref('metro_security_roles.group_stock_taxi'))]"></field>
+      <field name="domain_force">[('id', 'in', [53, 56, 59, 50, 41, 47, 44])]</field>
+    </record> -->
+
+  </data>
+</odoo>

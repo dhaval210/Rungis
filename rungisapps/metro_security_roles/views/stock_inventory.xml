@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <!-- Disable Transport -->
+      <record id="odoo_transport_management.menu_transport" model="ir.ui.menu">
+        <field name="groups_id" eval="[(3, ref('stock.group_stock_user'))]"/>
+      </record>
+
+  
+      <!-- Hide Iventory App Icon from Users -->
+      <record id="stock.menu_stock_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(3, ref('stock.group_stock_user'))]"/>
+      </record>
+
+  </data>
+</odoo>

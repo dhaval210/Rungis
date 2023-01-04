@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+    <t t-name="muk_web_theme.AppIcon">
+        <t t-if="app.web_icon_data">
+            <img class="o-app-icon" t-attf-src="data:image/png;base64,#{app.web_icon_data}"/>
+        </t>
+        <t t-else="">
+            <img class="o-app-icon" t-attf-src="#{'/metro_default_icons/static/src/img/default_icon.png'}"/>
+        </t>
+        <span class="o-app-name">
+            <t t-esc="app.name"/>
+        </span>
+    </t>
+</templates>

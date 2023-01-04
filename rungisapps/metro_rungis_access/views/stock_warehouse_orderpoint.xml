@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <menuitem
+            id="menu_reordering_rules_config"
+            action="stock.action_orderpoint_form"
+            name="Reordering Rules" parent="purchase.menu_purchase_config" sequence="10"/>
+    </data>
+</odoo>

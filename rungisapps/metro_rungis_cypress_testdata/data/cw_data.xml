@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="test_cw_product_1" model="product.product">
+            <field name="name">Test CW Product 0.1kg</field>
+            <field name="default_code">test-cw-1</field>
+            <field name="barcode">test-cw-1</field>
+            <field name="type">product</field>
+            <field name="uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="uom_po_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="cw_uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_kgm').id"/>
+            <field name="tracking">lot</field>
+            <field name="catch_weight_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="average_cw_quantity">0.1</field>
+            <field name="max_deviation">20</field>
+            <field name="list_price">20.00</field>
+            <field name="standard_price">5.99</field>
+            <field name="softm_location_number">6</field>
+            <field name="route_ids" eval="[(4, 43)]" />
+        </record>
+        
+        <record id="test_cw_product_2" model="product.product">
+            <field name="name">Test CW Product 3kg</field>
+            <field name="default_code">test-cw-2</field>
+            <field name="barcode">test-cw-2</field>
+            <field name="type">product</field>
+            <field name="uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="uom_po_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="cw_uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_kgm').id"/>
+            <field name="tracking">lot</field>
+            <field name="catch_weight_ok">True</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="average_cw_quantity">3</field>
+            <field name="max_deviation">20</field>
+            <field name="list_price">25.00</field>
+            <field name="standard_price">9.99</field>
+            <field name="softm_location_number">6</field>
+            <field name="route_ids" eval="[(4, 43)]" />
+        </record>
+
+    </data>
+</odoo>

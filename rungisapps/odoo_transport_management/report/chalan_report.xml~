@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <report
+            id="chalan_information" 
+            model="stock.picking"
+            report_type="qweb-pdf"
+            string="Rac Chalan"
+            name="odoo_transport_management.chalan_print"
+            file="odoo_transport_management.chalan_print"
+         />
+         
+        <template id="chalan_print">
+             <t t-foreach="docs" t-as="doc">
+               <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+            <div class="row">
+                        <h2>
+                        <span>Chalan Report:</span>
+                        <span t-field="doc.name"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-xs-2">
+                        </div>
+                    </div>
+                    
+
+                <div>
+                        <table class="table table-condensed">
+                               <tr>
+                                   <td><strong>Partner</strong></td><td> <span t-field="doc.partner_id.name"/></td>
+                                   <td><strong>Transporter</strong></td><td> <span t-field="doc.transporter_id.name"/></td>
+                               </tr>
+                               <tr>
+                                    <td><strong>Vehicle</strong></td><td> <span t-field="doc.vehicle_id.name"/></td>
+                                   <td><strong>LR Number</strong> </td><td> <span t-field="doc.lr_number"/></td>
+                               </tr>
+                               <!--tr>
+                                    <td><strong>Payment Amount</strong></td><td> <span t-field="doc.payment_amount"/></td>
+                                   <td><strong>Payment Date</strong> </td><td> <span t-field="doc.payment_date"/></td>
+                               </tr>
+                               <tr>
+                                    <td><strong>Sale Order</strong></td><td> <span t-field="doc.sale_order_id.name"/></td>
+                                    <td></td>
+                                    <td></td>
+                                    
+                               </tr-->
+                            </table>
+                        
+                        
+                </div>
+                <div>
+                <h3>Chalan Report</h3>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Initial Demand</th>
+                                        <th>Done</th>
+                                        <th>Unit of Measure</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="doc.move_lines" t-as="line">
+                                        <td>
+                                            <span t-field="line.product_id.name"/> 
+                                        </td>
+                                        <td>
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="line.product_uom_qty"/>
+                                        </td>
+                                        <td>
+                                             <span t-field="line.product_uom"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    </div>
+              </t>
+            </t>
+        </template>
+        
+    </data>
+</odoo>

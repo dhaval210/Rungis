@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <!-- sale schedule tree view -->
+    <record id="tour_assignment_view_tree" model="ir.ui.view">
+        <field name="name">tour.assignment.view.tree</field>
+        <field name="model">tour.assignment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id" string="Customer"/>
+                <field name="ref"/>
+                <field name="zip"/>
+                <field name="order_deadline"/>
+                <field name="tour_id"/>
+                <field name="drop_off"/>
+                <field name="tour_default_departure" widget="float_time"/>
+                <field name="tour_depot"/>
+                <field name="tour_group"/>
+                <field name="hub_id"/>
+                <field name="default_arrival_float" widget="float_time"/>
+                <field name="default_departure_float" widget="float_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tour_assignment_filter" model="ir.ui.view">
+        <field name="name">tour.assignment.select</field>
+        <field name="model">tour.assignment</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Tours">
+                <field name="partner_id" operator="child_of"/>
+                <field name="order_deadline"/>
+                <field name="tour_id"/>
+                <separator/>
+                <filter string="Monday" domain="[('order_deadline','=',0)]" name="filter_monday"/>
+                <filter string="Tuesday" domain="[('order_deadline','=',1)]" name="filter_tuesday"/>
+                <filter string="Wednesday" domain="[('order_deadline','=',2)]" name="filter_wednesday"/>
+                <filter string="Thursday" domain="[('order_deadline','=',3)]" name="filter_thursday"/>
+                <filter string="Friday" domain="[('order_deadline','=',4)]" name="filter_friday"/>
+                <filter string="Saturday" domain="[('order_deadline','=',5)]" name="filter_saturday"/>
+                <filter string="Sunday" domain="[('order_deadline','=',6)]" name="filter_sunday"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Partner" name="partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Tour" name="tour" domain="[]" context="{'group_by':'tour_id'}"/>
+                    <filter string="Order Deadline" name="order_deadline" domain="[]" context="{'group_by':'order_deadline'}"/>
+                    <filter string="Hub" name="hub" domain="[]" context="{'group_by':'hub_id'}"/>
+                    <filter string="Depot" name="depot" domain="[]" context="{'group_by':'tour_depot'}"/>
+                    <filter string="Group" name="group" domain="[]" context="{'group_by':'tour_group'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+
+    <!-- transporter.hub action window -->
+    <record id="tour_assignment_action" model="ir.actions.act_window">
+        <field name="name">Rahmentourenplan</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="search_view_id" ref="view_tour_assignment_filter"/>
+        <field name="res_model">tour.assignment</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- Sales Orders Kanban View  -->
+    <record model="ir.ui.view" id="view_sales_tour_kanban">
+        <field name="name">sales.tour.kanban</field>
+        <field name="model">tour.assignment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="tour_id"/>
+                <field name="partner_id"/>
+                <field name="zip"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top mb16">
+                                <div class="o_kanban_record_headings mt4">
+                                    <strong class="o_kanban_record_title"><span><t t-esc="record.partner_id.value"/></span></strong>
+                                </div>
+                                <strong><field name="zip"/></strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_generate_so" model="ir.actions.server">
+	    <field name="name">Bestellungen erstellen</field>
+	    <field name="model_id" ref="model_tour_assignment" />
+	    <field name="binding_model_id" ref="model_tour_assignment" />
+	    <field name="state">code</field>
+	    <field name="code">records.action_generate_so()</field>
+    </record>
+</odoo>

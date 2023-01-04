@@ -1,0 +1,185 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_partner_rank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 09:12+0000\n"
+"PO-Revision-Date: 2022-11-03 09:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:93
+#, python-format
+msgid "AProduct Sales"
+msgstr "Umsalz (Aproduct)"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:85
+#, python-format
+msgid "Aggregated Purchase volume"
+msgstr "Einkaufsvolumen"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:148
+#, python-format
+msgid "COGS"
+msgstr "Wareneinsatz"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model,name:metro_rungis_partner_rank.model_res_partner
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:97
+#, python-format
+msgid "Current Stock"
+msgstr "Bestand"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:101
+#, python-format
+msgid "Current Stock Aproduct"
+msgstr "Bestand (Aprodukte)"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner__data_ids
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_users__data_ids
+msgid "Data"
+msgstr "Persönliche Daten"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:109
+#, python-format
+msgid "Expired products"
+msgstr "Verderb/Vernichtung"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:156
+#, python-format
+msgid "Gross Profit"
+msgstr "Rohgewinn"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:105
+#, python-format
+msgid "Gross profit"
+msgstr "Rohgewinn"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__id
+msgid "ID"
+msgstr ""
+
+#. module: metro_rungis_partner_rank
+#: model_terms:ir.ui.view,arch_db:metro_rungis_partner_rank.view_partners_form_customer_status
+msgid "KPI"
+msgstr ""
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data____last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__last_month
+msgid "Last Month"
+msgstr "Letzter Monat"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__last_quarter
+msgid "Last Quarter"
+msgstr "Letzter Quartal"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__last_week
+msgid "Last Week"
+msgstr "Letzter Woche"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__last_year
+msgid "Last Year"
+msgstr "Letzter Jahr"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:160
+#, python-format
+msgid "Margin in %"
+msgstr "Spanne in %"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__name
+msgid "Name"
+msgstr ""
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: metro_rungis_partner_rank
+#: model:ir.actions.server,name:metro_rungis_partner_rank.cron_partner_product_data_ir_actions_server
+#: model:ir.cron,cron_name:metro_rungis_partner_rank.cron_partner_product_data
+#: model:ir.cron,name:metro_rungis_partner_rank.cron_partner_product_data
+msgid "Partner Product Data update"
+msgstr ""
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:89
+#, python-format
+msgid "Regular Sales"
+msgstr "Umsat"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__this_year
+msgid "This Year"
+msgstr "Aktuelles Jahr"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model.fields,field_description:metro_rungis_partner_rank.field_res_partner_data__today
+msgid "Today"
+msgstr "Heute"
+
+#. module: metro_rungis_partner_rank
+#: code:addons/metro_rungis_partner_rank/models/res_partner.py:152
+#, python-format
+msgid "Untaxed amount"
+msgstr "Nettoums"
+
+#. module: metro_rungis_partner_rank
+#: model:ir.model,name:metro_rungis_partner_rank.model_res_partner_data
+msgid "res.partner.data"
+msgstr ""

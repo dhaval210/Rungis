@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+
+from odoo import fields, models
+
+class TransporterRoute(models.Model):
+    _name = 'transporter.route'
+   
+    transporter_id = fields.Many2one(
+        'res.partner',
+        string='Transporter',
+    )

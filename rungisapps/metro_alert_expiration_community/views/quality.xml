@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="quality_control_point_view_form_metro_expiration" model="ir.ui.view">
+        <field name="name">quality.control.point.view.form.metro.inherited.expiration</field>
+        <field name="model">quality.control.point.line</field>
+        <field name="inherit_id" ref="sync_quality_control.quality_control_point_line_view_form"/>
+        <field name="arch" type="xml">
+            <field name="test_type_id" position="after">
+                <field name="time_ratio" attrs="{'required': [('test_type', '=', 'time_ratio')],'invisible': [('test_type', '!=', 'time_ratio')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

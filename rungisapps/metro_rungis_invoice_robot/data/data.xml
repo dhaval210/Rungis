@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+	<!-- Cron to generate and check invoice every day -->
+	<record id="ir_cron_generate_check_invoice" model="ir.cron">
+        <field name="name">Generate and Check Invoice</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="code">model.with_delay().generate_check_invoice()</field>
+        <field name="state">code</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 05:30:01')" />
+    </record>
+    
+    
+    <!-- Cron To merge generated invoices per partner -->
+    <record id="ir_cron_check_send_invoice" model="ir.cron">
+        <field name="name">Merge Invoices</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="account.model_account_invoice"/>
+        <field name="code">model.merge_invoices()</field>
+        <field name="state">code</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 06:30:01')" />
+    </record>
+
+    <!-- Cron to sent the merged invoices to each partner -->
+    <record id="ir_cron_robot_send_invoices" model="ir.cron">
+        <field name="name">Send Invoices</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="model_id" ref="account.model_account_invoice" />
+        <field name="code">model.send_invoices()</field>
+        <field name="state">code</field>
+        <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 07:30:01')" />
+    </record>
+
+    </data> 
+</odoo>

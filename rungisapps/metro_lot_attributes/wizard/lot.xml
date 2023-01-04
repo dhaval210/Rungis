@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_lot_report_wizard" model="ir.ui.view">
+            <field name="name">Lot</field>
+            <field name="model">lot.lot</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="lot_lines" readonly="1">
+                        <tree>
+                            <field name="lot_id"/>
+                        </tree>
+                    </field>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

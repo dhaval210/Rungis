@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_location_name" model="ir.ui.view">
+        <field name="name">view_picking_form_location_name</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <!-- hide from_loc and to_loc, show location_id and location_dest_id instead-->
+            <xpath expr="//page/field/tree/field[@name='location_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//page/field/tree/field[@name='location_dest_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <!-- <xpath expr="//page/field/tree/field[@name='from_loc']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//page/field/tree/field[@name='to_loc']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+            <xpath expr="//page/field/tree/field[@name='result_package_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//t[@t-name='kanban-box']/div/div/div[@class='col-xs-12 text-muted']" position="replace">
+                <span><t t-esc="record.location_id.value"/> to <t t-esc="record.location_dest_id.value"/></span>
+                <span><t t-esc="record.result_package_id.value"/></span>
+            </xpath> -->
+
+            <!-- also from pack operations-->
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='location_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='location_dest_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath>
+            <!-- <xpath expr="//field[@name='pack_operation_pack_ids']/tree/field[@name='from_loc']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='pack_operation_pack_ids']/tree/field[@name='to_loc']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath> -->
+            <!-- <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='result_package_id']" position="attributes">
+                <attribute name="invisible">0</attribute>
+            </xpath> -->
+        </field>
+    </record>
+</odoo>

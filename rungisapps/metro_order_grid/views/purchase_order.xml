@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- purchase.order inherit form view -->
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.view.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Grid Data" attrs="{'invisible': [('grid_id', '=', 0)]}">
+                    <field name="grid_id" invisible="1"/>
+                    <button name="action_open_grid_data" type="object" class="btn-primary" string="Grid Data" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

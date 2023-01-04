@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.quant tree view -->
+    <record id="stock_quant_view_tree" model="ir.ui.view">
+        <field name="name">stock.quant.view.tree</field>
+        <field name="model">stock.quant</field>
+        <field name="arch" type="xml">
+            <tree create='false' delete="false" limit="5000">
+                <field name="product_id"/>
+                <field name="location_id"/>
+                <field name="lot_id"/>
+                <field name="use_date"/>
+                <field name="quantity"/>
+                <field name="product_uom_id"/>
+                <field name="cw_stock_quantity"/>
+                <field name="product_cw_uom"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

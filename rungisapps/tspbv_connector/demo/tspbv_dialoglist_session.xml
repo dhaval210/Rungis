@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- session voice dialog starts here -->
+    <record id="dialoglist_4" model="tspbv.dialoglist">
+        <field name="name">Session Dialog</field>
+        <field name="start">startOrder</field>
+        <field name="default_code">session</field>
+    </record>
+
+    <record id="output_8" model="tspbv.output">
+        <field name="lydia_output">(Neuen) Auftrag starten</field>
+    </record>
+
+    <record id="grammar_rule_6" model="tspbv.grammar.rule">
+        <field name="rule_name">start order</field>
+        <field name="content">(starten|abbrechen)</field>
+    </record>
+    <record id="input_8" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_6')])]" />
+    </record>
+    <record id="recognition_10" model="tspbv.recognition">
+        <field name="rel">start1</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">starten</field>
+        <field name="input_id" ref="tspbv_connector.input_8" />
+    </record>
+    <record id="recognition_11" model="tspbv.recognition">
+        <field name="rel">abort1</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">abbrechen</field>
+        <field name="input_id" ref="tspbv_connector.input_8" />
+    </record>
+
+    <record id="dialog_9" model="tspbv.dialog">
+        <field name="id_dialog">startOrder</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_8" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_8" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_4" />
+    </record>
+
+    <record id="link_13" model="tspbv.link">
+        <field name="rel">start1</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9" />
+    </record>
+
+    <record id="link_14" model="tspbv.link">
+        <field name="rel">abort1</field>
+        <field name="href">#abort</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_9" />
+    </record>
+
+
+    <record id="output_9" model="tspbv.output">
+        <field name="lydia_output">Pause oder Feierabend</field>
+    </record>
+
+    <record id="grammar_rule_7" model="tspbv.grammar.rule">
+        <field name="rule_name">abort order</field>
+        <field name="content">(pause|feierabend)</field>
+    </record>
+
+    <record id="input_9" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_7')])]" />
+    </record>
+    <record id="recognition_12" model="tspbv.recognition">
+        <field name="rel">abort2</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">pause</field>
+        <field name="input_id" ref="tspbv_connector.input_9" />
+    </record>
+    <record id="recognition_13" model="tspbv.recognition">
+        <field name="rel">abort3</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">feierabend</field>
+        <field name="input_id" ref="tspbv_connector.input_9" />
+    </record>
+    <record id="dialog_10" model="tspbv.dialog">
+        <field name="id_dialog">abort</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_9" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_9" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_4" />
+    </record>
+    <record id="dialog_10_1" model="tspbv.dialog">
+        <field name="id_dialog">abortfinish</field>
+        <field name="terminate">True</field>
+    </record>
+    <record id="link_15" model="tspbv.link">
+        <field name="rel">abort2</field>
+        <field name="href">#standby</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_10" />
+    </record>
+    <record id="link_16" model="tspbv.link">
+        <field name="rel">abort3</field>
+        <field name="href">#confirmabort</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_10" />
+    </record>
+
+    <record id="grammar_rule_10_3" model="tspbv.grammar.rule">
+        <field name="rule_name">starte arbeit</field>
+    </record> 
+    <record id="input_10_3" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_10_3')])]" />
+    </record>
+    <record id="recognition_10_3" model="tspbv.recognition">
+        <field name="rel">standbyStart</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">starte arbeit</field>
+        <field name="input_id" ref="tspbv_connector.input_10_3" />
+    </record>   
+    <record id="output_10_3" model="tspbv.output">
+        <field name="lydia_output">Pausemodus aktiv</field>
+    </record>   
+    <record id="dialog_10_3" model="tspbv.dialog">
+        <field name="id_dialog">standby</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_10_3" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_10_3" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_4" />
+    </record>    
+    <record id="link_10_3" model="tspbv.link">
+        <field name="rel">standbyStart</field>
+        <field name="href">#startOrder</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_10_3" />
+    </record>    
+
+    <record id="output_10" model="tspbv.output">
+        <field name="lydia_output">Wollen Sie sich wirklich abmelden</field>
+    </record>
+    <record id="grammar_rule_8" model="tspbv.grammar.rule">
+        <field name="rule_name">confirmabortorder</field>
+        <field name="content">(okay|fertig|zurück)</field>
+    </record>
+    <record id="input_10" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_8')])]" />
+    </record>
+    <record id="recognition_14" model="tspbv.recognition">
+        <field name="rel">abort4</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector.input_10" />
+    </record>
+    <record id="recognition_14_f" model="tspbv.recognition">
+        <field name="rel">abort4</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector.input_10" />
+    </record>
+    <record id="recognition_15" model="tspbv.recognition">
+        <field name="rel">back1</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">zurück</field>
+        <field name="input_id" ref="tspbv_connector.input_10" />
+    </record>
+    <record id="dialog_11" model="tspbv.dialog">
+        <field name="id_dialog">confirmabort</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_10" />
+        <field name="lydia_input_id" ref="tspbv_connector.input_10" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_4" />
+    </record>
+    <record id="link_17" model="tspbv.link">
+        <field name="rel">abort4</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_11" />
+        <field name="sub_dialog_id" ref="tspbv_connector.dialog_10_1" />
+    </record>
+    <record id="link_18" model="tspbv.link">
+        <field name="rel">back1</field>
+        <field name="href">#startOrder</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_11" />
+    </record>
+    <!-- session voice dialog ends here -->
+</odoo>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_warehouse_form_view_inherit" model="ir.ui.view">
+        <field name="name">stock.warehouse</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="used_for_aproduct"/>
+                <field name="aproduct_exclude_location_ids" attrs="{'invisible': [('used_for_aproduct','=','False')]}" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+	    <field name="name">res.config.settings.view.form</field>
+	    <field name="model">res.config.settings</field>
+	    <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+	    <field name="arch" type="xml">
+	        <div name="integration" position="after">
+	            <h2>Aproduct</h2>
+	            <div class="row mt16 o_settings_container" name="Aproduct">
+	                <div class="col-12 col-lg-6 o_setting_box">
+						<div class="o_setting_left_pane"/>
+	                    <div class="o_setting_right_pane">
+				            <label for="aproduct_loss_account_id"/>
+				            <div class="text-muted">
+				                Aproduct loss account
+				            </div>
+				            <div class="mt8">
+				                <field name="aproduct_loss_account_id" class="o_light_label"/>
+				            </div>
+				            <label for="aproduct_factor"/>
+				            <div class="text-muted">
+				                Aproduct loss factor
+				            </div>
+				            <div class="mt8">
+				                <field name="aproduct_factor" class="o_light_label"/>
+				            </div>
+				        </div>
+	                </div>
+	            </div>
+	        </div>
+	    </field>
+	</record>
+
+</odoo>

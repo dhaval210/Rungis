@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tour_assignment_form" model="ir.ui.view">
+        <field name="name">partner.tour.assignment.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="Tour Assignment" attrs="{'invisible':[('customer', '=', False)]}">
+                    <field name="tour_ids">
+                        <tree editable="top" default_order="order_deadline asc">
+                            <field name="order_deadline"/>
+                            <field name="tour_id"/>
+                            <field name="drop_off"/>
+                        </tree>
+
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//group/field[@name='user_id']" position="after">
+                <field name="substitute_user_id"/>
+            </xpath>
+            <xpath expr="//notebook/page[@name='sales_purchases']//group[@name='sale']//field[@name='property_delivery_carrier_id']"
+                   position="after">
+                <field name="calling_time" widget="float_time"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

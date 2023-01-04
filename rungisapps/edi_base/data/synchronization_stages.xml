@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+<record id="new_synchronization_stage" model="edi.synchronization.stage">
+    <field name="name">New</field>
+    <field name="sequence">1</field>
+    <field name="state">new</field>
+    <field name="color">6</field>
+</record>
+
+<record id="fail_synchronization_stage" model="edi.synchronization.stage">
+    <field name="name">Fail</field>
+    <field name="sequence">2</field>
+    <field name="state">fail</field>
+    <field name="color">4</field>
+</record>
+
+<record id="done_synchronization_stage" model="edi.synchronization.stage">
+    <field name="name">Done</field>
+    <field name="sequence">3</field>
+    <field name="state">done</field>
+    <field name="color">1</field>
+</record>
+
+<record id="cancel_synchronization_stage" model="edi.synchronization.stage">
+    <field name="name">Cancel</field>
+    <field name="sequence">4</field>
+    <field name="state">cancel</field>
+    <field name="color">0</field>
+</record>
+
+</odoo>

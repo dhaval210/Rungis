@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="metro_dashboard.chart_template">
+        <div class="chart">
+            <canvas class="dashboardChart" width="300" height="200"></canvas>
+        </div>
+    </t>
+</template>

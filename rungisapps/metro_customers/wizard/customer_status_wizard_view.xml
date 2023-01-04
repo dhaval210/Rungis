@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="customer_report_view" model="ir.ui.view">
+            <field name="name">Customer Wizard</field>
+            <field name="model">customer.wizard</field>
+            <field name="arch" type="xml">
+               <form>
+                   <group>
+                        <group string="Select Customer Status">
+                                <field name="check_customer_status"/>
+                        </group>
+                        <footer>
+                            <button string="Print" name="print_button" type="object" class="btn-primary"/>
+                            <button string="Discard" class="btn-default" special="cancel"/>
+                        </footer>
+                    </group>
+               </form>
+            </field>
+        </record>
+        <record id="action_customer_report" model="ir.actions.act_window">
+            <field name="name">Generate Customer Saatus Report</field>
+            <field name="res_model">customer.wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_report_view"/>
+            <field name="target">new</field>
+        </record>
+        <menuitem name="Customer Report" id="menu_report_customer"
+           parent="sale.menu_sale_report" action="action_customer_report" sequence="5"/>
+    </data>
+</odoo>
+
+
+

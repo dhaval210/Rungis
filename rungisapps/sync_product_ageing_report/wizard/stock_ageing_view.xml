@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+        <record id="stock_ageing_analysis_view" model="ir.ui.view">
+            <field name="name">Stock Ageing Analysis Wizard</field>
+            <field name="model">stock.ageing</field>
+            <field name="arch" type="xml">
+               <form string="Stock Ageing Analysis">
+                   <field invisible="1" name="state"/>
+                   <div states="get">
+                       <group>
+                           <field name="data" colspan="4" invisible="1"/>
+                           <field name="name" filename="data" colspan="4"/>
+                       </group>
+                   </div>
+                   <div states="choose">
+                       <group>
+                           <group>
+                               <field name="interval"/>
+                               <field name="from_date"/>
+                            </group>
+                           <group>
+                               <field name="company_id"/>
+                            </group>
+                       </group>
+                       <separator string="Filter"/>
+                       <group>
+                            <field name="filter_by"/>
+                            <field name="location_id" widget="many2many_tags" />
+                            <field name="product_categ" widget="many2many_tags" attrs="{'invisible': [('filter_by', '!=', 'product_categ')]}"/>
+                            <field name="product_ids" widget="many2many_tags" attrs="{'invisible': [('filter_by', '!=', 'product')]}"/>
+                        </group>
+                   </div>
+                   <footer states="choose">
+                        <button string="Print PDF" name="stock_ageing_pdf" type="object" class="btn-primary"/>
+                        <button string="Print Excel" name="stock_ageing_excel" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                   </footer>
+                   <footer states="get">
+                       <button special="cancel" string="Cancel" class="oe_highlight" />
+                   </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_stock_ageing_analysis" model="ir.actions.act_window">
+            <field name="name">Stock Ageing Analysis</field>
+            <field name="res_model">stock.ageing</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_ageing_analysis_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Stock Ageing Analysis Report" id="stock_ageing_analysis" action="action_stock_ageing_analysis"
+                  parent="stock.menu_warehouse_report"/>
+</odoo>

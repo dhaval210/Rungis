@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="static_files">
+        <head>
+            <title>METRO Dashboard API</title>
+
+            <link rel="stylesheet" type="text/css" href="/metro_dashboard/static/src/css/metro_dashboard_api.css" />
+
+            <script type="text/javascript" src="/web/static/lib/nvd3/d3.v3.js"></script>
+            <script type="text/javascript" src="/web/static/lib/nvd3/nv.d3.js"></script>
+            <script type="text/javascript" src="/web/static/src/js/libs/nvd3.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/api/gauge_widget_api.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/api/chart_widget_api.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/api/timeframe_dropdown.js"></script>
+        </head>
+    </template>
+
+    <template id="dashboard_tile_api">
+        <div t-attf-class="oe_kanban_card metro_card {{ tileClass }} o_kanban_record" t-attf-id="card_{{id}}">
+            <div class="oe_kanban_content">
+                <h1 class="text-center biggerCaption" t-attf-id="name_{{id}}" t-esc="name"></h1>
+                <t t-if="has_goal == True">
+                    <t t-if="condition == 'higher'">
+                        <!--
+                            Display Gauge !!!
+                        -->
+                        <div class="days30">
+                            <div class="gauge days30" t-attf-id="gauge30_{{id}}" style="width:200px;height:150px;display:block!important;margin:auto;">
+                                <span class="current" t-attf-id="current_{{id}}"><t t-raw="progress"/></span>
+                                <span class="target" t-attf-id="target_{{id}}"><t t-raw="target" /></span>
+                                <span class="suffix"><t t-raw="suffix"></t></span>
+                                <span class="label"><t t-raw="result_short"></t></span>
+                            </div>
+                        </div>
+                        <div class="days90" hidden="">
+                            <div class="gauge days90" t-attf-id="gauge90_{{id}}" style="width:200px;height:150px;display:block!important;margin:auto;">
+                                <span class="current" t-attf-id="current_{{id}}"><t t-raw="progress90"/></span>
+                                <span class="target" t-attf-id="target_{{id}}"><t t-raw="target" /></span>
+                                <span class="suffix"><t t-raw="suffix"></t></span>
+                                <span class="label"><t t-raw="result_short90"></t></span>
+                            </div>
+                        </div>
+                        <!-- Only show decimal places for percentages -->
+                        <t t-if="suffix == '%'">
+                            <div class="days30 inline">
+                                <p class="text-muted text-center">
+                                    <span t-raw="progress" />
+                                    out of <span t-raw="target" />
+                                    <span t-raw="suffix" />
+                                </p>
+                            </div>
+                            <div class="days90 inline" hidden="">
+                                <p class="text-muted text-center">
+                                    <span t-raw="progress90" />
+                                    out of <span t-raw="target" />
+                                    <span t-raw="suffix" />
+                                </p>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="days30 inline">
+                                <p class="text-muted text-center">
+                                    <span t-raw="progress_int" />
+                                    out of <span t-raw="target" />
+                                    <span t-raw="suffix" />
+                                </p>
+                            </div>
+                            <div class="days90 inline" hidden="">
+                                <p class="text-muted text-center">
+                                    <span t-raw="progress90_int" />
+                                    out of <span t-raw="target" />
+                                    <span t-raw="suffix" />
+                                </p>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="md_condition_lower">
+                            <!-- Only show decimal places for percentages -->
+                            <t t-if="suffix == '%'">
+                                <span class="text-muted">Current: </span>
+                                <div class="days30 inline">
+                                    <span id="current" t-raw="progress" />
+                                </div>
+                                <div class="days90 inline" hidden="">
+                                    <span id="current" t-raw="progress90" />
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <span class="text-muted">Current: </span>
+                                <div class="days30 inline">
+                                    <span id="current" t-raw="result_short" />
+                                </div>
+                                <div class="days90 inline" hidden="">
+                                    <span id="current" t-raw="result_short90" />
+                                </div>
+                            </t>
+                            <span class="text-muted">/ <span t-esc="target" /></span><br />
+                            <t t-set="diff" t-value="progress - target" />
+                            <t t-set="diff90" t-value="progress90 - target" />
+                            <t t-if="diff &gt;= 0">
+                                <div class="days30 inline">
+                                    <p class="text-muted">
+                                        <span t-raw="diff" />
+                                        <span t-raw="suffix" />
+                                        more than the target
+                                    </p>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <t t-set="diff" t-value="diff * -1" />
+                                <div class="days30 inline">
+                                    <p class="light-success">
+                                        <span t-raw="diff" />
+                                        <span t-raw="suffix" />
+                                        less than the target
+                                    </p>
+                                </div>
+                            </t>
+                            <t t-if="diff90 &gt;= 0">
+                                <div class="days90 inline" hidden="">
+                                    <p class="text-muted">
+                                        <span t-raw="diff90" />
+                                        <span t-raw="suffix" />
+                                        more than the target
+                                    </p>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <t t-set="diff90" t-value="diff90 * -1" />
+                                <div class="days90 inline" hidden="">
+                                    <p class="light-success">
+                                        <span t-raw="diff90" />
+                                        <span t-raw="suffix" />
+                                        less than the target
+                                    </p>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+                <t t-elif="has_statistic == True">
+                    <t t-if="visualisation == 'number'">
+                        <div class="visualisation_number">
+                            <div class="days30">
+                                <t t-if="float(result) &gt; 999999 or float(result) &lt; -99999">
+                                    <span class="number" t-esc="result_short" />
+                                </t>
+                                <t t-elif="float(result) &gt;= 10000">
+                                    <span class="number" t-esc="result.split('.')[0]" />
+                                </t>
+                                <t t-else="">
+                                    <span class="number" t-esc="result" />
+                                </t>
+                            </div>
+                            <div class="days90" hidden="" t-if="use_timeframes">
+                                <t t-if="float(result90) &gt; 999999 or float(result90) &lt; -99999">
+                                    <span class="number" t-esc="result_short90" />
+                                </t>
+                                <t t-elif="float(result90) &gt;= 10000">
+                                    <span class="number" t-esc="result90.split('.')[0]" />
+                                </t>
+                                <t t-else="">
+                                    <span class="number" t-esc="result90" />
+                                </t>
+                            </div>
+                            <br />
+                            <span class="suffix" t-esc="suffix" />
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div t-attf-id="info_{{id}}" hidden="">
+                            <span class="result days30" t-esc="result" />
+                            <span class="result days90" t-esc="result90" />
+                            <span class="type" t-esc="visualisation" />
+                            <span class="keys days30" t-esc="keys" />
+                            <span class="keys days90" t-esc="keys90" />
+                            <span class="suffix" t-esc="suffix" />
+                        </div>
+                        <!-- The chart for timeframe 30 days is not empty -->
+                        <t t-if="empty == False">
+                            <div class="chart days30">
+                                <canvas t-attf-id="chart30_{{id}}" class="dashboardChart" width="300" height="200"></canvas>
+                            </div>
+                        </t>
+                        <!-- The chart for timeframe 30 days is empty -->
+                        <t t-if="empty == True">
+                            <p class="no-data-container days30">
+                                <i t-attf-class="fa fa-{{visualisation}}-chart no-data-icon"></i>
+                                <br/>There is no data available
+                            </p>
+                        </t>
+                        <!-- The chart for timeframe 90 days is not empty -->
+                        <t t-if="empty90 == False">
+                            <div class="chart days90" hidden="" t-if="use_timeframes == True">
+                                <canvas t-attf-id="chart90_{{id}}" class="dashboardChart" width="300" height="200"></canvas>
+                            </div>
+                        </t>
+                        <t t-if="empty90 == True">
+                            <p class="no-data-container days90" hidden="">
+                                <i t-attf-class="fa fa-{{visualisation}}-chart no-data-icon"></i>
+                                <br/>There is no data available
+                            </p>
+                        </t>
+                    </t>
+                </t>
+                <t t-elif="has_ch_line == True">
+                    <p class="no-data-container">
+                        <i t-attf-class="fa fa-tachometer no-data-icon"></i>
+                        <br/>There is no data available
+                    </p>
+                </t>
+                <t t-else="">
+                    <p class="no-data-container">
+                        <i t-attf-class="fa fa-exclamation-triangle no-data-icon"></i>
+                        <br/>This tile has no reference, it will be automatically removed when the dashboard refreshes the next time
+                    </p>
+                </t>
+                <div class="button_bar" t-attf-id="button_bar_{{id}}">
+                    <t t-if="use_timeframes == True">
+                        <!-- <t t-call="metro_dashboard.tile_timeframe_dropdown" /> -->
+                        <div class="dropdown">
+                            <button class="btn btn-link dropdown-toggle" type="button" id="timeframeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-clock-o" /> Last 30 days
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="timeframeDropdown">
+                                <button class="dropdown-item metro_timeframe_30days" t-attf-id="30DaysBtn_{{id}}">Last 30 days</button>
+                                <button class="dropdown-item metro_timeframe_90days" t-attf-id="90DaysBtn_{{id}}">Last 90 days</button>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <span t-attf-class="show_timeframe" t-esc="cust_timeframe" />
+                    </t>
+                </div>
+                <t t-if="len(table['30']) &gt; 0 or len(table['90']) &gt; 0">
+                    <hr/>
+                    <table class="metro_dashboard_tile_table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Progress</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="table_body" class="days30">
+                            <tr t-foreach="table['30']" t-as="row">
+                                <td t-esc="row['name']"></td>
+                                <td>
+                                    <span t-esc="row['progress']" /> <span t-esc="row['suffix']" />
+                                </td>
+                            </tr>
+                        </tbody>
+                        <t t-if="use_timeframes == True">
+                            <tbody id="table_body90" class="days90" hidden="">
+                                <tr t-foreach="table['90']" t-as="row">
+                                    <td t-esc="row['name']"></td>
+                                    <td>
+                                        <span t-esc="row['progress']" /> <span t-esc="row['suffix']" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </t>
+                    </table>
+                </t>
+            </div>
+        </div>
+
+        <t t-if="linebreak">
+            <div class="metro_kanban_line_break" />
+        </t>
+    </template>
+
+    <template id="dashboard_tile_api_page">
+        <t t-call-assets="website.assets_common" />
+        <t t-call-assets="website.assets_backend" />
+        <t t-call-assets="metro_dashboard.static_files" />
+
+        <div class="o_web_client o_main">
+            <div class="o_main_content">
+                <div class="o_content">
+                    <t t-if="error">
+                        <div class="center" style="text-align: center; margin: 40px;color: white;">
+                            <h1>Not available</h1>
+                            <p style="color:black;" t-esc="error"></p>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_kanban_view o_kanban_ungrouped">
+                            <t t-if="double_width">
+                                <t t-set="tileClass">metro_kanban_nogrow_2x</t>
+                            </t>
+                            <t t-else="">
+                                <t t-set="tileClass">metro_kanban_nogrow</t>
+                            </t>
+                            <t t-call="metro_dashboard.dashboard_tile_api" />
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="dashboard_api_page">
+        <t t-call-assets="website.assets_common" />
+        <t t-call-assets="website.assets_backend" />
+        <t t-call-assets="metro_dashboard.static_files" />
+
+        <div class="o_web_client o_main">
+            <div class="o_main_content">
+                <div class="o_content">
+                    <t t-if="error">
+                        <div class="center" style="text-align: center; margin: 40px;color: white;">
+                            <h1>Not available</h1>
+                            <p style="color:black;" t-esc="error"></p>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_kanban_view o_kanban_ungrouped">
+                            <t t-foreach="dashboard" t-as="tile">
+                                <t t-set="id" t-value="tile['id']" />
+                                <t t-set="name" t-value="tile['name']" />
+                                <t t-set="suffix" t-value="tile['suffix']" />
+                                <t t-set="table" t-value="tile['table']" />
+                                <t t-set="linebreak" t-value="tile['linebreak']" />
+                                <t t-set="has_statistic" t-value="tile['has_statistic']" />
+                                <t t-set="has_goal" t-value="tile['has_goal']" />
+                                <t t-set="has_ch_line" t-value="tile['has_ch_line']" />
+                                <t t-set="keys" t-value="tile['keys']" />
+                                <t t-set="keys90" t-value="tile['keys90']" />
+                                <t t-set="use_timeframes" t-value="tile['use_timeframes']" />
+                                <t t-set="cust_timeframe" t-value="tile['cust_timeframe']" />
+                                <t t-set="result_short" t-value="tile['result_short']" />
+                                <t t-set="result_short90" t-value="tile['result_short90']" />
+                                
+                                <t t-if="tile['double_width']">
+                                    <t t-set="tileClass">metro_kanban_nogrow_2x</t>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="tileClass">metro_kanban_nogrow</t>
+                                </t>
+                                
+                                <t t-if="tile['has_statistic']">
+                                    <t t-set="result" t-value="tile['result']" />
+                                    <t t-set="result90" t-value="tile['result90']" />
+                                    <t t-set="visualisation" t-value="tile['visualisation']" />
+                                    <t t-set="empty" t-value="tile['empty']" />
+                                    <t t-set="empty90" t-value="tile['empty90']" />
+                                </t>
+                                <t t-elif="tile['has_goal']">
+                                    <t t-set="progress" t-value="tile['progress']" />
+                                    <t t-set="progress90" t-value="tile['progress90']" />
+                                    <t t-set="progress_int" t-value="tile['progress_int']" />
+                                    <t t-set="progress90_int" t-value="tile['progress90_int']" />
+                                    <t t-set="condition" t-value="tile['condition']" />
+                                    <t t-set="target" t-value="tile['target']" />
+                                </t>
+
+                                <t t-call="metro_dashboard.dashboard_tile_api" />
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

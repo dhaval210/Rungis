@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="sale_order_form_inherit_internal_ref" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="custom_internal_ref" />
+            </xpath>
+        </field>
+    </record>
+    
+     <record id="sale_order_view_search_inherit_ref" model="ir.ui.view">
+        <field name="name">sale.order.filter.inherit.internal_ref</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <field name="custom_internal_ref" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

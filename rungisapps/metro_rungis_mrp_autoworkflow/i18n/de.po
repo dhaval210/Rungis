@@ -1,0 +1,133 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_mrp_autoworkflow
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-22 06:23+0000\n"
+"PO-Revision-Date: 2022-08-22 06:23+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:mail.template,body_html:metro_rungis_mrp_autoworkflow.aproduct_manufacture_template
+msgid "\n"
+"                    \n"
+"                        Dear warehouse team, <br>\n"
+"                            please decrease stock in SoftM for ${ctx.product_id.name} ${ctx.product_id.default_code}\n"
+"                            for ${ctx.qty} ${ctx.uom_id.name} in warehouse ${ctx.warehouse}. <br>\n"
+"                            ${ctx.user_id.name} has just completed the AProduct workflow in odoo. <br>\n"
+"\n"
+"                            Best regards\n"
+"                    \n"
+"            "
+msgstr "\n"
+"                    \n"
+"                        An das Lagerhaus Team, <br>\n"
+"                            Bitte reduzieren Sie den Bestand für den Artikel ${ctx.product_id.name} ${ctx.product_id.default_code}\n"
+"                            um ${ctx.qty} ${ctx.uom_id.name} im Softm Lager  ${ctx.warehouse}. <br>\n"
+"                            ${ctx.user_id.name} hat gerade den Bestand auf das AProdukt umgebucht. <br>\n"
+"\n"
+"                            Mit freundlichen Gruessen\n"
+"                    \n"
+"            "
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.actions.client,name:metro_rungis_mrp_autoworkflow.action_aproduct_auto_workflow
+msgid "Aproduct Auto Workflow"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model.fields,field_description:metro_rungis_mrp_autoworkflow.field_stock_warehouse__aproduct_exclude_location_ids
+msgid "Aproduct Exclude Location"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:mail.template,subject:metro_rungis_mrp_autoworkflow.aproduct_manufacture_template
+msgid "Aproduct manufactured"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model.fields,field_description:metro_rungis_mrp_autoworkflow.field_mrp_production__auto_check
+msgid "Auto Check"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model_terms:ir.ui.view,arch_db:metro_rungis_mrp_autoworkflow.mrp_auto_workflow
+msgid "Auto Workflow"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#. openerp-web
+#: code:addons/PreProdRungis/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:8
+#: code:addons/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:8
+#, python-format
+msgid "Location"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model,name:metro_rungis_mrp_autoworkflow.model_stock_production_lot
+msgid "Lot/Serial"
+msgstr "Los/Serie"
+
+#. module: metro_rungis_mrp_autoworkflow
+#: code:addons/PreProdRungis/metro_rungis_mrp_autoworkflow/models/mrp_production.py:62
+#: code:addons/metro_rungis_mrp_autoworkflow/models/mrp_production.py:62
+#, python-format
+msgid "Only One Component Needed for Manufacturing."
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#. openerp-web
+#: code:addons/PreProdRungis/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:7
+#: code:addons/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:7
+#, python-format
+msgid "Product"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model,name:metro_rungis_mrp_autoworkflow.model_mrp_production
+msgid "Production Order"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#. openerp-web
+#: code:addons/PreProdRungis/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:9
+#: code:addons/metro_rungis_mrp_autoworkflow/static/src/xml/aproduct_not_done.xml:9
+#, python-format
+msgid "Reason"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: code:addons/PreProdRungis/metro_rungis_mrp_autoworkflow/models/mrp_production.py:67
+#: code:addons/metro_rungis_mrp_autoworkflow/models/mrp_production.py:67
+#, python-format
+msgid "The Product Needs Lot."
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model.fields,field_description:metro_rungis_mrp_autoworkflow.field_stock_warehouse__used_for_aproduct
+msgid "Used for simplified Aproduct Auto workflow"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model,name:metro_rungis_mrp_autoworkflow.model_stock_warehouse
+msgid "Warehouse"
+msgstr "Lager"
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model,name:metro_rungis_mrp_autoworkflow.model_aproduct_not_done
+msgid "aproduct.not.done"
+msgstr ""
+
+#. module: metro_rungis_mrp_autoworkflow
+#: model:ir.model,name:metro_rungis_mrp_autoworkflow.model_aproduct_not_done_line
+msgid "aproduct.not.done.line"
+msgstr ""
+

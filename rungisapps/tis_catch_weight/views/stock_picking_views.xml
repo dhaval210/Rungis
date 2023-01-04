@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_picking_form_catchweight">
+            <field name="name">picking.form.inherit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom']" position="after">
+                    <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                    <field name="product_cw_uom_qty"
+                           attrs="{'readonly': ['|', ('is_initial_demand_editable', '=', False),
+                           ('catch_weight_ok', '=', False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="reserved_cw_availability" string="CW Reserved"
+                           attrs="{'column_invisible': (['|','|', ('parent.state','=', 'done'),
+                           ('parent.picking_type_code', '=', 'incoming'),'&amp;',
+                           ('parent.immediate_transfer', '=', True),
+                           ('parent.is_locked', '=', True)])}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="cw_qty_done" attrs="{'readonly': ['|',('is_quantity_done_editable', '=', False),
+                           ('catch_weight_ok', '=', False)]}"
+                           required="True" force_save="1" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="product_cw_uom"
+                           attrs="{'readonly': ['|',('state', '!=', 'draft'), ('additional', '=', False),
+                           ('catch_weight_ok', '=', False)]}" force_save="1"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                </xpath>
+                <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='qty_done']" position="after">
+                        <field name="catch_weight_ok" invisible="1"/>
+                        <field name="product_cw_uom_qty" readonly="1"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="cw_qty_done"
+                               attrs="{'readonly': ['|', ('state', 'in', ('done', 'cancel')), ('is_locked', '=', True),('catch_weight_ok', '=', False)]}"
+                               force_save="1"/>
+                        <field name="product_cw_uom"
+                               groups="tis_catch_weight.group_catch_weight" force_save="1"
+                               attrs="{'readonly': ['|',('state', '!=', 'draft'), ('catch_weight_ok', '=', False)]}"/>
+                    </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

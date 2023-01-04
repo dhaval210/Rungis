@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend" name="metro_dashboard_assets_backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/metro_dashboard/static/src/css/metro_dashboard_tile.css" />
+
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/Chart.bundle.min.js"></script>
+
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/action_manager_metro_dashboard.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/o2m_metro_dashboard.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/metro_dashboard_gauge.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/metro_dashboard_share.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/metro_tile_form_share.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/metro_tile_share.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/chart_base.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/chart_widget.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/chart_widget90.js"></script>
+            <script type="text/javascript" src="/metro_dashboard/static/src/js/metro_dashboard_timeframe_dropdown.js"></script>
+        </xpath>
+    </template>
+</odoo>

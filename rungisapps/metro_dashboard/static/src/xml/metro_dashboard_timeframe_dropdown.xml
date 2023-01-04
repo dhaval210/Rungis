@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-name="metro_dashboard.tile_timeframe_dropdown">
+        <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" id="timeframeDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-clock-o" /> Last 30 days
+            </button>
+            <div class="dropdown-menu" aria-labelledby="timeframeDropdown">
+                <button class="dropdown-item metro_timeframe_30days">Last 30 days</button>
+                <button class="dropdown-item metro_timeframe_90days">Last 90 days</button>
+            </div>
+        </div>
+    </t>
+</template>

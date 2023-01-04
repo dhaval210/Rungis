@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="enaio_deviation_company_parameter" model="ir.config_parameter">
+            <field name="key">metro_rungis_enaio_deviation.enaio_deviation_company_parameter</field>
+            <field name="value">4</field>
+        </record>
+    </data>
+</odoo>

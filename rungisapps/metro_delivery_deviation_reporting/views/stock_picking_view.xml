@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_packing_delivery_report" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.delivery.report</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="before">
+                <field name="delay_msg" invisible="1 " />
+            </xpath>
+        </field>
+    </record>
+</odoo>

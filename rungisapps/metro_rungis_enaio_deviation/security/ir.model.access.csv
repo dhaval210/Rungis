@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_enaio_deviation_remark_user,enaio.deviation.remark user,model_enaio_deviation_remark,base.group_user,1,1,1,0
+access_delivery_deviation_user,enaio.delivery.deviation user,model_enaio_delivery_deviation,base.group_user,1,1,1,0
+

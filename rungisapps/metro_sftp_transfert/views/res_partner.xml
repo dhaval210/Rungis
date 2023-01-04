@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_robot_inherited" model="ir.ui.view">
+        <field name="name">res.partner.form.robot.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="metro_rungis_invoice_robot.view_partner_form_inherited" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='process_controls']/group" position="inside">
+                <group string="SFTP Informations" attrs="{'invisible': [['transfert_mode', '!=', 'SFTP']]}" name="sftp_informations">
+                    <field name="sftp_server" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

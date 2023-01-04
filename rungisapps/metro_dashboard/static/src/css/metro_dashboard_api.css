@@ -1,0 +1,9 @@
+@media (max-width: 767.98px) {
+    .o_kanban_view .o_kanban_record, .o_kanban_view .o_kanban_quick_create {
+        padding: 8px 8px !important;
+    }
+}
+
+body {
+    background-color: #f9f9f9 !important;
+}

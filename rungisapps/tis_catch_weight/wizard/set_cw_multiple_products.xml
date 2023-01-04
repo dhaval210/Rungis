@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="set_cw_for_multiple_products" model="ir.ui.view">
+        <field name="name">Set CW For Multiple Products</field>
+        <field name="model">set.cw.multiple.products</field>
+        <field name="arch" type="xml">
+            <form string="Catch Weight">
+                <p class="oe_grey">
+                    You can change normal product(s) to catch weight product(s) or vice versa.
+                </p>
+                <group groups="tis_catch_weight.group_catch_weight">
+                    <group>
+                        <label for="catch_weight_ok"/>
+                        <div class="o_row">
+                            <field name="catch_weight_ok"/>
+                            <field name="catch_weight"
+                                   attrs="{'required':[('catch_weight_ok','=',True)], 'invisible':[('catch_weight_ok','!=',True)]}"/>
+                        </div>
+                    </group>
+                </group>
+                <p class="oe_grey" attrs="{'invisible':[('catch_weight','!=','yes')]}">
+                    Below are applicable to catch weight product(s).
+                </p>
+                <group col="3" attrs="{'invisible':[('catch_weight','!=','yes'),('catch_weight_ok','!=',True)]}">
+                    <div calss="o_column_header" class="col-md-10" attrs="{'invisible':[('catch_weight','!=','yes')]}">
+                        <label for="sale_price_base_ok"/>
+                        <field name="sale_price_base_ok"/>
+                        <field name="sale_price_base" colspan="4"
+                               attrs="{'required':[('sale_price_base_ok','=',True)], 'invisible':[('sale_price_base_ok','!=',True)]}"/>
+                    </div>
+                    <div calss="o_column_header" class="col-md-10" attrs="{'invisible':[('catch_weight','!=','yes')]}">
+                        <label for="purchase_price_base_ok"/>
+                        <field name="purchase_price_base_ok"/>
+                        <field name="purchase_price_base"
+                               attrs="{'required':[('purchase_price_base_ok','=',True)], 'invisible':[('purchase_price_base_ok','!=',True)]}"/>
+                    </div>
+                    <div calss="o_column_header" class="col-md-10" attrs="{'invisible':[('catch_weight','!=','yes')]}">
+                        <label for="cw_uom_id_ok"/>
+                        <field name="cw_uom_id_ok"/>
+                        <field name="cw_uom_id"
+                               attrs="{'required':[('cw_uom_id_ok','=',True)], 'invisible':[('cw_uom_id_ok','!=',True)]}"/>
+                    </div>
+                </group>
+                <footer>
+                    <button name="create_multiple_cw_products" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_activate_catch_weight" model="ir.actions.act_window">
+        <field name="name">Convert Product(CW/NOT)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">set.cw.multiple.products</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="product.model_product_template"/>
+    </record>
+
+</odoo>

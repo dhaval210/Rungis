@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="rungis_report_picking_inherit" inherit_id="stock.report_picking">
+        <xpath expr="//div[@class='page']" position="inside">
+            <div style="position:absolute;top: 0mm;left: -14mm; page-break-inside: avoid;">
+                <t t-if="o.origin">
+                    <img
+                            alt="Barcode"
+                            t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.origin, 365, 45)"
+                    />
+                    <br/>
+                    <center>
+                        <span t-field="o.origin"/>
+                    </center>
+                    <br/>
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//th[@name='td_sched_date_h']" position="after">
+            <th t-if="o.transporter_route_id">
+                <strong>Tour</strong>
+            </th>
+        </xpath>
+        <xpath expr="//td[@name='td_sched_date']" position="after">
+            <td t-if="o.transporter_route_id">
+                <span t-field="o.transporter_route_id"/>
+            </td>
+        </xpath>
+        <xpath expr="//table[2]/tbody" position="replace">
+            <tbody>
+                <t t-foreach="o.move_line_ids_without_package.sorted(key=lambda m: m.location_id.sort)" t-as="ml">
+                    <tr t-if="ml.product_id.catch_weight_ok == True and
+                        request.env['stock.picking.type'].sudo().search([('id', '=', o.picking_type_id.id)]).warehouse_id.company_id == request.env.user.company_id and
+                        request.env.user.company_id.cw_product_highlight == True"
+                        style="background-color: #D3D3D3">
+                        <td>
+                            <b>
+                                <span t-field="ml.product_id.display_name"/>
+                                <br/>
+                                <span t-field="ml.product_id.description_picking"/>
+                            </b>
+                        </td>
+                        <td>
+                            <b>
+                                <span t-if="o.state != 'done'" t-field="ml.product_uom_qty"/>
+                                <span t-if="o.state == 'done'" t-field="ml.qty_done"/>
+                                <span t-field="ml.product_uom_id" groups="uom.group_uom"/>
+                            </b>
+
+                        </td>
+                        <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                            <b>
+                                <span t-field="ml.product_cw_uom_qty"/>
+                                <span t-field="ml.product_cw_uom"/>
+                            </b>
+                        </td>
+                        <td width="14%" t-if="o.picking_type_id.code != 'incoming'">
+                            <b>
+                                <span t-esc="ml.location_id.name"/>
+                                <t t-if="ml.package_id">
+                                    <span t-field="ml.package_id"/>
+                                </t>
+                            </b>
+                        </td>
+                        <td style="display: inline-block;" t-if="o.picking_type_id.code != 'outgoing'">
+                            <div>
+                                <b>
+                                    <span t-field="ml.location_dest_id.name"/>
+                                    <t t-if="ml.result_package_id">
+                                        <span t-field="ml.result_package_id"/>
+                                    </t>
+                                </b>
+                            </div>
+                        </td>
+                        <td width="15%" class=" text-center h6" t-if="has_serial_number">
+                            <img t-if="has_serial_number and (ml.lot_id or ml.lot_name)"
+                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', ml.lot_id.name, 600, 100)"
+                                 style="width:100%;height:35px;" alt="Barcode"/>
+
+                        </td>
+                        <td width="15%" class="text-center" t-if="has_barcode">
+                            <t t-if="product_barcode != ml.product_id.barcode">
+                                <span t-if="ml.product_id and ml.product_id.barcode">
+                                    <img t-if="len(ml.product_id.barcode) == 13"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+                                    <img t-elif="len(ml.product_id.barcode) == 8"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+                                    <img t-else=""
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+
+                                </span>
+                                <b>
+                                    <t t-set="product_barcode" t-value="ml.product_id.barcode"/>
+                                </b>
+                            </t>
+                        </td>
+                        <td class="text-left">
+                            <b>
+                                <span t-field="ml.product_id.softm_location_number"/>
+                            </b>
+                        </td>
+                    </tr>
+                    <tr t-else="">
+                        <td>
+                            <span t-field="ml.product_id.display_name"/>
+                            <br/>
+                            <span t-field="ml.product_id.description_picking"/>
+                        </td>
+                        <td>
+                            <span t-if="o.state != 'done'" t-field="ml.product_uom_qty"/>
+                            <span t-if="o.state == 'done'" t-field="ml.qty_done"/>
+                            <span t-field="ml.product_uom_id" groups="uom.group_uom"/>
+
+                        </td>
+                        <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                            <span t-field="ml.product_cw_uom_qty"/>
+                            <span t-field="ml.product_cw_uom"/>
+                        </td>
+                        <td width="14%" t-if="o.picking_type_id.code != 'incoming'">
+                            <span t-esc="ml.location_id.name"/>
+                            <t t-if="ml.package_id">
+                                <span t-field="ml.package_id"/>
+                            </t>
+                        </td>
+                        <td style="display: inline-block;" t-if="o.picking_type_id.code != 'outgoing'">
+                            <div>
+                                <span t-field="ml.location_dest_id.name"/>
+                                <t t-if="ml.result_package_id">
+                                    <span t-field="ml.result_package_id"/>
+                                </t>
+                            </div>
+                        </td>
+                        <td width="15%" class=" text-center h6" t-if="has_serial_number">
+                            <img t-if="has_serial_number and (ml.lot_id or ml.lot_name)"
+                                 t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', ml.lot_id.name, 600, 100)"
+                                 style="width:100%;height:35px;" alt="Barcode"/>
+
+                        </td>
+                        <td width="15%" class="text-center" t-if="has_barcode">
+                            <t t-if="product_barcode != ml.product_id.barcode">
+                                <span t-if="ml.product_id and ml.product_id.barcode">
+                                    <img t-if="len(ml.product_id.barcode) == 13"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+                                    <img t-elif="len(ml.product_id.barcode) == 8"
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+                                    <img t-else=""
+                                         t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', ml.product_id.barcode, 600, 100)"
+                                         style="width:100%;height:35px" alt="Barcode"/>
+
+                                </span>
+                                <t t-set="product_barcode" t-value="ml.product_id.barcode"/>
+                            </t>
+                        </td>
+                        <td class="text-left">
+                            <span t-field="ml.product_id.softm_location_number"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </xpath>
+
+        <xpath expr="//table[2]/thead/tr/th[4]" position="replace">
+            <th width="12%" t-if="o.picking_type_id.code != 'incoming'" align="left">
+                <strong>From</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table[2]/thead/tr/th[5]" position="replace">
+            <th width="12%" t-if="o.picking_type_id.code != 'outgoing'" align="left">
+                <strong>To</strong>
+            </th>
+        </xpath>
+        <xpath expr="//table[2]/thead/tr/th[last()]" position="after">
+            <th width="5%" class="text-left">Lager</th>
+        </xpath>
+        <xpath expr="//div[@class='col-5 offset-1']/div[last()]" position="after">
+            <div t-if="o.partner_id.ref">
+                <span id="supplier_no">Supplier No:
+                    <span t-esc="o.partner_id.ref"/>
+                </span>
+            </div>
+        </xpath>
+    </template>
+    <template id="external_layout_standard_inherited" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@class='col-6']" position="after">
+            <t t-if="o._table=='stock_picking'">
+                <div class="not-first-page">
+                    <div class="col-10">
+                        <strong>PO Number:</strong>
+                        <t t-esc="o.origin"/>
+                    </div>
+                    <t t-if="o.partner_id">
+                        <div class="col-10">
+                            <strong>Vendor Address:</strong>
+                            <t t-esc="o.partner_id.name"/>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </template>
+    <template id="rungis_report_inventory_inherit" inherit_id="stock.report_inventory">
+        <xpath expr="//table[2]/tbody" position="replace">
+            <tbody>
+                <t t-foreach="locations.sorted(key=lambda l: l.sort)" t-as="location">
+                    <tr groups="stock.group_stock_multi_locations">
+                        <td colspan="2">
+                            <strong t-esc="location.display_name"/>
+                        </td>
+                        <td groups="stock.group_production_lot"/>
+                        <td groups="stock.group_tracking_lot"/>
+                        <td/>
+                    </tr>
+                    <tr t-foreach="o.line_ids.filtered(lambda line: line.location_id.id == location.id)" t-as="line">
+                        <td groups="stock.group_stock_multi_locations"/>
+                        <td>
+                            <span t-field="line.product_id"/>
+                        </td>
+                        <td groups="stock.group_production_lot">
+                            <span t-field="line.prod_lot_id"/>
+                        </td>
+                        <td groups="stock.group_tracking_lot">
+                            <span t-field="line.package_id"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.product_qty"/>
+                            <span t-field="line.product_uom_id" groups="uom.group_uom"/>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </xpath>
+    </template>
+</odoo>

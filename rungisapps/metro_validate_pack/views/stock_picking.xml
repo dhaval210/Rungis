@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.picking inherit tree view -->
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="before">
+                <field 
+                    name="async_state"
+                    widget="label_selection"
+                    options="{'classes': {'progress': 'primary', 'done': 'success'}}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="validate_packing" model="ir.actions.server">
+        <field name="name">Validate Packing Operation</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="stock.model_stock_picking"/>
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="state">code</field>
+            <field name="code">records.action_validate_packing()</field>
+    </record>
+</odoo>

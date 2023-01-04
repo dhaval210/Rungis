@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+            id="metro_report_inventory_adjustment"
+            model="stock.inventory"
+            string="Valuation Report"
+            report_type="qweb-pdf"
+            name="metro_report_inventory_adjustment.report_stock_inventory"
+            file="metro_report_inventory_adjustment.report_stock_inventory"
+            attachment_use="True"
+            menu="False"
+        />
+</odoo>

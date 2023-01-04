@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_level_forecast_pivot_cw_quantity" model="ir.ui.view">
+        <field name="name">Stock.forecast.pivot</field>
+        <field name="model">report.stock.forecast</field>
+        <field name="inherit_id" ref="stock.view_stock_level_forecast_pivot"/>
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field name="cw_quantity" type="measure"/>
+            </field>
+        </field>
+    </record>
+</odoo>

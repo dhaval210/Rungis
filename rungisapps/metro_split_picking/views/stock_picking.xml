@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_view_inherited" model="ir.ui.view">
+        <field name="name">stock.picking</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="quality_control.stock_picking_view_form_inherit_quality"/>
+        <field name="arch" type="xml">
+            <field name="priority" position="after">
+                <field name="transport_id"/>
+            </field>
+        </field>
+    </record>
+</odoo>

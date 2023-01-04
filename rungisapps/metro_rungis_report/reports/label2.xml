@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="paperformat_label2" model="report.paperformat">
+        <field name="name">Label</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">110</field>
+        <field name="page_width">80</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">4</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">80</field>
+    </record>
+    <report
+        id="label2"
+        model="stock.picking"
+        string="Transport Label2"
+        report_type="qweb-pdf"
+        name="metro_rungis_report.label_report2"
+        file="metro_rungis_report.label_report2"
+        attachment_use="False"
+        attachment=""
+        print_report_name="'Transport Label 2 - %s - %s' % (object.partner_id.name, object.picking_type_id.name)"
+        paperformat="paperformat_label"
+    />
+    <template id="label_report2">
+        <t t-call="web.basic_layout">
+<!--            transport label2-->
+            <t t-foreach="docs" t-as="doc">
+                <t t-foreach="doc.move_line_ids_without_package" t-as="move">
+                    <div class="page">
+                        <div class="container" style="height: 75mm;">
+                            <div class="row" style="margin-top: 4mm !important;">
+                                <div class="col-12 rounded" style="background-color: black; color: white !important;" >
+                                    <small style="width: 100%;text-align: center;font-size: 3.5mm !important;">
+
+                                        <span t-esc="doc.company_id.name" />
+                                        -
+                                        <span t-esc="doc.company_id.street" />
+                                        -
+                                        <span t-esc="doc.company_id.zip" />
+                                        <span t-esc="doc.company_id.city" />
+
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 16mm;">
+                                <div class="col-4">
+                                    <span t-field="doc.origin" style="font-size: 4mm !important;" /> <br />
+                                    <span t-field="doc.scheduled_date" t-options='{"format": "dd.MM.y"}' style="font-size: 4mm !important;" />
+                                </div>
+                                <div class="col-2">
+                                    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR', doc.origin, 128, 128)"
+                                    style="width:15mm;height:15mm;margin-left: -4mm !important;margin-top: 0.5mm !important;" alt="Barcode"/>
+                                </div>
+                                <div class="col-6" style="font-size: 14mm !important;margin-top: -3mm !important;text-align: right;">
+                                    <t t-if="doc.transporter_route_id.id!=False">
+                                        <span t-esc="doc.transporter_route_id.name[1:4]" />
+                                    </t>
+                                    <t t-if="doc.run_up_point > 0">
+                                        <span t-esc="doc.run_up_point" style="font-size: 6mm !important;margin-top: -3mm !important;text-align: right;" />
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="row border-top">
+                                <div class="col-6">
+                                    <span style="font-size:4mm;">
+                                        <span t-field="doc.partner_id.name" />
+                                        <span t-field="doc.partner_id.street" /> <br />
+                                        <b><span t-field="doc.partner_id.country_id.code" /> <span t-field="doc.partner_id.zip" /> <span t-field="doc.partner_id.city" /></b>
+                                    </span>
+                                </div>
+                                <div class="col-6" style="font-size: 11.5mm;text-align: right;">
+                                    <span t-field="doc.partner_id.ref" /> <br />
+                                </div>
+                            </div>
+
+                            <div class="row border" style="height: 17mm;margin-top: 2mm;border-width: 1mm !important;">
+                                <div class="col-3" style="margin-top: 2mm">
+                                    <!-- <span class="border" style="font-size: 14mm !important;border-width: 1mm !important;"> -->
+                                        <t t-if="doc.transporter_route_id.id!=False">
+                                            <span t-esc="doc.transporter_route_id.tour_depot" style="font-size: 10mm !important;margin-left: -1mm"/>
+                                        </t>
+                                    <!-- </span> -->
+                                </div>
+                                <div class="col-6" style="margin-top: 2mm">
+                                    <img t-if="doc.name"
+                                    t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', doc.name, 1225, 225)"
+                                    style="height:10mm;margin-left: -9.5mm;margin-top: 2mm"/>
+                                </div>
+                                <div class="col-3" style="margin-top: 2mm">
+                                    <span t-esc="doc.name[-3:]" style="font-size: 10mm !important;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+<!--            end-->
+        </t>
+    </template>
+
+</odoo>

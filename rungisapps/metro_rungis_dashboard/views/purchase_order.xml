@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="min_purchase_tree_view" model="ir.ui.view">
+            <field name="name">mini.purchase.tree.view</field>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <tree string="Mini Purchase" create="false">
+                    <field name="partner_id"/>
+                    <field name="name" string="Order Number"/>
+                    <field name="date_order"/>
+                    <field name="supplier_number"/>
+                    <field name="user_id"/>
+                    <field name="order_weight"/>
+                    <field name="amount_total" widget="monetary"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="purchase_ranking"/>
+                    <field name="buyer_ranking" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mini_purchase_report_search" model="ir.ui.view">
+            <field name="name">mini.purchase.report.search</field>
+            <field name="model">purchase.order</field>
+            <field name="arch" type="xml">
+                <search string="Mini Purchase">
+                    <field name="name" string="Purchase Order"
+                           filter_domain="['|','|',('name','ilike',self),('client_order_ref','ilike',self),('partner_id','child_of',self)]"/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field name="user_id"/>
+                    <field name="supplier_number" string="Supplier Number"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <filter string="Top 10 Buyers" name="top_customers"
+                            domain="[('buyer_ranking', '&lt;=', 10)]"/>
+                    <filter string="Top 10 Supplier" name="top_sale_persons"
+                            domain="[('purchase_ranking', '&lt;=', 10)]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="buyer" string="Buyer" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter string="Order Date" name="order_date" domain="[]"
+                                context="{'group_by':'date_order'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_min_purchase_order" model="ir.actions.act_window">
+            <field name="name">Mini Purchase</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_mode">tree,pivot</field>
+            <field name="domain">[('state', '=', 'purchase'), ('amount_untaxed', '&lt;=', 250), ('amount_untaxed', '&gt;=', 1)]</field>
+            <field name="context">{}</field>
+            <field name="view_id" ref="min_purchase_tree_view"/>
+            <field name="search_view_id" ref="view_mini_purchase_report_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <record id="purchase_order_action_view_order_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="purchase.purchase_order_tree"/>
+            <field name="act_window_id" ref="purchase.purchase_form_action"/>
+        </record>
+
+        <record id="purchase_order_rfq_action_view_order_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="purchase.purchase_order_tree"/>
+            <field name="act_window_id" ref="purchase.purchase_rfq"/>
+        </record>
+
+
+        <menuitem action="action_min_purchase_order" id="menu_mini_purchase"
+                  parent="purchase.purchase_report"/>
+
+        <menuitem id="purchase_report_modified" name="Reporting" parent="purchase.purchase_report" sequence="1"
+                  groups="purchase.group_purchase_manager" action="purchase.action_purchase_order_report_all"/>
+
+        <record id="no_buy_price_view_tree" model="ir.ui.view">
+            <field name="name">no.buy.price.tree.view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Mini Purchase" create="false">
+                    <field name="user_id"/>
+                    <field name="product_reference"/>
+                    <field name="product_id" string="Article"/>
+                    <field name="order_name"/>
+                    <field name="date_order"/>
+                    <field name="partner_ref"/>
+                    <field name="partner_id" string="Supplier"/>
+                    <field name="order_weight"/>
+                    <field name="price_subtotal"/>
+                    <field name="price_total"/>
+                    <field name="currency_id" invisible="1"/>
+                    <field name="state" invisible="1"/>
+<!--                    <field name="product_categ_id" invisible="1"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="no_buy_price_view_pivot" model="ir.ui.view">
+            <field name="name">no.buy.price.pivot.view</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Mini Purchase">
+                    <field name="user_id" type="row"/>
+                    <field name="price_subtotal" type="measure"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_no_buy_price_search" model="ir.ui.view">
+            <field name="name">no.buy.price.search</field>
+            <field name="model">purchase.order.line</field>
+            <field name="arch" type="xml">
+                <search string="No buy Price">
+                    <field name="order_name" string="Purchase Order"/>
+                    <field name="partner_id" operator="child_of"/>
+                    <field name="user_id"/>
+                    <field name="partner_ref" string="Supplier Number"/>
+                    <filter string="Yesterday" name="sale_yesterday_filter"
+                            domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Today" name="sale_today_filter"
+                            domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                    <filter string="Last 7 Days" name="Last_7_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="Last 30 Days" name="Last_30_Days"
+                            domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                    <filter string="This weeks" name="this_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                    <filter string="Last weeks" name="last_week"
+                            domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                    <filter string="This Year" name="Year"
+                            domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                    <separator/>
+                    <filter string="Purchase order in 0.01" name="purchase_price_1" domain="[('price_subtotal', '=', 0.01)]"/>
+                    <filter string="Purchase order in 999" name="purchase_price_999" domain="[('price_subtotal', '=', 999)]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Supplier" name="supplier" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="buyer" string="Buyer" domain="[]" context="{'group_by':'user_id'}"/>
+                        <filter name="state" string="State" domain="[]" context="{'group_by':'state'}"/>
+<!--                        <filter name="category" string="Product Category" domain="[]" context="{'group_by':'product_categ_id'}"/>-->
+                        <filter string="Order Date" name="order_date" domain="[]"
+                                context="{'group_by':'date_order'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_no_buy_price" model="ir.actions.act_window">
+            <field name="name">No Buy Price</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_mode">tree,pivot</field>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_purchase_price_1': 1, 'search_default_purchase_price_999': 1, 'search_default_this_week': 1 }</field>
+            <field name="view_ids" eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('no_buy_price_view_tree')}),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('no_buy_price_view_pivot')})]"/>
+            <field name="search_view_id" ref="view_no_buy_price_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Records.
+                </p>
+            </field>
+        </record>
+
+        <menuitem action="action_no_buy_price" id="menu_no_buy_price"
+                  parent="purchase.purchase_report"/>
+
+    </data>
+</odoo>

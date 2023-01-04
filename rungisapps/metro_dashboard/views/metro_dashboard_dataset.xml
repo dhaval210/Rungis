@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="metro_dashboard_dataset_tree" model="ir.ui.view">
+        <field name="name">metro.dashboard.dataset.tree</field>
+        <field name="model">metro.dashboard.dataset</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="line_count" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_dataset_form" model="ir.ui.view">
+        <field name="name">metro.dashboard.dataset.form</field>
+        <field name="model">metro.dashboard.dataset</field>
+        <field name="arch" type="xml">
+            <form string="Edit Dataset">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" /></h1>
+                    </div>
+                    <group>
+                        <field name="suffix" />
+                        <field name="has_suffix" attrs="{'invisible': True}" />
+                    </group>
+                    <notebook>
+                        <page string="Data">
+                            <field name="line_ids">
+                                <tree string="Data" editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="name" />
+                                    <field name="value" />
+                                    <field name="suffix" attrs="{'readonly': True}" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Additional information">
+                            <group>
+                                <field name="line_count" />
+                                <field name="keys" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="metro_dashboard_dataset_action" model="ir.actions.act_window">
+        <field name="name">Datasets</field>
+        <field name="res_model">metro.dashboard.dataset</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="metro_dashboard_dataset_menu"
+        parent="metro_dashboard_edit_item"
+        action="metro_dashboard_dataset_action"
+        name="Datasets"
+        groups="metro_dashboard.group_metro_dashboard_manager" />
+</odoo>

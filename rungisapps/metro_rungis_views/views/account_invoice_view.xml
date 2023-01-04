@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_account_invoice_gd_inherit">
+        <field name="name">account.invoice.gd.inherit</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='global_discount_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', 'in', ('open','in_payment','paid','cancel'))]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+<!--    <record id="view_invoice_filter_state_inherit" model="ir.ui.view">-->
+<!--        <field name="name">invoice.inherit.state.filter</field>-->
+<!--        <field name="model">account.invoice</field>-->
+<!--        <field name="inherit_id" ref="account.view_account_invoice_filter"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--             <xpath expr="//filter[@name='draft']" position="after">-->
+<!--                 <filter string="Passed Error Validation" name="passed" domain="[('state','=','passed')]"/>-->
+<!--                 <filter string="Sent" name="sent"  domain="[('state','=','sent')]"/>-->
+<!--            </xpath>-->
+<!--            <separator/>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="invoice_tree_related_company_inherited" model="ir.ui.view">-->
+<!--	    <field name="name">account.invoice.tree.related.inherited</field>-->
+<!--	    <field name="model">account.invoice</field>-->
+<!--	    <field name="inherit_id" ref="account.invoice_tree"/>-->
+<!--	    <field name="arch" type="xml">-->
+<!--	        <field name="partner_id" position="after">-->
+<!--	        	<field name="partner_shipping_id"/>-->
+<!--	        </field>-->
+<!--	    </field>-->
+<!--	</record>-->
+
+</odoo>

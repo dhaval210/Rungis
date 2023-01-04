@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+        id="action_report_list_report"
+        model="customer.wizard"
+        string="Customer Status"
+        report_type="qweb-pdf"
+        name="metro_customers.report_customer_status"
+        file="metro_customers.report_customer_status"
+    />
+</odoo>

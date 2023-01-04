@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template>
+    <!-- Share button for tiles -->
+    <t t-name="metro_dashboard.share_button">
+        <div class="dropdown">
+            <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-share-square" /> Share
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item metro_dashboard_share_link">Generate Link</button>
+                <button class="dropdown-item metro_dashboard_share_iframe">Generate iframe</button>
+            </div>
+        </div>
+    </t>
+
+    <!-- Share button for dashboards -->
+    <t t-name="metro_dashboard.dashboard_share_button">
+        <button type="button" class="btn oe_stat_button metro_dashboard_share_link" id="share_link">
+            <i class="fa fa-fw o_button_icon fa-share"></i>
+            <div class="o_stat_info o_readonly_modifier" data-original-title="" title="">
+                <span class="o_stat_value">Share</span>
+                <span class="o_stat_text">Link</span>
+            </div>
+        </button>
+        <button type="button" class="btn oe_stat_button metro_dashboard_share_iframe" id="share_iframe">
+            <i class="fa fa-fw o_button_icon fa-share-square"></i>
+            <div class="o_stat_info o_readonly_modifier" data-original-title="" title="">
+                <span class="o_stat_value">Share</span>
+                <span class="o_stat_text">iFrame</span>
+            </div>
+        </button>
+    </t>
+</template>

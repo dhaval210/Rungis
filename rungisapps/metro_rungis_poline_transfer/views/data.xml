@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="group_transper_po_lines" model="res.groups">
+            <field name="name">Group Transfer PO Lines</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- hold voice dialog starts here -->
+    <record id="dialoglist_10" model="tspbv.dialoglist">
+            <field name="name">Hold Dialog</field>
+            <field name="start">holdPick</field>
+            <field name="default_code">hold</field>
+        </record>
+        
+        <record id="output_10_1" model="tspbv.output">
+            <field name="lydia_output">Gehe zur Leitstelle</field>
+        </record>
+        <record id="grammar_rule_10_1" model="tspbv.grammar.rule">
+            <field name="rule_name">starte arbeit</field>
+        </record>
+        <record id="input_10_1" model="tspbv.input">
+            <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector.grammar_rule_10_1')])]" />
+        </record>
+        <record id="recognition_10_1_1" model="tspbv.recognition">
+            <field name="rel">startWork</field>
+            <field name="input_type">recognition</field>
+            <field name="pattern">starte arbeit</field>
+            <field name="input_id" ref="tspbv_connector.input_10_1" />
+        </record>
+        <record id="dialog_10_1_1" model="tspbv.dialog">
+            <field name="id_dialog">holdPick</field>
+            <field name="lydia_output_id" ref="tspbv_connector.output_10_1" />
+            <field name="lydia_input_id" ref="tspbv_connector.input_10_1" />
+            <field name="dialoglist_id" ref="tspbv_connector.dialoglist_10" />
+        </record>
+        
+        <record id="link_10_1" model="tspbv.link">
+            <field name="rel">startWork</field>
+            <!-- <field name="href">http://192.168.99.120:8069/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1</field> -->
+            <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/dialoglist?dialoglist_code=session&amp;record_id=1'" />                    
+            <field name="method">get</field>
+            <field name="dialog_id" ref="tspbv_connector.dialog_10_1_1" />
+        </record>
+        <!-- hold voice dialog ends here -->        
+</odoo>

@@ -1,0 +1,30 @@
+.tspbv_kanban {
+    display: block ;
+}
+
+.tspbv_kanban .o_kanban_group {
+    height: 300px;
+    overflow-y: scroll;
+    float: left;
+}
+
+.tspbv_kanban .o_kanban_group .o_kanban_header {
+    position: sticky;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99;
+    color: black;
+    /* background-color: rgba(255, 0, 0, 1); */
+    background-color: #f9f9f9;
+}
+
+.tspbv_kanban > .o_kanban_group:first-child {
+    height: calc(100vh);
+    overflow-y: scroll;
+}
+
+.tspbv_kanban > .dropdown-menu.show {
+    left: unset !important;
+    right: 0px !important;
+}

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.picking inherit form view -->
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" postion="inside">
+                <button 
+                    name="check_fix_move_lines" 
+                    type="object" 
+                    string="Fix Move Lines" 
+                    class="btn btn-danger"
+                    groups="metro_rungis_fix_picking.group_master_picking_fix"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

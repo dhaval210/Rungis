@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cypress_data_group_user,cypress_data.user,model_cypress_data,base.group_user,1,1,1,1
+access_stock_quant_group_admin,stock_quant.admin,stock.model_stock_quant,metro_rungis_cypress_testdata.group_admin,1,1,1,1
+access_cypress_purchase_data_user,cypress_purchase_data.user,model_cypress_purchase_data,base.group_user,1,1,1,1
+access_cypress_purchase_line_user,cypress_purchase_line.user,model_cypress_purchase_line,base.group_user,1,1,1,1

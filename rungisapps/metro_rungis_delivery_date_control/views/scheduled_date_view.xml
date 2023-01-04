@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="scheduled_date_view_form_inherit" model="ir.ui.view">
+        <field name="name">scheduled.date.view.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="po_date_planned"
+                       attrs="{'readonly': ['|',('state', 'not in', ('draft', 'sent','purchase')),('status_check','=',True)], 'required': True}"/>
+                <field name="status_check" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']/group/group/label[@for='date_planned']"
+                   position="replace">
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']/group/group/div" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='date_planned']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="before">
+                <field name="new_date_planned"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- purchase.order inherit tree view -->
+    <record id="purchase_order_tree" model="ir.ui.view">
+        <field name="name">purchase.order.inherit.view.tree</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="date_planned" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="date_planned" position="after">
+                <field name="po_date_planned"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

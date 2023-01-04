@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <report 
+            id="warehouse4"
+            model="stock.picking.batch"
+            string="Warehouse 4"
+            report_type="qweb-pdf"
+            name="metro_rungis_report.picking_warehouse4"
+            file="metro_rungis_report.picking_warehouse4"
+            attachment_use="False"
+            attachment="" 
+        />
+
+        <template id="picking_warehouse4">
+            <!-- <t t-call="web.html_container"> -->
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="header" >
+                            <div class="container" style="font-size: 5mm !important;">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h2> <span t-field="doc.name"/> </h2><br />
+                                    </div>
+                                    <div class="col-4">
+                                        <t t-if="doc.hub_id and doc.hub_id.departure_time">
+                                            <span style="float: center">
+                                                <h2>
+                                                    Departure:
+                                                    <span t-field="doc.hub_id.departure_time"  t-options="{'widget': 'datetime', 'format': 'HH:mm'}"/>
+                                                </h2>
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <t t-if="'transporter_route_id' in doc.picking_ids[0]._fields">
+                                        <div class="col-4">
+                                            <span style="float: right">
+                                                <h2>
+                                                    Tour: 
+                                                    <span t-esc="doc.picking_ids[0].transporter_route_id.name" />                                              
+                                                </h2>
+                                            </span>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                            <center><h2>Picking slip</h2></center>
+                        </div>
+                        <div class="page">                        
+                            <t t-set="i" t-value="0"/>
+                            <div class="container" style="font-size: 5mm !important;">
+                                <t t-foreach="doc.move_line_ids.sorted(key=lambda m: m.location_id.sort)" t-as="move_line">
+                                    <t t-if="i==0" >
+                                        <div class="row" style="padding-bottom: 2.5mm;padding-top: 2.5mm;margin-right: -15mm !important;">
+                                            <div class="col-2" >
+                                                <b>Picking</b>
+                                            </div>
+                                            <div class="col-3" >
+                                                <b>Product</b>
+                                            </div>
+                                            <div class="col-2" >
+                                                <b>Location</b>
+                                            </div>
+                                            <div class="col-2" >
+                                                <b>Qty</b>
+                                            </div>
+                                            <div class="col-2" >
+                                                <b>CW Qty</b>
+                                            </div>                                            
+                                            <div class="col-1" >
+                                                <b>Run P.</b>
+                                            </div>                                            
+                                        </div>
+                                        <t t-set="i" t-value="i + 1"/>
+                                    </t>
+                                    <t t-if="'catch_weight_ok' in move_line.product_id._fields and move_line.product_id.catch_weight_ok == True">
+                                        <div class="row" style="padding-bottom: 2.5mm;padding-top: 2.5mm;margin-right: -15mm !important;background-color: #D3D3D3;">
+                                            <t t-call="metro_rungis_report.wh4_row" />
+                                        </div>                                  
+                                    </t>
+                                    <t t-else="">
+                                        <t t-if="(move_line_index % 2)==0">
+                                            <div class="row" style="padding-bottom: 2.5mm;padding-top: 2.5mm;margin-right: -15mm !important;background: #f0f0f0;">
+                                                <t t-call="metro_rungis_report.wh4_row" />
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="row" style="padding-bottom: 2.5mm;padding-top: 2.5mm;margin-right: -15mm !important;background: #ffffff;">
+                                                <t t-call="metro_rungis_report.wh4_row" />
+                                            </div>
+                                        </t>
+                                    </t>                                        
+                                </t>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <div t-if="report_type == 'pdf'" class="text-muted">
+                                Page: <span class="page"/> / <span class="topage"/>
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d.%m.%Y %H:%M')" style="float: right" />
+                            </div>
+                        </div>                        
+                    </t>
+                </t>
+            <!-- </t> -->
+        </template>
+        <template id="wh4_row">
+            <div class="col-2" >
+                <span t-field="move_line.picking_id.name"/>
+            </div>
+            <div class="col-3" >
+                <span t-field="move_line.product_id.name"/>
+            </div>
+            <div class="col-2" >
+                <span t-field="move_line.location_id.name"/>
+            </div>
+            <div class="col-2" >
+                <span t-field="move_line.product_uom_qty" t-options='{"widget": "float", "precision": 2}'/>
+            </div>
+            <div class="col-2" >
+                <t t-if="'catch_weight_ok' in move_line.product_id._fields and move_line.product_id.catch_weight_ok == True">
+                    <span t-field="move_line.product_cw_uom_qty" t-options='{"widget": "float", "precision": 2}'/>
+                </t>
+            </div>
+            <div class="col-1" >
+                <t t-if="move_line.picking_id.run_up_point > 0">
+                    <span t-field="move_line.picking_id.run_up_point"/>
+                </t>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+13 Feb 2020:
+- as of version 12.0.1.0.5, removed the dependency of MWM local module "metro_myanmar_township"

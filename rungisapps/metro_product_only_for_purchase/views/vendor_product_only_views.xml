@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="vendor_product_only_view" model="ir.ui.view">
+            <field name="name">vendor.product.only.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//group//field[@name='date_order']" position="after">
+                    <field name="vendor_product" attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))]}"/>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="replace">
+                    <field name="product_id" attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))],
+                    'column_invisible': [('parent.vendor_product', '=', False)]}" domain="['|',
+                        ('seller_ids.name', '=', parent.partner_id),
+                        ('seller_ids.name.child_ids', '=', parent.partner_id),
+                        ('purchase_ok', '=', True)]"
+                           context="{'partner_id':parent.partner_id, 'quantity':product_qty,'uom':product_uom, 'company_id': parent.company_id}"
+                           force_save="1"/>
+                    <field name="product_id_filter"
+                           attrs="{'column_invisible': [('parent.vendor_product', '=', True)]}"
+                           context="{'partner_id':parent.partner_id, 'quantity':product_qty,'uom':product_uom, 'company_id': parent.company_id}"
+                           force_save="1"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

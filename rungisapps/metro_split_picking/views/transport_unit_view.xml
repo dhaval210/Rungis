@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="transport_unit_form_view">
+            <field name="name">Transport Unit</field>
+            <field name="model">transport.unit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="max_weight_capacity"/>
+                            <field name="max_volume_capacity"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="transport_unit_tree_view">
+            <field name="name">Transport Unit</field>
+            <field name="model">transport.unit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="max_weight_capacity"/>
+                    <field name="max_volume_capacity"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="transport_unit_action" model="ir.actions.act_window">
+            <field name="name">Transport Unit Action</field>
+            <field name="res_model">transport.unit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="menu_transport_unit" name="Transport Units" parent="stock.menu_warehouse_config"
+                  action="transport_unit_action" sequence="9999"/>
+    </data>
+</odoo>

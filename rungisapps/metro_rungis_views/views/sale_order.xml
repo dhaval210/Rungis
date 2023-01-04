@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- sale.order inherit form view -->
+
+    <record model="ir.ui.view" id="metro_margin_sale_order22">
+            <field name="name">sale.order.metro.margin.view.form22</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_margin.sale_margin_sale_order"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='margin']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Add your xpath here -->
+            <xpath expr="//header/button[@id='action_confirm']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', 'not in', ['sent']), ('softm_trennen', '=', False)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_confirm'][last()]" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', 'not in', ['draft']), ('softm_trennen', '=', False)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm'][last()]" position="after">
+                <button 
+                    name="action_confirm" 
+                    id="action_confirm_softm" 
+                    string="Master Confirm" 
+                    class="btn-primary btn-danger" 
+                    type="object" 
+                    groups="metro_rungis_views.group_master_user_sale_order"
+                    attrs="{'invisible': ['|', ('softm_trennen', '=', True), ('state', 'in', ['sale', 'done', 'cancel'])]}"
+                />
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='analytic_tag_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='route_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+<!--                <field name="purchase_price" string="Buy Price(unit)" groups="base.group_user" />-->
+                <field name="margin_percent" widget="percentage" groups="base.group_user"/>
+            </xpath>
+             <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="replace">
+                <field name="price_unit" string="Sales Price(unit)" groups="base.group_user" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree//field[@name='tax_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <field name="effective_date" position="after">
+                <field name="delivery_status" attrs="{'invisible': [('state', '!=', 'sale')]}"/>
+            </field>
+            <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
+<!--                <field name="purchase_cost" string="Buy Price(line)" groups="base.group_user"/>-->
+<!--                <field name="margin" string="Gross Profit(line)" groups="base.group_user"/>-->
+
+<!--                <field name="purchase_price_delivery"  groups="base.group_user"/>-->
+<!--                <field name="purchase_delivery_cost"  groups="base.group_user"/>-->
+<!--                <field name="margin_delivered"  groups="base.group_user"/>-->
+                <field name="margin_delivered_percent" widget="percentage" groups="base.group_user"/>
+
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_unit']" position="after">
+                <field name="purchase_price" string="Buy Price(unit)" groups="base.group_user" readonly="1"/>
+                <field name="purchase_cost" string="Buy Price(line)" groups="base.group_user"/>
+                <field name="margin" string="Gross Profit(line)" groups="base.group_user"/>
+                <field name="margin_percent" widget="percentage" groups="base.group_user"/>
+                <field name="purchase_price_delivery"  groups="base.group_user"/>
+                <field name="purchase_delivery_cost"  groups="base.group_user"/>
+                <field name="margin_delivered"  groups="base.group_user"/>
+                <field name="margin_delivered_percent" widget="percentage" groups="base.group_user"/>
+            </xpath>
+
+            <xpath expr="//field[@name='note']" position="replace">
+                <group class=" oe_left"  name="margin_total" string="Margin" attrs="{'invisible': [ ('delivery_status', 'in', ['delivered'])]}" >
+                    <field name="purchase_cost" widget="monetary" string="COGS" options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed" widget="monetary" string="Net Sales" options="{'currency_field': 'currency_id'}"/>
+                    <field name="margin" string="Gross Profit" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="margin_percent" widget="percentage"/>
+                </group>
+                <group class=" oe_left"  name="margin_total" string="Margin Delivered"  attrs="{'invisible': [ ('delivery_status', 'in', ['nothing'])]}">
+                    <field name="purchase_delivery_cost" widget="monetary"  options="{'currency_field': 'currency_id'}"/>
+                    <field name="amount_untaxed" widget="monetary"  options="{'currency_field': 'currency_id'}"/>
+                    <field name="margin_delivered" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="margin_delivered_percent" widget="percentage"/>
+                </group>
+                <div class="oe_clear"/>
+                <field name="note"  placeholder="Define your terms and conditions ..."/>
+                <div class="oe_clear"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="metro_margin_sale_order_tree">
+        <field name="name">sale.order.metro.margin.view.tree</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="margin" string="Gross Profit" sum="Gross Profit"/>
+                <field name="margin_percent" widget="percentage"/>
+            </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">margin_percent &lt; 0.2</attribute>
+                <attribute name="decoration-warning">margin_percent &gt; 0.2 and margin_percent &lt; 0.25</attribute>
+                <attribute name="decoration-success">margin_percent &gt; 0.25</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="metro_margin_sale_order_tree2">
+        <field name="name">sale.order.metro.margin.view.tree2</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='amount_total']" position="before">
+                <field name="margin" string="Gross Profit" sum="Gross Profit"/>
+                <field name="margin_percent" widget="percentage"/>
+            </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">margin_percent &lt; 0.2</attribute>
+                <attribute name="decoration-warning">margin_percent &gt; 0.2 and margin_percent &lt; 0.25</attribute>
+                <attribute name="decoration-success">margin_percent &gt; 0.25</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

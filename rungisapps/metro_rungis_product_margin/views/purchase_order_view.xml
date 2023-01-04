@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="metro_margin_sale_order_line_form">
+            <field name="name">purchase.order.line.tree.metro.margin.view.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_unit']" position="after">
+                    <field name="sales_price"  groups="base.group_user" />
+                    <field name="margin_percent"  widget="percentage" groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree//field[@name='price_subtotal']" position="before">
+                    <field name="sales_cost" groups="base.group_user"/>
+                    <field name="margin" groups="base.group_user"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form/sheet/group/group/field[@name='price_unit']" position="after">
+                    <field name="sales_price"  groups="base.group_user" />
+                    <field name="sales_cost"  groups="base.group_user"/>
+                    <field name="margin" groups="base.group_user"/>
+                    <field name="margin_percent"  widget="percentage" groups="base.group_user"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form/sheet/group/group/field[@name='price_unit']" position="replace">
+                    <field name="price_unit" string="Buy Price(unit)" groups="base.group_user"/>
+                </xpath>
+
+                <xpath expr="//field[@name='notes']" position="replace">
+                    <group class=" oe_left"  name="margin_total" string="Margin">
+                        <field name="sales_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="margin" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="margin_percent"  widget="percentage"/>
+                    </group>
+                    <div class="oe_clear"/>
+                    <field name="notes"  placeholder="Define your terms and conditions ..."/>
+                    <div class="oe_clear"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="metro_margin_sale_order_tree">
+            <field name="name">purchase.order.metro.margin.view.tree</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_untaxed']" position="before">
+                    <field name="margin" />
+                    <field name="margin_percent" widget="percentage"/>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

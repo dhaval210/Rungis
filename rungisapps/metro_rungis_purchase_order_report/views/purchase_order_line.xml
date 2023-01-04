@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="prev_product_qty" invisible="1"/>
+            </xpath>
+            <xpath expr="//page[@name='purchase_delivery_invoice']" position="after">
+                <page string="History" invisible="0">
+                    <group>
+                        <field name='is_po_updated' invisible="1"/>
+                        <field name='is_supplier_notified' invisible="1"/>
+                    </group>
+                    <field name="history_data">
+                        <tree string="History Order Lines" create="false" edit="false">
+                            <field name="product_id"/>
+                            <field name="prev_product_qty"/>
+                            <field name="product_qty"/>
+                            <field name="product_uom"/>
+                            <field name="is_sent"/>
+                            <field name="is_unlink_line"/>
+                            <field name="is_new_line"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

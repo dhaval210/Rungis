@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+
+    <record id="paperformat_stock_report" model="report.paperformat">
+        <field name="name">Financial Stock Report A4</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">28</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">24</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report string="Financial Stock Report PDF"
+            id="action_financial_stock_report_pdf"
+            model="stock.report.wizard"
+            name="metro_rungis_inventory_value_report.report_stock_value"
+            file="metro_rungis_inventory_value_report.report_stock_value"
+            report_type="qweb-pdf"
+            print_report_name="'Financial Stock Report'"
+            paperformat="metro_rungis_inventory_value_report.paperformat_stock_report"/>
+
+</odoo>

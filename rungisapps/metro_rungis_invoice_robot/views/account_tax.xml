@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="account_tax_show_fake" model="ir.ui.view">
+        <field name="name">Show fake tax checkbox</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]//div" position="after">
+                <field name="is_fake" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

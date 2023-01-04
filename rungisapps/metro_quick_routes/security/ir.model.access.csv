@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+stock_quick_routes_group_user,stock.quick.routes.user,model_stock_quick_routes,base.group_user,1,1,1,1

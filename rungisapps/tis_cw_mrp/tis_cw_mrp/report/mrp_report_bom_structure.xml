@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="report_mrp_bom_cw" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//table/thead/tr/th[4]" position="after">
+            <th class="text-right" groups="tis_catch_weight.group_catch_weight">CW Quantity</th>
+            <th groups="tis_catch_weight.group_catch_weight">CW-UOM</th>
+        </xpath>
+        <xpath expr="//table/tbody/tr/td[4]" position="after">
+            <t t-if="data.get('bom_cw_qty')">
+                <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <t t-esc="data['bom_cw_qty']"
+                           t-options='{"widget": "float", "decimal_precision": "Product CW Unit of Measure"}'/>
+                    </span>
+                </td>
+                <td groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <t t-esc="data['bom'].product_cw_uom_id.name"/>
+                    </span>
+                </td>
+            </t>
+            <t t-else="">
+                <td groups="tis_catch_weight.group_catch_weight"></td>
+                <td groups="tis_catch_weight.group_catch_weight"></td>
+            </t>
+        </xpath>
+        <xpath expr="//table/tfoot/tr/td[4]" position="after">
+            <td groups="tis_catch_weight.group_catch_weight"></td>
+            <td groups="tis_catch_weight.group_catch_weight"></td>
+        </xpath>
+
+    </template>
+
+    <template id="report_mrp_bom_line_cw" inherit_id="mrp.report_mrp_bom_line">
+        <xpath expr="//tr/td[4]" position="after">
+            <t t-if="l['prod_cw_qty']">
+                <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <t t-esc="l['prod_cw_qty']"
+                           t-options='{"widget": "float", "decimal_precision": "Product CW Unit of Measure"}'/>
+                    </span>
+                </td>
+                <td groups="tis_catch_weight.group_catch_weight">
+                    <span>
+                        <t t-esc="l['prod_cw_uom']"/>
+                    </span>
+                </td>
+            </t>
+            <t t-else="">
+                <td></td>
+                <td></td>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="report_mrp_bom_pdf_line_cw" inherit_id="mrp.report_mrp_bom_pdf_line">
+        <xpath expr="//tr/td[4]" position="after">
+            <td class="text-right" groups="tis_catch_weight.group_catch_weight">
+                  <span>
+                      <t t-if="l['type'] == 'operation'" t-esc="l['cw_quantity']" t-options='{"widget": "float_time"}'/>
+                      <t t-if="l['type'] == 'bom'" t-esc="l['cw_quantity']" t-options='{"widget": "float", "decimal_precision": "Product CW Unit of Measure"}'/>
+                  </span>
+              </td>
+              <td groups="tis_catch_weight.group_catch_weight"><span><t t-esc="l['cw_uom']"/></span></td>
+        </xpath>
+    </template>
+
+</odoo>

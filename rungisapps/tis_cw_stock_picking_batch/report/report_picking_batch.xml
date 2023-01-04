@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_picking_batch_cw" inherit_id="stock_picking_batch.report_picking_batch">
+            <xpath expr="//div[hasclass('page')]/t/table/thead/tr/th[2]" position="after">
+                <th groups="tis_catch_weight.group_catch_weight">CW Qty</th>
+            </xpath>
+            <xpath expr="//div[hasclass('page')]/t/table/tbody/tr/td[2]" position="after">
+                <td>
+                    <t t-if="not has_package">
+                        <t t-if="any(move_operation.filtered(lambda l: l.state == 'done'))">
+                            <span t-esc="sum(move_operation.mapped('cw_qty_done'))"
+                                  groups="tis_catch_weight.group_catch_weight"/>
+                        </t>
+                        <t t-else="">
+                            <span t-esc="sum(move_operation.mapped('product_cw_uom_qty'))"
+                                  groups="tis_catch_weight.group_catch_weight"/>
+                        </t>
+                    </t>
+                    <t t-if="has_package">
+                        <span t-esc="sum(move_operation.mapped('cw_qty_done'))"
+                              groups="tis_catch_weight.group_catch_weight"/>
+                    </t>
+                    <span t-field="move_operation.product_cw_uom"
+                          groups="tis_catch_weight.group_catch_weight"/>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

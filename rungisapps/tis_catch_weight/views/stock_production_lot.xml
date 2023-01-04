@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_stock_production_form_lot_catchweight">
+            <field name="name">stock.production.lot.inherit.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="before">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="cw_product_qty" string="CW Quantity" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'invisible': [('catch_weight_ok', '=', False)]}"/>
+                    <div class="o_row" attrs="{'invisible': [('catch_weight_ok', '=', False)]}">
+                        <field name="cw_product_qty" groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight" readonly="1"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

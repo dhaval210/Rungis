@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+        <!-- Fav Icons -->
+        <link rel="shortcut icon" href="/mobile_app_angular/static/src/img/favicon.ico">
+
+        <!-- Ionic - CSS -->
+        <link href="/mobile_app_angular/static/src/lib/ionic/ionic.css" rel="stylesheet">
+
+        <!-- Ionic - JS -->
+        <script src="/mobile_app_angular/static/src/lib/ionic/ionic.bundle.js?v=1.2.16"></script>
+
+        <!-- Ionic Icon - CSS -->
+        <link href="/mobile_app_angular/static/src/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+
+        <!-- Angular Datepicker - CSS -->
+        <link href="static/css/angular-material/angular-material.css" rel="stylesheet" type="text/css" >
+        <link href="static/css/angular-material/docs.css" rel="stylesheet" type="text/css" >
+
+        <!-- Angular - JS -->
+        <script src="/mobile_app_angular/static/src/lib/angular-cookies/angular-cookies.js?v=1.2.16"></script>
+
+        <!-- Angular-Translate - JS -->
+        <script src="/mobile_app_angular/static/src/lib/angular-translate/angular-translate.min.js?v=1.2.16"></script>
+        <script src="/mobile_app_angular/static/src/lib/angular-translate/angular-translate-loader-static-files.min.js?v=1.2.16"></script>
+
+        <!-- Odoo Connection - JS -->
+        <script src="/mobile_app_angular/static/src/js/angular_odoo.js?v=1.2.16"></script>
+
+        <!-- Import Mobile App Picking Custom JS Apps -->
+        <script src="/metro_mobile_app_picking/static/www/app.js?v=1.2.16"></script>
+
+        <!-- Import Scan JS -->
+        <script src="static/js/onscan.js?v=1.2.16"></script>
+
+        <!-- Import jsPDF -->
+        <script src="static/js/es6-promise.min.js?v=1.2.16"></script>
+        <script src="static/js/jspdf.debug.js?v=1.2.16"></script>
+        
+        <script src="static/js/html2canvas.min.js?v=1.2.16"></script>
+        <script src="static/js/html2pdf.min.js?v=1.2.16"></script>
+
+        <!-- Import JsBarcode -->
+        <script src="static/js/JsBarcode.all.min.js?v=1.2.16"></script>
+
+        <!-- Import Custom Js For MRTRN Scan -->
+        <script src="custom_app.js?v=1.3.21"></script>
+
+        <!-- Import Mobile App Picking CSS -->
+        <link href="/metro_mobile_app_picking/static/www/static/css/css.css?v=1.3.17" rel="stylesheet">
+
+        <!-- Import Custom CSS For MRTRN Scan -->
+        <link href="static/css/css.css" rel="stylesheet">
+        <link href="static/css/theme.css" rel="stylesheet">
+
+        <!-- Import Mobile App Picking Models -->
+        <script src="/metro_mobile_app_picking/static/www/models/picking_type.js?v=1.2.16"></script>
+        <script src="/metro_mobile_app_picking/static/www/models/picking.js?v=1.2.16"></script>
+        <script src="/metro_mobile_app_picking/static/www/models/move.js?v=1.2.21"></script>
+        <script src="/metro_mobile_app_picking/static/www/models/tools.js?v=1.2.16"></script>
+
+        <!-- Import MRTRN Scan Models -->
+        <script src="models/picking.js?v=1.2.16"></script>
+        <script src="models/move.js?v=1.2.18"></script>
+        <script src="models/location.js?v=1.3.18"></script>
+
+        <!-- Import Mobile App Picking Controllers -->
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/login.js"></script> -->
+        <script src="/metro_mobile_app_picking/static/www/controllers/credit.js?v=1.2.16"></script>
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/list_picking_type.js"></script> -->
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/list_picking.js"></script> -->
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/main_scan.js"></script> -->
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/picking_validate.js"></script> -->
+        <!-- <script src="/metro_mobile_app_picking/static/www/controllers/login.js"></script> -->
+
+        <!-- Import MRTRN Scan Controllers -->
+        <script src="controllers/login.js?v=1.2.18"></script>
+        <script src="controllers/list_move.js?v=1.3.18"></script>
+        <script src="controllers/main_scan.js?v=1.3.18"></script>
+        <script src="controllers/list_picking_type.js?v=1.2.16"></script>
+        <script src="controllers/list_picking.js?v=1.2.16"></script>
+        <script src="controllers/picking_validate.js?v=1.2.19"></script>
+    </head>
+
+    <body ng-app="mobile_app_picking">
+        <ion-side-menus enable-menu-with-back-views="true">
+
+            <ion-side-menu ng-controller="AppCtrl" side="right">
+                <header class="bar bar-header bar-stable">
+                    <h1 class="title">{{'Scan To Picking' | translate}}</h1>
+                </header>
+                <ion-content class="has-header">
+                    <ion-list>
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="credit({})"
+                                ng-show="['login', 'logout'].indexOf(currentState) != -1">
+                            <i class="icon ion-person-stalker"></i>{{'Credits' | translate}}
+                        </ion-item>
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="login({})"
+                                ng-show="['credit'].indexOf(currentState) != -1">
+                            <i class="icon ion-log-in"></i>{{'Log In' | translate}}
+                        </ion-item>
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="list_picking_type({})"
+                                ng-show="['list_picking', 'list_move', 'main_scan'].indexOf(currentState) != -1">
+                            <i class="icon ion-shuffle"></i>{{'Picking Types' | translate}}
+                        </ion-item>
+
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="list_picking({
+                                    picking_type_id:params.picking_type_id})"
+                                ng-show="['list_move', 'main_scan'].indexOf(currentState) != -1">
+                            <i class="icon ion-cube"></i>{{'Pickings' | translate}}
+                        </ion-item>
+
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="list_move({
+                                    picking_type_id:params.picking_type_id,
+                                    picking_id:params.picking_id})"
+                                ng-show="['main_scan'].indexOf(currentState) != -1">
+                            <i class="icon ion-clipboard"></i>{{'Moves' | translate}}
+                        </ion-item>
+
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="main_scan({
+                                    picking_type_id:params.picking_type_id,
+                                    picking_id:params.picking_id,
+                                    move_id: 0})"
+                                ng-show="['list_move'].indexOf(currentState) != -1">
+                            <i class="icon ion-qr-scanner"></i>{{'Scanner' | translate}}
+                        </ion-item>
+
+                        <ion-item menu-close class="item-icon-left action-click"  ng-click="click_print_operation()" ng-show="['list_move'].indexOf(currentState) != -1">
+                            <i class="icon ion-printer"></i>{{'Print Operation' | translate}}
+                        </ion-item>
+
+                        <ion-item menu-close class="item-icon-left action-click"
+                                ui-sref="logout({})"
+                                ng-show="['list_picking_type', 'list_picking', 'list_move', 'main_scan'].indexOf(currentState) != -1">
+                            <i class="icon ion-log-out"></i>{{'Log Out' | translate}}
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-side-menu>
+
+            <ion-side-menu-content ng-controller="AppCtrl" id="mobileAppPicking">
+
+                <input type="text" autocomplete="off" id="inputBarcode" class="item-input" />
+
+                <div class="page-spinner" ng-show="showSpinner == true">
+                    <img src="static/img/spinner2.gif" />
+                </div>
+
+                <div class="notification-top-bar" ng-show="showAlert != ''">
+                    <p>{{showAlert}}</p>
+                    <span class="top-right-icon cancel-icon ion-android-cancel" style="top: 0;
+                    line-height: 35px;" ng-click="showAlert = ''"></span>
+                </div>
+                <ion-nav-view />
+           </ion-side-menu-content>
+
+        </ion-side-menus>
+
+        <!-- Angular Datepicker - JS -->
+        <script src="static/js/angular-material/angular-aria.min.js?v=1.2.16"></script>
+        <script src="static/js/angular-material/angular-messages.min.js?v=1.2.16"></script>
+        <script src="static/js/angular-material/moment.js?v=1.2.16"></script>
+        <script src="static/js/angular-material/svg-assets-cache.js?v=1.2.16"></script>
+        <script src="static/js/angular-material/angular-material.js?v=1.2.16"></script>
+
+        <!-- Custom script for scan event -->
+        <script src="static/js/custom_script.js?v=1.2.16"></script>
+        
+    </body>
+</html>

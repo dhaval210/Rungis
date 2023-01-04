@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--
+            Odoo Usage KPI's
+        -->
+
+        <!-- Number of Odoo Users -->
+        <record id="metro_usage_num_users" model="metro.dashboard.statistics">
+            <field name="name">Number of Users</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">users</field>
+            <field name="compute_code">result = env["res.partner"].search_count([("active", "=", True)])</field>
+        </record>
+
+        <!-- Number of installed Apps -->
+        <record id="metro_usage_num_apps" model="metro.dashboard.statistics">
+            <field name="name">Number of installed Apps</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">apps</field>
+            <field name="compute_code">result = env["ir.module.module"].search_count([
+    ("state", "=", "installed"),
+    ("application", "=", True),
+])</field>
+        </record>
+
+        <!-- Number of Customers -->
+        <record id="metro_usage_num_customers" model="metro.dashboard.statistics">
+                <field name="name">Number of Customers</field>
+                <field name="visualisation">number</field>
+                <field name="suffix">customers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([
+    ("customer", "=", True),
+    ("active", "=", True),
+])</field>
+        </record>
+
+        <!-- Number of active Suppliers -->
+        <record id="metro_usage_suppliers_count" model="metro.dashboard.statistics">
+            <field name="name">Number of Suppliers</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">suppliers</field>
+            <field name="compute_code">result = env["res.partner"].search_count([
+    ("supplier", "=", True),
+    ("active", "=", True)
+])</field>
+        </record>
+
+        <!-- Active Products -->
+        <record id="metro_usage_active_products_count" model="metro.dashboard.statistics">
+            <field name="name">Active Products</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">products</field>
+            <field name="compute_code">result = env["product.product"].search_count([("active", "=", True)])</field>
+        </record>
+
+        <!--
+            Category Management
+        -->
+
+        <!-- Products without Sales -->
+        <record id="metro_cat_man_unsold" model="metro.dashboard.statistics">
+            <field name="name">Products without Sales</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">products</field>
+            <field name="compute_code">first_day = datetime.now().date() - timedelta(days=30)
+last_day = datetime.now().date() + timedelta(days=1)
+order_lines = env["sale.order.line"].search([
+    ("order_id.date_order", "&gt;=", first_day),
+    ("order_id.date_order", "&lt;=", last_day),
+    "|",
+    ("order_id.state", "!=", "draft"),
+    ("order_id.state", "!=", "cancelled"),
+])
+product_ids = []
+for line in order_lines:
+    if not line.product_id.id in product_ids:
+        product_ids.append(line.product_id.id)
+not_sold = env["product.product"].search([
+    ("id", "not in", product_ids),
+    ("sale_ok", "=", True),
+])
+result = len(not_sold)
+table = []
+for item in not_sold:
+    table_item = {
+        "label": item.name,
+        "value": 0,
+        "suffix": "sales"
+    }
+    table.append(table_item)</field>
+        </record>
+
+        <!-- Sales per Territory Sales Executive -->
+        <record id="metro_cat_man_sales_tse" model="metro.dashboard.statistics">
+            <field name="name">Sales per TSE</field>
+            <field name="visualisation">bar</field>
+            <field name="suffix">€</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+sales = env["sale.order"].search([
+    ("partner_id.kac", "=", False),
+    ("date_order", "&lt;=", last_day),
+    ("date_order", "&gt;=", first_day),
+    "|",
+    ("state", "!=", "draft"),
+    ("state", "!=", "cancelled")
+])
+result = {}
+for sale in sales:
+    salesperson = sale.user_id.name
+    if not salesperson:
+        salesperson = "Unknown"
+    if not salesperson in result:
+        result[salesperson] = 0
+    result[salesperson] += sale.amount_untaxed</field>
+        </record>
+
+        <!-- Margin per Territory Sales Executive -->
+        <record id="metro_cat_man_margin_tse" model="metro.dashboard.statistics">
+            <field name="name">Margin per TSE</field>
+            <field name="visualisation">bar</field>
+            <field name="suffix">€</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+sales = env["sale.order"].search([
+    ("partner_id.kac", "=", False),
+    ("date_order", "&lt;=", last_day),
+    ("date_order", "&gt;=", first_day),
+    "|",
+    ("state", "!=", "draft"),
+    ("state", "!=", "cancelled")
+])
+var = env["metro.dashboard.variable"].search([
+    ("name", "=", "avg_category_prices")
+]).value
+result = {}
+if var:  
+    avg_prices = load(var)
+    costs = {}
+    earnings = {}
+    for sale in sales:
+        salesperson = sale.user_id.name
+        if not salesperson:
+            salesperson = "Unkown"
+        if not salesperson in earnings:
+            earnings[salesperson] = 0
+        earnings[salesperson] += sale.amount_untaxed
+        for line in sale.order_line:
+            if not salesperson in costs:
+                costs[salesperson] = 0
+            if line.product_id.standard_price &gt; 0:
+                costs[salesperson] += line.product_id.standard_price * line.qty_invoiced
+            else:
+                costs[salesperson] += avg_prices[str(line.product_id.categ_id.id)]["buy"]
+    for key in earnings.keys():
+        result[key] = earnings[key] - costs[key]</field>
+        </record>
+
+        <record id="metro_cat_man_out_of_stock" model="metro.dashboard.statistics">
+            <field name="name">Out of Stock</field>
+            <field name="visualisation">pie</field>
+            <field name="suffix">products</field>
+            <field name="compute_code">all_products = env["product.product"].search_count([
+    ("active", "=", True),
+    ("sale_ok", "=", True)
+])
+buy_id = env["stock.location.route"].search([
+    ("name", "ilike", "buy")
+], limit=1).id
+out_of_stock = env["product.product"].search([
+    ("active", "=", True),
+    ("sale_ok", "=", True),
+    ("virtual_available", "&lt;=", 0),
+    ("route_ids", "in", buy_id),
+])
+result = {
+    "Enough items in Stock": all_products - len(out_of_stock),
+    "Out of Stock": len(out_of_stock)
+}
+table = []
+for o in out_of_stock[:5]:
+    d = {
+        "label": o.name,
+        "value": o.virtual_available,
+        "suffix": "left"
+    }
+    table.append(d)</field>
+        </record>
+
+        <!--
+            Web Shop
+        -->
+
+        <!-- Share of Web Shop Sales per Key Account Manager -->
+        <record id="metro_webshop_share_of_sales_per_kam" model="metro.dashboard.statistics">
+            <field name="name">Share of Web Shop Sales per KAM</field>
+            <field name="visualisation">bar</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">records = env["sale.order"].search([
+    ("partner_id.kac", "=", True),
+    "|",
+    ("state", "=", "sale"),
+    ("state", "=", "done"),
+])
+webshop = {}
+result = {}
+for rec in records:
+    if rec.webshop_sale == True:
+        if not rec.user_id.name in webshop:
+            webshop[rec.user_id.name] = 0
+        webshop[rec.user_id.name] += rec.amount_untaxed
+    if not rec.user_id.name in result:
+        result[rec.user_id.name] = 0
+    result[rec.user_id.name] += rec.amount_untaxed
+for key, value in result.items():
+    if key in webshop:
+        result[key] = value / webshop[key]
+    else:
+        result[key] = 0</field>
+        </record>
+
+        <!-- Favorite Products from Wishlist -->
+        <record id="metro_webshop_fav_products" model="metro.dashboard.statistics">
+            <field name="name">Favorite Products from Wishlist</field>
+            <field name="visualisation">pie</field>
+            <field name="suffix">times added</field>
+            <field name="compute_code">records = env["product.wishlist"].search([])
+fav_products = {}
+result = {}
+for record in records:
+    if not record.product_id.id in fav_products:
+        fav_products[record.product_id.id] = 0
+    fav_products[record.product_id.id] += 1
+sorted_keys = sorted(fav_products, key=fav_products.get)[:5]
+for k in sorted_keys:
+    product = env["product.product"].browse([k])
+    result[product.name] = fav_products[k]</field>
+        </record>
+
+        <!--
+            SCM - Supply Chain Management
+        -->
+
+        <!-- Shrinkage absolute value -->
+        <record id="metro_scm_shrinkage" model="metro.dashboard.statistics">
+            <field name="name">Absolute Shrinkage</field>
+            <field name="visualisation">bar</field>
+            <field name="suffix">items</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+scrapped = env["stock.scrap"].search([
+    ("state", "=", "done"),
+    ("write_date", "&gt;=", first_day),
+    ("write_date", "&lt;=", last_day),
+])
+result = {}
+for product in scrapped:
+    if not product.product_uom_id.name in result:
+        result[product.product_uom_id.name] = 0
+    result[product.product_uom_id.name] += product.scrap_qty</field>
+        </record>
+
+        <record id="metro_scm_qc_fail_pass" model="metro.dashboard.statistics">
+            <field name="name">Failed/Passed QCs</field>
+            <field name="visualisation">pie</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+qcs = env["quality.check"].search([
+    ("control_date", "&gt;=", first_day),
+    ("control_date", "&lt;=", last_day),
+])
+result = {
+    "Failed": 0,
+    "Passed": 0,
+    "Not checked": 0
+}
+for qc in qcs:
+    if qc.quality_state == "pass":
+        result["Passed"] += 1
+    elif qc.quality_state == "fail":
+        result["Failed"] += 1
+    else:
+        result["Not checked"] += 1</field>
+        </record>
+
+        <record id="metro_scm_failed_qcs" model="metro.dashboard.statistics">
+            <field name="name">Failed QCs</field>
+            <field name="visualisation">pie</field>
+            <field name="suffix">items</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+ds = env["quality.alert.stage"].search([
+    ("done", "=", True)
+])
+done_stages = []
+for d in ds:
+    done_stages.append(d.id)
+qcs = env["quality.check"].search([
+    ("control_date", "&gt;=", first_day),
+    ("control_date", "&lt;=", last_day),
+    ("quality_state", "=", "fail"),
+])
+result = {
+    "Failed without Alert": 0,
+    "Failed with Alert": 0,
+    "Failed with solved Alert": 0
+}
+for qc in qcs:
+    if not qc.alert_count &gt; 0:
+        result["Failed without Alert"] += 1
+    else:
+        unsolved_alert = False
+        for alert in qc.alert_ids:
+            if not alert.stage_id.id in done_stages:
+                unsolved_alert = True
+        if unsolved_alert:
+            result["Failed with Alert"] += 1
+        else:
+            result["Failed with solved Alert"] += 1</field>
+        </record>
+
+        <!--
+            VAS
+        -->
+
+        <!-- Average production times (of the current month and the last half year) -->
+        <record id="metro_vas_avg_times" model="metro.dashboard.statistics">
+            <field name="name">Average production time</field>
+            <field name="visualisation">line</field>
+            <field name="suffix">seconds</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+production_times = {}
+for i in range(0, 7):
+    mos = env["mrp.production"].search([
+        ("state", "=", "done"),
+        ("date_finished", "&gt;=", first_day),
+        ("date_finished", "&lt;=", last_day),
+    ])
+    total_delta = timedelta(seconds=0)
+    for mo in mos:
+        total_delta += mo.date_finished - mo.date_start
+    if len(mos):
+        month = first_day.strftime("%B")
+        production_times[month] = (total_delta.seconds / len(mos))
+    last_day = (first_day - timedelta(days=1))
+    first_day = last_day.replace(day=1)
+reversed_keys = sorted(production_times.keys(), reverse=True)
+result = {k: production_times[k] for k in reversed_keys}</field>
+        </record>
+
+        <!-- Produced Products -->
+        <record id="metro_vas_produced_products" model="metro.dashboard.statistics">
+            <field name="name">Produced Products</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">products</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+manufact_order = env["mrp.production"].search([
+    ("state", "=", "done"),
+    ("date_finished", "&gt;=", first_day),
+    ("date_finished", "&lt;=", last_day),
+])
+product_ids = {}
+table = []
+for mo in manufact_order:
+    if mo.product_id.id not in product_ids:
+        product_ids[mo.product_id.id] = {"value": 0, "label": mo.product_id.name, "suffix": mo.product_uom_id.name}
+    product_ids[mo.product_id.id]["value"] += mo.product_qty
+result = len(product_ids)
+for key in product_ids:
+    table.append(product_ids[key])</field>
+        </record>
+
+        <!-- Produced number of Units -->
+        <record id="metro_vas_produced_units" model="metro.dashboard.statistics">
+            <field name="name">Produced number of Units</field>
+            <field name="visualisation">pie</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+produced = {}
+id_name = {}
+result = {}
+manufact_order = env["mrp.production"].search([
+    ("state", "=", "done"),
+    ("date_finished", "&gt;=", first_day),
+    ("date_finished", "&lt;=", last_day),
+])
+for mo in manufact_order:
+    if not mo.product_uom_id.id in produced:
+        produced[mo.product_uom_id.id] = 0
+        id_name[mo.product_uom_id.id] = mo.product_uom_id.name
+    produced[mo.product_uom_id.id] += mo.qty_produced
+for k, v in produced.items():
+    name = id_name[k]
+    result[name] = v</field>
+        </record>
+
+        <!-- Shrinkage Share -->
+        <record id="metro_vas_shrinkage_share" model="metro.dashboard.statistics">
+            <field name="name">Shrinkage Share</field>
+            <field name="visualisation">number</field>
+            <field name="suffix">%</field>
+            <field name="compute_code">first_day = datetime.now().date().replace(day=1)
+last_day = datetime.now().date() + timedelta(days=1)
+scrapped = env["stock.scrap"].search([
+    ("state", "=", "done"),
+    ("write_date", "&gt;=", first_day),
+    ("write_date", "&lt;=", last_day),
+])
+products = {}
+result = 0
+table = []
+for product in scrapped:
+    p = env["product.product"].browse([product.product_id.id])
+    if not p.id in products:
+        l = {
+            "label": p.name,
+            "value": 0,
+            "suffix": "%",
+            "count": 0
+        }
+        products[p.id] = l
+    val = 0
+    if p.qty_available:
+        val = product.scrap_qty / p.qty_available * 100
+    else:
+        val = 100
+    products[p.id]["count"] += 1
+    if products[p.id]["count"]:
+        products[p.id]["value"] = (val + products[p.id]["value"]) / products[p.id]["count"]
+    else:
+        products[p.id]["value"] = (val + products[p.id]["value"])
+    result += val
+if len(scrapped):
+    result = result / len(scrapped)
+    for key in products:
+        p = products[key]
+        tl = {
+            "label": p["label"],
+            "value": p["value"],
+            "suffix": p["suffix"]
+        }
+        table.append(tl)</field>
+        </record>
+
+        <!--
+            Finance and Controlling
+        -->
+
+        <!-- Bad Depts: Customers -->
+        <record id="metro_fnc_bad_debts_customers" model="metro.dashboard.statistics">
+            <field name="name">Customers Bad Debts</field>
+            <field name="visualisation">number</field>
+            <field name="compute_code">data = variable.search([("name", "=", "bad_debts")], limit=1).value
+result = 0
+if data:
+    data = load(data)
+    result = data["receivable_total"]
+    table = []
+    for rec in data["receivable"]:
+        row = {
+            "label": rec["name"],
+            "value": rec["total"],
+            "suffix": "€"
+        }
+        table.append(row)</field>
+        </record>
+
+        <!-- Bad Depts: Vendors -->
+        <record id="metro_fnc_bad_debts_vendors" model="metro.dashboard.statistics">
+            <field name="name">Vendors Bad Debts</field>
+            <field name="visualisation">number</field>
+            <field name="compute_code">data = variable.search([("name", "=", "bad_debts")], limit=1).value
+if data:
+    data = load(data)
+    result = data["payable_total"]
+    table = []
+    for rec in data["payable"]:
+        row = {
+            "label": rec["name"],
+            "value": rec["total"],
+            "suffix": "€"
+        }
+        table.append(row)</field>                
+        </record>
+
+        <!-- Bad Debts Overview -->
+        <record id="metro_fnc_bad_debts_overview" model="metro.dashboard.statistics">
+            <field name="name">Bad Debts Overview</field>
+            <field name="visualisation">line</field>
+            <field name="compute_code">def preventNegative(val):
+    if val &lt; 0:
+        return (val * -1)
+    return val
+data = variable.search([("name", "=", "bad_depts")], limit=1).value
+if data:
+    data = load(data)
+    debts = data["payable"]
+    receivables = data["receivable"]
+    tmpl = {
+        "Older": 0.0,
+        "91-120": 0.0,
+        "61-90": 0.0,
+        "31-60": 0.0,
+        "1-30": 0.0
+    }
+    customers = tmpl.copy()
+    vendors = tmpl.copy()
+    for debt in debts:
+        vendors["Older"] += preventNegative(debt["0"])
+        vendors["91-120"] += preventNegative(debt["1"])
+        vendors["61-90"] += preventNegative(debt["2"])
+        vendors["31-60"] += preventNegative(debt["3"])
+        vendors["1-30"] += preventNegative(debt["4"])
+    for receivable in receivables:
+        customers["Older"] += preventNegative(receivable["0"])
+        customers["91-120"] += preventNegative(receivable["1"])
+        customers["61-90"] += preventNegative(receivable["2"])
+        customers["31-60"] += preventNegative(receivable["3"])
+        customers["1-30"] += preventNegative(receivable["4"])
+    result = [
+        "Customers", customers,
+        "Vendors", vendors
+    ]
+else:
+    result = []</field>
+        </record>
+    </data>
+</odoo>

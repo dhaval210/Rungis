@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cypress.purchase.data form view -->
+    <record id="cypress_purchase_data_view_form" model="ir.ui.view">
+        <field name="name">cypress.purchase.data.view.form</field>
+        <field name="model">cypress.purchase.data</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    <group>
+                        <group>
+                            <field name="partner_id" required="True"/>
+                        </group>
+                        <group>
+                            <button name="action_create_purchase_order" class="btn btn-primary"
+                                    id='cypress_purchase_order'
+                                    type="object" string="Create Purchase Order"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="we_user_id"/>
+                        </group>
+                        <group>
+                            <field name="taxi_user_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="order_line" string="Order Line">
+                            <field name="line_ids">
+                                <tree editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="location_dest_id"/>
+                                    <field name="uom_id"/>
+                                    <field name="qty"/>
+                                    <field name="price_unit"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="cypress_purchase_data_view_tree" model="ir.ui.view">
+        <field name="name">cypress.purchase.data.view.tree</field>
+        <field name="model">cypress.purchase.data</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Receipts">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="cypress_purchase_data_action" model="ir.actions.act_window">
+        <field name="name">cypress.purchase.data.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cypress.purchase.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('cypress_purchase_data_view_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('cypress_purchase_data_view_form')})]"/>
+    </record>
+
+    <menuitem id="cypress_menu_po" name="Test Purchase Receipt" parent="cypress_menu_categ"
+              action="cypress_purchase_data_action" sequence="20"/>
+
+
+</odoo>

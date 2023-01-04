@@ -1,0 +1,19 @@
+<odoo>
+    <record id="price_calculation_form" model="ir.ui.view">
+        <field name="name">price.calculation.form.view</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[last()]" position="after">
+                <page string="Price Calculation">
+                    <header>
+                        <button name="generate_preview" type="object" string="Calculate"/>
+                    </header>
+                    <sheet>
+                        <field name="preview" widget="html"/>
+                    </sheet>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

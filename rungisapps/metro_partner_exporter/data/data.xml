@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <record model="csv.backend" id="sap_partner_connector">
+        <field name="name">SAP Partner Exporter</field>
+        <field name="file_type">sap_partner_exporter</field>
+    </record>
+
+    <record model="ir.cron" id="cron_sap_partner_export">
+       <field name="name">SAP Partner Export</field>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+       <field name="doall" eval="False"/>
+       <field name="model_id" ref="model_csv_backend"/>
+       <field name="state">code</field>
+       <field name="code">model.export_partners_delay('sap_partner_exporter')</field>
+       <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 22:01:01')" />
+   </record>-->
+</odoo>
+
+

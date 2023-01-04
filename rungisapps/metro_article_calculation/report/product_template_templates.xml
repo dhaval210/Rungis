@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_pricecalculation">
+        <t t-call="web.basic_layout">
+            <div class="page">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th colspan="6">Vendor Name</th>
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6">
+                                    <span t-field="line_id.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <span>Blanket Order</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <span>Quantity</span>
+                            </td>
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6">
+                                    <span t-esc="line_id.min_qty"/><span/> <span t-esc="line_id.product_uom.name"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                    <thead >
+                        <tr>
+                            <th colspan="6">Vendor List Price</th>
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <span t-field="line_id.price"/><span/> <span t-esc="line_id.currency_id.symbol"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <span>Discount 1</span>
+                            </td>
+
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6" style="background-color: #f0ea84;">
+                                    <span t-esc="'%.0f'%line_id.discount"/><span/> %
+                                </td>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <span>Discount 2</span>
+                            </td>
+
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6" style="background-color: #f0ea84;">
+                                    <span t-esc="'%.0f'%line_id.discount2"/><span/> %
+                                </td>
+                            </t>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <span>Discount 3</span>
+                            </td>
+
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6" style="background-color: #f0ea84;">
+                                    <span t-esc="'%.0f'%line_id.discount3"/><span/> %
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Buy Price</th>
+                            <t t-foreach="docs.seller_ids" t-as="line">
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <t t-set="buy_price" t-value="line.discount_calculation/line.currency_id.rate"/>
+                                    <span t-esc="'%.2f'% buy_price"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <span>- Annual Discount(aggregated)</span>
+                            </td>
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6">
+
+                                    <span t-esc="0"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Purchase Price</th>
+                            <t t-foreach="docs.seller_ids" t-as="line">
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <t t-set="purchase_price" t-value="line.discount_calculation/line.currency_id.rate"/>
+                                    <span t-esc="'%.2f'% purchase_price"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <span>+ AVG Landed Cost</span>
+                            </td>
+
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <span t-esc="line_id.avg_land_cost"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="6">EK1(Cost)</th>
+                            <t t-foreach="docs.seller_ids" t-as="line_id">
+                                <t t-set="ek1_price" t-value="line_id.discount_calculation/line_id.currency_id.rate"/>
+                                <t t-set="calc"
+                                   t-value="ek1_price+line_id.product_tmpl_id.landed_cost"/>
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <span t-esc="'%.2f'% calc"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">
+                                <span>+Calc. Margin</span>
+                            </td>
+                            <t t-foreach="docs.seller_ids" t-as="line">
+                                <t t-set="ek1"
+                                   t-value="line.discount_calculation/line.currency_id.rate"/>
+                                <t t-set="calc"
+                                   t-value="ek1+line.product_tmpl_id.landed_cost"/>
+                                <t t-set="margin" t-value="line.product_tmpl_id.list_price-calc"/>
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <span t-esc="'%.2f'% margin"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="6">Sale Price</th>
+                            <t t-foreach="docs.seller_ids" t-as="line">
+                                <td colspan="6" style="background-color: #94f78b;">
+                                    <span t-esc="'%.2f'% line.product_tmpl_id.list_price"/><span/> €
+                                </td>
+                            </t>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

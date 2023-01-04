@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <!-- Add you code here -->
+        <record id="tspbv_assignment_create_picking_filter" model="ir.filters">
+                <field name="name">Assignment Create Picking Filter</field>
+                <field name="model_id">stock.picking</field>
+                <field name="domain">[('state','=','assigned')]</field>
+                <field name="user_id" />
+        </record>
+        <record id="tspbv_assignment_create_batch_picking_filter" model="ir.filters">
+                <field name="name">Assignment Create Batch Picking Filter</field>
+                <field name="model_id">stock.picking.batch</field>
+                <field name="domain">[('state','=','in_progress')]</field>
+                <field name="user_id" />
+        </record>
+        
+        <record id="assign_picking_filter_id" model="ir.config_parameter">
+                <field name="key">tspbv_connector.assign_picking_filter_id</field>
+                <field name="value" ref="tspbv_connector.tspbv_assignment_create_picking_filter"/>
+        </record>
+        <record id="assign_batch_picking_filter_id" model="ir.config_parameter">
+                <field name="key">tspbv_connector.assign_batch_picking_filter_id</field>
+                <field name="value" ref="tspbv_connector.tspbv_assignment_create_batch_picking_filter"/>
+        </record>
+        <!-- <record id="allow_backorder" model="ir.config_parameter">
+            <field name="key">tspbv_connector.allow_backorder</field>
+            <field name="value">False</field>
+    </record>         -->
+    </data>
+</odoo>

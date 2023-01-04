@@ -1,0 +1,4 @@
+13 Feb 2020:
+- as of version 1.0, removed the dependency of MWM local module "quality" add "sync_quality_control".
+15 April 2020:
+- as the Creation of LOt from Inventory>Mater Data> Lot/SerialNumbers, reported Bug is Fixed

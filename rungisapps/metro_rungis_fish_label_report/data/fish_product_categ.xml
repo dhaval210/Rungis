@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="fish_product_category" model="ir.config_parameter">
+        <field name="key">fish_product_category_name</field>
+        <field name="value">Stückfisch</field>
+    </record>
+</odoo>

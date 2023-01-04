@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_stock__update_onhand_cw_product_form_inherit" model="ir.ui.view">
+        <field name="name">update.cw.quanity.inherit</field>
+        <field name="model">stock.change.product.qty</field>
+        <field name="inherit_id" ref="stock.view_change_product_quantity"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='new_quantity']" position="after">
+                <field name="catch_weight_ok" invisible="1"/>
+                <field name="new_cw_quantity" attrs="{'invisible': [('catch_weight_ok', '=', False)]}"
+                       groups="tis_catch_weight.group_catch_weight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="group_cache_admin" model="res.groups">
+        <field name="name">Cache Order Grid Admin</field>
+    </record>
+</odoo>

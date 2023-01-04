@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="po_follower_channel" model="ir.config_parameter">
+                <field name="key">po_follower_channel_visible</field>
+                <field name="value">210</field>
+        </record>
+    </data>
+</odoo>

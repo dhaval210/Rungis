@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo noupdate="1">
+	<record id="cache_order_grid_cron" model="ir.cron">
+        <field name="name">Populate Cache Order Grid</field>
+        <field name="model_id" ref="model_cache_order_grid"/>
+        <field name="state">code</field>
+        <field name="code"># examples
+# create new entries only
+# model.populate_cache_order_grid()
+
+# update all
+# model.populate_cache_order_grid(force_update=True)
+
+# update specific vendor
+# model.populate_cache_order_grid(supplier='Valerie Melton', force_update=True)
+
+# update specific product (default code)
+# model.populate_cache_order_grid(product='41286', force_update=True)
+
+# update specific product for specific vendor (name)
+# model.populate_cache_order_grid(supplier='Valerie Melton', product='41286', force_update=True)
+
+# update specific product for specific vendor in a specific date range
+# model.populate_cache_order_grid(supplier='Valerie Melton', product='41286', force_update=True, start_date="2022-01-01", end_date="2022-05-01")
+model.populate_cache_order_grid()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active" eval="False"/>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

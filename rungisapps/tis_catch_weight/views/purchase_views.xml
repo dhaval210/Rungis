@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_purchase_form_catchweight">
+            <field name="name">purchase.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                    <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                    <field name="product_cw_uom_qty" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+                    <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight,uom.group_uom"
+                           attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+                    <field name="cw_qty_received" string="Received CW Qty" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'column_invisible': [('parent.state', 'not in', ('purchase', 'done'))],'readonly': [('product_type', 'in', ('consu', 'product'))]}"/>
+                    <field name="cw_qty_invoiced" string="Billed CW Qty" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'column_invisible': [('parent.state', 'not in', ('purchase', 'done'))]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/form/sheet/group/group[2]/field[@name='date_planned']"
+                       position="after">
+                    <field name="catch_weight_ok" groups="tis_catch_weight.group_catch_weight" invisible="1"/>
+                    <label for="product_cw_uom_qty" string="CW Quantity"
+                           groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+                    <div groups="tis_catch_weight.group_catch_weight">
+                        <field name="product_cw_uom_qty" class="oe_inline"
+                               attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+                        <span class="oe_inline">&#160;</span>
+                        <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight" class="oe_inline"
+                               attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

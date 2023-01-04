@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/metro_rungis_views/static/src/css/button_style.css"/>
+            </xpath>
+        </template>
+
+        <record id="stock_picking_type_kanban_view" model="ir.ui.view">
+            <field name="name">stock.picking.type.kanban</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+            <field name="arch" type="xml">
+                <field name="code" position="after">
+                    <field name="count_picking_ready_today"/>
+                </field>
+                <xpath expr="//button[@name='get_action_picking_tree_ready']" position="after">
+                    <button t-if="record.code.raw_value =='incoming'" class="btn btn-primary today-process"
+                            name="get_action_picking_tree_ready_today" type="object">
+                        <span>
+                            <t t-esc="record.count_picking_ready_today.value"/>
+                            To Process Today
+                        </span>
+                    </button>
+                </xpath>
+                <xpath expr="//div[@class='col-6 o_kanban_primary_right']" position="inside">
+                    <div t-if="record.count_picking_draft.raw_value > 0" class="row">
+                        <div class="col-9">
+                            <a name="get_action_picking_tree_draft" type="object">
+                                Draft
+                            </a>
+                        </div>
+                        <div class="col-3">
+                            <field name="count_picking_draft"/>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_ready_today" model="ir.actions.act_window">
+            <field name="name">To Do</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain">[('scheduled_date','&gt;=', time.strftime('%Y-%m-%d 00:00:00')),('scheduled_date','&lt;=',
+                time.strftime('%Y-%m-%d 23:55:55'))]
+            </field>
+            <field name="context">{
+                'search_default_picking_type_id': [active_id],
+                'default_picking_type_id': active_id,
+                'contact_display': 'partner_address',
+                'search_default_available': 1,
+                }
+            </field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Define a new transfer
+                </p>
+            </field>
+        </record>
+
+        <record id="action_picking_tree_draft" model="ir.actions.act_window">
+            <field name="name">Draft</field>
+            <field name="res_model">stock.picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar</field>
+            <field name="domain"></field>
+            <field name="context">{
+                    'search_default_picking_type_id': [active_id],
+                    'default_picking_type_id': active_id,
+                    'contact_display': 'partner_address',
+                    'search_default_draft': 1,
+            }
+            </field>
+            <field name="search_view_id" ref="stock.view_picking_internal_search"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Define a new transfer
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

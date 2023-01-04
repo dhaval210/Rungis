@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_move_special_wishes" model="ir.ui.view">
+        <field name="name">stock.move.special.wishes</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_cw_qty_tree" model="ir.ui.view">
+        <field name="name">stock.move.form.special.wishes.tree</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_tree_receipt_picking_cw" model="ir.ui.view">
+        <field name="name">stock.move.tree.special.wishes</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+        <field name="priority" eval="6"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_move_tree_cw" model="ir.ui.view">
+        <field name="name">stock.move.special.wishes</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.stock_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="stock_move_cw_quantity_form_view" model="ir.ui.view">
+        <field name="name">stock.move.special.wishes.form.view</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_tmpl_id']" position="after">
+                <field name="special_wishes"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_picking_move_tree_cw" model="ir.ui.view">
+        <field name="name">stock.picking.move.tree.special.wishes</field>
+        <field name="model">stock.move</field>
+        <field eval="50" name="priority"/>
+        <field name="inherit_id" ref="stock.view_picking_move_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_product_incoming_product_view" model="ir.ui.view">
+        <field name="name">purchase.price.incoming.product.view</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <label for="purchase_price" string="Purchase Price"/>
+                <div class="o_row">
+                    <field name="purchase_price" widget="monetary"/>
+                    <field name="currency_id" invisible="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <label for="supplier" string="Vendor"/>
+                <div class="o_row">
+                    <field name="supplier"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="purchase_product_incoming_product_tree" model="ir.ui.view">
+        <field name="name">purchase.price.incoming.product.view</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree_receipt_picking"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="before">
+                <field name="done_qty"/>
+            </xpath>
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="purchase_price" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="supplier"/>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="replace">
+                <field name="ordered_date" widget="date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

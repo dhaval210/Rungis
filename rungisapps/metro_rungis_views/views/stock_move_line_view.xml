@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_stock_move_line_tree_special_wishes">
+        <field name="name">stock.move.line.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_operation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_stock_move_line_form_special_wishes">
+        <field name="name">stock.move.line.form.special.wishes</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes" />
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_stock_move_line_product_tree_special_wishes">
+        <field name="name">stock.move.line.tree.special.wishes</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_id']" position="after">
+                <field name="special_wishes" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

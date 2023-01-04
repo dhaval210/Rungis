@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mrp_auto_workflow" model="ir.ui.view">
+            <field name="name">mrp.production.view.form.auto.workflow</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='button_plan']" position="after">
+                    <field name="auto_check" invisible="1"/>
+                    <button name="mrp_auto_flow" type="object"  attrs="{'invisible':['|',('auto_check', '=', False), ('state', 'in', ['planned', 'progress', 'done', 'cancel'])]}" string="Auto Workflow" class="btn btn-danger"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_category_property_form" model="ir.ui.view">
+            <field name="name">product.category.property.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <group name="first" position="after">
+                    <group name="aproduct" >
+                        <group string="Aproduct">
+                            <field name="aproduct_factor"/>
+                        </group>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

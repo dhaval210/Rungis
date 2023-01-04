@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- override core invoice print action -->
+    <report
+            id="account.account_invoices"
+            model="account.invoice"
+            string="Invoices"
+            report_type="qweb-pdf"
+            name="metro_rungis_invoice_report.print_invoice"
+            file="metro_rungis_invoice_report.print_invoice"
+            attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+            print_report_name="(object._get_report_base_filename())"
+            groups="account.group_account_invoice"
+    />
+
+
+    <template id="page_info_invoice">
+        <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+        <div class="row" style="width: 100%;padding-left: 0.44in;">
+            <!-- address block -->
+            <div class="col-6">
+                <br/>
+                <!-- sender address -->
+                <div>
+                    <small style="text-decoration: underline;font-size: 12px !important;">
+                        <span t-esc="doc.company_id.name"/>,
+                        <span t-esc="doc.company_id.street_number"/>
+                        <span t-esc="doc.company_id.street_name"/>,
+                        <span t-esc="doc.company_id.zip"/>
+                        <span t-esc="doc.company_id.city"/>
+                    </small>
+                </div>
+                <!-- sender address -->
+                <!-- customer address -->
+                <div style="font-size: 12px;">
+                    <t t-if="doc.partner_id.company_type == 'company'">
+                        <span t-if="doc.partner_id.title" t-field="doc.partner_id.title.name"/>
+                        <span t-if="doc.partner_id" t-field="doc.partner_id.name"/>
+                        <br/>
+                        <span t-if="doc.partner_id.street" t-field="doc.partner_id.street_number"/>
+                        <span t-if="doc.partner_id.street" t-field="doc.partner_id.street_name"/>
+                        <br/>
+                        <span t-if="doc.partner_id.zip" t-field="doc.partner_id.zip"/>
+                        <span t-if="doc.partner_id.city" t-field="doc.partner_id.city"/>
+                        <br/>
+                        <span t-if="doc.partner_id.country_id" t-field="doc.partner_id.country_id.name"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.partner_id.company_type == 'person'">
+                        <span t-if="doc.partner_id" t-field="doc.partner_id.parent_id"/>
+                        <br/>
+                        <span t-if="doc.partner_id.title" t-field="doc.partner_id.title.name"/>
+                        <span t-if="doc.partner_id" t-field="doc.partner_id.name"/>
+                        <br/>
+                        <span t-if="doc.partner_id.street" t-field="doc.partner_id.street_number"/>
+                        <span t-if="doc.partner_id.street" t-field="doc.partner_id.street_name"/>
+                        <br/>
+                        <span t-if="doc.partner_id.zip" t-field="doc.partner_id.zip"/>
+                        <span t-if="doc.partner_id.city" t-field="doc.partner_id.city"/>
+                        <br/>
+                        <span t-if="doc.partner_id.country_id" t-field="doc.partner_id.country_id.name"/>
+                        <br/>
+                    </t>
+                </div>
+                <!-- customer address -->
+            </div>
+            <!-- address block -->
+            <!-- invoice & contact block -->
+            <div t-att-style="'font-size:12px;margin-left:20px;' if report_type == 'html' else 'font-size:12px;margin-left:200px;'">
+                <br/>
+                <br/>
+                <br/>
+                <table style="width:100%;">
+                    <tr>
+                        <td class="text-left">
+                            <span t-if="doc.date_invoice">Date:</span><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                            <br/>
+                            <span>Customer Number:</span><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                            <br/>
+                            <span>VAT ID:</span><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                            <br/>
+                            <span t-if="doc.user_id">Your contact person:</span><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>
+                            <br/>
+                        </td>
+                        <td class="text-left">
+                            <span t-if="doc.date_invoice" t-field="doc.date_invoice"/>
+                            <br/>
+                            <t t-if="doc.partner_id.company_type == 'company'">
+                                <span t-if="doc.partner_id" t-field="doc.partner_id.ref"/>
+                            </t>
+                            <t t-if="doc.partner_id.company_type == 'person'">
+                                <span t-if="doc.partner_shipping_id" t-field="doc.partner_shipping_id.ref"/>
+                            </t>
+                            <br/>
+                            <span t-if="doc.partner_id" t-field="doc.partner_id.vat"/>
+                            <br/>
+                            <span t-if="doc.user_id" t-field="doc.user_id"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- invoice & contact block -->
+        </div>
+    </template>
+
+
+    <template id="page_invoice">
+        <t t-call="metro_rungis_invoice_report.page_info_invoice" t-lang="doc.partner_id.lang"/>
+        <br/>
+        <div style="padding-left: 0.44in;">
+            <h2>
+                <span t-if="doc.type == 'out_refund'">Credit Note.</span>
+                <span t-if="doc.type == 'out_invoice'">Invoice No.</span>
+                <span t-field="doc.number"/>
+            </h2>
+            <!-- Old Query:
+            <t t-set="inv_ids" t-value="request.env['account.invoice'].browse([doc.id])"/>
+                <t t-set="sale_order"
+                   t-value="request.env['sale.order'].search([('name', 'in', inv_ids.origin.split(' '))])"/> -->
+            <span t-if="doc.type == 'out_invoice'">
+                <t t-set="inv_ids" t-value="request.env['account.invoice'].browse([doc.id])"/>
+                <t t-if="',' in inv_ids.origin">
+                    <t t-set="sale_order"
+                   t-value="request.env['sale.order'].search([('company_id','=',doc.company_id.id),('name', 'in', str(inv_ids.origin).replace(' ','').split(','))])"/>
+                </t>
+                <t t-else="">
+                    <t t-set="sale_order"
+                   t-value="request.env['sale.order'].search([('company_id','=',doc.company_id.id),('name', 'in', inv_ids.origin.split(' '))])"/>
+                </t>
+            </span>
+            <span t-if="doc.type == 'out_refund'">
+                <t t-set="inv_ids" t-value="doc.origin"/>
+                <t t-set="sale_order" t-value="request.env['sale.order'].search([('invoice_ids','=',inv_ids)])"/>
+            </span>
+            <span t-if="doc.partner_id != doc.partner_shipping_id">
+                <!-- delivery address -->
+                <div style="font-size: 12px;">
+                    <strong>Delivery address:</strong>
+                    <br/>
+                    <span t-if="doc.partner_shipping_id.title" t-field="doc.partner_shipping_id.title.name"/>
+                    <span t-if="doc.partner_shipping_id" t-field="doc.partner_shipping_id.name"/>,
+                    <span t-if="doc.partner_shipping_id.street" t-field="doc.partner_shipping_id.street"/>
+                    <br/>
+                    <span t-if="doc.partner_shipping_id.zip" t-field="doc.partner_shipping_id.zip"/>,
+                    <span t-if="doc.partner_shipping_id.city" t-field="doc.partner_shipping_id.city"/>,
+                    <span t-if="doc.partner_shipping_id.country_id" t-field="doc.partner_shipping_id.country_id.name"/>
+                </div>
+                <!-- delivery address -->
+            </span>
+            <br/>
+            <span t-if="doc.type == 'out_refund'" style="font-size: 12px;">We created the following credit:</span>
+            <span t-if="doc.type == 'out_invoice'" style="font-size: 12px;">We thank you for the order placed with us
+                and
+                charge as follows:
+            </span>
+            <br/>
+            <div style="font-size: 12px;">
+                <tr>
+                    Sale order number:
+                    <t t-foreach="sale_order" t-as="p">
+                        <strong t-esc="p.name"/>
+                        <strong t-field="p.confirmation_date" t-options='{"format": "dd.MM.yyyy"}'/>
+                    </t>
+                    <br/>
+                    <t t-if="doc.type == 'out_refund'">
+                        Invoice No:
+                        <strong t-esc="doc.origin"/>
+                        <br/>
+                    </t>
+                    <t t-if="doc.global_discount_ids and (doc.global_discount_ids.discount != 0.0)">
+                        Customer discounts:
+                        <t t-foreach="doc.global_discount_ids" t-as="gd">
+                            <strong t-esc="gd.name"/>
+                        </t>
+                    </t>
+                </tr>
+            </div>
+        </div>
+        <!-- load invoice lines & total summary -->
+        <t t-call="metro_rungis_invoice_report.invoice_lines"/>
+    </template>
+
+    <template id="invoice_lines">
+        <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+        <!-- invoice line header -->
+        <div style="padding-left: 0.44in;">
+            <table class="table table-sm o_main_table" style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th class="text-right">
+                            DN No.
+                            <br/>
+                            DN Date
+                        </th>
+                        <th class="text-right">Product</th>
+                        <th class="text-right">Product Description</th>
+                        <th class="text-right">Qty</th>
+                        <th class="text-right">Sales Price</th>
+                        <th class="text-right">
+                            Total Untaxed
+                            <br/>
+                            Amount
+                        </th>
+                        <th class="text-right">VAT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="doc.invoice_line_ids" t-as="line">
+                        <tr>
+                            <td class="text-right">
+                                <span t-esc="line.delivery_no"/>
+                                <br/>
+                                <t t-foreach="line.sale_line_ids" t-as="sol">
+                                  <span t-field="sol.order_id.commitment_date"  t-options="{&quot;format&quot;: &quot;dd.MM.yyyy&quot;}"/>
+                                </t>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.product_id.default_code"/>
+                            </td>
+                            <td class="text-right">
+                                <span t-field="line.product_id.name"/>
+                                <br/>
+                                <t t-if="line.product_id.scientific_name">
+                                    <span t-field="line.product_id.scientific_name"/>
+                                    <br/>
+                                </t>
+                                <t t-if="line.product_id.hs_code_id.hs_code">
+                                    HS-Code:
+                                    <span t-field="line.product_id.hs_code_id.hs_code"/>
+                                    <br/>
+                                </t>
+                                <t t-if="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name">
+                                    Lot name:
+                                    <t t-if="line.product_id">
+                                        <span t-field="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name"/>
+                                    </t>
+                                    <br/>
+                                </t>
+                                <t t-if="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name.use_date">
+                                    BBD:
+                                    <t t-if="line.product_id">
+                                        <span t-field="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name.use_date"
+                                              t-options='{"format": "dd.MM.yyyy"}'/>
+                                    </t>
+                                    <br/>
+                                </t>
+                                <t t-if="line.product_id.attribute_line_ids">
+                                    <t t-foreach="line.product_id.attribute_line_ids" t-as="m">
+                                        <t t-if="m.print_on_invoice == True">
+                                            <span t-field="m.value_ids"/>
+                                            <br/>
+                                        </t>
+                                    </t>
+                                    <t t-if="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name.lot_attribute_line_ids">
+                                        <t t-foreach="line.sale_line_ids.filtered(lambda x: x.product_id.id == line.product_id.id).lot_name.lot_attribute_line_ids"
+                                           t-as="l">
+                                            <span t-field="l.value_ids"/>
+                                            <br/>
+                                        </t>
+                                    </t>
+                                </t>
+                                <t t-if="line.add_a_note">
+                                    <span t-field="line.add_a_note"/>
+                                    <br/>
+                                </t>
+                                <br/>
+                            </td>
+                            <td class="text-right">
+                                <t t-if="line.catch_weight_ok is True">
+                                    <span t-field="line.product_cw_uom_qty"/>
+                                    <span t-field="line.product_cw_uom.name"/>
+                                </t>
+                                <t t-else="">
+                                    <span t-field="line.quantity"/>
+                                    <span t-field="line.uom_id.name"/>
+                                </t>
+                            </td>
+                            <td class="text-right">
+<!--                                <span t-esc="'{:.2f}'.format(line.price_unit)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                            <td class="text-right">
+<!--                                <span t-esc="'{:.2f}'.format(line.price_subtotal)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </td>
+                            <td class="text-right">
+                                <span t-esc="line.invoice_line_tax_ids.amount"
+                                      t-options='{"widget": "float", "precision": 0}'/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+        <!-- total box-->
+        <div class="row border-top"
+             style="page-break-inside: avoid !important;font-size: 12px;padding-right: 0.55in; position: relative;">
+            <br/>
+            <br/>
+            <br/>
+            <div style="font-size: 12px; position: absolute; bottom: -50px; left: 0px; width: 70%; max-width: 70%; text-align: right; white-space: nowrap;"
+                 class="text-right mr-3">
+                <br/>
+                <t t-if="doc.global_discount_ids.discount">
+                    <br/>
+                    <br/>
+                </t>
+                <t t-if="not doc.fiscal_position_id.invoice_information"
+                   style="page-break-inside: avoid !important;">
+                    <br/>
+                </t>
+                <div t-if="doc.fiscal_position_id.invoice_information" style="page-break-inside: avoid !important;">
+                    <span t-field="doc.fiscal_position_id.invoice_information"/>
+                </div>
+                <div t-if="doc.type == 'out_refund'">
+                    <span t-field="doc.company_id.invoice_credit_payment"/>
+                </div>
+                <div t-if="doc.type == 'out_invoice'">
+                    Please
+                    <span t-field="doc.payment_term_id"/>
+                    <span t-field="doc.date_due" t-options='{"format": "dd.MM.yyyy"}'/>
+                </div>
+            </div>
+            <div class="text-right"
+                 style="page-break-inside: avoid !important;width: 250px; display: -webkit-box; display: flex; box-pack: end; -webkit-box-pack: end; -webkit-justify-content: flex-end; justify-content: flex-end; position: absolute; bottom: -50px; right: 10px;">
+                <div style="display: -webkit-box; display: flex;">
+
+                    <div class="text-left mr-2">
+                        <strong>Total Untaxed Amount</strong>
+                        <br/>
+                        <t t-if="doc.global_discount_ids.discount != 0">
+                            <strong>Global discounts</strong>
+                            <br/>
+                            <strong>Net Amount</strong>
+                            <br/>
+                        </t>
+                        <strong>VAT</strong>
+                        <br/>
+                        <strong>Invoice Total</strong>
+                        <br/>
+                    </div>
+                    <div class="text-right">
+                        <strong>
+                            <t t-if="doc.global_discount_ids.discount">
+<!--                                <span t-esc="'{:.2f}'.format(doc.amount_untaxed_before_global_discounts)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="doc.amount_untaxed_before_global_discounts" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </t>
+                            <t t-if="not doc.global_discount_ids.discount">
+<!--                                <span t-esc="'{:.2f}'.format(doc.amount_untaxed)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="doc.amount_untaxed" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            </t>
+                            <br/>
+                            <t t-if="doc.global_discount_ids.discount">
+<!--                                <span t-esc="'{:.2f}'.format(doc.amount_global_discount)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="doc.amount_global_discount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                <br/>
+<!--                                <span t-esc="'{:.2f}'.format(doc.amount_untaxed)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="doc.amount_untaxed" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                <br/>
+                            </t>
+<!--                            <span t-esc="'{:.2f}'.format(doc.amount_tax)"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="doc.amount_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+<!--                            <span t-esc="'{:.2f}'.format(doc.amount_untaxed + doc.amount_tax)"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="doc.amount_untaxed + doc.amount_tax" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- total box-->
+        <br/>
+        <!-- warning -->
+        <div t-if="doc.partner_id.invoice_warn == 'warning'" class="row" style="width:100%;font-size: 12px;padding-left: 0.44in;">
+            <div class="col-6">
+                <br/>
+                <span t-field="doc.partner_id.invoice_warn"/>:
+                <doc t-field="doc.partner_id.invoice_warn_msg"/>
+            </div>
+        </div>
+        <br/>
+        <!-- warning -->
+        <!-- Bank details -->
+        <div class="row" style="width:100%;font-size: 12px;page-break-inside: avoid !important;padding-left: 0.44in;">
+            <div class="col-6">
+                <br/>
+                <t t-if="doc.partner_id.company_type == 'company'">
+                    <t t-if="doc.company_id.bank_ids">
+                        <t t-foreach="doc.company_id.bank_ids" t-as="bk">
+                            Bank:
+                            <span t-field="bk.bank_id.name"/>
+                            <br/>
+                            IBAN:
+                            <span t-field="bk.acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-field="bk.bank_id.bic"/>
+                            <br/>
+                        </t>
+                    </t>
+                </t>
+                <t t-if="doc.partner_id.company_type == 'person'">
+                    <t t-if="doc.company_id.bank_ids">
+                        <t t-foreach="doc.company_id.bank_ids" t-as="bk">
+                            Bank:
+                            <span t-field="bk.bank_id.name"/>
+                            <br/>
+                            IBAN:
+                            <span t-field="bk.acc_number"/>
+                            <br/>
+                            BIC:
+                            <span t-field="bk.bank_id.bic"/>
+                            <br/>
+                        </t>
+                    </t>
+                </t>
+            </div>
+            <br/>
+        </div>
+        <br/>
+        <br/>
+        <!-- Bank details -->
+        <!-- vat box -->
+        <div style="padding-left: 0.44in;">
+            <div style="page-break-inside: avoid !important;">
+                <div class="row border-top"
+                     style="page-break-inside: avoid !important;width: 100%;font-size: 12px;border-height: 3px;text-align: right;">
+                    <div class="col-2">
+                        <strong>VAT rate</strong>
+                        <br/>
+                    </div>
+                    <div class="col-2">
+                        <strong>Amount</strong>
+                        <br/>
+                    </div>
+                    <t t-if="doc.global_discount_ids.discount">
+                        <div class="col-2">
+                            <strong>Discount</strong>
+                            <br/>
+                        </div>
+                        <div class="col-2">
+                            <strong>Net Amount</strong>
+                            <br/>
+                        </div>
+                    </t>
+                    <div class="col-2">
+                        <strong>VAT</strong>
+                        <br/>
+                    </div>
+                    <div class="col-2">
+                        <strong>Gross Amount</strong>
+                        <br/>
+                    </div>
+                </div>
+                <div class="row" style="width: 100%;font-size: 12px;text-align: right;">
+                    <div class="col-2">
+                        <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+                            <span t-field="line.tax_ids.description"/>
+                            <br/>
+                        </t>
+                    </div>
+                    <div class="col-2">
+                        <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+<!--                            <span t-esc="'{:.2f}'.format(line.base)"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="line.base" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+                        </t>
+                    </div>
+                    <t t-if="doc.global_discount_ids.discount">
+                        <div class="col-2">
+                            <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+<!--                                <span t-esc="'{:.2f}'.format(line.discount_amount)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="line.discount_amount" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                <br/>
+                            </t>
+                        </div>
+                        <div class="col-2">
+                            <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+<!--                                <span t-esc="'{:.2f}'.format(line.base_discounted)"/>-->
+<!--                                <span t-esc="doc.currency_id.symbol"/>-->
+                                <span t-esc="line.base_discounted" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                                <br/>
+                            </t>
+                        </div>
+                    </t>
+                    <div class="col-2">
+                        <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+<!--                            <span t-esc="'{:.2f}'.format(line.amt_tot)"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="line.amt_tot" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+                        </t>
+                    </div>
+                    <div class="col-2">
+                        <t t-foreach="doc.invoice_global_discount_ids" t-as="line">
+<!--                            <span t-esc="'{:.2f}'.format(line.gross_amt)"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="line.gross_amt" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row border-top" style="width: 100%;font-size:12px;text-align: right;">
+                    <br/>
+                    <div class="col-2">
+                        <strong>Sum:</strong>
+                        <br/>
+                    </div>
+                    <div class="col-2">
+<!--                        <span t-esc="'{:.2f}'.format(sum(line.base for line in doc.invoice_global_discount_ids))"/>-->
+<!--                        <span t-esc="doc.currency_id.symbol"/>-->
+                        <span t-esc="sum(line.base for line in doc.invoice_global_discount_ids)" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                    </div>
+                    <t t-if="doc.global_discount_ids.discount">
+                        <div class="col-2">
+<!--                            <span t-esc="'{:.2f}'.format(sum(line.discount_amount for line in doc.invoice_global_discount_ids))"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="sum(line.discount_amount for line in doc.invoice_global_discount_ids)" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                            <br/>
+                        </div>
+                        <div class="col-2">
+<!--                            <span t-esc="'{:.2f}'.format(sum(line.base_discounted for line in doc.invoice_global_discount_ids))"/>-->
+<!--                            <span t-esc="doc.currency_id.symbol"/>-->
+                            <span t-esc="sum(line.base_discounted for line in doc.invoice_global_discount_ids)" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                        </div>
+                    </t>
+                    <div class="col-2">
+<!--                        <span t-esc="'{:.2f}'.format(sum(line.amount_total for line in doc.tax_line_ids))"/>-->
+<!--                        <span t-esc="doc.currency_id.symbol"/>-->
+                        <span t-esc="sum(line.amt_tot for line in doc.invoice_global_discount_ids)" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                    </div>
+                    <div class="col-2">
+<!--                        <span t-esc="'{:.2f}'.format(sum(line.gross_amt for line in doc.invoice_global_discount_ids))"/>-->
+<!--                        <span t-esc="doc.currency_id.symbol"/>-->
+                        <span t-esc="sum(line.gross_amt for line in doc.invoice_global_discount_ids)" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- vat box -->
+        <br/>
+        <br/>
+        <!-- final text box & comment-->
+        <div style="padding-left: 0.44in;">
+            <div style="text-align:left; font-size: 12px;">
+                <span t-field="doc.company_id.invoice_final_text_box"/>
+                <br/>
+                <span t-field="doc.comment"/>
+            </div>
+        </div>
+        <!-- final text box & comment-->
+    </template>
+
+    <template id="print_invoice">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.html_container">
+                <t t-call="metro_rungis_invoice_report.external_layout_custom">
+                    <div style="margin-right: 0.55in; position: relative;">
+                        <t t-call="metro_rungis_invoice_report.page_invoice" t-lang="doc.partner_id.lang"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

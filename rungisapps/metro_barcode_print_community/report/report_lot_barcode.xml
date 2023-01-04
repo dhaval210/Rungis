@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="pick_print_lots">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="data['product_moves']" t-as="product_move">
+                            <t t-if="o.id == product_move['lot_id']">
+                                <t t-if="separate_page">
+                                    <t t-foreach="product_move['print_copy']" t-as="count">
+                                        <div class="page">
+                                            <div class="oe_structure"/>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <table class="table table-condensed"
+                                                           style="border-bottom: 0px solid white !important;width: 3in;">
+                                                        <tr>
+                                                            <th style="text-align: left;">
+                                                                <span t-field="o.product_id.display_name"/>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                LN/SN:
+                                                                <span t-field="o.name"/>
+                                                                <img t-att-src="'data:image/png;base64,%s' % to_text(o.qr_code_lot)"
+                                                                     style="height:100px;width:100px;float:center;"/>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-if="product_move['include_use_date']">
+                                                            <tr>
+                                                                <td style="text-align: center; vertical-align: middle;"
+                                                                    class="col-5">
+                                                                    Best Before Date:
+                                                                    <img t-att-src="'data:image/png;base64,%s' % to_text(o.qr_code)"
+                                                                         style="height:100px;width:100px;float:center;"/>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                        <tr>
+                                                            <td style="text-align: center; vertical-align: middle;"
+                                                                class="col-5">
+                                                                <img t-if="o.name"
+                                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 150)"
+                                                                     style="width:100%;height:20%;"/>
+                                                                <span t-field="o.name"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <p style="page-break-before:always;"/>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-if="same_page">
+                                    <t t-foreach="product_move['print_copy']" t-as="count">
+                                        <div class="page">
+                                            <div class="oe_structure"/>
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <table class="table table-condensed"
+                                                           style="border-bottom: 0px solid white !important;width: 3in;">
+                                                        <tr>
+                                                            <th style="text-align: left;">
+                                                                <span t-field="o.product_id.display_name"/>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                LN/SN:
+                                                                <span t-field="o.name"/>
+                                                                <img t-att-src="'data:image/png;base64,%s' % to_text(o.qr_code_lot)"
+                                                                     style="height:100px;width:100px;float:center;"/>
+                                                            </td>
+                                                        </tr>
+                                                        <t t-if="product_move['include_use_date']">
+                                                            <tr>
+                                                                <td style="text-align: center; vertical-align: middle;"
+                                                                    class="col-5">
+                                                                    Best Before Date:
+                                                                    <img t-att-src="'data:image/png;base64,%s' % to_text(o.qr_code)"
+                                                                         style="height:100px;width:100px;float:center;"/>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+                                                        <tr>
+                                                            <td style="text-align: center; vertical-align: middle;"
+                                                                class="col-5">
+                                                                <img t-if="o.name"
+                                                                     t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 150)"
+                                                                     style="width:100%;height:20%;"/>
+                                                                <span t-field="o.name"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <p style="page-break-before:always;"/>
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

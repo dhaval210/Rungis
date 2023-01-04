@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_stock_scrap_form_catchweight">
+            <field name="name">stock.scrap.form.inherit</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_row')]" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="scrap_cw_qty" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                           groups="tis_catch_weight.group_catch_weight"/>
+                    <div class="o_row">
+                        <field name="scrap_cw_qty" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_stock_scrap_form2_catchweight">
+            <field name="name">stock.scrap.form2.inherit</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_row')]" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <label for="scrap_cw_qty" attrs="{'invisible': [('catch_weight_ok','=',False)]}"/>
+                    <div class="o_row">
+                        <field name="scrap_cw_qty" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="product_cw_uom" attrs="{'invisible': [('catch_weight_ok','=',False)]}"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="stock_scrap_tree_view_cw_inherit">
+            <field name="name">stock.scrap.form2.inherit.cw</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom_id']" position="after">
+                    <field name="catch_weight_ok" invisible="1"/>
+                    <field name="scrap_cw_qty" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'invisible': [('catch_weight_ok','=',False)]}"/>
+                    <field name="product_cw_uom" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'invisible': [('catch_weight_ok','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Inherit quotation report (from module sale) -->
+<templates id="template" inherit_id="stock_barcode.template" xml:space="preserve">
+
+    <t t-extend="stock_barcode_lines_widget">
+      <t t-jquery=".btn.btn-secondary.text-uppercase.o_add_line" t-operation="replace">
+        <button t-if="widget.groups.group_stock_manager" class="btn btn-secondary text-uppercase o_add_line" ><i class="fa fa-plus mr-1"/>Add Product</button>
+      </t>
+    </t>
+
+</templates>

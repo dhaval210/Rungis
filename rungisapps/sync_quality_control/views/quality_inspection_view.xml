@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- QUALITY INSPECTION -->
+    <record id="quality_inspection_view_form" model="ir.ui.view">
+        <field name="name">quality.inspection.view.form</field>
+        <field name="model">quality.inspection</field>
+        <field name="arch" type="xml">
+            <form string="Quality Inspections" create="false" edit="false">
+                <header>
+                    <button name="do_pass" type="object" class="btn-primary" string="Pass" attrs="{'invisible':[('state', '!=', 'none')]}"/>
+                    <button name="do_fail" type="object" class="btn-primary" string="Fail" attrs="{'invisible':[('state', '!=', 'none')]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <!-- <field name="name"/> -->
+                            <field name="product_tmpl_id" invisible="1"/>
+                            <field name="product_id" attrs="{'readonly': [('state', 'in', ['pass', 'fail'])]}"/>
+                            <field name="product_tracking" invisible="1"/>
+                            <field name="show_lots_text" invisible="1"/>
+                            <field name="lot_id" groups="stock.group_production_lot" string="Lot/SN" attrs="{'invisible': ['|', '|', ('product_tracking', '=', 'none'), ('product_id', '=', False), ('show_lots_text', '=', True)], 'required': [('product_tracking','in', ['serial','lot']), ('show_lots_text', '=', False)], 'readonly': [('state', 'in', ['pass', 'fail'])]}" domain="[('product_id', '=', product_id)]"/>
+                            <field name="lot_name" groups="stock.group_production_lot" attrs="{'invisible': ['|', '|', ('product_tracking', '=', 'none'), ('product_id', '=', False), ('show_lots_text', '=', False)], 'required': [('product_tracking','in', ['serial','lot']), ('show_lots_text', '=', True)], 'readonly': [('state', 'in', ['pass', 'fail'])]}" domain="[('product_id', '=', product_id)]"/>
+                        </group>
+                        <group>
+                            <field name="create_date" string="Date"/>
+                            <field name="picking_id" attrs="{'readonly': [('state', 'in', ['pass', 'fail'])]}"/>
+                            <field name="point_id" attrs="{'readonly': [('state', 'in', ['pass', 'fail'])]}"/>
+                            <field name="team_id" attrs="{'readonly': [('state', 'in', ['pass', 'fail'])]}"/>
+                            <field name="user_id" string="Control Person" invisible="1"/>
+                            <field name="inspection_type" string="Inspection Type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Inspection Lines">
+                            <field name="quality_inspection_line_ids" readonly="1">
+                                <tree>
+                                    <field name="control_point_line_id" invisible="1"/>
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="code"/>
+                                    <field name="product_tracking" invisible="1"/>
+                                    <field name="show_lots_text" invisible="1"/>
+                                    <field name="lot_id" groups="stock.group_production_lot"  attrs="{'invisible': [('product_tracking', '=', 'none'), ('show_lots_text', '=', False)]}"/>
+                                    <field name="lot_name" groups="stock.group_production_lot" attrs="{'invisible': [('product_tracking', '=', 'none'), ('show_lots_text', '=', True)]}"/>
+                                    <field name="name"/>
+                                    <field name="test_type_id"/>
+                                    <field name="state"/>
+                                    <field name="inspection_state" invisible="1"/>
+                                    <button name="do_alert" type="object" class="btn-primary" string="Quality Alert" attrs="{'invisible': ['|', ('state', '!=', 'fail'), ('inspection_state', 'in', ['fail', 'pass'])]}"/>
+                                    <field name="quality_inspection_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Quality Alerts">
+                            <field name="alert_ids" readonly="1"/>
+                        </page>
+                        <page string="Extra Information" groups="base.group_no_one">
+                            <group col="4">
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </page>
+                        <page string="Notes">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Report Search View -->
+    <record id="view_report_quality_inspection_filter" model="ir.ui.view">
+        <field name="name">quality.inspection.filter</field>
+        <field name="model">quality.inspection</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <filter string="Incoming Inspection" name="Incoming Inspection" domain="[('inspection_type','=','incoming')]"/>
+                <filter string="In-progress Inspection" name="In-progress Inspection" domain="[('inspection_type','=','in_progress')]"/>
+                <filter string="Final Inspection" name="Final Inspection" domain="[('inspection_type','=','final')]"/>
+                <separator/>
+                <filter string="Passed" name="Passed" domain="[('state','=','pass')]"/>
+                <filter string="Failed" name="Failed" domain="[('state','=','fail')]"/>
+                <separator/>
+                <field name="code"/>
+                <field name="inspection_type"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="quality_inspection_view_tree" model="ir.ui.view">
+        <field name="name">quality.inspection.view.tree</field>
+        <field name="model">quality.inspection</field>
+        <field name="arch" type="xml">
+            <tree create="false" edit="false">
+                <field name="code"/>
+                <field name="create_date" string="Date"/>
+                <field name="product_id"/>
+                <field name="team_id" invisible="1"/>
+                <field name="inspection_type"/>
+                <field name="create_uid" string="Inspection by"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="quality_inspection_action_main" model="ir.actions.act_window">
+        <field name="name">Quality Inspection</field>
+        <field name="res_model">quality.inspection</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+              Quality Inspection is the execution of a quality control in some point
+            </p>
+        </field>
+        <field name="context">{'group_by':['inspection_type']}</field>
+    </record>
+
+    <record id="quality_inspection_action_team" model="ir.actions.act_window">
+        <field name="name">Quality Inspection</field>
+        <field name="res_model">quality.inspection</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('team_id', '=', active_id)]</field>
+        <field name="context">{
+            'default_team_id': active_id,
+            'search_default_team_id': [active_id],
+            'search_default_progress': "1"}
+        </field>
+        <field name="help" type="html">
+            <p>
+              Quality Check is the execution of a quality control in some point
+            </p>
+        </field>
+    </record>
+
+    <!-- QUALITY INSPECTION LINE -->
+    <record id="quality_line_line_view_form" model="ir.ui.view">
+        <field name="name">quality.inspection.line.view.form</field>
+        <field name="model">quality.inspection.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="do_pass" type="object" class="oe_highlight"  string="Pass"
+                        attrs="{'invisible': ['|',('test_type', '=', 'measure'), ('state', '!=', 'none')]}"/>
+                    <button name="do_fail" type="object" class="btn-primary" string="Fail"
+                        attrs="{'invisible': ['|',('test_type', '=', 'measure'), ('state', '!=', 'none')]}"/>
+                    <button name="do_measure" type="object" class="btn-primary" string="Validate"
+                        attrs="{'invisible': ['|',('test_type', '!=', 'measure'), ('state', '!=', 'none')]}"/>
+                    <button name="do_alert" type="object" class="btn-primary" string="Quality Alert"  attrs="{'invisible': ['|', ('state', '!=', 'fail'), ('inspection_state', 'in', ['fail', 'pass'])]}"/>
+                    <field name="inspection_state" invisible="1"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h3><field name="code"/></h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="test_type_id" />
+                            <field name="test_type" invisible="1"/>
+                            <label for="measure" attrs="{'invisible': [('test_type', '!=', 'measure')]}"/>
+                            <div attrs="{'invisible': [('test_type', '!=', 'measure')]}" class="o_row">
+                                <field name="measure" attrs="{'required': [('test_type', '=', 'measure')]}"/>
+                                <field name="norm_unit" readonly="1"/>
+                            </div>
+                            <label for="picture" string="Image" attrs="{'invisible': [('test_type', '!=', 'image')]}"/>
+                            <div attrs="{'invisible': [('test_type', '!=', 'image')]}">
+                                <field name="picture" widget="image"/>
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Instructions">
+                            <field name="note" placeholder="Describe the quality check to do..."/>
+                        </page>
+                        <page string="Extra Information" groups="base.group_no_one">
+                            <group col="4">
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_inspection_line_view_form_small" model="ir.ui.view">
+        <field name="name">quality.inspection.line.view.form.small</field>
+        <field name="model">quality.inspection.line</field>
+        <field name="arch" type="xml">
+            <form string="Quality Checks">
+                <h2>
+                    <field name="name" readonly="1"/>
+                </h2>
+                <field name="product_tracking" invisible="1"/>
+                <field name="show_lots_text" invisible="1"/>
+                <field name="move_line_id" invisible="1"/>
+                <field name="lot_id" groups="stock.group_production_lot" string="Lot/SN" attrs="{'invisible': ['|',('product_tracking', '=', 'none'),('show_lots_text', '=', True)], 'required': [('product_tracking','in', ['serial','lot']), ('show_lots_text', '=', False)]}" domain="[('product_id', '=', product_id)]" context="{'default_product_id': product_id}"/>
+                <group>
+                    <group>
+                        <field name="lot_name" groups="stock.group_production_lot" attrs="{'invisible': ['|',('product_tracking', '=', 'none'), ('show_lots_text', '=', False)], 'required': [('product_tracking','in', ['serial','lot']), ('show_lots_text', '=', True)]}"/>
+                    </group>
+                </group>
+                <field name="test_type" invisible="1"/>
+                <field name="quality_inspection_id" invisible="1"/>
+                <group  attrs="{'invisible': [('test_type', '!=', 'measure')]}">
+                    <group>
+                        <label for="norm"/>
+                        <div class="o_row">
+                            <field name="norm" attrs="{'required': [('test_type', '=', 'measure')]}" readonly="1"/>
+                            <field name="norm_unit" attrs="{'required': [('test_type', '=', 'measure')]}" readonly="1"/>
+                        </div>
+                        <label for="tolerance_min" string="Tolerance"/>
+                        <div class="o_row">
+                            <span>from </span> <field name="tolerance_min" readonly="1"/>
+                            <span>to </span> <field name="tolerance_max" readonly="1"/>
+                        </div>
+                    </group>
+                </group>
+                <group>
+                    <group>
+                        <field name="product_id" readonly="1" string="Product"/>
+                    </group>
+                    <group>
+                        <label for="measure" attrs="{'invisible': [('test_type', '!=', 'measure')]}"/>
+                        <div attrs="{'invisible': [('test_type', '!=', 'measure')]}" class="o_row">
+                            <field name="measure" attrs="{'required': [('test_type', '=', 'measure')]}"/>
+                            <field name="norm_unit" readonly="1"/>
+                        </div>
+                        <field name="picture" attrs="{'invisible': [('test_type', '!=', 'image')], 'required': [('test_type', '=', 'image')]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="do_measure" type="object" class="btn-primary" string="Validate"
+                        attrs="{'invisible': [('test_type', '!=', 'measure')]}"/>
+                    <button name="do_pass" type="object" class="btn-primary" string="Pass"
+                        attrs="{'invisible': [('test_type', '=', 'measure')]}"/>
+                    <button name="do_fail" type="object" class="btn-primary" string="Fail"
+                        attrs="{'invisible': [('test_type', '=', 'measure')]}"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel" />
+                    <button name="create_new_inspection" type="object" string="Create New Inspection" class="btn" invisible=" not context.get('picking_id', False)" confirm="Are you sure you want to create new Inspection?"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="quality_inspection_line_action_small" model="ir.actions.act_window">
+        <field name="name">Quality Inspection Line</field>
+        <field name="res_model">quality.inspection.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="quality_inspection_line_view_form_small"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="quality_inspection_line_action">
+        <field name="name">Quality Inspection Lines</field>
+        <field name="res_model">quality.inspection.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to add a new Quality Inspection Lines
+            </p>
+        </field>
+    </record>
+
+    <!-- QUALITY INSPECTION FAILURE  -->
+    <record id="quality_inspection_line_view_form_failure" model="ir.ui.view">
+        <field name="name">quality.inspection.line.view.form.failure</field>
+        <field name="model">quality.inspection.line</field>
+        <field name="arch" type="xml">
+            <form string="Quality Inspection Line Failed">
+                <div class="alert alert-warning" role="alert">
+                    <field name="warning_message" readonly="1"/>
+                </div>
+                 <div>
+                    <field name="failure_message" readonly="1"/>
+                </div>
+                <footer>
+                    <button name="correct_measure" type="object" class="btn-primary" string="Correct Measure"/>
+                    <button name="do_fail" type="object" string="Confirm Measure"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

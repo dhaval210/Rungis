@@ -1,0 +1,331 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    
+    <!-- cw getweight voice dialog starts here -->
+    <record id="dialoglist_tu_1" model="tspbv.dialoglist">
+        <field name="name">Transport Unit Dialog</field>
+        <field name="start">getTransportUnit</field>
+        <field name="default_code">transport_unit</field>
+        <field name="model_id" search="[('model','=','tspbv.session')]" model="ir.model" />
+    </record>
+    <record id="output_tu_1" model="tspbv.output">
+        <field name="lydia_output">(nimm) $[object.picking_ids | length] Kisten</field>
+    </record>
+
+    <record id="grammar_rule_tu_1" model="tspbv.grammar.rule">
+        <field name="rule_name">unitokay</field>
+        <field name="content">okay|fertig|nicht drucken</field>
+    </record>
+    <record id="input_tu_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_transport_unit.grammar_rule_tu_1')])]" />
+    </record>
+    <record id="recognition_tu_1" model="tspbv.recognition">
+        <field name="rel">unitOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_1" />
+    </record>
+    <record id="recognition_tu_1_f" model="tspbv.recognition">
+        <field name="rel">unitOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_1" />
+    </record>
+    <record id="recognition_tu_3" model="tspbv.recognition">
+        <field name="rel">unitDruckOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">nicht drucken</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_1" />
+    </record>    
+
+    <record id="dialog_tu_1" model="tspbv.dialog">
+        <field name="id_dialog">getTransportUnit</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_1" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_1" />
+        <field name="dialoglist_id" ref="tspbv_connector_transport_unit.dialoglist_tu_1" />
+    </record>
+    <record id="link_tu_1" model="tspbv.link">
+        <field name="rel">unitOkay</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location</field> -->
+        <!-- <field name="href">#confirmunit</field>     -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/transport_label?dialoglist_code=transport_unit_label&amp;print=True'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_1" />
+    </record>    
+    <record id="link_tu_3" model="tspbv.link">
+        <field name="rel">unitDruckOkay</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/start?model=stock.picking.batch&amp;dialoglist_code=location</field> -->
+        <!-- <field name="href">#confirmunit</field>     -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/transport_label?dialoglist_code=transport_unit_label&amp;print=False'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_1" />
+    </record>    
+
+
+    <record id="dialoglist_tu_2" model="tspbv.dialoglist">
+        <field name="name">Transport Unit Label Dialog</field>
+        <field name="start">getTransportUnitLabel</field>
+        <field name="default_code">transport_unit_label</field>
+        <field name="model_id" search="[('model','=','tspbv.session')]" model="ir.model" />
+    </record>
+    <record id="input_tu_2" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_transport_unit.grammar_rule_tu_1')])]" />
+    </record>    
+    <record id="output_tu_2" model="tspbv.output">
+        <field name="lydia_output">(nimm) Etikett $[object.tl_numbers]</field>
+    </record>
+    <record id="recognition_tu_2" model="tspbv.recognition">
+        <field name="rel">unitLabelOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_2" />
+    </record>        
+    <record id="recognition_tu_2_f" model="tspbv.recognition">
+        <field name="rel">unitLabelOkay</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_2" />
+    </record>        
+    <record id="dialog_tu_2" model="tspbv.dialog">
+        <field name="id_dialog">getTransportUnitLabel</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_2" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_2" />
+        <field name="dialoglist_id" ref="tspbv_connector_transport_unit.dialoglist_tu_2" />
+    </record>
+    <record id="link_tu_2" model="tspbv.link">
+        <field name="rel">unitLabelOkay</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/transport?dialoglist_code=location&amp;'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_2" />
+    </record>      
+
+    <!-- stash template!!!!! -->
+    <record id="dialoglist_tu_7" model="tspbv.dialoglist">
+        <field name="name">Stash Dialog</field>
+        <field name="start">startStash</field>
+        <field name="model_id" search="[('model','=','stock.picking')]" model="ir.model" />
+        <field name="default_code">stash</field>
+    </record>
+
+    <record id="output_tu_7_1" model="tspbv.output">
+        <field name="lydia_output">(Lege in )Kiste §DNUM($[object.name[-3:]])</field>
+    </record>
+
+    <record id="dialog_tu_7_1" model="tspbv.dialog">
+        <field name="id_dialog">startStash</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_7_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector_transport_unit.dialoglist_tu_7" />
+    </record>
+    <record id="link_tu_7_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#stashcheck</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_1" />
+    </record>    
+
+    <record id="constraint_tu_7_1" model="tspbv.grammar.rule.constraint">
+        <field name="type">digits</field>
+        <field name="min">3</field>
+        <field name="max">3</field>
+    </record>
+    <record id="grammar_rule_tu_7_1" model="tspbv.grammar.rule">
+        <field name="rule_name">stashok</field>
+        <field name="content">okay|fertig|neue kiste</field>
+        <field name="constraint_id" ref="tspbv_connector_transport_unit.constraint_tu_7_1" />
+    </record>
+    <record id="input_tu_7_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_transport_unit.grammar_rule_tu_7_1')])]" />
+    </record>
+    <record id="recognition_7_2" model="tspbv.recognition">
+        <field name="rel">stashcheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{3,3}) okay</field>
+        <field name="on_match">$[object.name[-3:]] == $1</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+    </record>
+    <record id="recognition_7_2_f" model="tspbv.recognition">
+        <field name="rel">stashcheckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{3,3}) fertig</field>
+        <field name="on_match">$[object.name[-3:]] == $1</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+    </record>
+    <record id="recognition_7_4" model="tspbv.recognition">
+        <field name="rel">stashfull</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">neue kiste</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+    </record>    
+    <record id="recognition_7_3" model="tspbv.recognition">
+        <field name="rel">stashchecknotok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{3,3}) okay</field>
+        <field name="on_match">$[object.name[-3:] | int] != $1</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+    </record>    
+    <record id="recognition_7_3_f" model="tspbv.recognition">
+        <field name="rel">stashchecknotok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">([0-9]{3,3}) fertig</field>
+        <field name="on_match">$[object.name[-3:] | int] != $1</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+    </record>    
+    
+    <record id="dialog_tu_7_2" model="tspbv.dialog">
+        <field name="id_dialog">stashcheck</field>
+        <field name="lydia_output_id" ref="" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_7_1" />
+        <field name="dialoglist_id" ref="tspbv_connector_transport_unit.dialoglist_tu_7" />
+    </record>    
+    <record id="link_7_3" model="tspbv.link">
+        <field name="rel">stashcheckok</field>
+        <!-- <field name="href">http://192.168.99.120:8069/tspbv/item/commit?dialoglist_code=location&amp;qty=${qtycheck}[1]</field> -->
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/lines?dialoglist_code=location'" />
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_2" />
+    </record>  
+    
+    <record id="output_tu_7_7_1" model="tspbv.output">
+        <field name="lydia_output">Inkorrekt(e Kiste)</field>
+    </record>
+    <record id="dialog_tu_7_8_2" model="tspbv.dialog">
+        <field name="id_dialog">shortageqtychecknotok</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_7_7_1" />
+        <field name="lydia_input_id" ref="" />
+    </record>
+
+    <record id="link_tu_7_13_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href">#startStash</field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_8_2" />
+    </record>
+
+    <record id="link_tu_7_10_1" model="tspbv.link">
+        <field name="rel">stashchecknotok</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_2" />
+        <field name="sub_dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_8_2" />
+    </record>    
+
+
+    
+    <record id="output_tu_8_7_1" model="tspbv.output">
+        <field name="lydia_output">(Nimm neue) Kiste</field>
+    </record>
+
+    <record id="input_tu_8_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_transport_unit.grammar_rule_tu_1')])]" />
+    </record>    
+    <record id="dialog_tu_8_8_2" model="tspbv.dialog">
+        <field name="id_dialog">newstash</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_8_7_1" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_8_1" />
+    </record>
+    <record id="recognition_tu_8_1" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_8_1" />
+    </record>
+    <record id="recognition_tu_8_1" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_8_1" />
+    </record>
+    <record id="recognition_tu_8_3" model="tspbv.recognition">
+        <field name="rel">newstashDruckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">nicht drucken</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_8_1" />
+    </record>        
+
+    <record id="link_tu_8_13_1" model="tspbv.link">
+        <field name="rel">newstashok</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/label?dialoglist_code=stash&amp;print=True'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_8_8_2" />
+    </record>
+
+    <record id="link_tu_8_10_1" model="tspbv.link">
+        <field name="rel">stashfull</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_7_2" />
+        <field name="sub_dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_8_8_2" />
+    </record>    
+
+
+    <record id="grammar_rule_tu_qty_1" model="tspbv.grammar.rule">
+        <field name="rule_name">stashkiste</field>
+        <field name="content">neue kiste</field>
+    </record>
+
+    <record id="tspbv_connector.input_7_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(4, ref('tspbv_connector_transport_unit.grammar_rule_tu_qty_1'))]" />
+    </record>
+    <record id="recognition_tu_qty_1" model="tspbv.recognition">
+        <field name="rel">stashfull</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">neue kiste</field>
+        <field name="input_id" ref="tspbv_connector.input_7_1" />
+    </record>        
+
+    <record id="output_tu_qty_8_7_1" model="tspbv.output">
+        <field name="lydia_output">(Nimm neue) Kiste</field>
+    </record>
+
+    <record id="input_tu_qty_8_1" model="tspbv.input">
+        <field name="grammar_rule_ids" eval="[(6,0,[ref('tspbv_connector_transport_unit.grammar_rule_tu_1')])]" />
+    </record>    
+    <record id="dialog_tu_qty_8_8_2" model="tspbv.dialog">
+        <field name="id_dialog">newstash</field>
+        <field name="lydia_output_id" ref="tspbv_connector_transport_unit.output_tu_qty_8_7_1" />
+        <field name="lydia_input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_7" />
+    </record>
+    <record id="recognition_tu_qty_8_1" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">okay</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>
+    <record id="recognition_tu_qty_8_1_f" model="tspbv.recognition">
+        <field name="rel">newstashok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">fertig</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>
+    <record id="recognition_tu_qty_8_3" model="tspbv.recognition">
+        <field name="rel">newstashDruckok</field>
+        <field name="input_type">recognition</field>
+        <field name="pattern">nicht drucken</field>
+        <field name="input_id" ref="tspbv_connector_transport_unit.input_tu_qty_8_1" />
+    </record>        
+
+    <record id="link_tu_qty_8_13_1" model="tspbv.link">
+        <field name="rel">newstashok</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/label?dialoglist_code=qty&amp;print=True'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_qty_8_8_2" />
+    </record>
+
+    <record id="link_tu_qty_1" model="tspbv.link">
+        <field name="rel">stashfull</field>
+        <field name="href"></field>
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_7_2" />
+        <field name="sub_dialog_id" ref="tspbv_connector_transport_unit.dialog_tu_qty_8_8_2" />
+    </record>    
+
+    <record id="tspbv_connector.workflow_1" model="tspbv.workflow">
+        <field name="dialoglist_ids" eval="[(4, ref('tspbv_connector_transport_unit.dialoglist_tu_1')), (4, ref('tspbv_connector_transport_unit.dialoglist_tu_2')), (4, ref('tspbv_connector_transport_unit.dialoglist_tu_7'))]" />
+        <field name="transport_unit_dialoglist" ref="tspbv_connector_transport_unit.dialoglist_tu_1" />
+        <field name="stash_dialoglist" ref="tspbv_connector_transport_unit.dialoglist_tu_7" />        
+    </record>
+
+
+</odoo>

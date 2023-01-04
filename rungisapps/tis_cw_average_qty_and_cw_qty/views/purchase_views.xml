@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_purchase_form_catchweight">
+            <field name="name">purchase.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="after">
+                    <field name="order_by" groups="tis_catch_weight.group_catch_weight"
+                           attrs="{'readonly': [('catch_weight_ok', '=', False)]}"/>
+
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_purchaseorder_document" inherit_id="purchase.report_purchaseorder_document">
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <div class="row mt226">
+                <div class="col-7 text-left"
+                     style="margin-top:10px;margin-left:70px;margin-bottom: 13px;font-family: 'Gill Sans';"
+                     t-field="o.company_id.back_address"/>
+            </div>
+            <div style="margin-left: 95px">
+                <span t-field="o.partner_id"
+                      t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True, "phone_icons": True}'
+                />
+            </div>
+
+            <div style="position: absolute;right: 110px;margin-top: -80px;">
+                <t t-if="o.user_id.name">
+                    <strong>User:</strong>
+                    <span t-field="o.user_id.name"/>
+                    <br/>
+                </t>
+                <t t-if="o.user_id.partner_id.phone">
+                    <strong>Phone No:</strong>
+                    <span t-field="o.user_id.partner_id.phone"/>
+                    <br/>
+                </t>
+                <t t-if="o.user_id.partner_id.fax">
+                    <strong>Fax :</strong>
+                    <span t-field="o.user_id.partner_id.fax"/>
+                    <br/>
+                </t>
+                <t t-if="o.user_id.partner_id.email">
+                    <strong>Email:</strong>
+                    <span t-field="o.user_id.partner_id.email"/>
+                </t>
+            </div>
+            <div style="margin-top: 31px; margin-left: 72px;margin-bottom: 81px;">
+                <strong>Order No:</strong>
+                <span t-field="o.name"/>
+                <br/>
+                <strong>Order Date:</strong>
+                <span t-field="o.date_order" class="m-0" t-options='{"widget": "date"}'/>
+                <br/>
+                <strong>Supplier Ref:</strong>
+                <span t-field="o.partner_id.ref"/>
+            </div>
+            <div style="position: absolute;right: 220px;margin-top: -150px;">
+                <strong>Shipping address:</strong>
+                <div t-if="o.picking_type_id and o.picking_type_id.warehouse_id">
+                    <span t-field="o.picking_type_id.warehouse_id.name"/>
+                    <div t-field="o.picking_type_id.warehouse_id.partner_id"
+                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//h2" position="replace"/>
+        <xpath expr="//h2" position="replace"/>
+        <xpath expr="//h2" position="replace"/>
+        <xpath expr="//h2" position="replace"/>
+        <xpath expr="//div[@id='informations']" position="replace">
+            <br/>
+            <br/>
+        </xpath>
+
+    </template>
+</odoo>

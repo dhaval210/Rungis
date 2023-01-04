@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="metro_stock_picking_view_form_inherit_print_barcode" model="ir.ui.view">
+            <field name="name">metro.stock.picking.form.inherit.print</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <button name="button_scrap" position="after">
+                    <button name="action_print_lots" type="object" string="Print Lots" barcode_trigger="print_lots"
+                            states="done"/>
+                    <button name="action_packages" type="object" string="Print Packages"
+                            barcode_trigger="print_packages" states="done"/>
+                    <button name="action_package_contents" type="object" string="Print Packages Contents"
+                            barcode_trigger="print_contents" states="done"/>
+                    <button name="action_product_label" type="object" string="Print Product Labels"
+                            barcode_trigger="print_labels" states="done"/>
+                </button>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="contain_piece_fish"/>
+                </xpath>
+                <xpath expr="//field[@name='move_line_ids_without_package']/tree/field[@name='product_id']"
+                       position="after">
+                    <field name="piece_fish"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_move_form_qr_code" model="ir.ui.view">
+            <field name="name">stock.production.lot.inherit.qrcode.form</field>
+            <field name="model">stock.production.lot</field>
+            <field name="inherit_id" ref="stock.view_production_lot_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="qr_code" widget="image" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_picking_type_form_print" model="ir.ui.view">
+            <field name="name">stock.picking.type.print.inherit.view.form</field>
+            <field name="model">stock.picking.type</field>
+            <field name="inherit_id" ref="stock.view_picking_type_form"/>
+            <field name="arch" type="xml">
+                <field name="return_picking_type_id" position="after">
+                    <field name="allow_print"/>
+                </field>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

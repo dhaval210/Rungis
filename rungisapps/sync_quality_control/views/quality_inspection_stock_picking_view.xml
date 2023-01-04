@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock_picking_view_form_inherit_quality_insepction" model="ir.ui.view">
+        <field name="name">stock.picking.view.form.inherit.quality</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="quality_control_alert_count" invisible="1"/>
+                <field name="quality_inspection_todo" invisible="1"/>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Inspections" attrs="{'invisible': [('quality_inspection_todo', '=', False)]}" groups="sync_quality_control.group_quality_user">
+                    <field name="quality_inspection_ids" readonly="1">
+                        <tree>
+                            <field name="code"/>
+                            <field name="create_date"/>
+                            <field name="product_id"/>
+                            <field name="team_id"/>
+                            <field name="state"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']" position="before">
+                <button name="inspection_quality_line" type="object" string="Quality Inspections" class="oe_highlight" groups="sync_quality_control.group_quality_user" attrs="{'invisible': ['|',('quality_inspection_todo', '=', False), ('state', 'in', ['draft', 'done', 'cancel'])]}"/>
+                <field name="quality_inspection_todo" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

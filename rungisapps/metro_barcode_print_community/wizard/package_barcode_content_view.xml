@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_package_barcode_content" model="ir.ui.view">
+            <field name="name">Package Barcode Content</field>
+            <field name="model">content.barcode.report</field>
+            <field name="arch" type="xml">
+                <form string="Package Content">
+                    <group col="4">
+                        <field name="package_content_moves" nolabel="1">
+                            <tree editable="top" create="0">
+                                <field name="result_package_id" options="{'no_create': True, 'no_open': True}"
+                                       force_save="1"/>
+                                <field name="print_copy"/>
+                            </tree>
+                            <form create="0">
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="result_package_id"
+                                                   options="{'no_create': True, 'no_open': True}"
+                                                   force_save="1"/>
+                                            <field name="print_copy"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                            <kanban class="o_kanban_mobile" string="Package Barcode Content" create="0">
+                                <field name="result_package_id"/>
+                                <field name="print_copy"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <strong>
+                                                        <field name="result_package_id"/>
+                                                    </strong>
+                                                    <br/>
+                                                    <strong>
+                                                        <span>No. Copies:</span>
+                                                    </strong>
+                                                    <field name="print_copy"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+
+                        </field>
+                    </group>
+                    <footer>
+                        <button name="print_packages_content" type="object" string="Print"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+
+
+
+
+
+
+
+

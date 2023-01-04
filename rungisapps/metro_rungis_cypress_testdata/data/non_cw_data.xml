@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="test_non_cw_product_1" model="product.product">
+            <field name="name">Test Non CW Product 1</field>
+            <field name="default_code">test-non-cw-1</field>
+            <field name="barcode">test-non-cw-1</field>
+            <field name="type">product</field>
+            <field name="uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="uom_po_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="cw_uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_kgm').id"/>
+            <field name="tracking">lot</field>
+            <field name="catch_weight_ok">False</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="list_price">15.00</field>
+            <field name="standard_price">3.99</field>
+            <field name="softm_location_number">6</field>
+            <field name="route_ids" eval="[(4, 43)]" />
+        </record>
+        <record id="test_non_cw_product_2" model="product.product">
+            <field name="name">Test Non CW Product 2</field>
+            <field name="default_code">test-non-cw-2</field>
+            <field name="barcode">test-non-cw-2</field>
+            <field name="type">product</field>
+            <field name="uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="uom_po_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_unit').id"/>
+            <field name="cw_uom_id" model="uom.uom"
+                eval="obj().env.ref('uom.product_uom_kgm').id"/>
+            <field name="tracking">lot</field>
+            <field name="catch_weight_ok">False</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="list_price">35.00</field>
+            <field name="standard_price">12.99</field>
+            <field name="softm_location_number">6</field>
+            <field name="route_ids" eval="[(4, 43)]" />
+        </record>        
+    </data>
+</odoo>

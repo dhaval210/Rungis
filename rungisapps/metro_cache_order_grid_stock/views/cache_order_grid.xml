@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- cache.order.grid inherit tree view -->
+    <record id="cache_order_grid_view_tree" model="ir.ui.view">
+        <field name="name">cache.order.grid.inherit.view.tree</field>
+        <field name="model">cache.order.grid</field>
+        <field name="inherit_id" ref="metro_cache_order_grid.cache_order_grid_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="vendor_id" position="after">
+                <field name="warehouse_id"/>
+            </field>
+            <field name="in_past" position="after">
+                <field name="min_qty"/>
+                <field name="max_qty"/>
+                <field name="removal_qty"/>
+                <field name="transit_in_qty"/>
+                <field name="transit_out_qty"/>                
+                <field name="qty_on_hand"/>                
+            </field>
+        </field>
+    </record>
+
+    <!-- cache.product.qty.grid tree view -->
+    <record id="cache_product_qty_grid_view_tree" model="ir.ui.view">
+        <field name="name">cache.product.qty.grid.view.tree</field>
+        <field name="model">cache.product.qty.grid</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="warehouse_id"/>
+                <field name="product_id"/>
+                <field name="qty_on_hand"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- cache.order.grid inherit search view -->
+    <record id="cache_order_grid_view_search" model="ir.ui.view">
+        <field name="name">cache.order.grid.inherit.view.search</field>
+        <field name="model">cache.order.grid</field>
+        <field name="inherit_id" ref="metro_cache_order_grid.cache_order_grid_view_search"/>
+        <field name="arch" type="xml">
+            <field name="product_tmpl_id" position="after">
+                <field name="warehouse_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- cache.product.qty.grid form view -->
+    <record id="cache_product_qty_grid_view_form" model="ir.ui.view">
+        <field name="name">cache.product.qty.grid.view.form</field>
+        <field name="model">cache.product.qty.grid</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="warehouse_id" readonly="1"/>
+                        <field name="product_id" readonly="1"/>
+                        <field name="qty_on_hand" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- cache.product.qty.grid action window -->
+    <record id="cache_product_qty_grid_action" model="ir.actions.act_window">
+        <field name="name">cache.product.qty.grid.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cache.product.qty.grid</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <menuitem 
+        id="cache_product_qty_grid_menu_act"
+        name="Product Qty" 
+        parent="metro_cache_order_grid.cache_order_grid_menu_categ"
+        action="metro_cache_order_grid_stock.cache_product_qty_grid_action" 
+        sequence="20"
+    />
+
+</odoo>

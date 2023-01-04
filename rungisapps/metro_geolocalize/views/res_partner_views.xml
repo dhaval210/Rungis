@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="metro_gelocalize_client_action" model="ir.actions.client">
+            <field name="name">Geolocalize from actual</field>
+            <field name="tag">metro_geolocalize.geolocalize</field>
+        </record>
+
+        <record id="view_metro_partner_geo_form" model="ir.ui.view">
+            <field name="name">res.partner.metro.geolocation.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base_geolocalize.view_crm_partner_geo_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='geo_localize']" position="attributes">
+                    <attribute name="string">Geolocate from Address</attribute>
+                    <attribute name="colspan">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='geo_localize']" position="after">
+                    <button onclick="geoFindMe()"
+                            style=" font-size: 16px;"
+                            string="Find my actual position"
+                            class="btn btn-sm fa fa-fw fa-street-view o_button_icon"/>
+                    <div colspan="1"/>
+                    <div id="geo-message"/>
+                    <div colspan="1"/>
+                    <button
+                        onclick="geoFindMe()"
+                        string="Save this position"
+                        class="localize_from_browser"
+                        colspan="1"
+                        icon="fa-save"
+                        type="button"
+                        style="visibility:hidden;"
+                        />
+                </xpath>
+            </field>
+        </record>
+</odoo>

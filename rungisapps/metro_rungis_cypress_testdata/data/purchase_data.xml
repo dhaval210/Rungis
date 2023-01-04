@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <record id="cypress_partner" model="res.partner">
+            <field name="name">Cypress Test Vendor</field>
+        </record>
+        <record id="cypress_stock_gate" model="stock.gate">
+            <field name="name">Test Tor 1</field>
+        </record>
+        <record id="cypress_stock_gate" model="stock.gate">
+            <field name="name">Test Tor 2</field>
+        </record>
+
+    </data>
+</odoo>

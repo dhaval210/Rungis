@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- tspbv.recognition form view -->
+    <record id="tspbv_recognition_view_form" model="ir.ui.view">
+        <field name="name">tspbv.recognition.view.form</field>
+        <field name="model">tspbv.recognition</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="rel" />
+                        <field name="on_match" />
+                        <field name="pattern" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="tspbv_recognition_view_tree" model="ir.ui.view">
+        <field name="name">tspbv.recognition.view.tree</field>
+        <field name="model">tspbv.recognition</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- tspbv.input action window -->
+    <record id="tspbv_recognition_action" model="ir.actions.act_window">
+        <field name="name">tspbv.recognition.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tspbv.recognition</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="tspbv_recognition_menu_act" name="Recognition" parent="tspbv_connector_menu_categ" action="tspbv_recognition_action" sequence="10"/>
+</odoo>

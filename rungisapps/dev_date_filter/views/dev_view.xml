@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    date order filter In sale order-->
+    <record id="view_sale_search_inherit" model="ir.ui.view">
+        <field name="name">view.sale.search.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="filter[@name='my_sale_orders_filter']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="sale_yesterday_filter"
+                        domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Today" name="sale_today_filter"
+                        domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days"
+                        domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Last 30 Days" name="Last_30_Days"
+                        domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                <filter string="This Year" name="Year"
+                        domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                <separator/>
+            </xpath>
+
+            <xpath expr="//filter[@name='customer']" position="after">
+                <filter string="Order Weekly" name="order_weekly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date_order:week'}"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Order Year" name="order_yearly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date_order:year'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Purchase order filter with date_order-->
+
+    <record id="view_purchase_search_inherit" model="ir.ui.view">
+        <field name="name">view.purchase.search.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='approved']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="purchase_yesterday_filter"
+                        domain="[('date_order','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Today" name="purchase_today_filter"
+                        domain="[('date_order', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_order', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days"
+                        domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Last 30 Days" name="Last_30_Days"
+                        domain="[('date_order','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_order','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('date_order','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date_order','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                <filter string="This Year" name="this_year"
+                        domain="[('date_order','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_order','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                <separator/>
+            </xpath>
+
+            <xpath expr="//filter[@name='invoiced']" position="after">
+                <separator/>
+                <filter string="Week" name="purchase_weekly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date_order:week'}"/>
+                <filter string="Month" name="purchase_monthly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date_order:month'}"/>
+                <filter string="Year" name="purchase_yearly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date_order:year'}"/>
+                <separator/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!--account invoice filter by date_order-->
+
+    <!--     <record id="view_account_invoice_search_inherit" model="ir.ui.view">
+               <field name="name">account.invoice.select.inherit</field>
+             <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+             <field name="arch" type="xml">
+                <xpath expr="//filter[@name='late']" position="after" >
+                           <separator/>
+                        <filter string="Yesterday" name="invoice_yesterday_filter" domain="[('date_invoice','=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                           <filter string="Today" name="invoice_today_filter" domain="[('date_invoice', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date_invoice', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                           <filter string="Last 7 Days"  name="Last_7_Days"
+                         domain="[('date_invoice','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date_invoice','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                        <filter string="Last 30 Days" name="Last_30_Days"
+                         domain="[('date_invoice','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date_invoice','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                         <filter string="This weeks" name="this_week"
+                         domain="[('date_invoice','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d')),
+                                  ('date_invoice','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d'))]" />
+
+                        <filter string="Last weeks" name="last_week"
+                         domain="[('date_invoice','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d')),
+                                  ('date_invoice','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d'))]" />
+
+
+
+                           <filter string="This Year"  name="Year" domain="[('date_invoice','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date_invoice','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                           <separator/>
+                 </xpath>
+                 <xpath expr="//filter[@name='status']" position="before" >
+                           <separator/>
+                           <filter string="Week" name="invoice_weekly" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'date_invoice:week'}"/>
+                           <filter string="Month" name="invoice_monthly" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'date_invoice:month'}"/>
+                         <filter string="Year" name="invoice_yearly" icon="terp-accessories-archiver" domain="[]" context="{'group_by':'date_invoice:year'}"/>
+                           <separator/>
+                 </xpath>
+             </field>
+        </record>
+     -->
+
+
+    <!--    	stock picking filter by date -->
+
+    <record id="view_stock_search_inherit" model="ir.ui.view">
+        <field name="name">view.stock.search.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+            <field name="arch" type="xml">
+            <xpath expr="//filter[@name='done']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="stock_yesterday_filter"
+                        domain="[('scheduled_date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('scheduled_date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+                <filter string="Today" name="stock_today_filter"
+                        domain="[('scheduled_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('scheduled_date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days"
+                        domain="[('scheduled_date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('scheduled_date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Last 30 Days" name="Last_30_Days"
+                        domain="[('scheduled_date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('scheduled_date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <separator/>
+                <filter string="This weeks" name="this_week"
+                        domain="[('scheduled_date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('scheduled_date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('scheduled_date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('scheduled_date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+                <filter string="This Year" name="Year"
+                        domain="[('scheduled_date','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('scheduled_date','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                <separator/>
+            </xpath>
+            <xpath expr="//filter[@name='picking_type']" position="after">
+
+                <separator/>
+                <filter string="Week" name="stock_weekly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:week'}"/>
+                <filter string="Month" name="stock_monthly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:month'}"/>
+                <filter string="Year" name="stock_yearly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:year'}"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--    	    	customer  Payment -->
+
+    <record id="view_account_payment_search_inherit" model="ir.ui.view">
+        <field name="name">account.payment.search.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="payment_yesterday_filter"
+                        domain="[('payment_date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('payment_date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Today" name="payment_today_filter"
+                        domain="[('payment_date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('payment_date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days" separator="1"
+                        domain="[('payment_date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d'))), ('payment_date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+
+                <filter icon="terp-go-month" string="Last 30 days" name="Last_30_Days"
+                        domain="[('payment_date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d'))), ('payment_date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+                <separator/>
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('payment_date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('payment_date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('payment_date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('payment_date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                <filter string="This Year" name="Year"
+                        domain="[('payment_date','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('payment_date','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                <separator/>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <separator/>
+                <filter string="Week" name="payment_weekly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'payment_date:week'}"/>
+                <filter string="Month" name="payment_monthly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'payment_date:month'}"/>
+                <filter string="Year" name="payment_yearly" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'payment_date:year'}"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- Account Move Line -->
+
+
+    <record id="view_account_move_line_search_inherit" model="ir.ui.view">
+        <field name="name">view.account.move.line.search.inherit</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="Yesterday"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d')))]"
+                        help="Yesterday"/>
+
+                <filter string="Today" name="Today"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d')))]"
+                        help="Today"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days" separator="1"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+
+                <filter string="Last 30 days" name="Last_30_Days"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d'))]"/>
+
+
+                <filter icon="terp-go-year" string="This Year" name="this_year"
+                        domain="[('date','&lt;=', time.strftime('%Y-%m-%d')),('date','&gt;=',time.strftime('%Y-01-01'))]"
+                        help="This Year"/>
+                <separator/>
+            </xpath>
+
+
+            <xpath expr="//group" position="inside">
+                <filter string="Week" name="week" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:week'}"/>
+                <filter string="Month" name="month" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:month'}"/>
+                <filter string="Year" name="year" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:year'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Account Move -->
+
+    <record id="view_account_move_search_inherit" model="ir.ui.view">
+        <field name="name">view.account.move.search.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_move_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dummy_account_id']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="yesterday"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=-1)).strftime('%Y-%m-%d')))]"
+                        help="Yesterday"/>
+
+                <filter string="Today" name="today"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d')))]"
+                        help="Today"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days" separator="1"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+                <filter icon="terp-go-month" string="Last 30 days" name="Last_30_Days"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d')))]"/>
+
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d'))]"/>
+
+                <filter icon="terp-go-year" string="This Year" name="this_year"
+                        domain="[('date','&lt;=', time.strftime('%Y-%m-%d')),('date','&gt;=',time.strftime('%Y-01-01'))]"
+                        help="This Year"/>
+                <separator/>
+            </xpath>
+
+
+            <xpath expr="//group" position="inside">
+                <filter string="Week" name="week" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:week'}"/>
+                <filter string="Month" name="month" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:month'}"/>
+                <filter string="Year" name="year" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:year'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inventory Adjustment -->
+    <record id="view_stock_inventory_search_inherit" model="ir.ui.view">
+        <field name="name">view.stock.inventory.search.inherit</field>
+        <field name="model">stock.inventory</field>
+        <field name="inherit_id" ref="stock.view_inventory_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <separator/>
+                <filter string="Yesterday" name="yesterday"
+                        domain="[('date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;=', ((context_today()+datetime.timedelta(days=0)).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Today" name="today"
+                        domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:23:59'))]"/>
+
+                <filter string="Last 7 Days" name="Last_7_Days"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-7)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="Last 30 Days" name="Last_30_Days"
+                        domain="[('date','&gt;=', ((context_today()+datetime.timedelta(days=-30)).strftime('%Y-%m-%d 00:00:00'))), ('date','&lt;', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]"/>
+
+                <filter string="This weeks" name="this_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=0, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+                <filter string="Last weeks" name="last_week"
+                        domain="[('date','&gt;=',(context_today()+relativedelta(weeks=-2,days=-1,weekday=-1)).strftime('%Y-%m-%d 00:00:00')),
+        					  ('date','&lt;',(context_today()+relativedelta(weeks=-1, weekday=6)).strftime('%Y-%m-%d 23:59:59'))]"/>
+
+
+                <filter string="This Year" name="Year"
+                        domain="[('date','&lt;=', time.strftime('%%Y-12-31 00:00:00')),('date','&gt;=',time.strftime('%%Y-01-01 23:59:59'))]"/>
+                <separator/>
+            </xpath>
+
+            <xpath expr="//group" position="inside">
+                <filter string="Week" name="week" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:week'}"/>
+                <filter string="Month" name="month" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:month'}"/>
+                <filter string="Year" name="year" icon="terp-accessories-archiver" domain="[]"
+                        context="{'group_by':'date:year'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

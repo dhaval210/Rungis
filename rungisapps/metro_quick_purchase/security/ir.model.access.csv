@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+quick_product_product_wiz_user,quick.product.product.wiz,model_quick_product_product_wiz,,1,1,0,0
+access_quick_po_line_wiz_user,quick.po.line.wiz,model_quick_po_line_wiz,,1,1,0,0

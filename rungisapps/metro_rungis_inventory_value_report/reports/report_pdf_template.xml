@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="report_stock_value">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <div class="page">
+                        <div style="padding-bottom:50px !important;"
+                             class="oe_structure"/>
+                        <h2 align="center">Financial Stock Report</h2>
+                        <table class="table table-condensed">
+                            <tbody>
+                                <tr>
+                                    <th>Start Date</th>
+                                    <td colspan="2">
+                                        <span t-esc="date_from"
+                                              t-options='{"widget": "date"}'/>
+                                    </td>
+                                    <th/>
+                                    <td/>
+                                    <th>End Date</th>
+                                    <td>
+                                        <span t-esc="date_to"
+                                              t-options='{"widget": "date"}'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Category</th>
+                                    <td colspan="2">
+                                        <span t-esc="categ_id"/>
+                                    </td>
+                                    <th/>
+                                    <td/>
+                                    <th t-if="product_id">Product</th>
+                                    <td>
+                                        <span t-esc="product_id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Article No</th>
+                                    <th>Catch Weight/Non Catch Weight</th>
+                                    <th>Catch Weight UoM</th>
+                                    <th>Quantity Available</th>
+                                    <th>CW Quantity Available</th>
+                                    <th>Stock Weight</th>
+                                    <th>Cost</th>
+                                    <th>Last Purchase Price</th>
+                                    <th>Stock Amount(LPP)</th>
+                                    <th>Stock Amount(Cost)</th>
+                                    <th>Landed Cost</th>
+                                    <th>Later Income</th>
+                                    <th>Final Stock Value(LPP)</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-foreach="main" t-as="warehouse">
+                                    <tr>
+                                        <td colspan="8">
+                                            <b>
+                                                <span t-esc="warehouse"></span>
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr t-foreach="values" t-as="value">
+                                        <t t-if="warehouse == value['warehouse']">
+                                            <t t-if="value['qty_available'] > 0 or value['cw_qty_available']">
+                                                <td>
+                                                    <span t-esc="value['product_id']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['ref']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['catch_weight']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['catch_weight_uom']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['qty_available']"></span>
+                                                    <span t-esc="value['uom_name']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="round(value['cw_qty_available'])"></span>
+                                                    <span t-esc="value['cw_uom_name']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="round(value['stock_weight'])"></span>
+                                                    <span t-esc="value['weight_uom_id']"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['standard_price']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['last_purchase_price']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['stock_amount']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['stock_amount_cost']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['landed_cost']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['later_income']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="value['final_stock_value_lpp']"
+                                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"></span>
+                                                </td>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                    <tr>
+                                        <t t-if="total_vals">
+                                            <td colspan="4">
+                                                <b>
+                                                    Total
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <span t-esc="total_vals[warehouse]['sum_qty_available']"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_cw_qty_available'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_stock_weight'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_cost'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_last_purchase_price'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_stock_amount'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_stock_amount_cost'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_landed_cost'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_later_income'])"/>
+                                            </td>
+                                            <td>
+                                                <span t-esc="round(total_vals[warehouse]['sum_final_stock_value'])"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <td colspan="4">
+                                        <b>
+                                            Total
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <span t-esc="wh_totals['tot_sum_qty_available']"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_cw_qty_available'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_stock_weight'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_cost'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_last_purchase_price'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_stock_amount'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_stock_amount_cost'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_landed_cost'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_later_income'])"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="round(wh_totals['tot_sum_final_stock_value'])"/>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+

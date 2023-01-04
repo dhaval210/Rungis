@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherit_identification" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="identification_id" readonly="1" invisible="1"/>
+                <field name="old_identification_id" readonly="1" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='ref']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <record id="view_partner_tree_inherit_ref_salesperson" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree//field[@name='display_name']" position="after"><!--nisu-->
+                <field name="ref" />
+                <!--<field name="township_id"/>-->
+                <field name="user_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

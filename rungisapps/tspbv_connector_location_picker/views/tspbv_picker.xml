@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- tspbv.picker form view -->
+    <record id="tspbv_picker_view_form" model="ir.ui.view">
+        <field name="name">tspbv.picker.view.form</field>
+        <field name="model">tspbv.picker</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="location_id"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tspbv.picker tree view -->
+    <record id="tspbv_picker_view_tree" model="ir.ui.view">
+        <field name="name">tspbv.picker.view.tree</field>
+        <field name="model">tspbv.picker</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="location_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- tspbv.picker action window -->
+    <record id="tspbv_picker_action" model="ir.actions.act_window">
+        <field name="name">tspbv.picker.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tspbv.picker</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="tspbv_picker_menu_categ" name="Picker" parent="tspbv_connector.tspbv_connector_menu_root" sequence="10"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="tspbv_picker_menu_act" name="Locations" parent="tspbv_picker_menu_categ" action="tspbv_picker_action" sequence="20"/>
+
+</odoo>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="quality_control_report_qweb">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="col-12">
+                        <div class="col-4" style="height:130px;margin-bottom:25px;font-size:12px;float:left;">
+                            <div style="border:1px solid black;position:relative;height:125px;padding:5px;">
+                                <div class="row">
+                                    <div class="col-5 text-left">
+                                        <strong><span t-field="o.code"/></strong>
+                                    </div>
+                                    <div class="col-7 text-right">
+                                        <strong>
+                                            <span t-field="o.lot_id.name"/>
+                                        </strong>
+                                    </div>
+                                </div>
+                                <div style="height:60px;">
+                                    <t t-set="count" t-value="0"/>
+                                    <t t-foreach="o.reason_ids" t-as="reason">
+                                        <t t-set="count" t-value="count + 1"/>
+                                        <div class="col-12" t-if="count  &lt; 4" style="padding:0px;">
+                                            <t t-if="reason">
+                                                <span t-field="reason.name"/>
+                                            </t>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div style="background-color: #fff;">
+                                    <div style="width:50%;float:left;">
+                                        <t t-if="o.product_id.barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.product_id.barcode, 200, 35)"/>
+                                        </t>
+                                        <t t-else="o.product_id.default_code">
+                                            <strong><span t-field="o.product_id.default_code"/></strong>
+                                        </t>
+                                    </div>
+                                    <div style="width:50%;float:right;text-align:right;">
+                                        <strong><sapn t-esc="o.create_date.date()"/></strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

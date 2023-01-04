@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- stock.picking.type inherit form view -->
+    <record id="view_picking_type_form" model="ir.ui.view">
+        <field name="name">stock.picking.type.inherit.view.form</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.view_picking_type_form"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="after">
+                <field name="async_reservation"/>
+                <field name="allow_block"/>
+            </field>
+        </field>
+    </record>
+    <record id="stock_picking_type_kanban" model="ir.ui.view">
+        <field name="name">stock.picking.type.kanban</field>
+        <field name="model">stock.picking.type</field>
+        <field name="inherit_id" ref="stock.stock_picking_type_kanban"/>
+        <field name="arch" type="xml">
+            <field name="code" position="after">
+                <field name="allow_block"/>
+                <field name="block_stock_assignment"/>
+                <field name="reservation_progress"/>
+            </field>
+            <xpath expr="//button[@name='get_action_picking_tree_ready']" position="after">
+                <span t-if="record.allow_block.raw_value == true" groups="metro_procurement_manager.group_inventory_master_run">
+                    <button t-if="record.block_stock_assignment.raw_value == true" class="btn fa fa-play" style="color: green" name="toggle_block_stock_assignment" type="object" groups="metro_procurement_manager.group_inventory_master_run" />                
+                    <button t-if="record.block_stock_assignment.raw_value == false" class="btn fa fa-pause" style="color: red" name="toggle_block_stock_assignment" type="object" groups="metro_procurement_manager.group_inventory_master_run" />      
+                    <!-- <button class="btn fa fa-refresh" name="run_specific_move_assign" type="object" groups="metro_procurement_manager.group_inventory_master_run">
+                        Run Now!
+                    </button>                 -->
+                </span>
+                <span t-if="record.reservation_progress.raw_value > 0" groups="metro_procurement_manager.group_inventory_master_run">
+                    <div class="badge badge-primary" style="background-color: green;font-size: 1.083rem;">
+                        In Progress
+                    </div>
+                </span>
+            </xpath>
+        </field>
+    </record>
+</odoo>

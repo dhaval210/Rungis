@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="assets backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/metro_sales_tour/static/src/css/style.css"/>
+            <script type="text/javascript" src="/metro_sales_tour/static/src/js/kanban_column.js"/>
+            <script type="text/javascript" src="/metro_sales_tour/static/src/js/kanban_column_progressbar.js"/>
+            <script type="text/javascript" src="/metro_sales_tour/static/src/js/kanban_renderer.js"/>
+        </xpath>
+    </template>
+</odoo>

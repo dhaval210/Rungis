@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- db2.backend form view -->
+    <record id="db2_backend_view_form" model="ir.ui.view">
+        <field name="name">db2.backend.view.form</field>
+        <field name="model">db2.backend</field>
+        <field name="arch" type="xml">
+            <form string="">                
+                <sheet>
+                    <div class="oe_button_box" name="db2_backend_button_box">
+                        <button name="toggle_active"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-archive">
+                                <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>                      
+                    <group>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </group>
+                    <group name="db2" string="DB2 Configuration">
+                        <notebook>
+                            <page string="Credentials" name="db2_cred">
+                                <group>
+                                    <field name="hostname"/>
+                                    <field name="port"/>
+                                    <field name="database"/>
+                                    <field name="uid"/>
+                                    <field name="pwd" password="1"/>
+                                </group>
+                                <button name="test_connection"
+                                    type="object"
+                                    class="oe_highlight"
+                                    string="Test Connection"/>                                     
+                            </page>
+                        </notebook>
+                    </group>
+                    <notebook>
+                        <page string="Import" name="db2_import">
+                            <p class="oe_grey oe_inline">
+                                By clicking on the buttons,
+                                you will initiate the synchronizations
+                                with DB2/AS400.
+                                Note that the import or exports
+                                won't be done directly,
+                                they will create 'Jobs'
+                                executed as soon as possible.
+                            </p>
+                            <group>
+                                <group>
+                                    <field name="is_time_restricted" />
+                                    <field name="between_start" widget="float_time" attrs="{'invisible': [('is_time_restricted', '=', False)]}"/>
+                                    <field name="between_end" widget="float_time" attrs="{'invisible': [('is_time_restricted', '=', False)]}"/>
+
+                                    <field name="sale_order_filter">
+                                        <tree editable="bottom">
+                                            <field name="attributes"/>
+                                            <field name="condition"/>
+                                            <field name="value"/>
+                                        </tree>
+                                    </field>
+
+                                    <!-- <field name="split_companies"/> -->
+                                    <field name="default_company_id" required="1"/>                                
+                                    <field name="default_warehouse_id" required="1"/>                                
+                                    <field name="sale_order_table" required="1"/>                                
+                                    <label for="import_sale_orders"
+                                    string="Import sales orders"
+                                    class="oe_inline"/>
+                                    <button name="import_sale_orders"
+                                        type="object"
+                                        class="oe_highlight"
+                                        string="Import in background"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- db.backend action window -->
+    <record id="db2_backend_action" model="ir.actions.act_window">
+        <field name="name">db2.backend.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">db2.backend</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+    <menuitem id="db2_connector_menu_root" name="DB2 Connector" sequence="999"/>
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="db2_connector_menu_categ" name="Backend Settings" parent="db2_connector_menu_root" sequence="1"/>
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="db2_connector_menu_act" name="DB2 Backend" parent="db2_connector_menu_categ" action="db2_backend_action" sequence="1"/>
+
+</odoo>

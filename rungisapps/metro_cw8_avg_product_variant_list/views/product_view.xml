@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_product_product_tree_avg_cw">
+            <field name="name">product.product.avg.cw.inherit_tree</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='uom_id']" position="after">
+                    <field name="average_cw_quantity" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

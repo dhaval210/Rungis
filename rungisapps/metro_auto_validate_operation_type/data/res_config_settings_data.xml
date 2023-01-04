@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="1">
+        <!-- default filter for auto validation -->
+        <record id="auto_validate_create_picking_filter" model="ir.filters">
+                <field name="name">Auto validate Picking Filter</field>
+                <field name="model_id">stock.picking</field>
+                <field name="domain">[('state','=','assigned')]</field>
+                <field name="user_id" />
+        </record>
+        
+        <!-- set id to configuration parameter -->
+        <record id="assign_picking_filter_id" model="ir.config_parameter">
+                <field name="key">metro_auto_validate_operation_type.assign_picking_filter_id</field>
+                <field name="value" ref="auto_validate_create_picking_filter"/>
+        </record>
+
+    </data>
+</odoo>

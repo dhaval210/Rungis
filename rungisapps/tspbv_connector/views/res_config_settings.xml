@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.tspbv.settings</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="20" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Tspbv" string="Tspbv" data-key="tspbv_connector">
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box" title="These taxes are set in any new product created.">
+                            <div class="o_setting_left_pane" />
+                            <div class="o_setting_right_pane"></div>
+                            <group string="Picking Filter">
+                                    <!-- <label for="id" string="Picking Filter" /> -->
+                                    <div class="col-12 col-lg-6 o_setting_box">
+                                        <div class="o_setting_left_pane">
+                                        </div>
+                                        <div class="o_setting_right_pane">
+                                            <label for="assign_picking_filter_id" />
+                                            <field 
+                                                name="assign_picking_filter_id"
+                                                domain="[('model_id', '=', 'stock.picking')]"
+                                                class="oe_inline"
+                                                context="{'default_model_id': 'stock.picking', 'default_active': False, 'active_test': False}"
+                                                can_create="true"
+                                                can_write="true" />
+                                        </div>
+                                        <div class="o_setting_right_pane">
+                                                <label for="assign_batch_picking_filter_id" />
+                                                <field 
+                                                    name="assign_batch_picking_filter_id"
+                                                    domain="[('model_id', '=', 'stock.picking.batch')]"
+                                                    class="oe_inline"
+                                                    context="{'default_model_id': 'stock.picking.batch', 'default_active': False, 'active_test': False}"
+                                                    can_create="true"
+                                                    can_write="true" />
+                                            </div>                                        
+                                    </div>
+
+                                <!-- <div>
+                                    <div>
+                                        <label for="assign_picking_filter_id" />
+                                        <field 
+                                            name="assign_picking_filter_id"
+                                            domain="[('model_id', '=', 'stock.picking')]"
+                                            class="oe_inline"
+                                            context="{'default_model_id': 'stock.picking', 'default_active': False, 'active_test': False}"
+                                            can_create="true"
+                                            can_write="true" />
+                                    </div>
+                                    <div>
+                                        <label for="assign_batch_picking_filter_id" />
+                                        <field 
+                                            name="assign_batch_picking_filter_id"
+                                            domain="[('model_id', '=', 'stock.picking.batch')]"
+                                            class="oe_inline"
+                                            context="{'default_model_id': 'stock.picking.batch', 'default_active': False, 'active_test': False}"
+                                            can_create="true"
+                                            can_write="true" />
+                                    </div>                                  
+                                </div> -->
+                            </group>
+                            <group string="Allow Backorder">
+                                <div class="col-12 col-lg-6 o_setting_box">
+                                    <div class="o_setting_left_pane">
+                                        <field name="backorder" />
+                                    </div>
+                                    <div class="o_setting_right_pane">
+                                        <label for="backorder" string="Allow Backorder"/>
+                                        <div class="text-muted">
+                                            When checked, this will create a backorder on incomplete pickings
+                                        </div>
+                                    </div>
+                                </div>
+                            </group>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

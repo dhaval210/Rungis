@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="dashboard_variable_incrementing" model="metro.dashboard.variable">
+            <field name="name">incrementing</field>
+            <field name="var_type">int</field>
+            <field name="compute_code">result = val() + 1</field>
+        </record>
+
+        <record id="dashboard_variable_bank_year" model="metro.dashboard.variable">
+            <field name="name">bank_year</field>
+            <field name="var_type">list</field>
+            <field name="compute_code">date_from = datetime.now().date()
+date_to = None
+if date_from.month &gt;= 10:
+    date_to = datetime(day=30, month=9, year=date_from.year+1).date()
+    date_from = datetime(day=1, month=10, year=date_from.year).date()
+else:
+    date_to = datetime(day=30, month=9, year=date_from.year).date()
+    date_from = datetime(day=1, month=10, year=date_from.year-1).date()
+result = [str(date_from), str(date_to)]</field>
+        </record>
+
+        <record id="dashboard_variable_pro_rata_temporis" model="metro.dashboard.variable">
+            <field name="name">pro_rata_temporis</field>
+            <field name="var_type">float</field>
+            <field name="compute_code">today = datetime.now().date()
+first_day, last_day = env["metro.dashboard.variable"].search([("name", "=", "bank_year")]).val()
+first_day = datetime.strptime(first_day,"%Y-%m-%d").date()
+last_day = datetime.strptime(last_day,"%Y-%m-%d").date()
+days_today = (first_day + timedelta(days=x+1) for x in range((today - first_day).days + 1))
+days_year = (last_day + timedelta(days=x+1) for x in range((last_day - first_day).days + 1))
+weekdays_today = sum(1 for day in days_today if day.weekday() &lt; 6)
+weekdays_year = sum(1 for day in days_year if day.weekday() &lt; 6)
+result = weekdays_today / weekdays_year</field>
+        </record>
+
+        <record id="dashboard_variable_avg_cat_prices" model="metro.dashboard.variable">
+            <field name="name">avg_category_prices</field>
+            <field name="var_type">dict</field>
+            <field name="dependencies">product</field>
+            <field name="compute_code">categories = env["product.category"].search([])
+result = {}
+for cat in categories:
+    products = env["product.template"].search([("categ_id", "=", cat.id)])
+    prices = {
+        "buy": 0,
+        "sell": 0
+    }
+    buy_count = 0
+    sell_count = 0
+    for pr in products:
+        if pr.standard_price:
+            prices["buy"] += pr.standard_price
+            buy_count += 1
+        if pr.list_price:
+            prices["sell"] += pr.list_price
+            sell_count += 1
+    if buy_count &gt; 0:
+        prices["buy"] = prices["buy"] / buy_count
+    if sell_count &gt; 0:
+        prices["sell"] = prices["sell"] / sell_count
+    result[cat.id] = prices</field>
+        </record>
+
+        <record id="dashboard_variable_bad_debts" model="metro.dashboard.variable">
+            <field name="name">bad_debts</field>
+            <field name="var_type">dict</field>
+            <field name="dependencies">account</field>
+            <field name="compute_code">AgedReports = env["report.account.report_agedpartnerbalance"].with_context(include_nullified_amount=True)
+account_type = ["payable", "receivable"]
+date_from = datetime.now().date()
+target_move = "posted"
+period_length = 30
+res, total, _ = AgedReports._get_partner_move_lines(account_type, date_from, target_move, period_length)
+result = {
+    "total": total,
+    "payable": [],
+    "payable_total": 0.0,
+    "receivable": [],
+    "receivable_total": 0.0
+}
+for rec in res:
+    if rec["total"] &gt; 0.0:
+        result["receivable"].append(rec)
+        result["receivable_total"] += rec["total"]
+    else:
+        result["payable"].append(rec)
+        result["payable_total"] += (rec["total"] * -1)</field>
+        </record>
+
+        <!-- The value may be zero (e.g. today and first = 01.03.2022) -->
+        <record id="dashboard_variable_days_from_march" model="metro.dashboard.variable">
+            <field name="name">days_from_march</field>
+            <field name="var_type">int</field>
+            <field name="compute_code">today = datetime.now().date()
+first = datetime.now().date()
+if first &lt; datetime(first.year, 3, 1).date():
+    first = first.replace(year=first.year-1)
+first = first.replace(month=3, day=1)
+delta = today - first
+if delta.days &lt; 0:
+    delta = delta * -1
+days_today = (first + timedelta(x+1) for x in range(delta.days + 1))
+result = sum(1 for day in days_today if day.weekday() &lt; 6)
+if result == 0:
+    result = 1</field>
+        </record>
+    </data>
+</odoo>

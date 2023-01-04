@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_view_picking_form_inherit_quality_checking" model="ir.ui.view">
+            <field name="name">stock.picking.quality_checking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='button_validate']" position="before">
+                    <button name="create_quality_check" 
+                            attrs="{'invisible':['|',('is_skip_quality_check','!=',True),('custom_is_confirm_qc','=',True)]}" 
+                            string="Confirm Truck QC" type="object" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="is_skip_quality_check" invisible="1"/>
+                    <field name="purchase_state" invisible="1"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="quality_check" string="Truck Quality Checks" attrs="{'invisible':[('is_skip_quality_check','!=',True)]}">
+                        <group>
+                            <group string="Truck Type">
+                                <field name="custom_truck_type" attrs="{'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}" />
+<!--                                <field name="custom_quality_team_id" attrs="{'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}" />-->
+                            </group>
+                            <group>
+                                <field name="quality_check_user_id"  />
+                                <field name="quality_check_date" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <group string="Vehicle Condition Quality">
+                                    <field name="custom_vehicle_condition" attrs="{'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}" />
+                                </group>
+<!--                                <group string="Vehicle Door">-->
+<!--                                    <field name="custom_vehicle_door"/>-->
+<!--                                </group>-->
+                                <field name="custom_is_confirm_qc"/>
+                            </group>
+                            <group>
+                                <group string="Stacking Arrangement">
+                                    <field name="custom_stacking_arragment" attrs="{'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}" />
+                                </group>
+                                <group string="Vehicle Temprature" attrs="{'invisible':[('custom_truck_type','not in',('chilled','frozen','chilled_frozen'))]}">
+                                    <field name="custom_chilled_temperature" attrs="{'invisible':[('custom_truck_type','not in',('chilled','chilled_frozen'))], 'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}"/>
+                                    <field name="custom_vehicle_temprature" attrs="{'invisible':[('custom_truck_type','not in',('frozen','chilled_frozen'))], 'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}"/>
+                                </group>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="Quality Check References">
+                                <field name="custom_quality_id" />
+                                <field name="stacking_quality_id" />
+<!--                                <field name="vehicledoor_quality_id" /-->
+                                <field name="vehicle_temperature_quality_id" attrs="{'invisible':[('custom_truck_type','not in',('frozen','chilled_frozen'))]}"/>
+                                <field name="vehicle_chilled_temperature_quality_id" attrs="{'invisible':[('custom_truck_type','not in',('chilled','chilled_frozen'))]}"/>
+                            </group>
+                            <group string="Quality Check State">
+                                <field name="custom_quality_state" />
+                                <field name="custom_stacking_quality_state" />
+                                <field name="custom_vehicledoor_quality_state"/>
+                                <field name="custom_temperature_quality_state" attrs="{'invisible':[('custom_truck_type','not in',('frozen','chilled_frozen'))]}"/>
+                                <field name="custom_chilled_temperature_quality_state" attrs="{'invisible':[('custom_truck_type','not in',('chilled','chilled_frozen'))]}"/>
+                            </group>
+                        </group>
+                        <group string="Internal Notes">
+                            <group>
+                                <field name="custom_internal_notes" attrs="{'readonly':['|','|',('state','=','cancel'),('custom_is_confirm_qc','!=',False),('purchase_state','=','cancel')]}" />
+                            </group>
+                            <group>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

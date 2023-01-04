@@ -1,0 +1,27 @@
+<odoo>
+
+    <record model="ir.ui.view" id="product_supplierinfo_total_discount_form_view">
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="purchase_discount.product_supplierinfo_form_view"/>
+        <field name="arch" type="xml">
+            <field name="discount" position="before">
+                <field name="discount_calculation"/>
+                <field name="avg_land_cost"/>
+                <field name="catch_weight_ok"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_supplierinfo_tree_view_inherit_cw">
+        <field name="name">product.template.product.form.inherit</field>
+        <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_uom']" position="after">
+                <field name="catch_weight_ok"/>
+                <field name="delay"/>
+                <field name="product_name"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

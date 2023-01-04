@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_common" name="tour" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/tis_cw_web_sale_avg/static/src/js/product_configurator_mixin.js"></script>
+        </xpath>
+    </template>
+</odoo>

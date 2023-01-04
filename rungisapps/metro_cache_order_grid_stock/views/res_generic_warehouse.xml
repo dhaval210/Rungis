@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <!-- res.generic.warehouse tree view -->
+    <record id="res_generic_warehouse_view_tree" model="ir.ui.view">
+        <field name="name">res.generic.warehouse.view.tree</field>
+        <field name="model">res.generic.warehouse</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="warehouse_id"/>
+                <field name="transit_in_ids"/>
+                <field name="transit_out_ids"/>
+                <field name="receipt_in_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- res.generic.warehouse form view -->
+    <record id="res_generic_warehouse_view_form" model="ir.ui.view">
+        <field name="name">res.generic.warehouse.view.form</field>
+        <field name="model">res.generic.warehouse</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="warehouse_id"/>
+                        <field name="transit_in_ids"/>
+                        <field name="transit_out_ids"/>
+                        <field name="receipt_in_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

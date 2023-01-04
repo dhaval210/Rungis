@@ -1,0 +1,10 @@
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  color:#ef8310;
+}
+
+.fa:hover {
+  color: #0c83f9;
+}

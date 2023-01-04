@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="integration_form_view" model="ir.ui.view">
+    <field name="name">edi.integration.form</field>
+    <field name="model">edi.integration</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+                <button type="object"
+                    name="test_connection"
+                    string="Test Connection"
+                />
+                <button type="object"
+                    name="process_integration"
+                    string="Synchronize"
+                    class="oe_highlight"
+                />
+            </header>
+            <sheet>
+                <field name="post_message_available" invisible="1"/>
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="toggle_active" icon="fa-archive">
+                        <field name="active" widget="boolean_button" options='{"terminology": "active"}'/>
+                    </button>
+                    <button type="object" name="open_synchronizations"
+                        icon="fa-cloud-upload" class="oe_stat_button"
+                        attrs="{
+                            'invisible': [('integration_type', '=', 'in')]
+                        }"
+                        string="Synchronizations"
+                    />
+                    <button type="object" name="open_synchronizations"
+                        icon="fa-cloud-download" class="oe_stat_button"
+                        attrs="{
+                            'invisible': [('integration_type', '=', 'out')]
+                        }"
+                        string="Synchronizations"
+                    />
+                </div>
+                <div class="oe_title">
+                    <h3>
+                        <label for="name" string="Name" class="oe_edit_only"/>
+                        <field name="name"/>
+                    </h3>
+                </div>
+                <notebook>
+                    <page name="configuration" string='Configuration'>
+                        <group>
+                            <group>
+                                <field name="integration_type"/>
+                                <field name="res_model_id"/>
+                            </group>
+                            <group>
+                                <field name="connection_id"/>
+                                <field name="connection_configuration"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="cron" string="Cron information">
+                        <group>
+                            <group>
+                                <field name="integration_user_id"/>
+                            </group>
+                            <group>
+                                <label for="integration_interval_number" string="Execute Every"/>
+                                <div>
+                                    <field name="integration_interval_number" class="oe_inline"/>
+                                    <field name="integration_interval_type" class="oe_inline"/>
+                                </div>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="extra" string="Extra information">
+                        <group>
+                            <group>
+                                <field name="post_message_needed" attrs="{
+                                        'readonly': [('post_message_available', '=', False)]
+                                    }"
+                                />
+                                <div colspan="2" class="well text-danger text-bf" attrs="{
+                                        'invisible': [('post_message_available', '=', True)]
+                                    }"
+                                >
+                                    <p>The selected resource model does not allow message posting!</p>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="provider_name"/>
+                            </group>
+                        </group>
+                        <group attrs="{
+                                'invisible': [
+                                    '|',
+                                    ('post_message_needed', '=', False),
+                                    ('post_message_available', '=', False)
+                                ]
+                            }"
+                        >
+                            <group>
+                                <field name="message_subject"/>
+                                <field name="error_message_body"/>
+                                <field name="success_message_body"/>
+                            </group>
+                            <group>
+                                <field name="synchronization_stage_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="integration_tree_view" model="ir.ui.view">
+    <field name="name">edi.integration.tree</field>
+    <field name="model">edi.integration</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="name"/>
+            <field name="integration_type"/>
+            <field name="provider_name"/>
+            <field name="cron_id"/>
+        </tree>
+    </field>
+</record>
+
+<record id="integration_kanban_view" model="ir.ui.view">
+    <field name="name">edi.integration.kanban</field>
+    <field name="model">edi.integration</field>
+    <field name="arch" type="xml">
+        <kanban string="Integrations" edit="0" create="0" delete="0">
+            <field name="name"/>
+            <field name="integration_type"/>
+            <field name="provider_name"/>
+            <field name="cron_id"/>
+            <field name="has_synchronizations"/>
+            <field name="integration_active"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_card oe_kanban_global_click">
+                        <div class="o_dropdown_kanban dropdown">
+                            <a class="dropdown-toggle btn" data-toggle="dropdown" href="#" role="button">
+                                <span class="fa fa-bars fa-lg" title=""/>
+                            </a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <li>
+                                    <a type="edit">Edit Integration</a>
+                                </li>
+                                <li t-if="record.has_synchronizations.raw_value">
+                                    <a type="object" name="open_synchronizations">Open synchronizations</a>
+                                </li>
+                                <li>
+                                    <a type="object" name="toggle_active">
+                                        <t t-if="!record.integration_active.raw_value">Activate</t>
+                                        <t t-if="!!record.integration_active.raw_value">Deactivate</t>
+                                        <i
+                                            t-attf-class="fa fa-toggle-#{ record.integration_active.raw_value ? 'on' : 'off' }"
+                                            t-attf-aria-label="#{ record.integration_active.raw_value ? 'Active' : 'Inactive'}"
+                                            title=""
+                                        />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <h4 class="text-center">
+                                <i
+                                    t-attf-class="ml8 fa fa-#{ record.integration_type.raw_value === 'out' ? 'up' : 'down' }load"
+                                    t-att-aria-label="record.integration_type.value"
+                                    title=""
+                                />
+                                <strong t-attf-class="text-{{ !record.integration_active.raw_value ? 'danger' : 'success'}}">
+                                    <field name="name"/>
+                                </strong>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="col-xs-1">
+                                    <i class="fa fa-plug" aria-label="Connection" title=""/>
+                                </div>
+                                <div class="col-xs-10">
+                                    <field name="connection_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-database" title=""/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <field name="res_model_id"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="col-xs-2">
+                                    <i class="fa fa-file-o" title=""/>
+                                </div>
+                                <div class="col-xs-8">
+                                    <field name="synchronization_content_type"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<record id="integration_search_view" model="ir.ui.view">
+    <field name="name">edi.integration.search</field>
+    <field name="model">edi.integration</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="integration_name"/>
+            <field name="integration_type"/>
+            <field name="synchronization_content_type"/>
+            <field name="res_model_id"/>
+            <filter name="all" string="All" domain="['|', ('active', '=', True), ('active', '=', False)]"/>
+            <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+            <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+            <group string="Group By">
+                <filter name="group_by_integration_type" string="Type" context="{'group_by': 'integration_type'}"/>
+                <filter name="group_by_res_model_id" string="Model" context="{'group_by': 'res_model_id'}"/>
+                <filter name="group_by_synchronization_content_type" string="Content Type" context="{'group_by': 'synchronization_content_type'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="integrations_act_window" model="ir.actions.act_window">
+    <field name="name">Integrations</field>
+    <field name="res_model">edi.integration</field>
+    <field name="view_mode">kanban,tree,form</field>
+    <field name="search_view_id" ref="edi_base.integration_search_view"/>
+    <field name="context" eval="{
+        'search_default_all': True,
+        'search_default_group_by_res_model_id': True
+    }"/>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent">Here you will find the integrations installed in your system.</p>
+    </field>
+</record>
+
+<menuitem id="root_menu" name="EDI" sequence="1" groups="base.group_erp_manager"/>
+
+<menuitem id="integrations_menu" parent="root_menu" name="Integrations" sequence="10" action="integrations_act_window"/>
+
+</odoo>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_category_form_delivery_note" model="ir.ui.view">
+        <field name="name">product.category.form.delivery.note</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='allow_negative_stock']" position="after">
+                <field name="is_unit_price_dn_maintainable"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="purchase_order_form_delivery_note" model="ir.ui.view">
+        <field name="name">purchase.order.form.delivery.note</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']" position="before">
+                <button name="action_delivery_note_wiz" string="Record Delivery Note" type="object"  class="oe_highlight" attrs="{'invisible':['|', ('is_delivery_note_check', '=', True), ('state', '!=', 'purchase')]}" groups="metro_rungis_purchase_vendor_confirmation.group_delivery_note,metro_rungis_purchase_vendor_confirmation.group_delivery_note_einkauf"/>
+                <button name="action_delivery_note_wiz_undo" string="Activate Delivery Note" type="object"  class="oe_highlight" attrs="{'invisible':['|', ('is_delivery_note_check', '=', False), ('state', '!=', 'purchase')]}" groups="metro_rungis_purchase_vendor_confirmation.group_delivery_note_activate"/>
+            </xpath>   
+
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="is_group_delivey_note" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="after">
+                <field name="is_delivery_note_check" readonly="1" force_save="1"/>
+            </xpath>
+
+            <xpath expr="//sheet/notebook/page[@name='purchase_delivery_invoice']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)], 'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='po_date_planned']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)], 'readonly': [('is_delivery_note_check', '=', True)], 'required': [('is_delivery_note_check', '=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='minimum_po_amount']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='approval_block_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)], 'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_ref']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('is_group_delivey_note', '=', True), ('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='exception_ids']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//header" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//sheet/div[@name='button_box']" position="attributes">
+                <attribute name="attrs">{'invisible': [('is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='incoterm_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath><xpath expr="//field[@name='invoice_status']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath><xpath expr="//field[@name='payment_term_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath><xpath expr="//field[@name='payment_mode_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath><xpath expr="//field[@name='supplier_partner_bank_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath><xpath expr="//field[@name='fiscal_position_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('parent.is_group_delivey_note', '=', True), ('parent.is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('parent.is_group_delivey_note', '=', True), ('parent.is_delivery_note_check', '=', True)]}</attribute>
+                <attribute name="string">Order QTY</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_cw_uom_qty']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('parent.is_group_delivey_note', '=', True), ('parent.is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_cw_uom']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('parent.is_group_delivey_note', '=', True), ('parent.is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('parent.is_group_delivey_note', '=', True), ('parent.is_delivery_note_check', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='new_date_planned']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id_filter']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='qty_received']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='qty_invoiced']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='order_by']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='cw_qty_received']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='cw_qty_invoiced']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='softm_location_number']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount2']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount3']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='recalculated_packaging_unit']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/button[@name='open_packaging_info']" position="attributes">
+                <attribute name="attrs">{'column_invisible': [('parent.is_group_delivey_note', '=', True)]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_qty']" position="after">
+                <field name="confirmed_qty" readonly="1" force_save="1"/>
+                <field name="prev_confirmed_qty" readonly="1" force_save="1" invisible="1"/>
+                <field name="is_vendor_qty_confirmed" readonly="1" force_save="1" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_cw_uom_qty']" position="after">
+                <field name="product_cw_uom_qty_confirmed" readonly="1" force_save="1"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="price_unit_dn" readonly="1" force_save="1"/>
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>

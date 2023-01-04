@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_quantity_history_inherit" model="ir.ui.view">
+        <field name="name">Inventory Report Inherit</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock_account.view_stock_quantity_history"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[1]" position="after">
+                <group>
+                    <field name="report_type" widget="radio" options="{'horizontal': true}" groups="tis_catch_weight.group_catch_weight"/>
+                    <field name="warehouse_ids" widget="many2many_tags" attrs="{'invisible': [('report_type','=','normal')]}"/>
+                </group>
+                <notebook>
+                    <page string="Category" attrs="{'invisible': [('report_type','=','normal')]}">
+                        <field name="category_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+            <xpath expr="//footer/button[@name='open_table']" position="after">
+                    <button name="export_cw_xls" string="Export cw stock" type="object" class="btn-primary" icon="fa-download" attrs="{'invisible': [('report_type','=','normal')]}"/>
+            </xpath>
+            <xpath expr="//footer/button[@name='open_table']"  position="attributes">
+                  <attribute name="attrs">{'invisible': [('report_type','!=','normal')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

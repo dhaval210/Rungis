@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- tspbv.session form view -->
+    <record id="tspbv_session_view_form" model="ir.ui.view">
+        <field name="name">tspbv.session.view.form</field>
+        <field name="model">tspbv.session</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                        <field name="user_id" />
+                        <field name="model_id" />
+                        <field name="model_res_id" />
+                        <field name="current_dialoglist_id" />
+                        <field name="picking_ids" />
+                        <field name="current_line_ids">
+                            <tree string="Items" default_order="sort asc">
+                                <field name="sort" />
+                                <field name="voice_picked" />
+                                <field name="product_id" />
+                                <field name="product_uom_qty" />
+                                <field name="qty_done" />
+                                <field name="location_id" />
+                                <field name="location_dest_id" />
+                                <field name="state" invisible="True" />
+                            </tree>
+                        </field>
+                        <field name="current_item_id" />
+                        <field name="current_location_id" />
+                        <field name="location_dest_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- tspbv.session tree view -->
+    <record id="tspbv_session_view_tree" model="ir.ui.view">
+        <field name="name">tspbv.session.view.tree</field>
+        <field name="model">tspbv.session</field>
+        <field name="arch" type="xml">
+            <tree>
+                <!-- Add your fields here -->
+                <field name="user_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- tspbv.session kanban view -->
+    <record id="tspbv_session_view_kanban" model="ir.ui.view">
+        <field name="name">tspbv.session.view.kanban</field>
+        <field name="model">tspbv.session</field>
+        <field name="arch" type="xml">
+            <kanban string="Pick by Voice Sessions" default_group_by="user_id" edit="0" create="0" delete="0" group_edit="0" group_delete="0">
+                <!-- Add your fields here -->
+                <!-- only available in template record if added here -->
+                <field name="user_id" />
+                <field name="current_dialoglist_id" />
+                <field name="current_item_id" />
+                <field name="current_location_id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click_edit oe_semantic_html_override
+                                                oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_dropdown_kanban">
+                                <!-- dropdown menu -->
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage" />
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <!-- title -->
+                                Dialog:
+                                <field name="current_dialoglist_id" />
+                                <br />
+                                Item:
+                                <field name="current_item_id" />
+                                <br />
+                                Location:
+                                <field name="current_location_id" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- stock.location search view -->
+    <!-- stock.location inherit search view -->
+    <record id="view_location_search" model="ir.ui.view">
+        <field name="name">stock.location.inherit.view.search</field>
+        <field name="model">stock.location</field>
+        <field name="inherit_id" ref="stock.view_location_search" />
+        <field name="arch" type="xml">
+            <field name="location_id" position="after">
+                <filter name="tspbv_session" string="Tspbv Filter" icon="terp-partner" domain="[('posy', '>', 0),('posz', '=', 0),('usage', '=', 'internal')]" context="{'group_by': 'posx'}" />
+            </field>
+        </field>
+    </record>
+
+    <!-- tspbv.session kanban view -->
+    <record id="tspbv_session_view_location_kanbanv2" model="ir.ui.view">
+        <field name="name">tspbv.session.view.kanban</field>
+        <field name="model">stock.location</field>
+        <field name="arch" type="xml">
+            <kanban string="Pick by Voice Sessions">
+                <field name="name" />
+                <field name="session_ids" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click_edit oe_semantic_html_override
+                                                    oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_dropdown_kanban col-12">
+                                <div class="row">
+                                    <div class="oe_title col-10">
+                                        <b>
+                                            Location:
+                                            <field name="name" />
+                                        </b>
+                                        <br />
+                                    </div>
+                                    <!-- dropdown menu -->
+                                    <div class="oe_dropdown_toggle col-2">
+                                        <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage" />
+                                        <ul class="oe_dropdown_menu">
+                                            <li>
+                                                <a type="delete">Delete</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="oe_clear"></div>
+                                </div>
+                            </div>
+                            <div t-attf-class="oe_kanban_content col-12">
+                                <!-- title -->
+                                <t t-if="record.session_ids.raw_value!=''">
+                                    <br />
+                                    User:
+                                    <t t-foreach="record.session_ids.raw_value" t-as="o">
+                                        <!-- <br /> -->
+                                        <span class="badge badge-pill  o_tag_color_0 o_badge_text" t-esc="o.user_id[1]" />
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- tspbv.session action window -->
+    <record id="tspbv_session_action" model="ir.actions.act_window">
+        <field name="name">tspbv.session.action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">tspbv.session</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <record id="tspbv_session_v2_action" model="ir.actions.act_window">
+        <field name="name">tspbv.session.actionv2</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.location</field>
+        <field name="view_id" ref="tspbv_session_view_location_kanbanv2" />
+        <field name="context">{'kanban_view_ref':'tspbv_session_view_location_kanbanv2', 'search_defaul_tspbv_session': 1}</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_type">form</field>
+    </record>
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="tspbv_session_menu_categ" name="Session" parent="tspbv_connector_menu_root" sequence="10" />
+    <!-- This Menu Item must have a parent and an action -->
+    <menuitem id="tspbv_session_menu_act" name="Session" parent="tspbv_session_menu_categ" action="tspbv_session_action" sequence="20" />
+    <menuitem id="tspbv_session_menuv2_act" name="Session  v2" parent="tspbv_session_menu_categ" action="tspbv_session_v2_action" sequence="30" />
+</odoo>

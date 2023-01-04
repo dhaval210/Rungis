@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="dialoglist_bf_1" model="tspbv.dialoglist">
+        <field name="name">Batch Finish Dialog</field>
+        <field name="start">batchfinish</field>
+        <field name="default_code">batch_finish</field>
+        <field name="model_id" search="[('model','=','tspbv.session')]" model="ir.model" />
+    </record>
+    <record id="output_bf_1" model="tspbv.output">
+        <field name="lydia_output">Tour abgeschlossen</field>
+    </record>
+    <record id="dialog_bf_1" model="tspbv.dialog">
+        <field name="id_dialog">batchfinish</field>
+        <field name="lydia_output_id" ref="tspbv_connector.output_bf_1" />
+        <field name="lydia_input_id" ref="" />
+        <field name="dialoglist_id" ref="tspbv_connector.dialoglist_bf_1" />
+    </record>
+    <record id="link_bf_1" model="tspbv.link">
+        <field name="rel">*</field>
+        <field name="href" model="ir.config_parameter" eval="obj().sudo().get_param('web.base.url') + '/tspbv/dialoglist?dialoglist_code=session&amp;record_id=0'" /> 
+        <field name="method">get</field>
+        <field name="dialog_id" ref="tspbv_connector.dialog_bf_1" />
+    </record> 
+</odoo>

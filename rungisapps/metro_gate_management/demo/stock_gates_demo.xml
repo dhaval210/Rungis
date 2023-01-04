@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="stock_gate_gate_1" model="stock.gate">
+        <field name="name">Tor 1</field>
+    </record>
+
+    <record id="stock_gate_gate_2" model="stock.gate">
+        <field name="name">Tor 2</field>
+    </record>
+
+    <record id="stock_gate_gate_3" model="stock.gate">
+        <field name="name">Tor 3</field>
+    </record>
+
+</odoo>

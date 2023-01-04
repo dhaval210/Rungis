@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <template id="external_layout_custom">
+            <head>
+                <t t-call-assets="web.report_assets_pdf" t-js="false"/>
+            </head>
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+            <div>
+                <div name="custom_header" class="header custom">
+                    <t t-call="header"/>
+                </div>
+                <div t-attf-class="article" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+                     t-att-data-oe-lang="o and o.env.context.get('lang')">
+                    <t t-raw="0"/>
+                </div>
+                <div name="custom_footer" class="footer custom">
+                    <t t-call="footer"/>
+
+                </div>
+            </div>
+    </template>
+
+    <template id="header" inherit_id="metro_rungis_invoice_report.external_layout_custom">
+        <xpath expr="//div[@name='custom_header']" position="replace">
+            <div class="header custom">
+                <t t-if="report_type == 'html'">
+                    <div class="first-page top-0 start-0" style="padding-left: 0.44in;">
+                        <span t-field="company.header_p1"/>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="first-page position-absolute top-0 start-0" style="padding-left: 0.44in;padding-right: 0.55in;">
+                        <span t-field="company.header_p1"/>
+                    </div>
+                    <div class="not-first-page position-absolute top-0 start-0" style="padding-left: 0.44in;padding-right: 0.55in;">
+                        <span t-field="doc.number"/>
+                        <br/>
+                        <span t-field="company.header_p2"/>
+                    </div>
+                </t>
+                <t t-if="doc.duplicate_watermark > 1 and doc.state != 'draft'">
+                    <div style="position:absolute;opacity:0.25;z-index:1000;transform:rotate(300deg);-webkit-transform:rotate(300deg);width:150%;">
+                        <p style="font-size:100px;">DUPLICATE</p>
+                    </div>
+                </t>
+
+            </div>
+        </xpath>
+    </template>
+
+    <template id="footer" inherit_id="metro_rungis_invoice_report.external_layout_custom">
+        <xpath expr="//div[@name='custom_footer']" position="replace">
+            <div class="footer custom">
+                <div class="first-page position-absolute top-0 start-0" style="padding-left: 0.44in;padding-right: 0.55in;">
+                    Seite:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                    <span t-field="company.footer_p1"/>
+                </div>
+                <div class="not-first-page position-absolute top-0 start-0" style="padding-left: 0.44in;padding-right: 0.55in;">
+                    Seite:
+                    <span class="page"/>
+                    /
+                    <span class="topage"/>
+                    <span t-field="company.footer_p2"/>
+                </div>
+                <br/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

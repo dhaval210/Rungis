@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_category_catch_weight_form_inherit" model="ir.ui.view">
+            <field name="name">product.category.catch.weight.form.inherit</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group" position="after">
+                    <group string="Catch Weight" groups="tis_catch_weight.group_catch_weight">
+                        <field name="sale_price_base" string="Sale Price Based On"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                        <field name="purchase_price_base" string="Purchase Price Based On"
+                               groups="tis_catch_weight.group_catch_weight"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

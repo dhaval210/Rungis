@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="transport_management_delivery_slip_view" inherit_id = "stock.report_delivery_document">
+            <xpath expr="//table[1]" position="after">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <t t-if="o.transporter_id">
+                                <th><strong>Transporter</strong></th>
+                            </t>
+                            <t t-if="o.vehicle_id">
+                                <th><strong>Vehicle</strong></th>
+                            </t>
+                            <t t-if="o.vehicle_driver">
+                                <th><strong>Vehicle Driver</strong></th>
+                            </t>
+                            <t t-if="o.no_of_parcel">
+                                <th><strong>No of Parcel</strong></th>
+                            </t>
+                            <t t-if="o.lr_number">
+                                <th><strong>LR Number</strong></th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td t-if="o.transporter_id">
+                                <span t-field="o.transporter_id.name"/>
+                            </td>
+                            <td t-if="o.vehicle_id">
+                                <span t-field="o.vehicle_id.name"/>
+                            </td>
+                            <td t-if="o.vehicle_driver">
+                                <span t-field="o.vehicle_driver.name"/>
+                            </td>
+                            <td t-if="o.no_of_parcel">
+                                <span t-field="o.no_of_parcel"/>
+                            </td>
+                            <td t-if="o.lr_number">
+                                <span t-field="o.lr_number"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                    </xpath>
+        </template>
+    </data>
+
+</odoo>

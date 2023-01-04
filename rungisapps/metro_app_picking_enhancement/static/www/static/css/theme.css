@@ -1,0 +1,229 @@
+.bar.bar-stable {
+    border-color: #875a7b;
+    background-color: #875a7b;
+    color: #ffffff;
+}
+
+.bar.bar-stable .title {
+    color: #ffffff;
+}
+
+.bar .button.button-icon .icon:before, 
+.bar .button.button-icon:before, 
+.bar .button.button-icon.icon-left:before, 
+.bar .button.button-icon.icon-right:before {
+    color: #c4adbc;
+}
+
+.move-title {
+    left: 30px !important;
+    right: 70px !important;
+    text-align: left !important;
+}
+
+span.top-right-icon.info-icon {
+    right: 50px;
+    font-size: 14px;
+    font-family: monospace;
+    font-weight: 600;
+    background-color: #c4adbc;
+    border: 1px solid #c4adbc;
+    color: #875a7b;
+    border-radius: 50px;
+    padding: 0px 6px;
+    margin: 6px 0;
+    cursor: help;
+}
+
+span.back-icon.ion-ios-arrow-left {
+    font-size: 20px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.list-move-block .head-title {
+    text-align: center;
+    height: 35px;
+    background: #31373e;
+    color: #ffffff;
+    top: 44px;
+    position: relative;
+}
+
+.list-move-block .head-title span {
+    font-size: 15px;
+    line-height: 35px;
+    display: block;
+    font-weight: 600;
+}
+
+.list-move-block .move-to {
+    background: #ececec;
+    height: 44px;
+    border: 1px solid #ced4db;
+    top: 44px;
+    position: relative;
+    outline: none;
+}
+
+.list-move-block .move-to span {
+    padding: 0 0 0 10px;
+    line-height: 44px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.list-move-block .move-to .move-name {
+    padding: 5px;
+    background-color: #ffffff;
+}
+
+.product-list {
+    position: relative;
+    display: block;
+    width: 100%;
+    box-shadow: 0px 4px 7px 0px #ddd;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+.product-list .icon {
+    color: #919294;
+    font-size: 20px;
+    margin: 5px 10px;
+    display: inline-block;
+}
+
+.product-name span {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.product-detail span {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.product-edit.icon.ion-edit {
+    position: absolute;
+    right: 1%;
+    top: 25%;
+    color: #d3d4d4;
+    cursor: pointer;
+    font-size: 250%;
+}
+
+.list-move-block .has-header {
+    top: 123px;
+    bottom: 95px;
+}
+
+.main-scan-block .has-header {
+    bottom: 50px;
+}
+
+.btn-footer {
+    bottom: 0;
+    position: absolute;
+    display: block;
+    width: 100%;
+    background: #ffffff;
+}
+
+.btn-footer .button {
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    display: block;
+    width: 100%;
+    border-radius: unset;
+    box-shadow: 0px -2px 14px 2px #ddd;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+
+.main-scan-block .btn-footer {
+    display: flex;
+}
+
+.btn-grey {
+    background: #808080 !important;
+    color: #ffffff !important;
+    /* cursor: not-allowed; */
+}
+
+.btn-green {
+    background: #008000 !important;
+    color: #ffffff !important;
+}
+
+.btn-dark-green {
+    background: #00A09D !important;
+    color: #ffffff !important;
+}
+
+.cancel-icon {
+    cursor: pointer;
+}
+
+.main-scan-block p{
+    margin: 10px;
+}
+
+p.title, span.title {
+    font-weight: 600;
+}
+
+.main-scan-block .product-name {
+    color: #098783;
+    font-weight: 600;
+}
+
+.theme-input {
+    border-bottom: 1px solid #ddd !important;
+    width: 100%;
+}
+
+.theme-select {
+    display: block;
+    width: 100%;
+    height: 35px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ddd;
+}
+
+.theme-select-thick {
+    display: block;
+    width: 100%;
+    height: 35px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid #666666;
+}
+
+.flex {
+    display: flex;
+    margin: 0 10px;
+}
+
+.pd-10 {
+    padding: 10px;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+table.md-calendar-day-header th {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 20px;
+}
+
+#inputBarcode {
+    opacity: 0 !important;
+    position: absolute !important;
+}

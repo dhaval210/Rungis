@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.actions.act_window" id="action_inventory_value_report">
+        <field name="name">Financial Stock Reporting</field>
+        <field name="res_model">stock.report.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem id="menu_report_inventory_value"
+              name="Financial Stock Reporting"
+              parent="stock.menu_warehouse_report"
+              action="action_inventory_value_report" active="False"/>
+
+</odoo>

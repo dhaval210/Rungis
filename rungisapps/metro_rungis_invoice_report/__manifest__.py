@@ -1,0 +1,36 @@
+{
+    'name': 'Rungis Invoice Report Module',
+    'version': '12.0.1.0.44',
+    'summary': 'Custom Report Changes,RUN-785,RUN-889,RUN-942,RUN-952,RUN-953,RUN-985,RUN-1084, RUN-1085, RUN-1092, RUN-1064, RUN-1115',
+    'description': 'RUN-785 : https://jira.metrosystems.net/browse/RUN-785 ',
+    'description': 'RUN-889 : https://jira.metrosystems.net/browse/RUN-889 ',
+    'description': 'RUN-942 : https://jira.metrosystems.net/browse/RUN-942 ',
+    'description': 'RUN-952 : https://jira.metrosystems.net/browse/RUN-952 ',
+    'description': 'RUN-953 : https://jira.metrosystems.net/browse/RUN-953 ',
+    'description': 'RUN-985 : https://jira.metrosystems.net/browse/RUN-985 ',
+    'description': 'RUN-1064 : https://jira.metrosystems.net/browse/RUN-1064 ',
+    'description': 'RUN-1064 : https://jira.metrosystems.net/browse/RUN-1115 ',
+    'category': 'Enhancement',
+    'author': 'Hucke Media GmbH & Co. KG',
+    'website': 'https://hucke-media.de',
+    'license': 'AGPL-3',
+    'depends': [
+        'account',
+        'tis_catch_weight',
+        'web',
+        'report_qweb_element_page_visibility'
+    ],
+    'data': [
+        'reports/layout.xml',
+        'reports/invoice.xml',
+        'views/assets.xml',
+        'views/res_company.xml',
+        'views/sale_order.xml',
+        'views/account_invoice.xml',
+        'views/account_fiscal_position.xml',
+        'views/account_invoice_save.xml'
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_stock_landed_cost_form_l10n_mx_stock">
+        <field name="name">view.stock.landed.cost.form.l10n_mx_stock</field>
+        <field name="model">stock.landed.cost</field>
+        <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='valuation_adjustment_lines']" position="after">
+                <group class="oe_subtotal_footer oe_right">
+                    <field name="amount_total" widget="monetary"/>
+                    <button colspan="2" name="compute_average_landed_cost" string="Compute Average" type="object" class="oe_right btn-secondary" states='draft'/>
+                </group>
+                <div class="oe_clear"/>
+                <separator string="Average Landed Cost Calculations"/>
+                <field name="avg_landed_cost_lines">
+                    <form string="Average Landed Cost Calculations">
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                            </group>
+                            <group>
+                                <field name="average_landed_cost"/>
+                            </group>
+                        </group>
+                    </form>
+                    <tree string="Average Landed Cost Calculations" editable="bottom" create="0">
+                        <field name="product_id" readonly="1"/>
+                        <field name="average_landed_cost" readonly="1"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>

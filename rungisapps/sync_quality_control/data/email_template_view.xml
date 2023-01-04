@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="email_template_quality_alert" model="mail.template">
+        <field name="name">Quality Alert</field>
+        <field name="model_id" ref="sync_quality_control.model_quality_control_alert"/>
+        <field name="email_from"><![CDATA[${object.company_id.name} <${(object.company_id.email or user.email)|safe}>]]></field>
+        <field name="email_to">${(object.user_id.login)}</field>
+        <field name="subject">Quality Alert</field>
+        <field name="body_html"><![CDATA[
+            <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34);
+                background-color: #FFF; ">
+                <p>Hello,</p>
+                <p><h3><p>Quality Alert: ${object.code}</p></h3>
+                <p>Please check ${object.code} and resolve it.</p>
+                <br>
+                Thanks
+                </br>
+            </div>]]>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
+</odoo>

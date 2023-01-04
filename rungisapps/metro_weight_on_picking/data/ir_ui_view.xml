@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record model="ir.ui.view" id="odoo_studio_stock_pi_7cca6cbe-bd62-40d6-ab0e-ac31634ddc4a">
+    <field name="active" eval="True"/>
+    <field type="xml" name="arch">
+      <data>
+        <xpath expr="//field[@name='origin']" position="after">
+          <field name="shipping_weight"/>
+          <field name="weight"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field ref="stock.vpicktree" name="inherit_id"/>
+    <field name="mode">extension</field>
+    <field name="model">stock.picking</field>
+    <field name="name">Metro - Odoo Studio: stock.picking.tree customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+</odoo>

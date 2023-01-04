@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+<!-- purchase.order inherit form view -->
+<record id="purchase_order_form_inherit" model="ir.ui.view">
+    <field name="name">purchase.order.form.inherit</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_form"/>
+    <field name="arch" type="xml">
+        <!-- Add your xpath here -->
+        <xpath expr="//field[@name='partner_id']" position="after">
+            <field name="vendor_ref"/>
+        </xpath>
+        <xpath expr="//field[@name='order_line']/tree//field[@name='discount2']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='order_line']/tree//field[@name='discount3']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='order_line']/tree//field[@name='order_by']" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </xpath>
+        <button name="button_done" position="after">
+            <button name="button_softm_refresh" icon="fa-refresh" type="object" string="Transfer"/>
+        </button>
+    </field>
+</record>
+    <record id="purchase_order_tree_inherit" model="ir.ui.view">
+    <field name="name">purchase.order.tree.inherit</field>
+    <field name="model">purchase.order</field>
+    <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+    <field name="arch" type="xml">
+        <!-- Add your xpath here -->
+        <xpath expr="//field[@name='company_id']" position="replace">
+            <field name="check_done_channel_ids" string="LS Kontrolle" widget="many2many_tags"/>
+        </xpath>
+    </field>
+</record>
+</odoo>

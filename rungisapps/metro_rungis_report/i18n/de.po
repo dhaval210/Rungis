@@ -1,0 +1,128 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* metro_rungis_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-11 12:24+0000\n"
+"PO-Revision-Date: 2020-11-11 12:24+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "<b>CW Qty</b>"
+msgstr "CW Menge"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "<b>Location</b>"
+msgstr "Lagerplatz"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "<b>Picking</b>"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "<b>Product</b>"
+msgstr "Produkt"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "<b>Qty</b>"
+msgstr "Menge"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.label_report
+msgid "Barcode"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.model.fields,field_description:metro_rungis_report.field_stock_move_line__batch_id
+msgid "Batch"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.model,name:metro_rungis_report.model_stock_picking_batch
+msgid "Batch Picking"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.actions.report,name:metro_rungis_report.inventory_without_quantity_report
+msgid "Inventory without quantity"
+msgstr "Zaelliste"
+
+#. module: metro_rungis_report
+#: model:ir.model,name:metro_rungis_report.model_stock_inventory_line
+msgid "Inventory Line"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.model.fields,field_description:metro_rungis_report.field_stock_picking_batch__move_line_ids
+msgid "Move Line"
+msgstr ""
+
+#. module: metro_rungis_report
+#: code:addons/metro_rungis_report/models/stock_picking_batch.py:32
+#: code:addons/metro_rungis_report/models/stock_picking_batch.py:41
+#, python-format
+msgid "Nothing to print."
+msgstr ""
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "Page: <span class=\"page\"/> / <span class=\"topage\"/>"
+msgstr "Seite: <span class=\"page\"/> / <span class=\"topage\"/>"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.picking_warehouse4
+msgid "Picking slip"
+msgstr "Kommissionierschein"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.stock_picking_batch_form
+msgid "Print Pickings"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.stock_picking_batch_form
+msgid "Pick Batch"
+msgstr "Pick Stapel"
+
+#. module: metro_rungis_report
+#: model:ir.model,name:metro_rungis_report.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.model.fields,field_description:metro_rungis_report.field_stock_inventory_line__sorted_location
+msgid "Sorting"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.actions.report,name:metro_rungis_report.label
+msgid "Transport Label"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.stock_picking_batch_form
+msgid "Transportlabel"
+msgstr ""
+
+#. module: metro_rungis_report
+#: model:ir.actions.report,name:metro_rungis_report.warehouse4
+msgid "Warehouse 4"
+msgstr "Lager 4"
+
+#. module: metro_rungis_report
+#: model_terms:ir.ui.view,arch_db:metro_rungis_report.rungis_report_picking_inherit
+msgid "Supplier No:"
+msgstr "Lieferant Nr:"

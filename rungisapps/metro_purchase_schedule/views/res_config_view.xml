@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_purchase_schedule_view" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.purchase.schedule</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="70"/>
+            <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@data-key='purchase']" position="inside">
+                    <h2>Purchase Schedule</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="This fields are use for purchase schedule records.">
+                            <div class="o_setting_right_pane">
+                                <label for="schedule_duration"/>
+                                <div class="text-muted">
+                                      Select Duration for purchase schedule event.
+                                </div>
+                                <div class="text-muted">
+                                    <field name="schedule_duration"/>
+                                </div>
+                                <label for="tags"/>
+                                <div class="text-muted">
+                                     Tags for the purchase schedule event.
+                                </div>
+                                <div class="text-muted">
+                                    <field name="tags" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             title="This fields are use for purchase schedule records.">
+                            <div class="o_setting_right_pane">
+                                <label for="number_of_weeks"/>
+                                <div class="text-muted">
+                                      Number of weeks for updating purchase scheduled events.
+                                </div>
+                                <div class="text-muted">
+                                    <field name="number_of_weeks"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

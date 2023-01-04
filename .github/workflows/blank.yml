@@ -30,5 +30,5 @@ jobs:
 
 
   call-workflow:
-    uses: dhaval210/odoodev/.github/workflows/blank.yml@dev
+    uses: dhaval210/Rungis/.github/workflows/blank.yml@dev
     secrets: inherit

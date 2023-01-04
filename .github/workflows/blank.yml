@@ -28,6 +28,16 @@ jobs:
         destination_branch: "preprod"
         pr_title: "Pulling ${{ github.ref }} into preprod"
 
+  Copy_code_in_prod:
+    runs-on: ubuntu-latest
+    environment: copy_code_in_prod
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
+      with:
+        destination_branch: "prod"
+        pr_title: "Pulling ${{ github.ref }} into prod"
 
   call-workflow:
     uses: dhaval210/Rungis/.github/workflows/blank.yml@dev

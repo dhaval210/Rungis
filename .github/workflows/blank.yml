@@ -1,7 +1,6 @@
 on:
   push:
     branches: [ "dev" ]
-  workflow_call:
   
 jobs:
   Deploy_to_dev:
@@ -17,22 +16,16 @@ jobs:
       with:
         time: '10s'
       
-  copy_code_in_pp:
-
+  release_pull_request:
     runs-on: ubuntu-latest
-    environment: copy_code_in_pp
+    name: release_pull_request
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-
-    - name: Copy_development_folder
-      uses: LnkAsia/git-publish-subdir-action@develop
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Create PR to branch
+      uses: gorillio/github-action-cherry-pick@master
+      with:
+        pr_branch: 'preprod'
       env:
-          REPO: self
-          BRANCH: preprod # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          TARGET_DIR: rungisapps
-  call-workflow:
-    uses: dhaval210/Rungis/.github/workflows/blank.yml@preprod
-    secrets: inherit
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DRY_RUN: false

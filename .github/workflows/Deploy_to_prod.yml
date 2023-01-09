@@ -1,7 +1,7 @@
 on:
   push:
     branches: [ "prod" ]
-  workflow_call:
+
   
 jobs:
   Deploy_to_prod:
@@ -15,4 +15,4 @@ jobs:
     - name: Sleep for 10 seconds
       uses: dhaval210/wait-action@master
       with:
-        time: '10s'
+        time: '10s'  

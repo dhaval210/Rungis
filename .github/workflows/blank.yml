@@ -16,6 +16,4 @@ jobs:
       uses: dhaval210/wait-action@master
       with:
         time: '10s'
-  call-workflow:
-    uses: dhaval210/Rungis/.github/workflows/blank.yml@prod
-    secrets: inherit
+

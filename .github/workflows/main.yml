@@ -25,5 +25,5 @@ jobs:
           TARGET_DIR: rungisapps
 
   call-workflow:
-    uses: dhaval210/Rungis/.github/workflows/blank.yml@preprod
+    uses: dhaval210/Rungis/.github/workflows/blank.yml@dev
     secrets: inherit

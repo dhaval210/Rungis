@@ -2,7 +2,7 @@ name: Build and Deploy on GKE - Prod
 
 on:
   push:
-    branches: [ "prod" ]
+    branches: "prod"
 
 jobs:
       

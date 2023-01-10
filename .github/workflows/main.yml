@@ -1,0 +1,20 @@
+on:
+  push:
+    branches: [ "developer" ]
+  
+jobs:
+      
+  Push_code_in_Development:
+    runs-on: ubuntu-latest
+    name: Push_code_in_Development
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Create PR to branch
+      uses: gorillio/github-action-cherry-pick@master
+      with:
+        pr_branch: 'preprod'
+        pr_labels: 'Push_code_in_Development'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DRY_RUN: false

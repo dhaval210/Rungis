@@ -4,7 +4,7 @@
 
 {
     'name': 'Product UoM UNECE',
-    'version': '12.0.1.1.0',
+    'version': '12.0.1.1.1',
     'category': 'Sales',
     'license': 'AGPL-3',
     'summary': 'UNECE nomenclature for the units of measure',

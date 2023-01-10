@@ -3,7 +3,7 @@
 
 {
     'name': 'Account Invoice Import',
-    'version': '12.0.1.0.5',
+    'version': '12.0.1.0.2',
     'category': 'Accounting & Finance',
     'license': 'AGPL-4',
     'summary': 'Import supplier invoices/refunds as PDF or XML files',

@@ -4,7 +4,7 @@
 
 {
     'name': 'Account Invoice Import Invoice2data',
-    'version': '12.0.1.0.3',
+    'version': '12.0.1.0.4',
     'category': 'Invoicing Management',
     'license': 'AGPL-3',
     'summary': 'Import supplier invoices using the invoice2data lib',

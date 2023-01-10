@@ -1,11 +1,11 @@
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "preprod" ]
   
 jobs:
-  Deploy_to_dev:
+  Deploy_to_preprod:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: pp
 
     steps:
     - name: Checkout
@@ -16,17 +16,17 @@ jobs:
       with:
         time: '10s'
       
-  Push_code_in_preprod:
+  Push_code_in_prod:
     runs-on: ubuntu-latest
-    name: Push_code_in_preprod
-    environment: copy_code_in_pp
+    name: Push_code_in_prod
+    environment: copy_code_in_prod
     steps:
     - name: checkout
       uses: actions/checkout@v1
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
-        pr_branch: 'preprod'
+        pr_branch: 'prod'
         pr_labels: 'Push_code_in_preprod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

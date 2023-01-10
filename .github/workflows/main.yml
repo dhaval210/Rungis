@@ -1,8 +1,6 @@
 on:
   pull_request:
     branches: [ "developer" ]
-  push:
-    branches: [ "developer" ]
   
 jobs:
  

@@ -25,7 +25,7 @@
     'category': 'Sales',
     'summary': """Set minimum sales quantity limit on product""",
     'license': 'AGPL-4',
-    'website': 'http://www.asceticbs.com',
+    'website': 'http://www.lnk',
     'description': """
 """,
     'version': '12.0.0.1',

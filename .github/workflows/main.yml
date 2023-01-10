@@ -1,53 +1,17 @@
 on:
   push:
-    branches: [ "developer" ]
+    branches: [ "dev" ]
   
 jobs:
-  
-  Push_code_in_Dev:
+  Deploy_to_dev:
     runs-on: ubuntu-latest
-    name: Push_code_in_Dev
-    environment: copy_code_in_dev
+    environment: dev
+
     steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'dev'
-        pr_labels: 'Push_code_in_Dev'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
-        
-  Push_code_in_preprod:
-    runs-on: ubuntu-latest
-    name: Push_code_in_preprod
-    environment: copy_code_in_pp
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'preprod'
-        pr_labels: 'Push_code_in_preprod'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
+    - name: Checkout
+      uses: actions/checkout@v3
       
-  Push_code_in_prod:
-    runs-on: ubuntu-latest
-    name: Push_code_in_prod
-    environment: copy_code_in_prod
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
+    - name: Sleep for 10 seconds
+      uses: dhaval210/wait-action@master
       with:
-        pr_branch: 'prod'
-        pr_labels: 'Push_code_in_preprod'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
+        time: '10s'

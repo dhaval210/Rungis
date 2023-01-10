@@ -1,11 +1,12 @@
 on:
   push:
-    branches: [ "preprod" ]
+    branches: [ "prod" ]
+
   
 jobs:
-  Deploy_to_preprod:
+  Deploy_to_prod:
     runs-on: ubuntu-latest
-    environment: pp
+    environment: prod
 
     steps:
     - name: Checkout
@@ -14,20 +15,4 @@ jobs:
     - name: Sleep for 10 seconds
       uses: dhaval210/wait-action@master
       with:
-        time: '10s'
-      
-  Push_code_in_prod:
-    runs-on: ubuntu-latest
-    name: Push_code_in_prod
-    environment: copy_code_in_prod
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'prod'
-        pr_labels: 'Push_code_in_prod'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
+        time: '10s'  

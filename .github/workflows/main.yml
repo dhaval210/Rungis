@@ -1,4 +1,7 @@
-  
+on:
+  push:
+    branches: "developer"
+    
 jobs:
  
   Push_code_in_Dev:

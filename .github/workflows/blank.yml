@@ -1,12 +1,11 @@
 on:
   push:
     branches: [ "preprod" ]
-  workflow_call:
   
 jobs:
   Deploy_to_preprod:
     runs-on: ubuntu-latest
-    environment: pp
+    environment: dev
 
     steps:
     - name: Checkout
@@ -16,4 +15,19 @@ jobs:
       uses: dhaval210/wait-action@master
       with:
         time: '10s'
-
+      
+  Push_code_in_prod:
+    runs-on: ubuntu-latest
+    name: Push_code_in_prod
+    environment: copy_code_in_prod
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - name: Create PR to branch
+      uses: gorillio/github-action-cherry-pick@master
+      with:
+        pr_branch: 'prod'
+        pr_labels: 'Push_code_in_prod'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DRY_RUN: false

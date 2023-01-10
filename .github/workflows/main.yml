@@ -47,7 +47,7 @@ jobs:
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
         pr_branch: 'prod'
-        pr_labels: 'Push_code_in_preprod'
+        pr_labels: 'Push_code_in_prod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false

@@ -24,11 +24,11 @@
     'author': 'Ascetic Business Solution',
     'category': 'Sales',
     'summary': """Set minimum sales quantity limit on product""",
-    'license': 'AGPL-4',
+    'license': 'AGPL-3',
     'website': 'http://www.asceticbs.com',
     'description': """
 """,
-    'version': '12.0.0.4',
+    'version': '12.0.0.0.1',
     'depends': ['base','sale_management','product','purchase'],
     'data': ['views/view_minimum_order_quantity.xml'
            ],

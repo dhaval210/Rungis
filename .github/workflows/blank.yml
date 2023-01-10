@@ -16,9 +16,10 @@ jobs:
       with:
         time: '10s'
       
-  release_pull_request:
+  Push_code_in_preprod:
     runs-on: ubuntu-latest
-    name: release_pull_request
+    name: Push_code_in_preprod
+    environment: copy_code_in_pp
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -26,8 +27,7 @@ jobs:
       uses: gorillio/github-action-cherry-pick@master
       with:
         pr_branch: 'preprod'
-        pr_labels: 'preprod'
-        pr_tital: 'push_in_preprod'
+        pr_labels: 'Push_code_in_preprod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false

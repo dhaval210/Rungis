@@ -15,19 +15,3 @@ jobs:
       uses: dhaval210/wait-action@master
       with:
         time: '10s'
-      
-  Push_code_in_preprod:
-    runs-on: ubuntu-latest
-    name: Push_code_in_preprod
-    environment: copy_code_in_pp
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'preprod'
-        pr_labels: 'Push_code_in_preprod'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false

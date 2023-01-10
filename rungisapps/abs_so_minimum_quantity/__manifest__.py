@@ -28,7 +28,7 @@
     'website': 'http://www.asceticbs.com',
     'description': """
 """,
-    'version': '12.0.0.2',
+    'version': '12.0.0.3',
     'depends': ['base','sale_management','product','purchase'],
     'data': ['views/view_minimum_order_quantity.xml'
            ],

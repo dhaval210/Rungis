@@ -3,7 +3,7 @@
 
 {
     'name': 'Account Invoice Import UBL',
-    'version': '12.0.1.0.1',
+    'version': '12.0.1.0.2',
     'category': 'Accounting & Finance',
     'license': 'AGPL-3',
     'summary': 'Import UBL XML supplier invoices/refunds',

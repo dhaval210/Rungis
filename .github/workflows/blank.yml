@@ -26,6 +26,7 @@ jobs:
       uses: gorillio/github-action-cherry-pick@master
       with:
         pr_branch: 'preprod'
+        pr_labels: 'preprod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false

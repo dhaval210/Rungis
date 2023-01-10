@@ -2,7 +2,7 @@
 # Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    'name': 'Account Global Discount',
+    'name': 'Account Global ',
     'version': '12.0.1.2.2',
     'category': 'Accounting',
     'author': 'Tecnativa,'

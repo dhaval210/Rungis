@@ -5,7 +5,7 @@
     'name': 'Account Invoice Import',
     'version': '12.0.1.0.1',
     'category': 'Accounting & Finance',
-    'license': 'AGPL-3',
+    'license': 'AGPL-4',
     'summary': 'Import supplier invoices/refunds as PDF or XML files',
     'author': 'Akretion,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/edi',

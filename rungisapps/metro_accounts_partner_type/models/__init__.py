@@ -1,1 +1,0 @@
-from . import default_accounts_partner_type

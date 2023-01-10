@@ -1,4 +1,0 @@
-pysftp
-paramiko
-cachetools
-

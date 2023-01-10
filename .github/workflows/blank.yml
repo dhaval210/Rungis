@@ -27,6 +27,7 @@ jobs:
       with:
         pr_branch: 'preprod'
         pr_labels: 'preprod'
+        pr_tital: 'push_in_preprod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false

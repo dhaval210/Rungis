@@ -10,7 +10,7 @@ jobs:
     environment: copy_code_in_dev
     steps:
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
@@ -26,7 +26,7 @@ jobs:
     environment: copy_code_in_pp
     steps:
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
@@ -42,7 +42,7 @@ jobs:
     environment: copy_code_in_prod
     steps:
     - name: checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:

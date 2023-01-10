@@ -5,7 +5,7 @@ on:
 jobs:
   Deploy_to_preprod:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: pp
 
     steps:
     - name: Checkout

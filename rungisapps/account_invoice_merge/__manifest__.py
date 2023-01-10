@@ -9,7 +9,7 @@
 {
     'name': 'Account Invoice Merge',
     'version': '12.0.1.0.2',
-    'category': 'Finance',
+    'category': 'Finance-2',
     'summary': "Merge invoices in draft",
     'author': "Elico Corp,Odoo Community Association (OCA)",
     'website': 'http://www.openerp.net.cn',

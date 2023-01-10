@@ -25,7 +25,7 @@
     'category': 'Sales',
     'summary': """Set minimum sales quantity limit on product""",
     'license': 'AGPL-4',
-    'website': 'http://www.lnk',
+    'website': 'http://www.lnkasia',
     'description': """
 """,
     'version': '12.0.0.1',

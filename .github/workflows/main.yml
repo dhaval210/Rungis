@@ -1,18 +1,17 @@
 on:
   push:
     branches: [ "prod" ]
-
   
 jobs:
-  Deploy_to_prod:
+  Deploy_to_Production:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: Deploy_to_Production
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       
     - name: Sleep for 10 seconds
-      uses: dhaval210/wait-action@master
+      uses: LnkAsia/wait-action-@master
       with:
-        time: '10s'  
+        time: '10s'

@@ -3,15 +3,15 @@ on:
     branches: [ "dev" ]
   
 jobs:
-  Deploy_to_dev:
+  Deploy_to_Development:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: Deploy_to_Development
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       
     - name: Sleep for 10 seconds
-      uses: dhaval210/wait-action@master
+      uses: LnkAsia/wait-action-@master
       with:
         time: '10s'

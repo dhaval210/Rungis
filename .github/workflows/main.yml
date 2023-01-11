@@ -2,16 +2,17 @@ on:
   push:
     branches: [ "preprod" ]
   
+  
 jobs:
-  Deploy_to_preprod:
+  Deploy_to_PreProd:
     runs-on: ubuntu-latest
-    environment: pp
+    environment: Deploy_to_PreProd
 
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       
     - name: Sleep for 10 seconds
-      uses: dhaval210/wait-action@master
+      uses: LnkAsia/wait-action-@master
       with:
         time: '10s'

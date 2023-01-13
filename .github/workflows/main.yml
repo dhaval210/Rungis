@@ -1,11 +1,12 @@
 on:
   push:
-    branches: [ "prod" ]
+    branches: [ "preprod" ]
+  
   
 jobs:
-  Deploy_to_Production:
+  Deploy_to_PreProd:
     runs-on: ubuntu-latest
-    environment: Deploy_to_Production
+    environment: Deploy_to_PreProd
 
     steps:
     - name: Checkout

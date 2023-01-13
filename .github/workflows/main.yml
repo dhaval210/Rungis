@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "prod" ]
+    branches: [ "production" ]
   
 jobs:
   Deploy_to_Production:

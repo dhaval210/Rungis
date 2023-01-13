@@ -1,0 +1,20 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+# Other files and folders
+.settings/
+.github/workflows/main.yml
+.github/workflows
+main.yml
+
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.yml
+*.pyc

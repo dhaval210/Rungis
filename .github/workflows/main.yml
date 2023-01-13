@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "development" ]
   
 jobs:
   Deploy_to_Development:

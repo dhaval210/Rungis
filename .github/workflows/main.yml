@@ -14,7 +14,7 @@ jobs:
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
-        pr_branch: 'dev'
+        pr_branch: 'development'
         pr_labels: 'Merge_Request_for_development'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,7 +30,7 @@ jobs:
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
-        pr_branch: 'preprod'
+        pr_branch: 'preproduction'
         pr_labels: 'Merge_Request_for_preprod'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -46,7 +46,7 @@ jobs:
     - name: Create PR to branch
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
-        pr_branch: 'prod'
+        pr_branch: 'production'
         pr_labels: 'Merge_Request_for_Production'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

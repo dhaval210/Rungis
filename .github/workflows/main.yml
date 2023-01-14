@@ -1,6 +1,6 @@
 on:
   push:
-    branches: [ "preproduction" ]
+    branches: [ "preprod" ]
   
   
 jobs:

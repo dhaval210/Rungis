@@ -15,7 +15,7 @@ jobs:
       uses: LnkAsia/github-action-cherry-pick-@master
       with:
         pr_branch: 'dev'
-        pr_labels: 'Merge_Request_for_development'
+        pr_labels: ${{GITHUB.REF_NAME}}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false

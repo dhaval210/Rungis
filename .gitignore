@@ -20,4 +20,3 @@ main.yml
 *.pyc
 *.DSSTORE
 *.pycache
-.DS_Store

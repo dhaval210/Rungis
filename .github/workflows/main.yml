@@ -1,24 +1,8 @@
 on:
   push:
-    branches: [ "maintenance" ]
+    branches: [ "maintenance-preprod" ]
   
 jobs:
-  
-  Create_Pull-request_for_development:
-    runs-on: ubuntu-latest
-    name: Create_Pull-request_for_development
-    environment: Create_Pull-request_for_development
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'dev'
-        pr_labels: 'Merge_Request_for_Dev'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
         
   Create_Pull-request_for_preprod:
     runs-on: ubuntu-latest
@@ -36,18 +20,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DRY_RUN: false
       
-  Create_Pull-request_for_Production:
-    runs-on: ubuntu-latest
-    name: Create_Pull-request_for_Production
-    environment: Create_Pull-request_for_Production
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - name: Create PR to branch
-      uses: LnkAsia/github-action-cherry-pick-@master
-      with:
-        pr_branch: 'prod'
-        pr_labels: 'Merge_Request_for_Production'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DRY_RUN: false
+
